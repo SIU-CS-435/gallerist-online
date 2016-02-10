@@ -5,4 +5,4 @@ Our project is a web-based implementation of a physical board game called The Ga
 **Created by Team JAMiN  Members:**
 
  - Mike Brajkovich | zeroone@siu.edu | siu850104216
- - Etc.
+ - Nathaniel Grudzinski | n.grudzinski@siu.edu | siu851296425
