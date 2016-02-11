@@ -6,3 +6,4 @@ Our project is a web-based implementation of a physical board game called The Ga
 
  - Mike Brajkovich | zeroone@siu.edu | siu850104216
  - Nathaniel Grudzinski | n.grudzinski@siu.edu | siu851296425
+ - Jonah Borders | bordersjb@siu.edu | siu852046497
