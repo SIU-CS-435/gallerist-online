@@ -20,8 +20,12 @@ namespace TeamJAMiN.Controllers
             {
                 games.Add("Game " + (i + 1));
             }
-            
+
             ViewBag.games = games;
+            return View();
+        }
+        public ActionResult Play()
+        {
             return View();
         }
     }
