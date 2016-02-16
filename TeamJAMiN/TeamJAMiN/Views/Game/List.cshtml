@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Game List";
+}
+<h2>@ViewBag.Title</h2>
+
+@{ 
+    foreach(var game in ViewBag.games)
+    {
+        <li>@game</li>
+    }
+}
