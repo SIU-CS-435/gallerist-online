@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Play";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>The Gallerist</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-6">Contracts</div>
+            <div class="col-md-3">Top Action</div>
+            <div class="col-md-3">End Scoring</div>
+            <div class="col-md-4">
+                @*International Market*@
+                @Html.Partial("~/Views/Game/InternationalMarket/InternationalMarket.cshtml")
+            </div>
+            <div class="col-md-8">
+                Galleries
+            </div>
+        </div>
+        <div class="col-md-4">
+            @* Artist Colony *@
+            @Html.Partial("~/Views/Game/ArtistColony/ArtistColony.cshtml")
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            @* Media *@
+            @Html.Partial("~/Views/Game/Media/Media.cshtml")
+        </div>
+        <div class="col-md-4">Bottom Action</div>
+        <div class="col-md-4">
+            <div class="col-md-12">
+                <div class="col-md-4">Pink</div>
+                <div class="col-md-4">Brown</div>
+                <div class="col-md-4">White</div>
+            </div>
+        </div>
+        <div class="row">
+            @* Influence Track *@
+            @Html.Partial("~/Views/Game/InfluenceTrack/InfluenceTrack.cshtml")
+        </div>
+    </div>
+    <hr />
+    <dl class="dl-horizontal"></dl>
+</div>

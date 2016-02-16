@@ -1,4 +1,20 @@
-﻿body {
+﻿
+/* Removes Gutter Padding From Rows*/
+/*Used in the influence track*/
+.row.no-gutter {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.row.no-gutter [class*='col-']:not(:first-child),
+.row.no-gutter [class*='col-']:not(:last-child) {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+/*Default Stuff*/
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
