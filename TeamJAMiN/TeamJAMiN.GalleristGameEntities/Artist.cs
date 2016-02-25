@@ -13,8 +13,8 @@ namespace TeamJAMiN.GalleristComponentEntities
         public string slug { get; set; }
         public ArtistCategory category { get; set; }
         public ArtType artType { get; set; }
-        public int startFame { get; set; }
-        public int startPromotion { get; set; }
+        public int fame { get; set; }
+        public int promotion { get; set; }
         public string starLevelData { get; set; }
         public int[] starLevels
         {
@@ -24,10 +24,10 @@ namespace TeamJAMiN.GalleristComponentEntities
             }
             set
             {
-                starLevelData = String.Join(";", value.Select(p => p.ToString()).ToArray());
+                starLevelData = String.Join(";", value.Select(s => s.ToString()).ToArray());
             }
         }
-        bool discovered { get; set; }
+        public bool discovered { get; set; }
         int availableArt { get; set; }
     }
 

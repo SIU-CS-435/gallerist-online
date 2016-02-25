@@ -1,12 +1,53 @@
-﻿
+﻿@model TeamJAMiN.GalleristComponentEntities.Art
+@using TeamJAMiN.GalleristComponentEntities
 @*Art Tile*@
 <div class="container">
     <div class="row">
         @*Fame*@
-        <div class="col-xs-4"></div>
+        <div class="col-xs-4">@Model.fame</div>
         @*Tickets*@
-        <div class="col-xs-4"></div>
+        <div class="col-xs-4">
+          @{ 
+              var displayString = "";
+              foreach (VisitorTicketType ticket in Model.firstTicket)
+              {
+
+                  if (ticket == VisitorTicketType.collector)
+                  {
+                      displayString += "c";
+                  }
+                  if (ticket == VisitorTicketType.vip)
+                  {
+                      displayString += "v";
+                  }
+                  if (ticket == VisitorTicketType.investor)
+                  {
+                      displayString += "i";
+                  }
+              }
+              if (Model.numTickets > 1)
+              {
+                  displayString += " ";
+                  foreach (VisitorTicketType ticket in Model.secondTicket)
+                  {
+                      if (ticket == VisitorTicketType.collector)
+                      {
+                          displayString += "c";
+                      }
+                      if (ticket == VisitorTicketType.vip)
+                      {
+                          displayString += "v";
+                      }
+                      if (ticket == VisitorTicketType.investor)
+                      {
+                          displayString += "i";
+                      }
+                  }
+              }
+          }
+        @displayString
+        </div>
         @*Art Type*@
-        <div class="col-xs-4"></div>
+        <div class="col-xs-4">@Model.type.ToString()</div>
     </div>
 </div>

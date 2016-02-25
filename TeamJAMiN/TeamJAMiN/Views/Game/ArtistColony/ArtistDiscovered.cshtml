@@ -1,15 +1,23 @@
-﻿@*Discovered Artist (Front Side)*@
+﻿@model TeamJAMiN.GalleristComponentEntities.Artist
+
+@*Discovered Artist (Front Side)*@
 <div class="container">
     <div class="row">
         @*Art Type*@
-        <div class="col-xs-3"></div>
+        <div class="col-xs-3">@Model.artType</div>
         @*Promotion Level*@
-        <div class="col-xs-6 col-xs-offset-3"></div>
+        <div class="col-xs-6 col-xs-offset-3">@Model.promotion</div>
     </div>
     <div class="row">
         @*Fame/Cost*@
-        <div class="col-xs-6"></div>
+        <div class="col-xs-6">@Model.fame</div>
         @*Next Star Level*@
-        <div class="col-xs-6"></div>
+        <div class="col-xs-6">
+        @{
+            int i = 0;
+            while (Model.starLevels[i] < Model.fame) { i++; }
+        }
+        @(i+1): @Model.starLevels[i+1]
+        </div>
     </div>
 </div>

@@ -1,17 +1,20 @@
-﻿
+﻿@model TeamJAMiN.GalleristComponentEntities.Game
+@using TeamJAMiN.GalleristComponentEntities
 @*International Market*@
 <div class="container">
     @*pre-action gain and requirement*@
     <div class="row">
         @*influnce gain*@
         <div class="row">
-            <div class="col-xs-3 col-xs-offset-3">3</div>
+            <div class="col-xs-3"></div>
+            <div class="col-xs-3">3</div>
             <div class="col-xs-3">2</div>
             <div class="col-xs-3">1</div>
         </div>
         @*lobby requirement*@
         <div class="row">
-            <div class="col-xs-3 col-xs-offset-3">pink or brown</div>
+            <div class="col-xs-3"></div>
+            <div class="col-xs-3">pink or brown</div>
             <div class="col-xs-3">pink and brown</div>
             <div class="col-xs-3">pink or brown and white</div>
         </div>
@@ -21,30 +24,42 @@
         @*digital*@
         <div class="row">
             <div class="col-xs-3">digital</div>
-            <div class="col-xs-3">tile</div>
-            <div class="col-xs-3">tile</div>
-            <div class="col-xs-3">tile</div>
+            @foreach (ReputationTile tile in Model.reputationTiles.Take(3))
+            {
+                <div class="col-xs-3">
+                    @Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml",tile)
+                </div>
+            }
         </div>
         @*photo*@
         <div class="row">
             <div class="col-xs-3">photo</div>
-            <div class="col-xs-3">tile</div>
-            <div class="col-xs-3">tile</div>
-            <div class="col-xs-3">tile</div>
+            @foreach (ReputationTile tile in Model.reputationTiles.Skip(3).Take(3))
+            {
+                <div class="col-xs-3">
+                    @Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml", tile)
+                </div>
+            }
         </div>
-        @*sculpture*@
+                    @*sculpture*@
         <div class="row">
             <div class="col-xs-3">sculpture</div>
-            <div class="col-xs-3">tile</div>
-            <div class="col-xs-3">tile</div>
-            <div class="col-xs-3">tile</div>
+            @foreach (ReputationTile tile in Model.reputationTiles.Skip(6).Take(3))
+            {
+                <div class="col-xs-3">
+                    @Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml", tile)
+                </div>
+            }
         </div>
-        @*painting*@
+                    @*painting*@
         <div class="row">
             <div class="col-xs-3">painting</div>
-            <div class="col-xs-3">tile</div>
-            <div class="col-xs-3">tile</div>
-            <div class="col-xs-3">tile</div>
+            @foreach (ReputationTile tile in Model.reputationTiles.Skip(9))
+            {
+                <div class="col-xs-3">
+                    @Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml", tile)
+                </div>
+            }
         </div>
     </div>
     @*auction*@

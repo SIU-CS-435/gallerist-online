@@ -1,24 +1,40 @@
-﻿
-@*New (Blue) Artists*@
+﻿@using TeamJAMiN.GalleristComponentEntities
+@model TeamJAMiN.GalleristComponentEntities.Game
+@{ var listOrder = new List<ArtType> { ArtType.digital, ArtType.painting, ArtType.sculpture, ArtType.photo };}
 <div class="container">
+    @*New (Blue) Artists*@
     <div class="col-md-4">
-        <div class="row">Blue Digital</div>
-        <div class="row">Blue Painting</div>
-        <div class="row">Blue Sculpture</div>
-        <div class="row">Blue Photo</div>
+        @foreach (ArtType type in listOrder)
+        {
+            if (Model.blueArtists[type].discovered)
+            {
+                <div class="row">@Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", Model.blueArtists[type])</div>
+            }
+            else
+            {
+                <div class="row">@Html.Partial("~/Views/Game/ArtistColony/ArtistUndiscovered.cshtml", Model.blueArtists[type])</div>
+            }
+        }
     </div>
     @*Experienced (Red) Artists*@
     <div class="col-md-4">
-        <div class="row">Red Digital</div>
-        <div class="row">Red Painting</div>
-        <div class="row">Red Sculpture</div>
-        <div class="row">Red Photo</div>
+        @foreach (ArtType type in listOrder)
+        {
+            if (Model.redArtists[type].discovered)
+            {
+                <div class="row">@Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", Model.redArtists[type])</div>
+            }
+            else
+            {
+                <div class="row">@Html.Partial("~/Views/Game/ArtistColony/ArtistUndiscovered.cshtml", Model.redArtists[type])</div>
+            }
+        }
     </div>
     @*Art*@
     <div class="col-md-4">
-        <div class="row">Art Digital</div>
-        <div class="row">Art Painting</div>
-        <div class="row">Art Sculpture</div>
-        <div class="row">Art Photo</div>
+        @foreach (ArtType type in listOrder)
+        {
+            <div class="row">@Html.Partial("~/Views/Game/ArtistColony/Art.cshtml", Model.art[type].First())</div>
+        }
     </div>
 </div>

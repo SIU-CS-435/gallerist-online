@@ -312,8 +312,8 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             new Artist
             {
                 slug = "photo-0",
-                startFame = 5,
-                startPromotion = 2,
+                fame = 5,
+                promotion = 2,
                 starLevels = new int[] { 2, 6, 9, 12, 15, 19 },
                 artType = ArtType.photo,
                 category = ArtistCategory.red
@@ -321,8 +321,8 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             new Artist
             {
                 slug = "photo-1",
-                startFame = 1,
-                startPromotion = 0,
+                fame = 1,
+                promotion = 0,
                 starLevels = new int[] { 2, 5, 8, 11, 15, 19 },
                 artType = ArtType.photo,
                 category = ArtistCategory.blue
@@ -330,8 +330,8 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             new Artist
             {
                 slug = "photo-2",
-                startFame = 4,
-                startPromotion = 1,
+                fame = 4,
+                promotion = 1,
                 starLevels = new int[] { 2, 6, 9, 12, 15, 19 },
                 artType = ArtType.photo,
                 category = ArtistCategory.blue
@@ -339,8 +339,8 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             new Artist
             {
                 slug = "photo-3",
-                startFame = 8,
-                startPromotion = 3,
+                fame = 8,
+                promotion = 3,
                 starLevels = new int[] { 2, 6, 9, 12, 15, 19 },
                 artType = ArtType.photo,
                 category = ArtistCategory.red
@@ -348,8 +348,8 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             new Artist
             {
                 slug = "digital-0",
-                startFame = 5,
-                startPromotion = 2,
+                fame = 5,
+                promotion = 2,
                 starLevels = new int[] { 2, 6, 9, 12, 15, 19 },
                 artType = ArtType.digital,
                 category = ArtistCategory.red
@@ -357,8 +357,8 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             new Artist
             {
                 slug = "digital-1",
-                startFame = 1,
-                startPromotion = 0,
+                fame = 1,
+                promotion = 0,
                 starLevels = new int[] { 2, 5, 8, 11, 15, 19 },
                 artType = ArtType.digital,
                 category = ArtistCategory.blue
@@ -366,8 +366,8 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             new Artist
             {
                 slug = "digital-2",
-                startFame = 4,
-                startPromotion = 1,
+                fame = 4,
+                promotion = 1,
                 starLevels = new int[] { 2, 6, 9, 12, 15, 19 },
                 artType = ArtType.digital,
                 category = ArtistCategory.blue
@@ -375,8 +375,8 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             new Artist
             {
                 slug = "digital-3",
-                startFame = 8,
-                startPromotion = 3,
+                fame = 8,
+                promotion = 3,
                 starLevels = new int[] { 2, 6, 9, 12, 15, 19 },
                 artType = ArtType.digital,
                 category = ArtistCategory.red
@@ -384,8 +384,8 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             new Artist
             {
                 slug = "sculpture-0",
-                startFame = 5,
-                startPromotion = 1,
+                fame = 5,
+                promotion = 1,
                 starLevels = new int[] { 2, 6, 9, 12, 15, 19 },
                 artType = ArtType.sculpture,
                 category = ArtistCategory.blue
@@ -393,8 +393,8 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             new Artist
             {
                 slug = "sculpture-1",
-                startFame = 3,
-                startPromotion = 0,
+                fame = 3,
+                promotion = 0,
                 starLevels = new int[] { 2, 5, 8, 11, 15, 19 },
                 artType = ArtType.sculpture,
                 category = ArtistCategory.blue
@@ -402,8 +402,8 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             new Artist
             {
                 slug = "sculpture-2",
-                startFame = 7,
-                startPromotion = 2,
+                fame = 7,
+                promotion = 2,
                 starLevels = new int[] { 2, 6, 9, 12, 15, 19 },
                 artType = ArtType.sculpture,
                 category = ArtistCategory.red
@@ -411,8 +411,8 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             new Artist
             {
                 slug = "sculpture-3",
-                startFame = 10,
-                startPromotion = 3,
+                fame = 10,
+                promotion = 3,
                 starLevels = new int[] { 2, 6, 9, 12, 15, 19 },
                 artType = ArtType.sculpture,
                 category = ArtistCategory.red
@@ -420,8 +420,8 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
              new Artist
              {
                  slug = "painting-0",
-                 startFame = 5,
-                 startPromotion = 1,
+                 fame = 5,
+                 promotion = 1,
                  starLevels = new int[] { 2, 6, 9, 12, 15, 19 },
                  artType = ArtType.painting,
                  category = ArtistCategory.blue
@@ -429,8 +429,8 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             new Artist
             {
                 slug = "painting-1",
-                startFame = 3,
-                startPromotion = 0,
+                fame = 3,
+                promotion = 0,
                 starLevels = new int[] { 2, 5, 8, 11, 15, 19 },
                 artType = ArtType.painting,
                 category = ArtistCategory.blue
@@ -438,8 +438,8 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             new Artist
             {
                 slug = "painting-2",
-                startFame = 7,
-                startPromotion = 2,
+                fame = 7,
+                promotion = 2,
                 starLevels = new int[] { 2, 6, 9, 12, 15, 19 },
                 artType = ArtType.painting,
                 category = ArtistCategory.red
@@ -447,8 +447,8 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             new Artist
             {
                 slug = "painting-3",
-                startFame = 10,
-                startPromotion = 3,
+                fame = 10,
+                promotion = 3,
                 starLevels = new int[] { 2, 6, 9, 12, 15, 19 },
                 artType = ArtType.painting,
                 category = ArtistCategory.red

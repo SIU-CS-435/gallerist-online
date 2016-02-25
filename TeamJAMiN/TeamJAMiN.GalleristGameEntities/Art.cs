@@ -24,7 +24,7 @@ namespace TeamJAMiN.GalleristComponentEntities
             }
             set
             {
-                firstTicketData = String.Join(";", value.Select(p => p.ToString()).ToArray());
+                firstTicketData = String.Join(";", value.Select(v => v.ToString()).ToArray());
             }
         }
         public string secondTicketData { get; set; }
@@ -37,7 +37,7 @@ namespace TeamJAMiN.GalleristComponentEntities
             }
             set
             {
-                secondTicketData = String.Join(";", value.Select(p => p.ToString()).ToArray());
+                secondTicketData = String.Join(";", value.Select(v => v.ToString()).ToArray());
             }
         }
     }
