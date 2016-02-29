@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace TeamJAMiN.GalleristComponentEntities
 {
-    class Player
+    public class Player
     {
-        //public int Id { get; set; }
-        //public int GameId { get; set; }
-        //public int UserId { get; set; }
-        //public Game Game { get; set; }
-        //public 
-        //{
-        }
+        public int Id { get; set; }
+        public int GameId { get; set; }
+        public int UserId { get; set; }
+        public Game Game { get; set; }
+    }        
 }

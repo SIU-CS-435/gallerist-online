@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Art.cs" />
-    <Compile Include="Artist.cs" />
+    <Compile Include="GameArt.cs" />
+    <Compile Include="TemplateArt.cs" />
+    <Compile Include="GameArtist.cs" />
+    <Compile Include="TemplateArtist.cs" />
     <Compile Include="ArtType.cs" />
     <Compile Include="BonusType.cs" />
     <Compile Include="Player.cs" />

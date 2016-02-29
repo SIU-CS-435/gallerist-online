@@ -8,13 +8,20 @@ namespace TeamJAMiN.GalleristComponentEntities
 {
     public class Game
     {
-        public int playerCount { get; set; }
-        public string artistsData { get; set; }
-        public Dictionary<ArtType, Artist> redArtists { get; set; }
-        public Dictionary<ArtType, Artist> blueArtists { get; set; }
-        public Dictionary<ArtType, List<Art>> art { get; set; }
-        public List<ReputationTile> reputationTiles { get; set; }
-        public List<Contract> contracts { get; set; }
+        public Game()
+        {
+            Artists = new HashSet<GameArtist>();
+            Art = new HashSet<GameArt>();
+            ReputationTiles = new HashSet<ReputationTile>();
+            Contracts = new HashSet<Contract>();
+            Players = new HashSet<Player>();
+        }
 
+        public int Id { get; set; }
+        public HashSet<GameArtist> Artists { get; set; }
+        public HashSet<GameArt> Art { get; set; }
+        public HashSet<ReputationTile> ReputationTiles { get; set; }
+        public HashSet<Contract> Contracts { get; set; }
+        public HashSet<Player> Players { get; set; }
     }
 }
