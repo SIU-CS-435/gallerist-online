@@ -14,6 +14,8 @@ namespace TeamJAMiN.DataContexts
         public DbSet<Art> Art { get; set; }
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<ReputationTile> ReputationTiles { get; set; }
+        public DbSet<Game> Games { get; set; }
+        public DbSet<Player> Players { get; set; }
 
         public GalleristComponentsDb()
             : base("DefaultConnection")

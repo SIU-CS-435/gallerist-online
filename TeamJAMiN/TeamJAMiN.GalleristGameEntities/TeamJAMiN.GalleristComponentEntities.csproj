@@ -45,6 +45,7 @@
     <Compile Include="Artist.cs" />
     <Compile Include="ArtType.cs" />
     <Compile Include="BonusType.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Contract.cs" />
     <Compile Include="GalleryLocationType.cs" />
     <Compile Include="Game.cs" />
