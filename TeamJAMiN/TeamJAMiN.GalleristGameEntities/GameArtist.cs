@@ -8,6 +8,17 @@ namespace TeamJAMiN.GalleristComponentEntities
 {
     public class GameArtist
     {
+        public GameArtist(TemplateArtist temp)
+        {
+            Category = temp.Category;
+            ArtType = temp.ArtType;
+            Fame = temp.Fame;
+            Promotion = temp.Promotion;
+            StarLevels = temp.StarLevels;
+            IsDiscovered = temp.IsDiscovered;
+            AvailableArt = 2;
+        }
+        
         public int Id { get; set; }
         public ArtistCategory Category { get; set; }
         public ArtType ArtType { get; set; }

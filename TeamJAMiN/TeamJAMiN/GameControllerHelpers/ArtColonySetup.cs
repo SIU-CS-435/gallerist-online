@@ -9,25 +9,16 @@ namespace TeamJAMiN.GameControllerHelpers
 {
     public static class ArtColonySetup
     {
-
-        public static Dictionary<ArtType,List<TemplateArt>> shuffleArt(this Dictionary<ArtType,List<TemplateArt>> artLists, Game game)
+        public static Dictionary<ArtType, List<TemplateArt>> chooseArt(this List<TemplateArt> completeList)
         {
-            var keys = new List<ArtType>(artLists.Keys);
-            foreach ( ArtType key in keys )
+            var result = new Dictionary<ArtType, List<TemplateArt>>();
+            foreach (ArtType type in Enum.GetValues(typeof(ArtType)))
             {
-                artLists[key] = artLists[key].Shuffle().ToList();
-                var i = 0;
-                foreach (TemplateArt art in artLists[key])
-                {
-                    var gameArt = new GameArt(art);
-                    gameArt.Order = i++;
-                    game.Art.Add(gameArt);
-                }
-
+                result.Add(type, completeList.Where(a => a.Type == type).ToList());
+                result[type] = result[type].Shuffle().ToList();
             }
-            return artLists;
+            return result;
         }
-
         public static Dictionary<ArtType,TemplateArtist> chooseArtists(this List<TemplateArtist> completeList)
         {
             bool firstBlue = false;
@@ -37,7 +28,7 @@ namespace TeamJAMiN.GameControllerHelpers
             {
                 if (artist.Category == ArtistCategory.blue && firstBlue == false)
                 {
-                    artist.Discovered = true;
+                    artist.IsDiscovered = true;
                     firstBlue = true;
                 }
                 if (!result.ContainsKey(artist.ArtType))

@@ -27,7 +27,7 @@ namespace TeamJAMiN.GalleristComponentEntities
                 StarLevelData = String.Join(";", value.Select(s => s.ToString()).ToArray());
             }
         }
-        public bool Discovered { get; set; }
+        public bool IsDiscovered { get; set; }
         int AvailableArt { get; set; }
     }
 

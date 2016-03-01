@@ -8,7 +8,7 @@ namespace TeamJAMiN.GameControllerHelpers
 {
     public static class ReputationTileSetup
     {
-        public static List<ReputationTile> chooseReputationTiles(this List<ReputationTile> reputationTileList, int playerCount = 4)
+        public static List<TemplateReputationTile> chooseReputationTiles(this List<TemplateReputationTile> reputationTileList, int playerCount = 4)
         {
             reputationTileList = reputationTileList.Shuffle().ToList();
             return reputationTileList.Take(12).ToList();

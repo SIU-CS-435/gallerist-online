@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace TeamJAMiN.GalleristComponentEntities
 {
-    public class Contract
+    public class TemplateContract
     {
-        public int ContractId { get; set; }
-        public ArtType art { get; set; }
-        public BonusType bonus { get; set; }
+        public int Id { get; set; }
+        public ArtType Art { get; set; }
+        public BonusType Bonus { get; set; }
     }
 }

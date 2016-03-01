@@ -39,18 +39,22 @@ namespace TeamJAMiN.Controllers
             using (var db = new GalleristComponentsDb())
             {
                 Game newGame = new Game();
-                var artStacks = new Dictionary<ArtType, List<TemplateArt>>();
-                foreach (ArtType type in Enum.GetValues(typeof(ArtType)))
-                    artStacks.Add(type, db.TemplateArt.Where(a => a.Type == type).ToList());
 
-                ViewBag.Art = artStacks.shuffleArt(newGame);
+                var artLists = db.TemplateArt.ToList().chooseArt();
+                newGame.AddArtStack(artLists);
+
+                var blueArtists = db.TemplateArtists.Where(a => a.Category == ArtistCategory.red).ToList().chooseArtists();
+                var redArtists = db.TemplateArtists.Where(a => a.Category == ArtistCategory.blue).ToList().chooseArtists();
+                newGame.AddArtists(blueArtists.Values.ToList());
+                newGame.AddArtists(redArtists.Values.ToList());
 
 
-                ViewBag.blueArtists = db.TemplateArtists.Where(a => a.Category == ArtistCategory.red).ToList().chooseArtists();
-                ViewBag.redArtists = db.TemplateArtists.Where(a => a.Category == ArtistCategory.blue).ToList().chooseArtists();
-                
-                ViewBag.ReputationTiles = db.ReputationTiles.ToList().chooseReputationTiles();
-                ViewBag.Contracts = db.Contracts.ToList().Shuffle().ToList();
+                var ReputationTiles = db.TemplateReputationTiles.ToList().chooseReputationTiles();
+                newGame.AddReputationTiles(ReputationTiles);
+
+                var Contracts = db.Contracts.ToList().Shuffle().ToList();
+                newGame.AddContracts(Contracts);
+
 
                 db.SaveChanges();
                 return View(newGame);

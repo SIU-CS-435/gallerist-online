@@ -455,229 +455,229 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             }
             );
             context.Contracts.AddOrUpdate(
-            c => new { c.art, c.bonus },
-            new Contract
+            c => new { c.Art, c.Bonus },
+            new TemplateContract
             {
-                art = ArtType.painting,
-                bonus = BonusType.assistant
+                Art = ArtType.painting,
+                Bonus = BonusType.assistant
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.painting,
-                bonus = BonusType.bagVisitor
+                Art = ArtType.painting,
+                Bonus = BonusType.bagVisitor
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.painting,
-                bonus = BonusType.plazaVipInvestor
+                Art = ArtType.painting,
+                Bonus = BonusType.plazaVipInvestor
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.painting,
-                bonus = BonusType.money
+                Art = ArtType.painting,
+                Bonus = BonusType.money
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.painting,
-                bonus = BonusType.contract
+                Art = ArtType.painting,
+                Bonus = BonusType.contract
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.photo,
-                bonus = BonusType.assistant
+                Art = ArtType.photo,
+                Bonus = BonusType.assistant
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.photo,
-                bonus = BonusType.bagVisitor
+                Art = ArtType.photo,
+                Bonus = BonusType.bagVisitor
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.photo,
-                bonus = BonusType.plazaVipInvestor
+                Art = ArtType.photo,
+                Bonus = BonusType.plazaVipInvestor
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.photo,
-                bonus = BonusType.money
+                Art = ArtType.photo,
+                Bonus = BonusType.money
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.photo,
-                bonus = BonusType.contract
+                Art = ArtType.photo,
+                Bonus = BonusType.contract
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.sculpture,
-                bonus = BonusType.assistant
+                Art = ArtType.sculpture,
+                Bonus = BonusType.assistant
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.sculpture,
-                bonus = BonusType.bagVisitor
+                Art = ArtType.sculpture,
+                Bonus = BonusType.bagVisitor
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.sculpture,
-                bonus = BonusType.plazaVipInvestor
+                Art = ArtType.sculpture,
+                Bonus = BonusType.plazaVipInvestor
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.sculpture,
-                bonus = BonusType.influence
+                Art = ArtType.sculpture,
+                Bonus = BonusType.influence
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.sculpture,
-                bonus = BonusType.contract
+                Art = ArtType.sculpture,
+                Bonus = BonusType.contract
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.digital,
-                bonus = BonusType.assistant
+                Art = ArtType.digital,
+                Bonus = BonusType.assistant
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.digital,
-                bonus = BonusType.bagVisitor
+                Art = ArtType.digital,
+                Bonus = BonusType.bagVisitor
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.digital,
-                bonus = BonusType.plazaVipInvestor
+                Art = ArtType.digital,
+                Bonus = BonusType.plazaVipInvestor
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.digital,
-                bonus = BonusType.influence
+                Art = ArtType.digital,
+                Bonus = BonusType.influence
             },
-            new Contract
+            new TemplateContract
             {
-                art = ArtType.digital,
-                bonus = BonusType.contract
+                Art = ArtType.digital,
+                Bonus = BonusType.contract
             }
             );
-            context.ReputationTiles.AddOrUpdate(
-            r => r.scoring,
-            new ReputationTile
+            context.TemplateReputationTiles.AddOrUpdate(
+            r => r.Scoring,
+            new TemplateReputationTile
             {
-                money = 1,
-                influence = 0,
-                scoring = ReputationTileScoring.threeInflunce
+                Money = 1,
+                Influence = 0,
+                Scoring = ReputationTileScoring.threeInflunce
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 3,
-                influence = 1,
-                scoring = ReputationTileScoring.collector
+                Money = 3,
+                Influence = 1,
+                Scoring = ReputationTileScoring.collector
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 2,
-                influence = 1,
-                scoring = ReputationTileScoring.vip
+                Money = 2,
+                Influence = 1,
+                Scoring = ReputationTileScoring.vip
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 2,
-                influence = 1,
-                scoring = ReputationTileScoring.investor
+                Money = 2,
+                Influence = 1,
+                Scoring = ReputationTileScoring.investor
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 1,
-                influence = 0,
-                scoring = ReputationTileScoring.visitor
+                Money = 1,
+                Influence = 0,
+                Scoring = ReputationTileScoring.visitor
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 4,
-                influence = 0,
-                scoring = ReputationTileScoring.visitorSet
+                Money = 4,
+                Influence = 0,
+                Scoring = ReputationTileScoring.visitorSet
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 1,
-                influence = 2,
-                scoring = ReputationTileScoring.reputationTile
+                Money = 1,
+                Influence = 2,
+                Scoring = ReputationTileScoring.reputationTile
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 3,
-                influence = 1,
-                scoring = ReputationTileScoring.auction
+                Money = 3,
+                Influence = 1,
+                Scoring = ReputationTileScoring.auction
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 1,
-                influence = 1,
-                scoring = ReputationTileScoring.assistant
+                Money = 1,
+                Influence = 1,
+                Scoring = ReputationTileScoring.assistant
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 2,
-                influence = 0,
-                scoring = ReputationTileScoring.promotion
+                Money = 2,
+                Influence = 0,
+                Scoring = ReputationTileScoring.promotion
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 2,
-                influence = 0,
-                scoring = ReputationTileScoring.aquired
+                Money = 2,
+                Influence = 0,
+                Scoring = ReputationTileScoring.aquired
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 3,
-                influence = 1,
-                scoring = ReputationTileScoring.sold
+                Money = 3,
+                Influence = 1,
+                Scoring = ReputationTileScoring.sold
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 3,
-                influence = 1,
-                scoring = ReputationTileScoring.exhibiting
+                Money = 3,
+                Influence = 1,
+                Scoring = ReputationTileScoring.exhibiting
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 2,
-                influence = 1,
-                scoring = ReputationTileScoring.artType
+                Money = 2,
+                Influence = 1,
+                Scoring = ReputationTileScoring.artType
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 3,
-                influence = 1,
-                scoring = ReputationTileScoring.photo
+                Money = 3,
+                Influence = 1,
+                Scoring = ReputationTileScoring.photo
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 3,
-                influence = 1,
-                scoring = ReputationTileScoring.painting
+                Money = 3,
+                Influence = 1,
+                Scoring = ReputationTileScoring.painting
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 3,
-                influence = 1,
-                scoring = ReputationTileScoring.digital
+                Money = 3,
+                Influence = 1,
+                Scoring = ReputationTileScoring.digital
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 3,
-                influence = 1,
-                scoring = ReputationTileScoring.sculpture
+                Money = 3,
+                Influence = 1,
+                Scoring = ReputationTileScoring.sculpture
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 2,
-                influence = 1,
-                scoring = ReputationTileScoring.fame
+                Money = 2,
+                Influence = 1,
+                Scoring = ReputationTileScoring.fame
             },
-            new ReputationTile
+            new TemplateReputationTile
             {
-                money = 4,
-                influence = 2,
-                scoring = ReputationTileScoring.masterpiece,
+                Money = 4,
+                Influence = 2,
+                Scoring = ReputationTileScoring.masterpiece,
             }
             );
             //  This method will be called after migrating to the latest version.
