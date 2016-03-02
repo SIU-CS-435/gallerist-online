@@ -7,6 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <meta name="description" content="The Gallerist online game" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -21,8 +22,11 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Game List", "List", "Game")</li>
-                    <li>@Html.ActionLink("play", "Play", "Game")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Game List", "List", "Game")</li>
+                        <li>@Html.ActionLink("New Game", "Play", "Game")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

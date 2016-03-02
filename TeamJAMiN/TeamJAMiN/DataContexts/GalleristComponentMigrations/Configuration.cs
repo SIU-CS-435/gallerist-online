@@ -1,12 +1,12 @@
 namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
 {
-    using GalleristComponentEntities;
+    using TeamJAMiN.GalleristComponentEntities;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<TeamJAMiN.DataContexts.GalleristComponentsDb>
+    internal sealed class Configuration : DbMigrationsConfiguration<TeamJAMiN.DataContexts.GalleristComponentsDbContext>
     {
         public Configuration()
         {
@@ -14,7 +14,7 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             MigrationsDirectory = @"DataContexts\GalleristComponentMigrations";
         }
 
-        protected override void Seed(TeamJAMiN.DataContexts.GalleristComponentsDb context)
+        protected override void Seed(TeamJAMiN.DataContexts.GalleristComponentsDbContext context)
         {
             context.TemplateArt.AddOrUpdate(
                 a => a.Slug,
