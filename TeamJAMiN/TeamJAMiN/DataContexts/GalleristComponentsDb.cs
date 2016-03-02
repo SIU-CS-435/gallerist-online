@@ -18,6 +18,8 @@ namespace TeamJAMiN.DataContexts
         public DbSet<GameArtist> Artists { get; set; }
         public DbSet<GameReputationTile> ReputationTiles { get; set; }
 
+        public DbSet<GameVisitor> Visitors { get; set; }
+
         public DbSet<TemplateContract> Contracts { get; set; }
 
         public DbSet<Game> Games { get; set; }

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace TeamJAMiN.GalleristComponentEntities
 {
-    public enum GalleryLocationType
+    public class TemplateLocation
     {
-        gallery, lobby, plaza, visitorBag
+        public GalleryLocationType Type { get; set; }
     }
 }

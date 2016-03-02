@@ -6,11 +6,11 @@
 @*New (Blue) Artists*@
 <div class="col-md-4">
     @{  foreach (ArtType type in listOrder)
+        {
+            var artist = artists.Where(a => a.ArtType == type && a.Category == ArtistCategory.blue).FirstOrDefault();
+            if (artist.IsDiscovered)
             {
-                var artist = artists.Where(a => a.ArtType == type && a.Category == ArtistCategory.blue).FirstOrDefault();
-                if (artist.IsDiscovered)
-                {
-                <div class="row">@Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", artist))</div>
+                <div class="row">@Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", artist)</div>
             }
             else
             {
@@ -39,7 +39,7 @@
 <div class="col-md-4">
     @foreach (ArtType type in listOrder)
     {
-        var art = Model.Art.FirstOrDefault();
+        var art = Model.Art.Where(a => a.Type == type).FirstOrDefault();
         <div class="row">@Html.Partial("~/Views/Game/ArtistColony/Art.cshtml", art)</div>
     }
 </div>

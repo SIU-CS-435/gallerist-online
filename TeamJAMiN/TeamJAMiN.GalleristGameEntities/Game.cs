@@ -22,6 +22,8 @@ namespace TeamJAMiN.GalleristComponentEntities
         public HashSet<GameArt> Art { get; set; }
         public HashSet<GameReputationTile> ReputationTiles { get; set; }
         public HashSet<GameContract> Contracts { get; set; }
+        public HashSet<GameVisitor> Visitors { get; set; }
+
         public HashSet<Player> Players { get; set; }
 
         public void AddArtStack(List<TemplateArt> artList)

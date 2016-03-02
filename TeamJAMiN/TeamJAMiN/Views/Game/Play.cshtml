@@ -7,35 +7,29 @@
 <div class="container">
     <h2>The Gallerist</h2>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="row">
                 @*Sales Office (Contracts)*@
-                <div class="col-md-6">@Html.Partial("~/Views/Game/SalesOffice/SalesOffice.cshtml")</div>
-                <div class="col-md-3">Top Action</div>
-                <div class="col-md-3">End Scoring</div>
+                <div class="col-md-12">@Html.Partial("~/Views/Game/SalesOffice/SalesOffice.cshtml")</div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     @*International Market*@
                     @Html.Partial("~/Views/Game/InternationalMarket/InternationalMarket.cshtml")
                 </div>
-                <div class="col-md-8">
-                    Galleries
-                </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             @* Artist Colony *@
             @Html.Partial("~/Views/Game/ArtistColony/ArtistColony.cshtml",Model)
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-8">
             @* Media *@
             @Html.Partial("~/Views/Game/Media/Media.cshtml")
         </div>
-        <div class="col-md-4">Bottom Action</div>
-        <div class="col-md-4">
+        <div class="col-md-4 col-md-offset-2">
             <div class="col-md-12">
                 <div class="col-md-4">Pink</div>
                 <div class="col-md-4">Brown</div>

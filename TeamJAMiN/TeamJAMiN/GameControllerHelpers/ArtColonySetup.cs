@@ -31,10 +31,10 @@ namespace TeamJAMiN.GameControllerHelpers
                     artist.IsDiscovered = true;
                     firstBlue = true;
                 }
+                else
+                    artist.IsDiscovered = false;
                 if (!result.ContainsKey(artist.ArtType))
-                {
                     result.Add(artist.ArtType,artist);
-                }
             }
             return result;
         }
