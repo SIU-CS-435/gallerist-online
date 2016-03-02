@@ -1,6 +1,6 @@
 namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
 {
-    using GalleristComponentEntities;
+    using TeamJAMiN.GalleristComponentEntities;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
