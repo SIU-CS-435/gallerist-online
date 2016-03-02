@@ -3,9 +3,31 @@
 }
 <h2>@ViewBag.Title</h2>
 
-@{ 
-    foreach(var game in ViewBag.games)
-    {
-        <li>@game</li>
+
+<table>
+    <thead>
+        <tr>
+            <td style="padding:5px;">#</td>
+            <td style="padding:5px;">Game</td>
+            <td style="padding:5px;">Max Players</td>
+            <td style="padding:5px;">Current Players</td>
+            <td style="padding:5px;">Max Turn Length</td>
+        </tr>
+    </thead>
+    <tbody>
+    @{
+        var index = 1;
+        foreach (var game in ViewBag.games)
+        {
+            <tr>
+                <td style="padding:5px;">@index</td>
+                <td style="padding:5px;"><a href="@game.Url">@game.Name</a></td>
+                <td style="padding:5px;">@game.MaxNumberOfPlayers</td>
+                <td style="padding:5px;">@game.CurrentNumberOfPlayers</td>
+                <td style="padding:5px;">@game.MaxTurnLength</td>
+            </tr>
+            index++;
+        }
     }
-}
+    </tbody>
+</table>

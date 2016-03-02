@@ -46,8 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\GameDto.cs" />
     <Compile Include="GameArt.cs" />
     <Compile Include="GameReputationTile.cs" />
+    <Compile Include="Partial\Game.cs" />
     <Compile Include="TemplateArt.cs" />
     <Compile Include="GameArtist.cs" />
     <Compile Include="TemplateArtist.cs" />

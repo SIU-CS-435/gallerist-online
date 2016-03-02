@@ -7,7 +7,7 @@ using TeamJAMiN.GalleristComponentEntities;
 
 namespace TeamJAMiN.DataContexts
 {
-    public class GalleristComponentsDb : DbContext
+    public class GalleristComponentsDbContext : DbContext
     {
         public DbSet<TemplateArt> TemplateArt { get; set; }
         public DbSet<TemplateArtist> TemplateArtists { get; set; }
@@ -23,7 +23,7 @@ namespace TeamJAMiN.DataContexts
         public DbSet<Game> Games { get; set; }
         public DbSet<Player> Players { get; set; }
 
-        public GalleristComponentsDb()
+        public GalleristComponentsDbContext()
             : base("DefaultConnection")
         {
         }
