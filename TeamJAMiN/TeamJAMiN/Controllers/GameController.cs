@@ -41,28 +41,27 @@ namespace TeamJAMiN.Controllers
         }
 
         [Authorize]
+        [HttpGet]
         public ActionResult Create()
         {
-            var userName = User.Identity.Name;
+            return View(new Game());
+        }
 
-            using (var identityContext = new ApplicationDbContext())
+        [Authorize]
+        [HttpPost]
+        public ActionResult Create(Game newGame)
+        {
+            using (var galleristContext = new GalleristComponentsDbContext())
             {
-                var userId = identityContext.Users.First(m => m.UserName == userName).Id;
-                using (var galleristContext = new GalleristComponentsDbContext())
+                newGame.CreateRandomSetup();
+                galleristContext.Games.Add(newGame);
+                using (var identityContext = new ApplicationDbContext())
                 {
-                    var games = galleristContext.Games.Where(m => m.NumberOfPlayers != m.Players.Count)
-                        .Select(m => new GameDto
-                        {
-                            Url = "/Game/Play/" + m.Id,
-                            Name = m.Name,
-                            CurrentNumberOfPlayers = m.Players.Count,
-                            MaxNumberOfPlayers = m.NumberOfPlayers,
-                            MaxTurnLength = m.TurnLength
-                        }).ToList();
-
-                    ViewBag.games = games;
-                    return View();
+                    //add me to the game
+                    newGame.Players.Add(new Player { UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id });
                 }
+                galleristContext.SaveChanges();
+                return Redirect("/Game/List");
             }
         }
 
@@ -79,23 +78,7 @@ namespace TeamJAMiN.Controllers
                 using (var galleristContext = new GalleristComponentsDbContext())
                 {
                     Game newGame = new Game();
-
-                    ViewBag.artLists = galleristContext.TemplateArt.ToList().chooseArt();
-                    newGame.AddArtStack(ViewBag.artLists);
-
-                    var blueArtists = galleristContext.TemplateArtists.Where(a => a.Category == ArtistCategory.red).ToList().chooseArtists();
-                    var redArtists = galleristContext.TemplateArtists.Where(a => a.Category == ArtistCategory.blue).ToList().chooseArtists();
-                    ViewBag.redArtists = redArtists;
-                    ViewBag.blueArtists = blueArtists;
-                    newGame.AddArtists(blueArtists.Values.ToList());
-                    newGame.AddArtists(redArtists.Values.ToList());
-
-
-                    ViewBag.ReputationTiles = galleristContext.TemplateReputationTiles.ToList().chooseReputationTiles();
-                    newGame.AddReputationTiles(ViewBag.ReputationTiles);
-
-                    ViewBag.Contracts = galleristContext.Contracts.ToList().Shuffle().ToList();
-                    newGame.AddContracts(ViewBag.Contracts);
+                    newGame.CreateRandomSetup();
 
                     //TODO: We need to allow users to input these values instead of auto generating
                     var gameNameStrings = new List<String>{
