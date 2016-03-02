@@ -40,20 +40,24 @@ namespace TeamJAMiN.Controllers
             {
                 Game newGame = new Game();
 
-                var artLists = db.TemplateArt.ToList().chooseArt();
-                newGame.AddArtStack(artLists);
+                ViewBag.artLists = db.TemplateArt.ToList().chooseArt();
+                newGame.AddArtStack(ViewBag.artLists);
 
                 var blueArtists = db.TemplateArtists.Where(a => a.Category == ArtistCategory.red).ToList().chooseArtists();
                 var redArtists = db.TemplateArtists.Where(a => a.Category == ArtistCategory.blue).ToList().chooseArtists();
+                ViewBag.redArtists = redArtists;
+                ViewBag.blueArtists = blueArtists;
                 newGame.AddArtists(blueArtists.Values.ToList());
                 newGame.AddArtists(redArtists.Values.ToList());
 
 
-                var ReputationTiles = db.TemplateReputationTiles.ToList().chooseReputationTiles();
-                newGame.AddReputationTiles(ReputationTiles);
+                ViewBag.ReputationTiles = db.TemplateReputationTiles.ToList().chooseReputationTiles();
+                newGame.AddReputationTiles(ViewBag.ReputationTiles);
 
-                var Contracts = db.Contracts.ToList().Shuffle().ToList();
-                newGame.AddContracts(Contracts);
+                ViewBag.Contracts = db.Contracts.ToList().Shuffle().ToList();
+                newGame.AddContracts(ViewBag.Contracts);
+
+                var artist = newGame.Artists.Where(a => a.ArtType == ArtType.digital && a.Category == ArtistCategory.red).FirstOrDefault();
 
 
                 db.SaveChanges();

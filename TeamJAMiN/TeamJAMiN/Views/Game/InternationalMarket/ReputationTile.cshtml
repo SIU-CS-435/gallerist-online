@@ -1,23 +1,22 @@
-﻿@model TeamJAMiN.GalleristComponentEntities.ReputationTile
+﻿@model TeamJAMiN.GalleristComponentEntities.GameReputationTile
 
-<div class="container">
-    <div class="row">
-        @*influence*@
-        <div class="col-xs-6">
-            @Model.influence
-        </div>
-        @*money*@
-        <div class="col-xs-6">
-            @Model.money
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            @Model.scoring
-        </div>
-    </div>
 
+<div class="row">
+    @*influence*@
+    <div class="col-xs-6">
+        @Model.Influence
+    </div>
+    @*money*@
+    <div class="col-xs-6">
+        @Model.Money
+    </div>
 </div>
+<div class="row">
+    <div class="col-xs-12">
+        @Model.Scoring
+    </div>
+</div>
+
 
 
 

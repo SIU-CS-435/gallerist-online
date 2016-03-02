@@ -1,40 +1,45 @@
 ﻿@using TeamJAMiN.GalleristComponentEntities
 @model TeamJAMiN.GalleristComponentEntities.Game
 @{ var listOrder = new List<ArtType> { ArtType.digital, ArtType.painting, ArtType.sculpture, ArtType.photo };}
-<div class="container">
-    @*New (Blue) Artists*@
-    <div class="col-md-4">
-        @foreach (ArtType type in listOrder)
-        {
-            if (Model.blueArtists[type].discovered)
+@{ var artists = Model.Artists.ToList(); }
+
+@*New (Blue) Artists*@
+<div class="col-md-4">
+    @{  foreach (ArtType type in listOrder)
             {
-                <div class="row">@Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", Model.blueArtists[type])</div>
+                var artist = artists.Where(a => a.ArtType == type && a.Category == ArtistCategory.blue).FirstOrDefault();
+                if (artist.IsDiscovered)
+                {
+                <div class="row">@Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", artist))</div>
             }
             else
             {
-                <div class="row">@Html.Partial("~/Views/Game/ArtistColony/ArtistUndiscovered.cshtml", Model.blueArtists[type])</div>
+                <div class="row">@Html.Partial("~/Views/Game/ArtistColony/ArtistUndiscovered.cshtml", artist)</div>
             }
+
         }
-    </div>
-    @*Experienced (Red) Artists*@
-    <div class="col-md-4">
-        @foreach (ArtType type in listOrder)
+    }
+</div>
+@*Experienced (Red) Artists*@
+<div class="col-md-4">
+    @foreach (ArtType type in listOrder)
+    {
+        var artist = artists.Where(a => a.ArtType == type && a.Category == ArtistCategory.red).FirstOrDefault();
+        if (artist.IsDiscovered)
         {
-            if (Model.redArtists[type].discovered)
-            {
-                <div class="row">@Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", Model.redArtists[type])</div>
-            }
-            else
-            {
-                <div class="row">@Html.Partial("~/Views/Game/ArtistColony/ArtistUndiscovered.cshtml", Model.redArtists[type])</div>
-            }
+            <div class="row">@Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", artist)</div>
         }
-    </div>
-    @*Art*@
-    <div class="col-md-4">
-        @foreach (ArtType type in listOrder)
+        else
         {
-            <div class="row">@Html.Partial("~/Views/Game/ArtistColony/Art.cshtml", Model.art[type].First())</div>
+            <div class="row">@Html.Partial("~/Views/Game/ArtistColony/ArtistUndiscovered.cshtml", artist)</div>
         }
-    </div>
+    }
+</div>
+@*Art*@
+<div class="col-md-4">
+    @foreach (ArtType type in listOrder)
+    {
+        var art = Model.Art.FirstOrDefault();
+        <div class="row">@Html.Partial("~/Views/Game/ArtistColony/Art.cshtml", art)</div>
+    }
 </div>

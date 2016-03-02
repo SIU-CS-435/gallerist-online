@@ -14,7 +14,10 @@ namespace TeamJAMiN.GalleristComponentEntities
             Fame = temp.Fame;
             NumTickets = temp.NumTickets;
             FirstTicket = temp.FirstTicket;
-            SecondTicket = temp.SecondTicket;
+            if(temp.NumTickets >= 2)
+                SecondTicket = temp.SecondTicket;
+            else
+                SecondTicket = new VisitorTicketType[] { };
         }
 
         public int Id { get; set; }
