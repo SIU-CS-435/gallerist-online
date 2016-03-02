@@ -13,7 +13,7 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201603020622359_GameUpdates"; }
+            get { return "201603021214320_GameUpdates"; }
         }
         
         string IMigrationMetadata.Source

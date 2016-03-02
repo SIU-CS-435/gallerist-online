@@ -20,6 +20,12 @@ namespace TeamJAMiN.GalleristComponentEntities
                 SecondTicket = new VisitorTicketType[] { };
         }
 
+        public GameArt()
+        {
+            FirstTicket = new VisitorTicketType[] { };
+            SecondTicket = new VisitorTicketType[] { };
+        }
+
         public int Id { get; set; }
         
         public ArtType Type { get; set; }

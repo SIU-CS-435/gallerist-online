@@ -10,7 +10,7 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             AddColumn("dbo.Games", "Name", c => c.String());
             AddColumn("dbo.Games", "NumberOfPlayers", c => c.Int(nullable: false));
             AddColumn("dbo.Games", "TurnLength", c => c.Int(nullable: false));
-            AlterColumn("dbo.Players", "UserId", c => c.String());
+            AlterColumn("dbo.Players", "UserId", c => c.String(maxLength: 128));
         }
         
         public override void Down()

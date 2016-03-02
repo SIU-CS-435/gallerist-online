@@ -23,12 +23,12 @@ namespace TeamJAMiN.GalleristComponentEntities
         public string Name { get; set; }
         public int NumberOfPlayers { get; set; }
         public int TurnLength { get; set; }
-        public HashSet<GameArtist> Artists { get; set; }
-        public HashSet<GameArt> Art { get; set; }
-        public HashSet<GameReputationTile> ReputationTiles { get; set; }
-        public HashSet<GameContract> Contracts { get; set; }
-        public HashSet<GameVisitor> Visitors { get; set; }
+        public virtual HashSet<GameArtist> Artists { get; set; }
+        public virtual HashSet<GameArt> Art { get; set; }
+        public virtual HashSet<GameReputationTile> ReputationTiles { get; set; }
+        public virtual HashSet<GameContract> Contracts { get; set; }
+        public virtual HashSet<GameVisitor> Visitors { get; set; }
 
-        public HashSet<Player> Players { get; set; }
+        public virtual HashSet<Player> Players { get; set; }
     }
 }

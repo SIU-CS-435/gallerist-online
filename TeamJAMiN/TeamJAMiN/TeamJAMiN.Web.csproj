@@ -205,10 +205,6 @@
     <Compile Include="DataContexts\GalleristComponentMigrations\201603011355143_AddGameContracts.Designer.cs">
       <DependentUpon>201603011355143_AddGameContracts.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataContexts\GalleristComponentMigrations\201603020622359_GameUpdates.cs" />
-    <Compile Include="DataContexts\GalleristComponentMigrations\201603020622359_GameUpdates.Designer.cs">
-      <DependentUpon>201603020622359_GameUpdates.cs</DependentUpon>
-    </Compile>
     <Compile Include="DataContexts\GalleristComponentMigrations\201603020627470_MaxLengthUserId.cs" />
     <Compile Include="DataContexts\GalleristComponentMigrations\201603020627470_MaxLengthUserId.Designer.cs">
       <DependentUpon>201603020627470_MaxLengthUserId.cs</DependentUpon>
@@ -216,6 +212,10 @@
     <Compile Include="DataContexts\GalleristComponentMigrations\201603021157204_VisitorInit.cs" />
     <Compile Include="DataContexts\GalleristComponentMigrations\201603021157204_VisitorInit.Designer.cs">
       <DependentUpon>201603021157204_VisitorInit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603021214320_GameUpdates.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603021214320_GameUpdates.Designer.cs">
+      <DependentUpon>201603021214320_GameUpdates.cs</DependentUpon>
     </Compile>
     <Compile Include="DataContexts\GalleristComponentMigrations\Configuration.cs" />
     <Compile Include="DataContexts\GalleristComponentsDb.cs" />
@@ -317,6 +317,7 @@
     <Content Include="Views\Game\SalesOffice\SalesOffice.cshtml" />
     <Content Include="Scripts\jquery-2.2.1.min.map" />
     <Content Include="Views\Game\NotFound.cshtml" />
+    <Content Include="Views\Game\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -343,14 +344,14 @@
     <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603011355143_AddGameContracts.resx">
       <DependentUpon>201603011355143_AddGameContracts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603020622359_GameUpdates.resx">
-      <DependentUpon>201603020622359_GameUpdates.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603020627470_MaxLengthUserId.resx">
       <DependentUpon>201603020627470_MaxLengthUserId.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603021157204_VisitorInit.resx">
       <DependentUpon>201603021157204_VisitorInit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603021214320_GameUpdates.resx">
+      <DependentUpon>201603021214320_GameUpdates.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201602282353509_init.resx">
       <DependentUpon>201602282353509_init.cs</DependentUpon>

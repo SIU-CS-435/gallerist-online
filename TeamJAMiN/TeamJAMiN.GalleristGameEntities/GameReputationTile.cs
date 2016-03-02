@@ -15,6 +15,10 @@ namespace TeamJAMiN.GalleristComponentEntities
             Scoring = temp.Scoring;
         }
 
+        public GameReputationTile()
+        {
+        }
+
         public int Id { get; set; }
         public int Influence { get; set; }
         public int Money { get; set; }

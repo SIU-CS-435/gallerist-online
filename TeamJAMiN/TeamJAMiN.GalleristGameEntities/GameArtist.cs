@@ -18,7 +18,12 @@ namespace TeamJAMiN.GalleristComponentEntities
             IsDiscovered = temp.IsDiscovered;
             AvailableArt = 2;
         }
-        
+
+        public GameArtist()
+        {
+            StarLevels = new int[] { };
+        }
+
         public int Id { get; set; }
         public ArtistCategory Category { get; set; }
         public ArtType ArtType { get; set; }

@@ -40,6 +40,32 @@ namespace TeamJAMiN.Controllers
             }
         }
 
+        [Authorize]
+        public ActionResult Create()
+        {
+            var userName = User.Identity.Name;
+
+            using (var identityContext = new ApplicationDbContext())
+            {
+                var userId = identityContext.Users.First(m => m.UserName == userName).Id;
+                using (var galleristContext = new GalleristComponentsDbContext())
+                {
+                    var games = galleristContext.Games.Where(m => m.NumberOfPlayers != m.Players.Count)
+                        .Select(m => new GameDto
+                        {
+                            Url = "/Game/Play/" + m.Id,
+                            Name = m.Name,
+                            CurrentNumberOfPlayers = m.Players.Count,
+                            MaxNumberOfPlayers = m.NumberOfPlayers,
+                            MaxTurnLength = m.TurnLength
+                        }).ToList();
+
+                    ViewBag.games = games;
+                    return View();
+                }
+            }
+        }
+
         /// <summary>
         /// Takes you to the new game view. This also creates a game but we really need to do that in a post. We also need an additional step between clicking New Game
         /// and creating the game. For example we probably want to setup rules, setup a game name etc.
@@ -71,19 +97,17 @@ namespace TeamJAMiN.Controllers
                     ViewBag.Contracts = galleristContext.Contracts.ToList().Shuffle().ToList();
                     newGame.AddContracts(ViewBag.Contracts);
 
-                    var artist = newGame.Artists.Where(a => a.ArtType == ArtType.digital && a.Category == ArtistCategory.red).FirstOrDefault();
-
                     //TODO: We need to allow users to input these values instead of auto generating
                     var gameNameStrings = new List<String>{
-                    "The Gallerist Test Game 1",
-                    "Gallerist Game A",
-                    "Gallerist Game Dev",
-                    "Trying the gallerist!",
-                    "Let's give Gallerist a go!",
-                    "Gallerist - All welcome :)",
-                    "Gallerist time lets gooo...",
-                    "Gallerist Private Room"
-                };
+                        "The Gallerist Test Game 1",
+                        "Gallerist Game A",
+                        "Gallerist Game Dev",
+                        "Trying the gallerist!",
+                        "Let's give Gallerist a go!",
+                        "Gallerist - All welcome :)",
+                        "Gallerist time lets gooo...",
+                        "Gallerist Private Room"
+                    };
 
                     var rand = new Random();
                     var gameName = gameNameStrings.ElementAt(rand.Next(gameNameStrings.Count));
@@ -107,7 +131,7 @@ namespace TeamJAMiN.Controllers
                 //TODO: Make this less horrible. Need a new action
                 using (var galleristContext = new GalleristComponentsDbContext())
                 {
-                    var game = galleristContext.Games.FirstOrDefault(m => m.Id == id);
+                    var game = galleristContext.Games.Include("Art").Include("Artists").Include("ReputationTiles").Include("Contracts").Include("Visitors").FirstOrDefault(m => m.Id == id);
 
                     if (game == null)
                     {

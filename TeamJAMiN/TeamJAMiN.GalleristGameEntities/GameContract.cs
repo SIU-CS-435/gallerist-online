@@ -13,7 +13,11 @@ namespace TeamJAMiN.GalleristComponentEntities
             Art = temp.Art;
             Bonus = temp.Bonus;
         }
-        
+
+        public GameContract()
+        {
+        }
+
         public int Id { get; set; }
         public ArtType Art { get; set; }
         public BonusType Bonus { get; set; }
