@@ -44,7 +44,7 @@
     </div>
     @{ foreach (Player player in Model.Players)
         {
-            Html.Partial("~/Views/Game/PlayerBoard/PlayerBoard.cshtml", player);
+           @Html.Partial("~/Views/Game/PlayerBoard/PlayerBoard.cshtml", player);
         }
     }
 </div>
