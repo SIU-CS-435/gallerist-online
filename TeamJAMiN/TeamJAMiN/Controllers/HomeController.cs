@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MoreLinq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,7 +13,7 @@ namespace TeamJAMiN.Controllers
         public ActionResult Index()
         {
             using (var galleristContext = new GalleristComponentsDbContext()) {
-                ViewBag.NumberOfPlayers = galleristContext.Players.Count();
+                ViewBag.NumberOfPlayers = galleristContext.Players.DistinctBy(m => m.UserId).Count();
                 ViewBag.NumberOfGames = galleristContext.Games.Count();
                 ViewBag.RandomNumber = new Random().Next(100);
                 return View();
