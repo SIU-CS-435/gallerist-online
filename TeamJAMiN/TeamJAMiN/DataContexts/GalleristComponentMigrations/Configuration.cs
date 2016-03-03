@@ -454,7 +454,7 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
                 Category = ArtistCategory.red
             }
             );
-            context.Contracts.AddOrUpdate(
+            context.TemplateContracts.AddOrUpdate(
             c => new { c.Art, c.Bonus },
             new TemplateContract
             {

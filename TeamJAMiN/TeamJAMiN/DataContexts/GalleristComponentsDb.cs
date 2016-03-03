@@ -12,7 +12,7 @@ namespace TeamJAMiN.DataContexts
         public DbSet<TemplateArt> TemplateArt { get; set; }
         public DbSet<TemplateArtist> TemplateArtists { get; set; }
         public DbSet<TemplateReputationTile> TemplateReputationTiles { get; set; }
-
+        public DbSet<TemplateContract> TemplateContracts { get; set; }
 
         public DbSet<GameArt> Art { get; set; }
         public DbSet<GameArtist> Artists { get; set; }
@@ -20,7 +20,6 @@ namespace TeamJAMiN.DataContexts
 
         public DbSet<GameVisitor> Visitors { get; set; }
 
-        public DbSet<TemplateContract> Contracts { get; set; }
 
         public DbSet<Game> Games { get; set; }
         public DbSet<Player> Players { get; set; }
@@ -29,5 +28,7 @@ namespace TeamJAMiN.DataContexts
             : base("DefaultConnection")
         {
         }
+
+        public System.Data.Entity.DbSet<TeamJAMiN.GalleristComponentEntities.GameContract> GameContracts { get; set; }
     }
 }

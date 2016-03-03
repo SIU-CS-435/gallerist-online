@@ -9,6 +9,15 @@ namespace TeamJAMiN.GalleristComponentEntities
 {
     public class Player
     {
+        public Player()
+        {
+            Money = 10;
+            Influence = 10;
+            Assistants = new HashSet<PlayerAssistant>();
+            Tiles = new HashSet<GameReputationTile>();
+            Contracts = new HashSet<GameContract>();
+            Art = new HashSet<GameArt>();
+        }
         public int Id { get; set; }
 
         public int GameId { get; set; }
@@ -20,9 +29,9 @@ namespace TeamJAMiN.GalleristComponentEntities
         public int Money { get; set; }
         public int Influence { get; set; }
         public HashSet<PlayerAssistant> Assistants { get; set; }
-        public HashSet<GameReputationTile> tiles { get; set; }
+        public HashSet<GameReputationTile> Tiles { get; set; }
         public HashSet<GameContract> Contracts { get; set; }
         public HashSet<GameArt> Art { get; set; }
-        public GameArtist comission { get; set; }
+        public GameArtist Commission { get; set; }
     }        
 }

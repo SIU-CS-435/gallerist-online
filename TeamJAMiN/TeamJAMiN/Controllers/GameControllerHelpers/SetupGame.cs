@@ -26,7 +26,7 @@ namespace TeamJAMiN.GameControllerHelpers
                 var reputationTiles = galleristContext.TemplateReputationTiles.ToList().chooseReputationTiles();
                 newGame.AddReputationTiles(reputationTiles);
 
-                var contracts = galleristContext.Contracts.ToList().Shuffle().ToList();
+                var contracts = galleristContext.TemplateContracts.ToList().Shuffle().ToList();
                 newGame.AddContracts(contracts);
             }
         }
