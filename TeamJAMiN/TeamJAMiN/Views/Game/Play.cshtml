@@ -1,4 +1,5 @@
 ﻿@model TeamJAMiN.GalleristComponentEntities.Game
+@using TeamJAMiN.GalleristComponentEntities
 @{
     ViewBag.Title = "Play";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -41,4 +42,9 @@
         @* Influence Track *@
         @Html.Partial("~/Views/Game/InfluenceTrack/InfluenceTrack.cshtml")
     </div>
+    @{ foreach (Player player in Model.Players)
+        {
+            Html.Partial("~/Views/Game/PlayerBoard/PlayerBoard.cshtml", player);
+        }
+    }
 </div>

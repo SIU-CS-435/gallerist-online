@@ -6,8 +6,22 @@ using System.Threading.Tasks;
 
 namespace TeamJAMiN.GalleristComponentEntities
 {
-    public class TemplateLocation
+    public abstract class TemplateLocation
     {
-        public GalleryLocationType Type { get; set; }
+        public int Id { get; set; }
+    }
+
+    public class ContractLocation : TemplateLocation
+    {
+
+    }
+    public class ReputationTileLocation : TemplateLocation
+    {
+
+    }
+
+    public class AssistantLocation : TemplateLocation
+    {
+
     }
 }

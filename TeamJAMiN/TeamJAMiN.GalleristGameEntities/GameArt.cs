@@ -29,6 +29,7 @@ namespace TeamJAMiN.GalleristComponentEntities
         public int Id { get; set; }
         
         public ArtType Type { get; set; }
+        public GameArtist Artist { get; set; }
         public int Fame { get; set; }
         public int NumTickets { get; set; }
         public string FirstTicketData { get; set; }

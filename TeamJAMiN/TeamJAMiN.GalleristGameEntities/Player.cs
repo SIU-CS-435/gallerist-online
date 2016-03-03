@@ -17,5 +17,12 @@ namespace TeamJAMiN.GalleristComponentEntities
         public string UserId { get; set; }
 
         public Game Game { get; set; }
+        public int Money { get; set; }
+        public int Influence { get; set; }
+        public HashSet<PlayerAssistant> Assistants { get; set; }
+        public HashSet<GameReputationTile> tiles { get; set; }
+        public HashSet<GameContract> Contracts { get; set; }
+        public HashSet<GameArt> Art { get; set; }
+        public GameArtist comission { get; set; }
     }        
 }
