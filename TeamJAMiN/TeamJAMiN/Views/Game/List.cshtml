@@ -26,10 +26,11 @@
                         <td>@myGame.PlayersString</td>
                         <td>@myGame.MaxTurnLengthString</td>
                         <td>
-                        if(myGame.RemainingSlots > 0)
-                        {
-                            <a href="@myGame.Url" class="btn-sm btn-default">Open</a></td>
-                        }
+                            @if (myGame.RemainingSlots > 0)
+                            {
+                                <a href="@myGame.Url" class="btn-sm btn-success">Open</a>
+                            }
+                        </td>
                     </tr>
                     index++;
                 }
@@ -62,9 +63,9 @@
                         <td>@game.PlayersString</td>
                         <td>@game.MaxTurnLengthString</td>
                         <td>
-                            if(myGame.RemainingSlots > 0)
+                            @if(game.RemainingSlots > 0)
                             {
-                                <a href="@game.Url" class="btn-sm btn-success">Join</a>
+                                @*<a href="@game.Url" class="btn-sm btn-success">Join</a>*@
                             }
                         </td>
                     </tr>
