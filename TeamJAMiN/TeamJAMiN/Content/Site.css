@@ -12,6 +12,24 @@
   padding-left: 0;
 }
 
+
+.board-region {
+    background-color: rgba(255, 255, 255,.1);
+    text-align:center;
+}
+
+.player-board {
+    margin-top:100px;
+}
+
+.border {
+    border: 1px solid white;
+}
+
+.separate-top {
+    margin-top:10px;
+}
+
 /*Default Stuff*/
 
 body {
