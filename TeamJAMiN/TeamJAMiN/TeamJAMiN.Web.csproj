@@ -340,6 +340,8 @@
     <Content Include="Views\Game\NotFound.cshtml" />
     <Content Include="Views\Game\Create.cshtml" />
     <Content Include="Views\Game\PlayerBoard\PlayerBoard.cshtml" />
+    <Content Include="Views\Game\PlayerBoard\PlayerArt.cshtml" />
+    <Content Include="Views\Game\PlayerBoard\PlayerContracts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

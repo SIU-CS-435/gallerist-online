@@ -139,8 +139,13 @@ namespace TeamJAMiN.Controllers
                         return View("NotFound");
                     }
 
+                    using (var identityContext = new ApplicationDbContext())
+                    {
+                        //add me to the game
+                        ViewBag.userName = User.Identity.Name;
+                    }
                     return View(game);
-                }
+                }                
             }
         }
 
