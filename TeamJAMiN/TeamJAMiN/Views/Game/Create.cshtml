@@ -3,7 +3,7 @@
 @using (Html.BeginForm("Create", "Game", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
+    <h4>Create a new game</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
@@ -13,9 +13,15 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.NumberOfPlayers, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.MaxNumberOfPlayers, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.NumberOfPlayers, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.MaxNumberOfPlayers, new { @class = "form-control", @type = "number" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.TurnLength, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.TurnLength, new { @class = "form-control", @type = "number" })
         </div>
     </div>
     <div class="form-group">

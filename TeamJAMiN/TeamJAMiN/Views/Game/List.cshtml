@@ -1,33 +1,76 @@
 ﻿@{
-    ViewBag.Title = "Game List";
+    ViewBag.Title = "My Games";
 }
 <h2>@ViewBag.Title</h2>
 
 
-<table>
-    <thead>
-        <tr>
-            <td style="padding:5px;">#</td>
-            <td style="padding:5px;">Game</td>
-            <td style="padding:5px;">Max Players</td>
-            <td style="padding:5px;">Current Players</td>
-            <td style="padding:5px;">Max Turn Length</td>
-        </tr>
-    </thead>
-    <tbody>
-    @{
-        var index = 1;
-        foreach (var game in ViewBag.games)
-        {
+<div class="jumbotron">
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td style="padding:5px;">@index</td>
-                <td style="padding:5px;"><a href="@game.Url">@game.Name</a></td>
-                <td style="padding:5px;">@game.MaxNumberOfPlayers</td>
-                <td style="padding:5px;">@game.CurrentNumberOfPlayers</td>
-                <td style="padding:5px;">@game.MaxTurnLength</td>
+                <td></td>
+                <td>Games</td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
-            index++;
-        }
-    }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @{
+                var index = 1;
+                foreach (var myGame in ViewBag.myGames)
+                {
+                    <tr>
+                        <td>@index</td>
+                        <td>@myGame.Name</td>
+                        <td>@myGame.PlayersString</td>
+                        <td>@myGame.MaxTurnLengthString</td>
+                        <td>
+                        if(myGame.RemainingSlots > 0)
+                        {
+                            <a href="@myGame.Url" class="btn-sm btn-default">Open</a></td>
+                        }
+                    </tr>
+                    index++;
+                }
+            }
+        </tbody>
+    </table>
+</div>
+   
+<h2>All Games</h2>
+
+<div class="jumbotron">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td></td>
+                <td>Games</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var allGameIndex = 1;
+                foreach (var game in ViewBag.allGames)
+                {
+                    <tr>
+                        <td>@allGameIndex</td>
+                        <td>@game.Name</td>
+                        <td>@game.PlayersString</td>
+                        <td>@game.MaxTurnLengthString</td>
+                        <td>
+                            if(myGame.RemainingSlots > 0)
+                            {
+                                <a href="@game.Url" class="btn-sm btn-success">Join</a>
+                            }
+                        </td>
+                    </tr>
+                    allGameIndex++;
+                }
+            }
+        </tbody>
+    </table>
+</div>

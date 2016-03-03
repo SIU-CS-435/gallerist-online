@@ -38,3 +38,19 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.center-text{
+    text-align:center;
+}
+
+.table{
+    font-size: 15px;
+}
+
+.table thead tr td{
+    border-bottom:solid;
+}
+
+td{
+    padding:5px;
+}

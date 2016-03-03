@@ -14,5 +14,8 @@ namespace TeamJAMiN.GalleristComponentEntities.Dtos
         public int MaxNumberOfPlayers { get; set; }
         public int CurrentNumberOfPlayers { get; set; }
         public int MaxTurnLength { get; set; }
+        public string MaxTurnLengthString { get; set; }
+        public string PlayersString { get; set; }
+        public int RemainingSlots { get; set; }
     }
 }

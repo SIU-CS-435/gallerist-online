@@ -24,17 +24,35 @@ namespace TeamJAMiN.Controllers
                 var userId = identityContext.Users.First(m => m.UserName == userName).Id;
                 using (var galleristContext = new GalleristComponentsDbContext())
                 {
-                    var games = galleristContext.Games.Where(m => m.NumberOfPlayers != m.Players.Count)
+                    var allGames = galleristContext.Games.Where(m => !m.IsCompleted)
                         .Select(m => new GameDto
                         {
                             Url = "/Game/Play/" + m.Id,
                             Name = m.Name,
                             CurrentNumberOfPlayers = m.Players.Count,
-                            MaxNumberOfPlayers = m.NumberOfPlayers,
-                            MaxTurnLength = m.TurnLength
+                            MaxNumberOfPlayers = m.MaxNumberOfPlayers,
+                            RemainingSlots = m.MaxNumberOfPlayers - m.Players.Count,
+                            MaxTurnLength = m.TurnLength,
+                            MaxTurnLengthString = m.TurnLength + " Minutes Per Turn",
+                            PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers + " players"
                         }).ToList();
 
-                    ViewBag.games = games;
+                    var myGames =
+                        galleristContext.Games.Where(m => m.Players.Any(n => n.UserId == userId) && !m.IsCompleted)
+                        .Select(m => new GameDto
+                        {
+                            Url = "/Game/Play/" + m.Id,
+                            Name = m.Name,
+                            CurrentNumberOfPlayers = m.Players.Count,
+                            MaxNumberOfPlayers = m.MaxNumberOfPlayers,
+                            RemainingSlots = m.MaxNumberOfPlayers - m.Players.Count,
+                            MaxTurnLength = m.TurnLength,
+                            MaxTurnLengthString = m.TurnLength + " Minutes Per Turn",
+                            PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers + " players"
+                        }).ToList();
+
+                    ViewBag.allGames = allGames;
+                    ViewBag.myGames = myGames;
                     return View();
                 }
             }
@@ -95,7 +113,7 @@ namespace TeamJAMiN.Controllers
                     var rand = new Random();
                     var gameName = gameNameStrings.ElementAt(rand.Next(gameNameStrings.Count));
                     newGame.Name = gameName;
-                    newGame.NumberOfPlayers = 4;
+                    newGame.MaxNumberOfPlayers = 4;
                     newGame.TurnLength = 60;
 
                     //need standard for adding a player to a game
