@@ -228,6 +228,10 @@
     <Compile Include="DataContexts\GalleristComponentMigrations\201603030257127_GameUpdates1.Designer.cs">
       <DependentUpon>201603030257127_GameUpdates1.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603030342523_PlayerBoard.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603030342523_PlayerBoard.Designer.cs">
+      <DependentUpon>201603030342523_PlayerBoard.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\GalleristComponentMigrations\Configuration.cs" />
     <Compile Include="DataContexts\GalleristComponentsDb.cs" />
     <Compile Include="DataContexts\IdentityMigrations\201602282353509_init.cs" />
@@ -382,6 +386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603030257127_GameUpdates1.resx">
       <DependentUpon>201603030257127_GameUpdates1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603030342523_PlayerBoard.resx">
+      <DependentUpon>201603030342523_PlayerBoard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201602282353509_init.resx">
       <DependentUpon>201602282353509_init.cs</DependentUpon>
