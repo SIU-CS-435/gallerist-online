@@ -7,6 +7,7 @@ using TeamJAMiN.GameControllerHelpers;
 using TeamJAMiN.GalleristComponentEntities;
 using TeamJAMiN.Models;
 using TeamJAMiN.GalleristComponentEntities.Dtos;
+using TeamJAMiN.Util;
 
 namespace TeamJAMiN.Controllers
 {
@@ -24,35 +25,35 @@ namespace TeamJAMiN.Controllers
                 var userId = identityContext.Users.First(m => m.UserName == userName).Id;
                 using (var galleristContext = new GalleristComponentsDbContext())
                 {
-                    var allGames = galleristContext.Games.Where(m => !m.IsCompleted)
-                        .Select(m => new GameDto
-                        {
-                            Url = "/Game/Play/" + m.Id,
-                            Name = m.Name,
-                            CurrentNumberOfPlayers = m.Players.Count,
-                            MaxNumberOfPlayers = m.MaxNumberOfPlayers,
-                            RemainingSlots = m.MaxNumberOfPlayers - m.Players.Count,
-                            MaxTurnLength = m.TurnLength,
-                            MaxTurnLengthString = m.TurnLength + " Minutes Per Turn",
-                            PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers + " players"
-                        }).ToList();
+                    var allGames = galleristContext.Games.Where(m => !m.IsCompleted);
+                    var myGames = allGames.Where(m => m.Players.Any(n => n.UserId == userId));
 
-                    var myGames =
-                        galleristContext.Games.Where(m => m.Players.Any(n => n.UserId == userId) && !m.IsCompleted)
-                        .Select(m => new GameDto
-                        {
-                            Url = "/Game/Play/" + m.Id,
-                            Name = m.Name,
-                            CurrentNumberOfPlayers = m.Players.Count,
-                            MaxNumberOfPlayers = m.MaxNumberOfPlayers,
-                            RemainingSlots = m.MaxNumberOfPlayers - m.Players.Count,
-                            MaxTurnLength = m.TurnLength,
-                            MaxTurnLengthString = m.TurnLength + " Minutes Per Turn",
-                            PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers + " players"
-                        }).ToList();
+                    var allGamesList = allGames.Select(m => new GameDto
+                    {
+                        Url = "/Game/Play/" + m.Id,
+                        Name = m.Name,
+                        CurrentNumberOfPlayers = m.Players.Count,
+                        MaxNumberOfPlayers = m.MaxNumberOfPlayers,
+                        RemainingSlots = m.MaxNumberOfPlayers - m.Players.Count,
+                        MaxTurnLength = m.TurnLength,
+                        MaxTurnLengthString = m.TurnLength + " Minutes Per Turn",
+                        PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers + " players"
+                    }).ToList();
 
-                    ViewBag.allGames = allGames;
-                    ViewBag.myGames = myGames;
+                    var myGamesList = myGames.Select(m => new GameDto
+                    {
+                        Url = "/Game/Play/" + m.Id,
+                        Name = m.Name,
+                        CurrentNumberOfPlayers = m.Players.Count,
+                        MaxNumberOfPlayers = m.MaxNumberOfPlayers,
+                        RemainingSlots = m.MaxNumberOfPlayers - m.Players.Count,
+                        MaxTurnLength = m.TurnLength,
+                        MaxTurnLengthString = m.TurnLength + " Minutes Per Turn",
+                        PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers + " players"
+                    }).ToList();
+
+                    ViewBag.allGames = allGamesList;
+                    ViewBag.myGames = myGamesList;
                     return View();
                 }
             }
@@ -79,12 +80,12 @@ namespace TeamJAMiN.Controllers
                     newGame.Players.Add(new Player { UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id });
                 }
                 galleristContext.SaveChanges();
-                return Redirect("/Game/List");
+                return Redirect("/Game/List"); //redirect to actual game might be better for demo purposes
             }
         }
 
         /// <summary>
-        /// Takes you to an existing view for a game
+        /// Takes you to an existing view for a game for which you are a member
         /// </summary>
         /// <returns>Game View</returns>
         [Authorize]
@@ -92,19 +93,52 @@ namespace TeamJAMiN.Controllers
         {
             using (var galleristContext = new GalleristComponentsDbContext())
             {
-                var game = galleristContext.Games.Include("Art").Include("Artists").Include("ReputationTiles").Include("Contracts").Include("Visitors").Include("Players").FirstOrDefault(m => m.Id == id);
-
-                if (game == null)
-                {
-                    return View("NotFound");
-                }
-
                 using (var identityContext = new ApplicationDbContext())
                 {
-                    //add me to the game
-                    ViewBag.userName = User.Identity.Name;
+                    var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
+
+                    if (gameResponse.Success)
+                    {
+                        ViewBag.userName = User.Identity.Name;
+                        return View(gameResponse.Game);
+                    }
+                    else
+                    {
+                        ViewBag.Message = gameResponse.Message;
+                        ViewBag.Title = gameResponse.Title;
+                        return View("GameError");
+                    }
                 }
-                return View(game);
+            }
+        }
+
+        /// <summary>
+        /// Joins an existing game and takes you to the view for that game.
+        /// </summary>
+        /// <returns>Existing game view or appropriate error</returns>
+        [Authorize]
+        [HttpPost]
+        public ActionResult Join(int id = 0)
+        {
+            using (var galleristContext = new GalleristComponentsDbContext())
+            {
+                using (var identityContext = new ApplicationDbContext())
+                {
+                    var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
+
+                    if (gameResponse.Success)
+                    {
+                        gameResponse.Game.Players.Add(new Player { UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id });
+                        ViewBag.userName = User.Identity.Name;
+                        return View(gameResponse.Game);
+                    }
+                    else
+                    {
+                        ViewBag.Message = gameResponse.Message;
+                        ViewBag.Title = gameResponse.Title;
+                        return View("GameError");
+                    }
+                }
             }
         }
     }
