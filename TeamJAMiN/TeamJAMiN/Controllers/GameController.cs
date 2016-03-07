@@ -7,7 +7,6 @@ using TeamJAMiN.GameControllerHelpers;
 using TeamJAMiN.GalleristComponentEntities;
 using TeamJAMiN.Models;
 using TeamJAMiN.GalleristComponentEntities.Dtos;
-using TeamJAMiN.Util;
 
 namespace TeamJAMiN.Controllers
 {
@@ -70,17 +69,24 @@ namespace TeamJAMiN.Controllers
         [HttpPost]
         public ActionResult Create(Game newGame)
         {
-            using (var galleristContext = new GalleristComponentsDbContext())
+            if (ModelState.IsValid)
             {
-                newGame.CreateRandomSetup();
-                galleristContext.Games.Add(newGame);
-                using (var identityContext = new ApplicationDbContext())
+                using (var galleristContext = new GalleristComponentsDbContext())
                 {
-                    //add me to the game
-                    newGame.Players.Add(new Player { UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id });
+                    newGame.CreateRandomSetup();
+                    galleristContext.Games.Add(newGame);
+                    using (var identityContext = new ApplicationDbContext())
+                    {
+                        //add me to the game
+                        newGame.Players.Add(new Player { UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id });
+                    }
+                    galleristContext.SaveChanges();
+                    return Redirect("/Game/List"); //redirect to actual game might be better for demo purposes
                 }
-                galleristContext.SaveChanges();
-                return Redirect("/Game/List"); //redirect to actual game might be better for demo purposes
+            }
+            else
+            {
+                return View(newGame);
             }
         }
 
