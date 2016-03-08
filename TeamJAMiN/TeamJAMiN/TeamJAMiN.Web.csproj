@@ -261,6 +261,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Controllers\GameControllerHelpers\GameManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Icons\ArtDigital.svg" />
@@ -282,6 +283,8 @@
     <Content Include="Content\Icons\FameStarWhite.svg" />
     <Content Include="Content\Icons\Promotion.svg" />
     <Content Include="Content\Icons\PromotionFive.svg" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -300,6 +303,8 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -317,6 +322,8 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -363,7 +370,7 @@
     <Content Include="Views\Game\SalesOffice\Contract.cshtml" />
     <Content Include="Views\Game\SalesOffice\SalesOffice.cshtml" />
     <Content Include="Scripts\jquery-2.2.1.min.map" />
-    <Content Include="Views\Game\NotFound.cshtml" />
+    <Content Include="Views\Game\GameError.cshtml" />
     <Content Include="Views\Game\Create.cshtml" />
     <Content Include="Views\Game\PlayerBoard\PlayerBoard.cshtml" />
     <Content Include="Views\Game\PlayerBoard\PlayerArt.cshtml" />
