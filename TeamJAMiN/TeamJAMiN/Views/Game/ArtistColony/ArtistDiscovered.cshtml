@@ -8,7 +8,18 @@
     @*Art Type*@
     <div class="col-xs-6"><div class="@Model.ArtType.ToString()-icon art-icon"></div></div>
     @*Promotion Level*@
-    <div class="col-xs-6 promotion-container"><div class="promotion-tile promotion-@Model.Promotion">@Model.Promotion</div></div>
+    <div class="col-xs-6 promotion-container">
+        <div class="promotion-tile promotion-@Model.Promotion">
+            @{
+                var output = "-";
+                if (Model.Promotion > 0)
+                {
+                    output = Model.Promotion.ToString();
+                }
+                @output
+            }
+        </div>
+    </div>
 </div>
 <div class="row no-gutter discovered-bottom-row">
     @*Initial Fame*@

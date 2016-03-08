@@ -118,6 +118,9 @@
     background-image:url(Icons/FameStarWhite.svg);
     min-height:15px;
 }
+.promotion-0 {
+    background-image:url(Icons/Promotion.svg), linear-gradient(to right, #c3e1ef 40%, #ffffff 40%, #ffffff 100%);
+}
 .promotion-1 {
     background-image:url(Icons/Promotion.svg), linear-gradient(to right, #ffffff 40%, #f5edd3 40%, #f5edd3 100%);
 }

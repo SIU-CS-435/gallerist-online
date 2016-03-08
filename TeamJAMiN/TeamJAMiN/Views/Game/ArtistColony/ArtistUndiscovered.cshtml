@@ -14,7 +14,18 @@
         <div class="@FameCss.StarClass[i] fame-star star-size-med"></div>
     </div>
     @*Starting Promotion Level*@
-    <div class="col-xs-6"><div class="promotion-tile promotion-@Model.Promotion">@Model.Promotion</div></div>
+    <div class="col-xs-6">
+        <div class="promotion-tile promotion-@Model.Promotion">
+        @{ 
+            var output = "-";
+            if (Model.Promotion > 0)
+            {
+                output = Model.Promotion.ToString();
+            }
+            @output
+        }
+        </div>
+    </div>
 </div>
 <div class="row no-gutter">
     @*Art Type*@
