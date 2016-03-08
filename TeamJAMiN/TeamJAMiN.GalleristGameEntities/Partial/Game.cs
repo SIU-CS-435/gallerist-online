@@ -31,11 +31,13 @@ namespace TeamJAMiN.GalleristComponentEntities
                 }
             }
         }
-        public void AddArtists(List<TemplateArtist> artists)
+        public void AddArtists(List<TemplateArtist> artists, List<BonusType> artistBonuses)
         {
             foreach (TemplateArtist artist in artists)
             {
                 var gameArtist = new GameArtist(artist);
+                gameArtist.DiscoverBonus = artistBonuses[0];
+                artistBonuses.RemoveAt(0);
                 Artists.Add(gameArtist);
             }
         }

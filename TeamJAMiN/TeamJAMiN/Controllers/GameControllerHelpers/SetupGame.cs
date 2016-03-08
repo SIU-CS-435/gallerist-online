@@ -13,14 +13,16 @@ namespace TeamJAMiN.GameControllerHelpers
         {
             using (var galleristContext = new GalleristComponentsDbContext())
             {
-                //put list building on separate line for clarity
+                //put list building on separate lines for clarity
                 var artLists = galleristContext.TemplateArt.ToList().chooseArt();
                 newGame.AddArtStack(artLists);
 
                 var blueArtists = galleristContext.TemplateArtists.Where(a => a.Category == ArtistCategory.red).ToList().chooseArtists();
                 var redArtists = galleristContext.TemplateArtists.Where(a => a.Category == ArtistCategory.blue).ToList().chooseArtists();
-                newGame.AddArtists(blueArtists.Values.ToList());
-                newGame.AddArtists(redArtists.Values.ToList());
+                var artBonuses = ArtColonySetup.chooseArtBonuses();
+
+                newGame.AddArtists(blueArtists.Values.ToList(),artBonuses);
+                newGame.AddArtists(redArtists.Values.ToList(),artBonuses);
 
 
                 var reputationTiles = galleristContext.TemplateReputationTiles.ToList().chooseReputationTiles();

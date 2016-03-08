@@ -11,7 +11,7 @@
             int i = 0;
             while (Model.StarLevels[i] < Model.Fame) { i++; }
         }
-        <div class="@FameCss.StarClass[i] fame-star star-size-med"></div>
+        <div class="@IconCss.StarClass[i] fame-star star-size-med"></div>
     </div>
     @*Starting Promotion Level*@
     <div class="col-xs-6">
@@ -30,8 +30,6 @@
 <div class="row no-gutter">
     @*Art Type*@
     <div class="col-xs-4"><div class="@Model.ArtType.ToString()-icon art-icon"></div></div>
-    @*Collector*@
-    <div class="col-xs-4"></div>
     @*Artist Bonus*@
-    <div class="col-xs-4"></div>
+    <div class="col-xs-4 col-xs-offset-4"><div class="artist-bonus @IconCss.ArtistBonusClass[Model.DiscoverBonus]"></div></div>
 </div>

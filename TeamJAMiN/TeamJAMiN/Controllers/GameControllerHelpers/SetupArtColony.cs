@@ -38,5 +38,10 @@ namespace TeamJAMiN.GameControllerHelpers
             }
             return result;
         }
+        public static List<BonusType> chooseArtBonuses()
+        {
+            var completeList = new List<BonusType> { BonusType.fame, BonusType.fame, BonusType.influence, BonusType.influence, BonusType.money, BonusType.money, BonusType.plazaVisitor, BonusType.plazaVisitor, BonusType.twoTickets, BonusType.twoTickets };
+            return completeList.Shuffle().Take(8).ToList();
+        }
     }
 }
