@@ -22,7 +22,7 @@
 <div class="row">
     @*digital*@
     <div class="row">
-        <div class="col-xs-3">digital</div>
+        <div class="col-xs-3"><div class="digital-icon art-icon"></div></div>
         @foreach (GameReputationTile tile in Model.ReputationTiles.Take(3))
             {
             <div class="col-xs-3">
@@ -32,7 +32,7 @@
     </div>
     @*photo*@
     <div class="row">
-        <div class="col-xs-3">photo</div>
+        <div class="col-xs-3"><div class="photo-icon art-icon"></div></div>
         @foreach (GameReputationTile tile in Model.ReputationTiles.Skip(3).Take(3))
             {
             <div class="col-xs-3">
@@ -42,7 +42,7 @@
     </div>
     @*sculpture*@
     <div class="row">
-        <div class="col-xs-3">sculpture</div>
+        <div class="col-xs-3"><div class="sculpture-icon art-icon"></div></div>
         @foreach (GameReputationTile tile in Model.ReputationTiles.Skip(6).Take(3))
             {
             <div class="col-xs-3">
@@ -52,7 +52,7 @@
     </div>
     @*painting*@
     <div class="row">
-        <div class="col-xs-3">painting</div>
+        <div class="col-xs-3"><div class="painting-icon art-icon"></div></div>
         @foreach (GameReputationTile tile in Model.ReputationTiles.Skip(9))
             {
             <div class="col-xs-3">

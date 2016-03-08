@@ -236,6 +236,10 @@
     <Compile Include="DataContexts\GalleristComponentMigrations\201603030342523_PlayerBoard.Designer.cs">
       <DependentUpon>201603030342523_PlayerBoard.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603071900369_ChangeGameArtist.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603071900369_ChangeGameArtist.Designer.cs">
+      <DependentUpon>201603071900369_ChangeGameArtist.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\GalleristComponentMigrations\Configuration.cs" />
     <Compile Include="DataContexts\GalleristComponentsDb.cs" />
     <Compile Include="DataContexts\IdentityMigrations\201602282353509_init.cs" />
@@ -251,6 +255,7 @@
     <Compile Include="Controllers\GameControllerHelpers\Shuffler.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\GameViewHelpers\FameCss.cs" />
     <Compile Include="Models\GameViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -258,12 +263,25 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Icons\ArtDigital.svg" />
+    <Content Include="Content\Icons\ArtPainting.svg" />
+    <Content Include="Content\Icons\ArtPhoto.svg" />
+    <Content Include="Content\Icons\ArtSculpture.svg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Icons\FameStarCelebrity.svg" />
+    <Content Include="Content\Icons\FameStarGoldOne.svg" />
+    <Content Include="Content\Icons\FameStarGoldTwo.svg" />
+    <Content Include="Content\Icons\FameStarGreenOne.svg" />
+    <Content Include="Content\Icons\FameStarGreenThree.svg" />
+    <Content Include="Content\Icons\FameStarGreenTwo.svg" />
+    <Content Include="Content\Icons\FameStarWhite.svg" />
+    <Content Include="Content\Icons\Promotion.svg" />
+    <Content Include="Content\Icons\PromotionFive.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -393,6 +411,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603030342523_PlayerBoard.resx">
       <DependentUpon>201603030342523_PlayerBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603071900369_ChangeGameArtist.resx">
+      <DependentUpon>201603071900369_ChangeGameArtist.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201602282353509_init.resx">
       <DependentUpon>201602282353509_init.cs</DependentUpon>

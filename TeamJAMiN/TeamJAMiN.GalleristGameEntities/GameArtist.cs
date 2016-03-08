@@ -13,6 +13,7 @@ namespace TeamJAMiN.GalleristComponentEntities
             Category = temp.Category;
             ArtType = temp.ArtType;
             Fame = temp.Fame;
+            InitialFame = temp.Fame;
             Promotion = temp.Promotion;
             StarLevels = temp.StarLevels;
             IsDiscovered = temp.IsDiscovered;
@@ -28,6 +29,7 @@ namespace TeamJAMiN.GalleristComponentEntities
         public ArtistCategory Category { get; set; }
         public ArtType ArtType { get; set; }
         public int Fame { get; set; }
+        public int InitialFame { get; set; }
         public int Promotion { get; set; }
         public string StarLevelData { get; set; }
         public int[] StarLevels

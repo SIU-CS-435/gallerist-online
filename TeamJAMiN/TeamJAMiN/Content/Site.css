@@ -2,20 +2,27 @@
 /* Removes Gutter Padding From Rows*/
 /*Used in the influence track*/
 .row.no-gutter {
-  margin-left: 0;
-  margin-right: 0;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .row.no-gutter [class*='col-']:not(:first-child),
 .row.no-gutter [class*='col-']:not(:last-child) {
-  padding-right: 0;
-  padding-left: 0;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.row.no-margin {
+    margin-left: 0;
+    margin-right: 0;
 }
 
 
 .board-region {
     background-color: rgba(255, 255, 255,.1);
     text-align:center;
+    border-radius:15px;
+    padding: 15px;
 }
 
 .player-board {
@@ -28,6 +35,169 @@
 
 .separate-top {
     margin-top:10px;
+}
+/* All Tiles */
+.tile {
+    border-radius:15px;
+    padding: 5px;
+}
+
+/* Artist Tiles*/
+.artist {
+    height:125px;
+}
+.artist:not(:first-child) {
+    margin-top:10px;
+}
+.artist-blue {
+    background-color: royalblue;
+}
+.artist-red {
+    background-color: indianred;
+}
+.undiscovered-top-row {
+    background-color: rgba(255,255,255,.4);
+    margin-bottom:10px;
+    border-radius:15px;
+    padding: 5px 10px;
+}
+.discovered-top-row {
+    background-color: rgba(255,255,255,.8);
+    margin: -5px -5px 0 -5px !important;
+    padding: 10px 0;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.discovered-bottom-row {
+    padding-top: 5px;
+}
+.promotion-container {
+    padding: 5px !important;
+}
+.initial-fame {
+    border-radius:15px;
+    padding: 5px !important;
+}
+.fame-track {
+    border-radius:15px;
+    padding: 5px !important;
+    color:royalblue;
+}
+.fame-track .current-fame {
+    background-color: rgba(255,255,255,.4);
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    height:2em;
+}
+.fame-track .next-fame-star {
+    background-color: rgba(255,255,255,.2);
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 2em;
+}
+.arrow-right {
+	width: 0; 
+	height: 0; 
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;	
+	border-left: 5px solid rgba(255,255,255,.2);
+    position:relative;
+    top: 10px;
+    left:100%;
+}
+.artist-fame {
+    border-radius:5px;
+    background-color:#5c1201;
+    color:white;
+    height: 2em;
+    margin-bottom:5px;
+}
+.star-white {
+    position:relative;
+    bottom:0;
+    background-image:url(Icons/FameStarWhite.svg);
+    min-height:15px;
+}
+.promotion-1 {
+    background-image:url(Icons/Promotion.svg), linear-gradient(to right, #ffffff 40%, #f5edd3 40%, #f5edd3 100%);
+}
+.promotion-2 {
+    background-image:url(Icons/Promotion.svg), linear-gradient(to right, #ffffff 40%, #f8ef8c 40%, #f8ef8c 100%);
+}
+.promotion-3 {
+    background-image:url(Icons/Promotion.svg), linear-gradient(to right, #ffffff 40%, #fbd194 40%, #fbd194 100%);
+}
+.promotion-4 {
+    background-image:url(Icons/Promotion.svg), linear-gradient(to right, #ffffff 40%, #f598b5 40%, #f598b5 100%);
+}
+.promotion-5 {
+    background-image:url(Icons/PromotionFive.svg), linear-gradient(to right, #ffffff 40%, #5c1201 40%, #5c1201 100%);
+}
+.promotion-tile {
+    background-size: 35%, auto;
+    background-repeat:no-repeat;
+    background-position-x: 80%;
+    background-position-y: 50%;
+    color: #5c1201;
+    border: 1px solid #5c1201;
+    border-radius:5px;
+    text-align:left;
+    padding:5px;
+}
+
+/* Fame Stars */
+.fame-star {
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:center;
+    margin: 0 auto;
+}
+.star-green-1 {
+    background-image:url(Icons/FameStarGreenOne.svg);
+}
+.star-green-2 {
+    background-image:url(Icons/FameStarGreenTwo.svg);
+}
+.star-green-3 {
+    background-image:url(Icons/FameStarGreenThree.svg);
+}
+.star-gold-1 {
+    background-image:url(Icons/FameStarGoldOne.svg);
+}
+.star-gold-2 {
+    background-image:url(Icons/FameStarGoldTwo.svg);
+}
+.star-celebrity {
+    background-image:url(Icons/FameStarCelebrity.svg);
+}
+.star-size-xs{
+    min-height:15px;
+}
+.star-size-sm {
+    min-height:20px;
+}
+.star-size-med {
+    min-height:30px;
+}
+
+/*Art Type Icons*/
+.painting-icon {
+    background-image: url(Icons/ArtPainting.svg);
+}
+.digital-icon {
+    background-image: url(Icons/ArtDigital.svg);
+}
+.photo-icon {
+    background-image: url(Icons/ArtPhoto.svg);
+}
+.sculpture-icon {
+    background-image: url(Icons/ArtSculpture.svg);
+}
+.art-icon {
+    width: 50px;
+    height: 50px;
+    background-size:contain;
+    margin: 0 auto;
 }
 
 /*Default Stuff*/
