@@ -43,10 +43,10 @@
 }
 
 /* Artist Tiles*/
-.artist {
+.artist-colony-tile {
     height:125px;
 }
-.artist:not(:first-child) {
+.artist-colony-tile:not(:first-child) {
     margin-top:10px;
 }
 .artist-blue {
@@ -214,6 +214,95 @@
     min-height:30px;
 }
 
+/* Art Tiles */
+.art-tile {
+    background-color: #f3ebd6;
+}
+.art-tile-top-row {
+    height:55%;
+    margin: -5px -5px 0 -5px !important;
+    background-color: rgba(255,255,255,.4);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.art-tile-visitor-row {
+    padding-top:20px;
+}
+.art-tile-icon-row {
+    padding-top: 10px;
+}
+.art-tile-icon {
+    background-size:contain;
+    background-repeat:no-repeat;
+    margin: 0 auto;
+}
+.art-tile-visitor {
+    min-height:30px;
+    background-position: center;
+}
+.art-tile-type {
+    min-height:30px;
+    background-position: center;
+}
+.art-tile-ticket {
+    min-height:15px;
+    background-position: center;
+}
+.art-tile-ticket:first-child {
+    margin-bottom:2px;
+}
+.art-tile-fame {
+    min-height:30px;
+}
+.plus-fame {
+    position:absolute;
+    top:20%;
+    left: 37%;
+    font-size:18px;
+    color: #5c1201;
+}
+
+/* Gain Fame Art Tile Icons */
+.gain-fame-0 {
+    background-image: url(Icons/FameGainStarZero.svg);
+    background-position: center left;
+}
+.gain-fame-1 {
+    background-image: url(Icons/FameGainStarOne.svg);
+    background-position: center left;
+}
+.gain-fame-2 {
+    background-image: url(Icons/FameGainStarTwo.svg);
+    background-position: center left;
+}
+.gain-fame-collector {
+    background-image: url(Icons/FameGainCollector.svg);
+    background-position: center right;
+}
+
+/*Ticket Icons*/
+.ticket-any {
+    background-image: url(Icons/TicketAny.svg);
+}
+.ticket-collector {
+    background-image: url(Icons/TicketCollector.svg);
+}
+.ticket-collector-vip {
+    background-image: url(Icons/TicketCollectorVip.svg);
+}
+.ticket-investor {
+    background-image: url(Icons/TicketInvestor.svg);
+}
+.ticket-investor-collector {
+    background-image: url(Icons/TicketInvestorCollector.svg);
+}
+.ticket-vip {
+    background-image: url(Icons/TicketVip.svg);
+}
+.ticket-any-two {
+    background-image: url(Icons/TicketAnyTwo.svg);
+}
+
 /*Art Type Icons*/
 .painting-icon {
     background-image: url(Icons/ArtPainting.svg);
@@ -232,6 +321,17 @@
     height: 50px;
     background-size:contain;
     margin: 0 auto;
+}
+
+/* Visitor Icons */
+.visitor-investor {
+    background-image: url(Icons/VisitorInvestor.svg);
+}
+.visitor-collector {
+    background-image: url(Icons/VisitorCollector.svg);
+}
+.visitor-vip {
+    background-image: url(Icons/VisitorVip.svg);
 }
 
 /*Default Stuff*/

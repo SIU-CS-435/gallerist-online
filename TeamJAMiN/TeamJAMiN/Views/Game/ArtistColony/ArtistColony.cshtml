@@ -4,42 +4,42 @@
 @{ var artists = Model.Artists.ToList(); }
 
 @*New (Blue) Artists*@
-<div class="col-md-4">
+<div class="col-xs-4">
     @{  foreach (ArtType type in listOrder)
         {
             var artist = artists.Where(a => a.ArtType == type && a.Category == ArtistCategory.blue).FirstOrDefault();
             if (artist.IsDiscovered)
             {
-                <div class="row no-gutter tile artist artist-@artist.Category.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", artist)</div>
+                <div class="row no-gutter tile artist-colony-tile artist artist-@artist.Category.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", artist)</div>
             }
             else
             {
-                <div class="row no-gutter tile artist artist-@artist.Category.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistUndiscovered.cshtml", artist)</div>
+                <div class="row no-gutter tile artist-colony-tile artist artist-@artist.Category.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistUndiscovered.cshtml", artist)</div>
             }
 
         }
     }
 </div>
 @*Experienced (Red) Artists*@
-<div class="col-md-4">
+<div class="col-xs-4">
     @foreach (ArtType type in listOrder)
     {
         var artist = artists.Where(a => a.ArtType == type && a.Category == ArtistCategory.red).FirstOrDefault();
         if (artist.IsDiscovered)
         {
-            <div class="row no-gutter tile artist artist-@artist.Category.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", artist)</div>
+            <div class="row no-gutter tile artist-colony-tile artist-@artist.Category.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", artist)</div>
         }
         else
         {
-            <div class="row no-gutter tile artist artist-@artist.Category.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistUndiscovered.cshtml", artist)</div>
+            <div class="row no-gutter tile artist-colony-tile artist artist-@artist.Category.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistUndiscovered.cshtml", artist)</div>
         }
     }
 </div>
 @*Art*@
-<div class="col-md-4">
+<div class="col-xs-4">
     @foreach (ArtType type in listOrder)
     {
         var art = Model.Art.Where(a => a.Type == type).FirstOrDefault();
-        <div class="row">@Html.Partial("~/Views/Game/ArtistColony/Art.cshtml", art)</div>
+        <div class="row tile artist-colony-tile art-tile">@Html.Partial("~/Views/Game/ArtistColony/Art.cshtml", art)</div>
     }
 </div>

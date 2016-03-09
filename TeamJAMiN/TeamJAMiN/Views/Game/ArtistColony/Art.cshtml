@@ -1,51 +1,48 @@
 ﻿@model TeamJAMiN.GalleristComponentEntities.GameArt
 @using TeamJAMiN.GalleristComponentEntities
+@using TeamJAMiN.Models.GameViewHelpers
 @*Art Tile*@
-<div class="row">
+<div class="row no-gutter art-tile-top-row">
+    <div class="art-tile-visitor-row">
+        <div class="col-xs-4 visitor-investor art-tile-icon art-tile-visitor"></div>
+        <div class="col-xs-4 visitor-collector art-tile-icon art-tile-visitor"></div>
+        <div class="col-xs-4 visitor-vip art-tile-icon art-tile-visitor"></div>
+    </div>
+</div>
+<div class="row no-gutter art-tile-icon-row">
     @*Fame*@
-    <div class="col-xs-4">@Model.Fame</div>
+    <div class="col-xs-6">
+        <div class="col-xs-6 gain-fame-@Model.Fame art-tile-icon art-tile-fame"></div>
+        <div class="plus-fame">&nbsp;+&nbsp;</div>
+        <div class="col-xs-6 gain-fame-collector art-tile-icon art-tile-fame"></div>
+    </div>
     @*Tickets*@
-    <div class="col-xs-4">
+    <div class="col-xs-3">
         @{
-            var displayString = "";
-            foreach (VisitorTicketType ticket in Model.FirstTicket)
+            var firstTicket = IconCss.ArtTicketToClass(Model.FirstTicket);
+            var secondTicket = "";
+            if(Model.NumTickets > 1)
             {
-
-                if (ticket == VisitorTicketType.collector)
-                {
-                    displayString += "c";
-                }
-                if (ticket == VisitorTicketType.vip)
-                {
-                    displayString += "v";
-                }
-                if (ticket == VisitorTicketType.investor)
-                {
-                    displayString += "i";
-                }
+                secondTicket = IconCss.ArtTicketToClass(Model.SecondTicket);
             }
-            if (Model.NumTickets > 1)
+            if(secondTicket == firstTicket)
             {
-                displayString += " ";
-                foreach (VisitorTicketType ticket in Model.SecondTicket)
-                {
-                    if (ticket == VisitorTicketType.collector)
-                    {
-                        displayString += "c";
-                    }
-                    if (ticket == VisitorTicketType.vip)
-                    {
-                        displayString += "v";
-                    }
-                    if (ticket == VisitorTicketType.investor)
-                    {
-                        displayString += "i";
-                    }
-                }
+                firstTicket = "art-tile-ticket " + "ticket-any-two";
+                secondTicket = "";
+            }
+            else if(secondTicket != "")
+            {
+                firstTicket = "art-tile-ticket " + firstTicket;
+                secondTicket = "art-tile-ticket " + secondTicket;
+            }
+            else
+            {
+                firstTicket = "art-tile-ticket " + firstTicket;
             }
         }
-        @displayString
+        <div class="@firstTicket art-tile-icon"></div>
+        <div class="@secondTicket art-tile-icon"></div>
     </div>
     @*Art Type*@
-    <div class="col-xs-4"><div class="@Model.Type.ToString()-icon art-icon"></div></div>
+    <div class="col-xs-3"><div class="@Model.Type.ToString()-icon art-tile-icon art-tile-type"></div></div>
 </div>

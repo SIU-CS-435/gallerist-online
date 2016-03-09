@@ -283,6 +283,10 @@
     <Content Include="Content\Icons\BonusMoney.svg" />
     <Content Include="Content\Icons\BonusTicketTwo.svg" />
     <Content Include="Content\Icons\BonusVisitorPlazaAny.svg" />
+    <Content Include="Content\Icons\FameGainCollector.svg" />
+    <Content Include="Content\Icons\FameGainStarOne.svg" />
+    <Content Include="Content\Icons\FameGainStarTwo.svg" />
+    <Content Include="Content\Icons\FameGainStarZero.svg" />
     <Content Include="Content\Icons\FameStarCelebrity.svg" />
     <Content Include="Content\Icons\FameStarGoldOne.svg" />
     <Content Include="Content\Icons\FameStarGoldTwo.svg" />
@@ -292,6 +296,16 @@
     <Content Include="Content\Icons\FameStarWhite.svg" />
     <Content Include="Content\Icons\Promotion.svg" />
     <Content Include="Content\Icons\PromotionFive.svg" />
+    <Content Include="Content\Icons\TicketAny.svg" />
+    <Content Include="Content\Icons\TicketAnyTwo.svg" />
+    <Content Include="Content\Icons\TicketCollector.svg" />
+    <Content Include="Content\Icons\TicketCollectorVip.svg" />
+    <Content Include="Content\Icons\TicketInvestor.svg" />
+    <Content Include="Content\Icons\TicketInvestorCollector.svg" />
+    <Content Include="Content\Icons\TicketVip.svg" />
+    <Content Include="Content\Icons\VisitorCollector.svg" />
+    <Content Include="Content\Icons\VisitorInvestor.svg" />
+    <Content Include="Content\Icons\VisitorVip.svg" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
