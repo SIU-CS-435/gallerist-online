@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TeamJAMiN.GalleristComponentEntities;
 
-namespace TeamJAMiN.GameControllerHelpers
+namespace TeamJAMiN.Controllers.GameControllerHelpers
 {
     public static class ArtColonySetup
     {

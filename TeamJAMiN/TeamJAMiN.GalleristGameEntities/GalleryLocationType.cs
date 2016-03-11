@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace TeamJAMiN.GalleristComponentEntities
 {
-    public enum GalleryLocationType
+    public enum GalleryColor
     {
-        gallery, lobby, plaza, visitorBag
+        Orange,Blue,Purple,Yellow,None
     }
 }

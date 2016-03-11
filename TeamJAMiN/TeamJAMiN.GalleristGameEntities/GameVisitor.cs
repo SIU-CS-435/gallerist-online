@@ -10,6 +10,8 @@ namespace TeamJAMiN.GalleristComponentEntities
     {
         public int Id { get; set; }
         public VisitorTicketType Type { get; set; }
-        public TemplateLocation Location { get; set; }
+        public GameVisitorLocation Location { get; set; }
+        public GalleryColor PlayerGallery { get; set; }
+        public int Order { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using TeamJAMiN.DataContexts;
 using TeamJAMiN.GalleristComponentEntities;
 using TeamJAMiN.Models;
 
-namespace TeamJAMiN.GameControllerHelpers
+namespace TeamJAMiN.Controllers.GameControllerHelpers
 {
     public class GameManager
     {

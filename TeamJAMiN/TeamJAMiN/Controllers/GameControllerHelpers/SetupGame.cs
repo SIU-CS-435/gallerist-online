@@ -5,7 +5,7 @@ using System.Web;
 using TeamJAMiN.DataContexts;
 using TeamJAMiN.GalleristComponentEntities;
 
-namespace TeamJAMiN.GameControllerHelpers
+namespace TeamJAMiN.Controllers.GameControllerHelpers
 {
     public static class SetupGame
     {
@@ -31,6 +31,12 @@ namespace TeamJAMiN.GameControllerHelpers
                 var contracts = galleristContext.TemplateContracts.ToList().Shuffle().ToList();
                 newGame.AddContracts(contracts);
             }
+        }
+
+        public static void FinalizeSetup(this Game newGame)
+        {
+            newGame.ChooseVisitors();
+            newGame.SetupTickets();
         }
     }
 }

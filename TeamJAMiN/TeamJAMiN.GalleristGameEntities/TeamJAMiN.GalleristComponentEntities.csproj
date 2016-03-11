@@ -48,10 +48,14 @@
   <ItemGroup>
     <Compile Include="Dtos\GameDto.cs" />
     <Compile Include="GameArt.cs" />
+    <Compile Include="GameContractLocation.cs" />
     <Compile Include="GameReputationTile.cs" />
     <Compile Include="GameVisitor.cs" />
+    <Compile Include="GameVisitorLocation.cs" />
     <Compile Include="Partial\Game.cs" />
     <Compile Include="PlayerAssistant.cs" />
+    <Compile Include="GameReputationTileLocation.cs" />
+    <Compile Include="PlayerAssistantLocation.cs" />
     <Compile Include="TemplateArt.cs" />
     <Compile Include="GameArtist.cs" />
     <Compile Include="TemplateArtist.cs" />
@@ -63,7 +67,6 @@
     <Compile Include="GalleryLocationType.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TemplateLocation.cs" />
     <Compile Include="TemplateReputationTile.cs" />
     <Compile Include="ReputationTileScoring.cs" />
     <Compile Include="VisitorTicketType.cs" />

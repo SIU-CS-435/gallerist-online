@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TeamJAMiN.GameControllerHelpers
+namespace TeamJAMiN.Controllers.GameControllerHelpers
 {
     public static class Shuffler
     {

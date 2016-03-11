@@ -23,5 +23,7 @@ namespace TeamJAMiN.GalleristComponentEntities
         public int Influence { get; set; }
         public int Money { get; set; }
         public ReputationTileScoring Scoring { get; set; }
+        public GameReputationTileLocation Column {get; set;}
+        public ArtType Row { get; set; }
     }
 }

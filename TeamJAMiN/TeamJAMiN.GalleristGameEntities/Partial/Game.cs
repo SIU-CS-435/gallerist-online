@@ -51,9 +51,11 @@ namespace TeamJAMiN.GalleristComponentEntities
         }
         public void AddContracts(List<TemplateContract> contracts)
         {
+            var i = 0;
             foreach (TemplateContract contract in contracts)
             {
                 var gameContract = new GameContract(contract);
+                gameContract.Order = i++;
                 Contracts.Add(gameContract);
             }
         }

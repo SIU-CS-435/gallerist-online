@@ -43,7 +43,9 @@ namespace TeamJAMiN.GalleristComponentEntities
         public virtual HashSet<GameReputationTile> ReputationTiles { get; set; }
         public virtual HashSet<GameContract> Contracts { get; set; }
         public virtual HashSet<GameVisitor> Visitors { get; set; }
-
         public virtual HashSet<Player> Players { get; set; }
+        public int AvailableVipTickets { get; set; }
+        public int AvailableInvestorTickets { get; set; }
+        public int AvailableCollectorTickets { get; set; }
     }
 }

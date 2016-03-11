@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using TeamJAMiN.DataContexts;
-using TeamJAMiN.GameControllerHelpers;
+using TeamJAMiN.Controllers.GameControllerHelpers;
 using TeamJAMiN.GalleristComponentEntities;
 using TeamJAMiN.Models;
 using TeamJAMiN.GalleristComponentEntities.Dtos;
@@ -79,6 +79,7 @@ namespace TeamJAMiN.Controllers
                     {
                         //add me to the game
                         newGame.Players.Add(new Player { UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id });
+                        newGame.FinalizeSetup();
                     }
                     galleristContext.SaveChanges();
                     return Redirect("/Game/List"); //redirect to actual game might be better for demo purposes

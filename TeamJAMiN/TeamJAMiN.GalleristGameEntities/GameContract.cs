@@ -21,5 +21,6 @@ namespace TeamJAMiN.GalleristComponentEntities
         public int Id { get; set; }
         public ArtType Art { get; set; }
         public BonusType Bonus { get; set; }
+        public int Order { get; set; }
     }
 }

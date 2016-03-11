@@ -13,6 +13,9 @@ namespace TeamJAMiN.GalleristComponentEntities
         {
             Money = 10;
             Influence = 10;
+            VipTickets = 0;
+            InvestorTickets = 0;
+            CollectorTickets = 0;
             Assistants = new HashSet<PlayerAssistant>();
             Tiles = new HashSet<GameReputationTile>();
             Contracts = new HashSet<GameContract>();
@@ -33,5 +36,8 @@ namespace TeamJAMiN.GalleristComponentEntities
         public HashSet<GameContract> Contracts { get; set; }
         public HashSet<GameArt> Art { get; set; }
         public GameArtist Commission { get; set; }
+        public int VipTickets { get; set; }
+        public int InvestorTickets { get; set; }
+        public int CollectorTickets { get; set; }
     }        
 }

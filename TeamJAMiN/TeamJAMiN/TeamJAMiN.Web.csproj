@@ -188,8 +188,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GameActions\GameContractActions.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\GameControllerHelpers\SetupGame.cs" />
+    <Compile Include="Controllers\GameControllerHelpers\SetupVisitors.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DataContexts\GalleristComponentMigrations\201602200341065_InitialCreate.cs" />
