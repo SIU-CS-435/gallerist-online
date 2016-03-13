@@ -1,13 +1,17 @@
 ﻿@model TeamJAMiN.GalleristComponentEntities.Game
 @using TeamJAMiN.GalleristComponentEntities
+@using TeamJAMiN.Controllers.GameLogicHelpers
 
 @*Contracts Container*@
 
 <div class="row">
     @{
-        foreach (GameContract contract in Model.Contracts.Take(4))
+        var draftLocations = new List<GameContractLocation>
+            { GameContractLocation.Draft0, GameContractLocation.Draft1, GameContractLocation.Draft2, GameContractLocation.Draft3 };
+        var contractDict = Model.GetContractDecks();
+        foreach (GameContractLocation location in draftLocations)
         {
-            <div class="col-xs-3">@Html.Partial("~/Views/Game/SalesOffice/Contract.cshtml", contract)</div>
+            <div class="col-xs-3">@Html.Partial("~/Views/Game/SalesOffice/Contract.cshtml", contractDict[location].FirstOrDefault())</div>
         }
     }
 </div>

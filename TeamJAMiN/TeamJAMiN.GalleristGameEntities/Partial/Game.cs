@@ -56,6 +56,7 @@ namespace TeamJAMiN.GalleristComponentEntities
             {
                 var gameContract = new GameContract(contract);
                 gameContract.Order = i++;
+                gameContract.Location = GameContractLocation.DrawDeck;
                 Contracts.Add(gameContract);
             }
         }

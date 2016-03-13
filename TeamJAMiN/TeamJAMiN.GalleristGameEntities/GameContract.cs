@@ -22,5 +22,6 @@ namespace TeamJAMiN.GalleristComponentEntities
         public ArtType Art { get; set; }
         public BonusType Bonus { get; set; }
         public int Order { get; set; }
+        public GameContractLocation Location { get; set; }
     }
 }

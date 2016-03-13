@@ -188,7 +188,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\GameActions\GameContractActions.cs" />
+    <Compile Include="Controllers\GameLogicHelpers\GameContractActions.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\GameControllerHelpers\SetupGame.cs" />
     <Compile Include="Controllers\GameControllerHelpers\SetupVisitors.cs" />
@@ -245,6 +245,10 @@
     <Compile Include="DataContexts\GalleristComponentMigrations\201603080108143_ArtistBonuses.cs" />
     <Compile Include="DataContexts\GalleristComponentMigrations\201603080108143_ArtistBonuses.Designer.cs">
       <DependentUpon>201603080108143_ArtistBonuses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603131537476_VisitorsTicketsContracts.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603131537476_VisitorsTicketsContracts.Designer.cs">
+      <DependentUpon>201603131537476_VisitorsTicketsContracts.cs</DependentUpon>
     </Compile>
     <Compile Include="DataContexts\GalleristComponentMigrations\Configuration.cs" />
     <Compile Include="DataContexts\GalleristComponentsDb.cs" />
@@ -449,6 +453,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603080108143_ArtistBonuses.resx">
       <DependentUpon>201603080108143_ArtistBonuses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603131537476_VisitorsTicketsContracts.resx">
+      <DependentUpon>201603131537476_VisitorsTicketsContracts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201602282353509_init.resx">
       <DependentUpon>201602282353509_init.cs</DependentUpon>

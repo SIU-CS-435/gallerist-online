@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TeamJAMiN.Controllers.GameLogicHelpers;
 using TeamJAMiN.DataContexts;
 using TeamJAMiN.GalleristComponentEntities;
 
@@ -30,6 +31,7 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
 
                 var contracts = galleristContext.TemplateContracts.ToList().Shuffle().ToList();
                 newGame.AddContracts(contracts);
+                newGame.DrawContracts();
             }
         }
 
