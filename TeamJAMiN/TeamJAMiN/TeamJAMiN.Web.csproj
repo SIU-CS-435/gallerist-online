@@ -284,11 +284,15 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Icons\BonusAssistant.svg" />
+    <Content Include="Content\Icons\BonusContract.svg" />
     <Content Include="Content\Icons\BonusFame.svg" />
     <Content Include="Content\Icons\BonusInfluence.svg" />
     <Content Include="Content\Icons\BonusMoney.svg" />
     <Content Include="Content\Icons\BonusTicketTwo.svg" />
     <Content Include="Content\Icons\BonusVisitorPlazaAny.svg" />
+    <Content Include="Content\Icons\BonusVisitorPlazaInvestorVip.svg" />
+    <Content Include="Content\Icons\BonusVisitorVisitorBag.svg" />
     <Content Include="Content\Icons\FameGainCollector.svg" />
     <Content Include="Content\Icons\FameGainStarOne.svg" />
     <Content Include="Content\Icons\FameGainStarTwo.svg" />

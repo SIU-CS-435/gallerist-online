@@ -11,7 +11,9 @@
         var contractDict = Model.GetContractDecks();
         foreach (GameContractLocation location in draftLocations)
         {
-            <div class="col-xs-3">@Html.Partial("~/Views/Game/SalesOffice/Contract.cshtml", contractDict[location].FirstOrDefault())</div>
+            <div class="col-xs-3">
+                <div class="contract-card tile">@Html.Partial("~/Views/Game/SalesOffice/Contract.cshtml", contractDict[location].FirstOrDefault())</div>
+            </div>
         }
     }
 </div>

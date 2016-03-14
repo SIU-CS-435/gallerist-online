@@ -119,6 +119,23 @@
     min-height:15px;
 }
 
+/* Contract Cards */
+.contract-card {
+    background-color:white;
+}
+.contract-art-row {
+    background-color:lightpink;
+    padding:5px;
+    border-top-left-radius:15px;
+    border-top-right-radius:15px;
+}
+.contract-bonus-row {
+    background-color: #5c1201;
+    padding:5px;
+    border-bottom-left-radius:15px;
+    border-bottom-right-radius:15px;
+}
+
 /* Bonuses */
 .artist-bonus {
     position:relative;
@@ -126,7 +143,17 @@
     background-color: white;
     width: 50px;
     height: 50px;
-    background-size:75%;
+    background-size:80%;
+    background-repeat:no-repeat;
+    background-position:50%;
+    border-radius:10px;
+    margin: 0 auto;
+}
+.contract-bonus {
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    background-size:80%;
     background-repeat:no-repeat;
     background-position:50%;
     border-radius:10px;
@@ -143,9 +170,25 @@
 }
 .bonus-fame {
     background-image:url(Icons/BonusFame.svg);
+    background-size:75%;
+
 }
 .bonus-ticket-two {
     background-image:url(Icons/BonusTicketTwo.svg);
+}
+.bonus-assistant {
+    background-image:url(Icons/BonusAssistant.svg);
+}
+.bonus-visitor-bag {
+    background-image:url(Icons/BonusVisitorVisitorBag.svg);
+    background-size:60%;
+}
+.bonus-visitor-plaza-investor-vip {
+    background-image:url(Icons/BonusAssistant.svg);
+}
+.bonus-contract {
+    background-image:url(Icons/BonusContract.svg);
+    background-size:60%;
 }
 
 /* Promotion Tiles */
