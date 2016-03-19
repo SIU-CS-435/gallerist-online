@@ -5,58 +5,76 @@
 <div class="row">
     @*influnce gain*@
     <div class="row">
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3">3</div>
-        <div class="col-xs-3">2</div>
-        <div class="col-xs-3">1</div>
+        <div class="col-xs-3 col-xs-offset-3"><div class="influence-3 international-market-influence"></div></div>
+        <div class="col-xs-3"><div class="influence-2 international-market-influence"></div></div>
+        <div class="col-xs-3"><div class="influence-1 international-market-influence"></div></div>
     </div>
     @*lobby requirement*@
     <div class="row">
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3">pink or brown</div>
-        <div class="col-xs-3">pink and brown</div>
-        <div class="col-xs-3">pink or brown and white</div>
+        <div class="col-xs-3 col-xs-offset-3">
+            <div class="bonus-visitor-any visitor-center international-market-visitor"></div>
+        </div>
+        <div class="col-xs-3">
+            <div class="row no-gutter">
+                <div class="col-xs-6">
+                    <div class="visitor-investor visitor-left international-market-visitor"></div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="visitor-vip visitor-right international-market-visitor"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-3">
+            <div class="row no-gutter">
+                <div class="col-xs-6">
+                    <div class="bonus-visitor-plaza-investor-vip visitor-left international-market-visitor"></div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="visitor-collector visitor-right international-market-visitor"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @*reputation*@
 <div class="row">
     @*digital*@
-    <div class="row">
-        <div class="col-xs-3"><div class="digital-icon art-icon"></div></div>
+    <div class="row separate-top">
+        <div class="col-xs-3"><div class="digital-icon reputation-row-art-icon"></div></div>
         @foreach (GameReputationTile tile in Model.ReputationTiles.Take(3))
             {
             <div class="col-xs-3">
-                @Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml", tile)
+                <div class="tile reputation-tile">@Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml", tile)</div>
             </div>
         }
     </div>
     @*photo*@
-    <div class="row">
-        <div class="col-xs-3"><div class="photo-icon art-icon"></div></div>
+    <div class="row separate-top">
+        <div class="col-xs-3"><div class="photo-icon reputation-row-art-icon"></div></div>
         @foreach (GameReputationTile tile in Model.ReputationTiles.Skip(3).Take(3))
             {
             <div class="col-xs-3">
-                @Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml", tile)
+                <div class="tile reputation-tile">@Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml", tile)</div>
             </div>
         }
     </div>
     @*sculpture*@
-    <div class="row">
-        <div class="col-xs-3"><div class="sculpture-icon art-icon"></div></div>
+    <div class="row separate-top">
+        <div class="col-xs-3"><div class="sculpture-icon reputation-row-art-icon"></div></div>
         @foreach (GameReputationTile tile in Model.ReputationTiles.Skip(6).Take(3))
             {
             <div class="col-xs-3">
-                @Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml", tile)
+                <div class="tile reputation-tile">@Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml", tile)</div>
             </div>
         }
     </div>
     @*painting*@
-    <div class="row">
-        <div class="col-xs-3"><div class="painting-icon art-icon"></div></div>
+    <div class="row separate-top">
+        <div class="col-xs-3"><div class="painting-icon reputation-row-art-icon"></div></div>
         @foreach (GameReputationTile tile in Model.ReputationTiles.Skip(9).Take(3))
             {
             <div class="col-xs-3">
-                @Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml", tile)
+                <div class="tile reputation-tile">@Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml", tile)</div>
             </div>
         }
     </div>
@@ -64,41 +82,41 @@
 @*auction*@
 <div class="row">
     @*bid 1*@
-    <div class="row">
+    <div class="row separate-top">
         <div class="col-xs-3">1</div>
-        <div class="col-xs-3">ticket</div>
-        <div class="col-xs-3">assistant</div>
-        <div class="col-xs-3">tickets</div>
+        <div class="col-xs-3"><div class="ticket-any auction-tile tile"></div></div>
+        <div class="col-xs-3"><div class="bonus-assistant auction-tile tile"></div></div>
+        <div class="col-xs-3"><div class="bonus-ticket-two auction-tile tile"></div></div>
     </div>
     @*bid 3*@
-    <div class="row">
+    <div class="row separate-top">
         <div class="col-xs-3">3</div>
-        <div class="col-xs-3">assistant</div>
-        <div class="col-xs-3">influence</div>
-        <div class="col-xs-3">money</div>
+        <div class="col-xs-3"><div class="bonus-assistant auction-tile tile"></div></div>
+        <div class="col-xs-3"><div class="bonus-influence auction-tile tile"></div></div>
+        <div class="col-xs-3"><div class="bonus-money auction-tile tile"></div></div>
     </div>
     @*bid 6*@
-    <div class="row">
+    <div class="row separate-top">
         <div class="col-xs-3">6</div>
-        <div class="col-xs-3">meeple</div>
-        <div class="col-xs-3">money</div>
-        <div class="col-xs-3">influence</div>
+        <div class="col-xs-3"><div class="bonus-visitor-any auction-tile tile"></div></div>
+        <div class="col-xs-3"><div class="bonus-money auction-tile tile"></div></div>
+        <div class="col-xs-3"><div class="bonus-influence auction-tile tile"></div></div>
     </div>
 </div>
 @*column scoring*@
-<div class="row">
+<div class="row separate-top">
     <div class="col-xs-3">Scoring</div>
     <div class="col-xs-3">
         <div class="col-xs-4">6</div>
         <div class="col-xs-4">3</div>
         <div class="col-xs-4">1</div>
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-3 separate-top">
         <div class="col-xs-4">10</div>
         <div class="col-xs-4">6</div>
         <div class="col-xs-4">3</div>
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-3 separate-top">
         <div class="col-xs-4">15</div>
         <div class="col-xs-4">10</div>
         <div class="col-xs-4">6</div>

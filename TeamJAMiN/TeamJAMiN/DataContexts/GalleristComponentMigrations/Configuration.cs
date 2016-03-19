@@ -597,8 +597,8 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
             },
             new TemplateReputationTile
             {
-                Money = 1,
-                Influence = 2,
+                Money = 2,
+                Influence = 1,
                 Scoring = ReputationTileScoring.reputationTile
             },
             new TemplateReputationTile

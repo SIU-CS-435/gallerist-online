@@ -17,6 +17,9 @@
     margin-right: 0;
 }
 
+.no-padding {
+    padding: 0 !important;
+}
 
 .board-region {
     background-color: rgba(255, 255, 255,.1);
@@ -40,6 +43,20 @@
 .tile {
     border-radius:15px;
     padding: 5px;
+}
+
+/* Action Icons */
+.sell-icon {
+    background-image:url(Icons/Sell.svg)
+}
+.exhibit-icon {
+    background-image:url(Icons/Exhibit.svg)
+}
+.auction-icon {
+    background-image:url(Icons/Auction.svg)
+}
+.reputation-icon {
+    background-image:url(Icons/Reputation.svg)
 }
 
 /* Artist Tiles*/
@@ -135,6 +152,189 @@
     border-bottom-left-radius:15px;
     border-bottom-right-radius:15px;
 }
+/* international market*/
+.international-market-visitor {
+    width: 30px;
+    height: 30px;
+    background-size:80%;
+    background-repeat:no-repeat;
+    background-position:50%;
+}
+.auction-tile {
+    width: 75px;
+    height: 75px;
+    background-color: grey;
+    background-size:80%;
+    background-repeat:no-repeat;
+    background-position:50%;
+    margin: 0 auto;
+}
+.visitor-left {
+        margin: 0 0 0 auto;
+}
+.visitor-right {
+        margin: 0 auto 0 0;
+}
+.visitor-center {
+    margin: 0 auto;
+}
+
+/* reputaion tiles */
+.reputation-tile {
+    width: 75px;
+    height: 75px;
+    background: linear-gradient(to bottom, rgba(173, 216, 230, 0.50) 50%, lightblue 50%, lightblue 100%);
+    background-color: white;
+    margin: 0 auto;
+}
+.reputation-tile-influence {
+    width: 25px;
+    height: 25px;
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:50%;
+    margin: 0 auto 0 0;
+}
+.reputation-tile-money {
+    width: 25px;
+    height: 25px;
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:50%;
+    margin: 0 0 0 auto;
+}
+.scoring-container{
+    height: 0;
+}
+.reputation-tile-scoring {
+    width: 40px;
+    height: 40px;
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:50%;
+    margin: 0 auto;
+}
+#promotion-scoring {
+    position: relative;
+    bottom:-8px;
+    height:30px;
+}
+#masterpiece-scoring {
+    height: 35px;
+    width: 35px;
+    margin-top: 5px;
+}
+#visitor-set-scoring {
+    position:relative;
+    bottom:10px;
+}
+.visitor-set-scoring-visitor {
+    height: 25px;
+    width:25px;
+    margin: 0 auto;
+}
+#visitor-set-collector {
+    position:relative;
+    bottom: -5px;
+}
+#art-type-scoring {
+    position:relative;
+    bottom:15px;
+}
+.art-type-scoring-art {
+    height: 23px;
+    width:23px;
+    margin: 0 auto;
+    background-size:contain;
+    background-repeat:no-repeat;
+}
+#art-type-scoring-digital {
+    position:relative;
+    bottom:12px;
+}
+#art-type-scoring-sculpture {
+    position:relative;
+    bottom:-12px;
+}
+#art-type-scoring-painting {
+    margin: 0 auto 0 0;
+}
+#art-type-scoring-photo {
+    margin: 0 0 0 auto;
+}
+.aquired-scoring-icon{
+    height: 35px;
+    width:35px;
+    margin: 0 auto;
+    background-size:contain;
+    background-repeat:no-repeat;
+}
+#aquired-scoring-sold {
+    position:relative;
+    bottom:25px;
+}
+#aquired-scoring-exhibited {
+    position:relative;
+    bottom:-10px;
+    right: 5px;
+}
+.reputation-row-art-icon {
+    width: 65px;
+    height: 75px;
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position:50%;
+    margin: 0 auto;
+}
+
+
+/* Influence Icons */
+.international-market-influence {
+    width: 40px;
+    height: 40px;
+    background-size:80%;
+    background-repeat:no-repeat;
+    background-position:50%;
+    margin: 0 auto;
+}
+.influence-1 {
+     background-image:url(Icons/InfluenceOne.svg);
+}
+.influence-2 {
+     background-image:url(Icons/InfluenceTwo.svg);
+}
+.influence-3 {
+     background-image:url(Icons/InfluenceThree.svg);
+}
+
+/* Money Icons */
+.money-1 {
+     background-image:url(Icons/Money1.svg);
+}
+.money-2 {
+     background-image:url(Icons/Money2.svg);
+}
+.money-3 {
+     background-image:url(Icons/Money3.svg);
+}
+.money-4 {
+     background-image:url(Icons/Money4.svg);
+}
+.money-5 {
+     background-image:url(Icons/Money5.svg);
+}
+.money-6 {
+     background-image:url(Icons/Money6.svg);
+}
+.money-7 {
+     background-image:url(Icons/Money7.svg);
+}
+.money-8 {
+     background-image:url(Icons/Money8.svg);
+}
+.money-9 {
+     background-image:url(Icons/Money9.svg);
+}
 
 /* Bonuses */
 .artist-bonus {
@@ -184,7 +384,7 @@
     background-size:60%;
 }
 .bonus-visitor-plaza-investor-vip {
-    background-image:url(Icons/BonusAssistant.svg);
+    background-image:url(Icons/BonusVisitorPlazaInvestorVip.svg);
 }
 .bonus-contract {
     background-image:url(Icons/BonusContract.svg);
@@ -246,6 +446,9 @@
 }
 .star-celebrity {
     background-image:url(Icons/FameStarCelebrity.svg);
+}
+.star-reputation-tile {
+    background-image:url(Icons/FameReputationTile.svg);
 }
 .star-size-xs{
     min-height:15px;
@@ -375,6 +578,14 @@
 }
 .visitor-vip {
     background-image: url(Icons/VisitorVip.svg);
+}
+.visitor-any {
+    background-image: url(Icons/BonusVisitorPlazaAny.svg);
+}
+
+/* Assistants  */
+.assistant-icon {
+    background-image: url(Icons/Assistant.svg);
 }
 
 /*Default Stuff*/
