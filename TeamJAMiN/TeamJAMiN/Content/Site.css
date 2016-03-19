@@ -25,7 +25,7 @@
     background-color: rgba(255, 255, 255,.1);
     text-align:center;
     border-radius:15px;
-    padding: 15px;
+    padding: 5px 10px;
 }
 
 .player-board {
@@ -37,8 +37,22 @@
 }
 
 .separate-top {
-    margin-top:10px;
+    margin-top:5px;
 }
+
+/* Icon Basics */
+.icon-lg, .artist-bonus, .contract-bonus, .art-icon {
+    height: 50px;
+    width: 50px;
+}
+.icon-background, .artist-bonus, .contract-bonus, .art-icon, .media-icon, .international-market-visitor, .international-market-influence,
+.auction-tile, .reputation-tile-influence, .reputation-tile-money, .reputation-tile-scoring, .art-type-scoring-art, .fame-star,
+.aquired-scoring-icon, .reputation-row-art-icon, .auction-row-icon, .auction-row-cost, .minus-icon, .art-tile-icon {
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:50%;
+}
+
 /* All Tiles */
 .tile {
     border-radius:15px;
@@ -139,6 +153,7 @@
 /* Contract Cards */
 .contract-card {
     background-color:white;
+    margin: 0 5px;
 }
 .contract-art-row {
     background-color:lightpink;
@@ -157,16 +172,12 @@
     width: 30px;
     height: 30px;
     background-size:80%;
-    background-repeat:no-repeat;
-    background-position:50%;
 }
 .auction-tile {
     width: 75px;
     height: 75px;
     background-color: grey;
     background-size:80%;
-    background-repeat:no-repeat;
-    background-position:50%;
     margin: 0 auto;
 }
 .visitor-left {
@@ -190,17 +201,11 @@
 .reputation-tile-influence {
     width: 25px;
     height: 25px;
-    background-size:contain;
-    background-repeat:no-repeat;
-    background-position:50%;
     margin: 0 auto 0 0;
 }
 .reputation-tile-money {
     width: 25px;
     height: 25px;
-    background-size:contain;
-    background-repeat:no-repeat;
-    background-position:50%;
     margin: 0 0 0 auto;
 }
 .scoring-container{
@@ -209,9 +214,6 @@
 .reputation-tile-scoring {
     width: 40px;
     height: 40px;
-    background-size:contain;
-    background-repeat:no-repeat;
-    background-position:50%;
     margin: 0 auto;
 }
 #promotion-scoring {
@@ -245,8 +247,6 @@
     height: 23px;
     width:23px;
     margin: 0 auto;
-    background-size:contain;
-    background-repeat:no-repeat;
 }
 #art-type-scoring-digital {
     position:relative;
@@ -266,8 +266,6 @@
     height: 35px;
     width:35px;
     margin: 0 auto;
-    background-size:contain;
-    background-repeat:no-repeat;
 }
 #aquired-scoring-sold {
     position:relative;
@@ -281,20 +279,38 @@
 .reputation-row-art-icon {
     width: 65px;
     height: 75px;
-    background-size:contain;
-    background-repeat: no-repeat;
-    background-position:50%;
     margin: 0 auto;
 }
 
+/* Auction Row */
+.auction-row-icon {
+    height:30px;
+    width:30px;
+    background-color:white;
+    background-size: 80%;
+    border-radius:50%;
+    margin: 0 auto
+}
+.auction-row-cost {
+    height:40px;
+    width:50px;
+    background-size: 80%;
+    margin: 0 0 0 auto;
+}
+.minus-icon {
+    background-image:url(Icons/Minus.svg);
+    height:50%;
+    width:50%;
+    position:relative;
+    top:25%;
+    left:-15%;
+}
 
 /* Influence Icons */
 .international-market-influence {
     width: 40px;
     height: 40px;
     background-size:80%;
-    background-repeat:no-repeat;
-    background-position:50%;
     margin: 0 auto;
 }
 .influence-1 {
@@ -341,21 +357,13 @@
     position:relative;
     right:15px;
     background-color: white;
-    width: 50px;
-    height: 50px;
     background-size:80%;
-    background-repeat:no-repeat;
-    background-position:50%;
     border-radius:10px;
     margin: 0 auto;
 }
 .contract-bonus {
     background-color: white;
-    width: 50px;
-    height: 50px;
     background-size:80%;
-    background-repeat:no-repeat;
-    background-position:50%;
     border-radius:10px;
     margin: 0 auto;
 }
@@ -424,9 +432,6 @@
 
 /* Fame Stars */
 .fame-star {
-    background-size:contain;
-    background-repeat:no-repeat;
-    background-position:center;
     margin: 0 auto;
 }
 .star-green-1 {
@@ -478,8 +483,6 @@
     padding-top: 10px;
 }
 .art-tile-icon {
-    background-size:contain;
-    background-repeat:no-repeat;
     margin: 0 auto;
 }
 .art-tile-visitor {
@@ -563,9 +566,6 @@
     background-image: url(Icons/ArtSculpture.svg);
 }
 .art-icon {
-    width: 50px;
-    height: 50px;
-    background-size:contain;
     margin: 0 auto;
 }
 
@@ -586,6 +586,13 @@
 /* Assistants  */
 .assistant-icon {
     background-image: url(Icons/Assistant.svg);
+}
+
+/* Media Center */
+.media-icon {
+    width: 35px;
+    height: 35px;
+    margin: 0 auto;
 }
 
 /*Default Stuff*/

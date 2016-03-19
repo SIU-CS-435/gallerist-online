@@ -39,6 +39,7 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
         {
             newGame.ChooseVisitors();
             newGame.SetupTickets();
+            newGame.assignReputationTiles();
         }
     }
 }

@@ -311,6 +311,7 @@
     <Content Include="Content\Icons\InfluenceOne.svg" />
     <Content Include="Content\Icons\InfluenceThree.svg" />
     <Content Include="Content\Icons\InfluenceTwo.svg" />
+    <Content Include="Content\Icons\Minus.svg" />
     <Content Include="Content\Icons\Money1.svg" />
     <Content Include="Content\Icons\Money2.svg" />
     <Content Include="Content\Icons\Money3.svg" />
