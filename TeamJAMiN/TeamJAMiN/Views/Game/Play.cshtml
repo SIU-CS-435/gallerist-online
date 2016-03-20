@@ -7,7 +7,7 @@
 
 <div class="container gallerist-game-view">
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="row board-region" id="sales-office">
                 @*Sales Office (Contracts)*@
                 <div class="col-md-12 no-padding">@Html.Partial("~/Views/Game/SalesOffice/SalesOffice.cshtml",Model)</div>
@@ -19,43 +19,44 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 col-md-offset-2 board-region">
-            @* Artist Colony *@
-            @Html.Partial("~/Views/Game/ArtistColony/ArtistColony.cshtml",Model)
-        </div>
-    </div>
-    <div class="row separate-top">
-        <div class="col-md-6 board-region">
-            @* Media *@
-            @Html.Partial("~/Views/Game/Media/Media.cshtml")
-        </div>
-        <div class="col-md-4 col-md-offset-2 board-region">
-            <div class="col-md-12">
-                <div class="col-md-4">
-                    <div class="col-xs-12">
-                        <div class="ticket-vip icon-lg icon-background"></div>
+        <div class="col-md-5 col-md-offset-3">
+            <div class="col-xs-12 board-region">
+                @* Artist Colony *@
+                @Html.Partial("~/Views/Game/ArtistColony/ArtistColony.cshtml", Model)
+            </div>
+            <div class="col-xs-12 board-region separate-top">
+                @* Media *@
+                @Html.Partial("~/Views/Game/Media/Media.cshtml")
+            </div>
+            @* Tickets *@
+            <div class="col-xs-12 board-region separate-top">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <div class="col-xs-12">
+                            <div class="ticket-vip icon-lg icon-background"></div>
+                        </div>
+                        <div class="col-xs-12"></div>
+                        <div class="col-xs-12"></div>
                     </div>
-                    <div class="col-xs-12"></div>
-                    <div class="col-xs-12"></div>
-                </div>
-                <div class="col-md-4">
-                    <div class="col-xs-12">
-                        <div class="ticket-investor icon-lg icon-background"></div>
+                    <div class="col-md-4">
+                        <div class="col-xs-12">
+                            <div class="ticket-investor icon-lg icon-background"></div>
+                        </div>
+                        <div class="col-xs-12"> </div>
+                        <div class="col-xs-12"> </div>
                     </div>
-                    <div class="col-xs-12"> </div>
-                    <div class="col-xs-12"> </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="col-xs-12">
-                        <div class="ticket-collector icon-lg icon-background"></div>
+                    <div class="col-md-4">
+                        <div class="col-xs-12">
+                            <div class="ticket-collector icon-lg icon-background"></div>
+                        </div>
+                        <div class="col-xs-12"> </div>
+                        <div class="col-xs-12"> </div>
                     </div>
-                    <div class="col-xs-12"> </div>
-                    <div class="col-xs-12"> </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row board-region separate-top">
+    <div class="row influence-track">
         @* Influence Track *@
         @Html.Partial("~/Views/Game/InfluenceTrack/InfluenceTrack.cshtml")
     </div>

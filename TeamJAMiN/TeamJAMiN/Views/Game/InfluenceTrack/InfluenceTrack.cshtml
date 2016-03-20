@@ -1,96 +1,47 @@
-﻿
+﻿@using TeamJAMiN.Controllers.GameLogicHelpers
 @*Influence Track*@
+
+@{  int i = 0;
+    int money = 0;
+}
 <div class="row no-gutter">
-    <div class="col-lg-3 col-md-6 col-sm-12">
-        <div class="col-sm-4 col-xs-6">
-            <div class="row no-gutter">
-                <div class="col-xs-4">0</div>
-                <div class="col-xs-4">1</div>
-                <div class="col-xs-4">2</div>
-            </div>
+    @for (int j = 0; j < 4; j++)
+    {
+        <div class="col-lg-3 col-md-6 col-sm-12 influence-track-section">
+            @for (int k = 0; k < 3; k++)
+            {
+                <div class="col-sm-4 col-xs-6">
+                    <div class="row no-gutter">
+                        @for (int m = 0; m < 3; m++)
+                        {
+                            var moneyHTML = "";
+                            var starHTML = "";
+                            var kickedClass = "";
+                            if (GameInfluenceTrack.InfluenceToMoney[money] == i)
+                            {
+                                moneyHTML = @"<div class=""influence-money-icon money-" + money++ + @"""></div>";
+                            }
+                            if ( i % 5 == 0 && i != 35)
+                            {
+                                starHTML = @"<div class=""star-white influence-star-icon""></div>";
+                                kickedClass = "has-star ";
+                            }
+                            if ( i % 5 == 0 && i != 0)
+                            {
+                                kickedClass += "influence-kicked-out";
+                            }
+                            else if (i==0)
+                            {
+                                kickedClass += "influence-icon";
+                            }
+                            <div class="col-xs-4">
+                                <div id="influence-track-@i" class="@kickedClass influence-track-space">@Html.Raw(starHTML)<div class="influence-track-number">@i</div>@Html.Raw(moneyHTML)</div>
+                            </div>
+                            i++;
+                        }
+                    </div>
+                </div>
+            }
         </div>
-        <div class="col-sm-4 col-xs-6">
-            <div class="row no-gutter">
-                <div class="col-xs-4">3</div>
-                <div class="col-xs-4">4</div>
-                <div class="col-xs-4">5</div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-xs-6">
-            <div class="row no-gutter">
-                <div class="col-xs-4">6</div>
-                <div class="col-xs-4">7</div>
-                <div class="col-xs-4">8</div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-12">
-        <div class="col-sm-4 col-xs-6">
-            <div class="row no-gutter">
-                <div class="col-xs-4">9</div>
-                <div class="col-xs-4">10</div>
-                <div class="col-xs-4">11</div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-xs-6">
-            <div class="row no-gutter">
-                <div class="col-xs-4">12</div>
-                <div class="col-xs-4">13</div>
-                <div class="col-xs-4">14</div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-xs-6">
-            <div class="row no-gutter">
-                <div class="col-xs-4">15</div>
-                <div class="col-xs-4">16</div>
-                <div class="col-xs-4">17</div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-12">
-        <div class="col-sm-4 col-xs-6">
-            <div class="row no-gutter">
-                <div class="col-xs-4">18</div>
-                <div class="col-xs-4">19</div>
-                <div class="col-xs-4">20</div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-xs-6">
-            <div class="row no-gutter">
-                <div class="col-xs-4">21</div>
-                <div class="col-xs-4">22</div>
-                <div class="col-xs-4">23</div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-xs-6">
-            <div class="row no-gutter">
-                <div class="col-xs-4">24</div>
-                <div class="col-xs-4">25</div>
-                <div class="col-xs-4">26</div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-12">
-        <div class="col-sm-4 col-xs-6">
-            <div class="row no-gutter">
-                <div class="col-xs-4">27</div>
-                <div class="col-xs-4">28</div>
-                <div class="col-xs-4">29</div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-xs-6">
-            <div class="row no-gutter">
-                <div class="col-xs-4">30</div>
-                <div class="col-xs-4">31</div>
-                <div class="col-xs-4">32</div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-xs-6">
-            <div class="row no-gutter">
-                <div class="col-xs-4">33</div>
-                <div class="col-xs-4">34</div>
-                <div class="col-xs-4">35</div>
-            </div>
-        </div>
-    </div>
+    }
 </div>

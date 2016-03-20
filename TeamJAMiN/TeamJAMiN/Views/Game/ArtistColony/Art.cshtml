@@ -27,8 +27,8 @@
             }
             if(secondTicket == firstTicket)
             {
-                firstTicket = "art-tile-ticket " + "ticket-any-two";
-                secondTicket = "";
+                firstTicket = "art-tile-ticket-single " + "ticket-any-two";
+                secondTicket = "hidden";
             }
             else if(secondTicket != "")
             {
@@ -37,7 +37,8 @@
             }
             else
             {
-                firstTicket = "art-tile-ticket " + firstTicket;
+                firstTicket = "art-tile-ticket-single " + firstTicket;
+                secondTicket = "hidden";
             }
         }
         <div class="@firstTicket art-tile-icon"></div>

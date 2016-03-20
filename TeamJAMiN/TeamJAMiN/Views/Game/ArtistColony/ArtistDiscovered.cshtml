@@ -23,7 +23,7 @@
 </div>
 <div class="row no-gutter discovered-bottom-row">
     @*Initial Fame*@
-    <div class="col-xs-4 initial-fame"><div class="artist-fame">@Model.InitialFame<div class="star-white fame-star"></div></div></div>
+    <div class="col-xs-4 initial-fame"><div class="artist-fame">@Model.InitialFame<div class="initial-fame-star fame-star"></div></div></div>
     @*Fame Track*@
     @{
         int i = 0;
@@ -31,14 +31,18 @@
     }
     <div class="col-xs-8 fame-track">
         <div class="row no-gutter">
-            <div class="col-xs-6 current-fame">
-                <div class="col-xs-12">@Model.Fame</div>
-                <div class="col-xs-12 @IconCss.StarClass[i] fame-star star-size-xs"></div>
-                <div class="arrow-right"></div>
+            <div class="col-xs-6">
+                <div class="current-fame">
+                    <div class="col-xs-12">@Model.Fame</div>
+                    <div class="col-xs-12 @IconCss.StarClass[i] fame-star star-size-xs"></div>
+                    <div class="arrow-right"></div>
+                </div>
             </div>
-            <div class="col-xs-6 next-fame-star">
-                <div class="col-xs-12">@Model.StarLevels[i + 1]</div>
-                <div class="col-xs-12 @IconCss.StarClass[i+1] fame-star star-size-xs"></div>
+            <div class="col-xs-6">
+                <div class="next-fame-star">
+                    <div class="col-xs-12">@Model.StarLevels[i + 1]</div>
+                    <div class="col-xs-12 @IconCss.StarClass[i+1] fame-star star-size-xs"></div>
+                </div>
             </div>
         </div>    
     </div>

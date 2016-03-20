@@ -10,11 +10,11 @@
             var artist = artists.Where(a => a.ArtType == type && a.Category == ArtistCategory.blue).FirstOrDefault();
             if (artist.IsDiscovered)
             {
-                <div class="row no-gutter tile artist-colony-tile artist artist-@artist.Category.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", artist)</div>
+                <div class="row tile artist-colony-tile artist artist-@artist.Category.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", artist)</div>
             }
             else
             {
-                <div class="row no-gutter tile artist-colony-tile artist artist-@artist.Category.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistUndiscovered.cshtml", artist)</div>
+                <div class="row tile artist-colony-tile artist artist-@artist.Category.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistUndiscovered.cshtml", artist)</div>
             }
 
         }
@@ -27,11 +27,11 @@
         var artist = artists.Where(a => a.ArtType == type && a.Category == ArtistCategory.red).FirstOrDefault();
         if (artist.IsDiscovered)
         {
-            <div class="row no-gutter tile artist-colony-tile artist-@artist.Category.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", artist)</div>
+            <div class="row tile artist-colony-tile artist-@artist.Category.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", artist)</div>
         }
         else
         {
-            <div class="row no-gutter tile artist-colony-tile artist artist-@artist.Category.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistUndiscovered.cshtml", artist)</div>
+            <div class="row tile artist-colony-tile artist artist-@artist.Category.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistUndiscovered.cshtml", artist)</div>
         }
     }
 </div>

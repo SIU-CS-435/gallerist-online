@@ -47,7 +47,8 @@
 }
 .icon-background, .artist-bonus, .contract-bonus, .art-icon, .media-icon, .international-market-visitor, .international-market-influence,
 .auction-tile, .reputation-tile-influence, .reputation-tile-money, .reputation-tile-scoring, .art-type-scoring-art, .fame-star,
-.aquired-scoring-icon, .reputation-row-art-icon, .auction-row-icon, .auction-row-cost, .minus-icon, .art-tile-icon {
+.aquired-scoring-icon, .reputation-row-art-icon, .auction-row-icon, .auction-row-cost, .minus-icon, .art-tile-icon, .influence-money-icon,
+.influence-star-icon {
     background-size:contain;
     background-repeat:no-repeat;
     background-position:50%;
@@ -86,6 +87,10 @@
 .artist-red {
     background-color: indianred;
 }
+.row.artist-colony-tile {
+    margin-left: -12px;
+    margin-right: -12px;
+}
 .undiscovered-top-row {
     background-color: rgba(255,255,255,.4);
     margin-bottom:10px;
@@ -112,27 +117,29 @@
 .fame-track {
     border-radius:15px;
     padding: 5px !important;
-    color:royalblue;
-}
+    color:#5c1201;}
 .fame-track .current-fame {
-    background-color: rgba(255,255,255,.4);
+    background-color: #d3dcf8;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
-    height:2em;
+    height:30px;
+    margin-right:2px;
 }
 .fame-track .next-fame-star {
-    background-color: rgba(255,255,255,.2);
+    background-color: #a7b9f1;
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
-    height: 2em;
+    height: 30px;
+    margin-right:2px;
 }
 .arrow-right {
 	width: 0; 
 	height: 0; 
 	border-top: 5px solid transparent;
 	border-bottom: 5px solid transparent;	
-	border-left: 5px solid rgba(255,255,255,.2);
+	border-left: 5px solid #d3dcf8;
     position:relative;
+    z-index:1;
     top: 10px;
     left:100%;
 }
@@ -143,7 +150,7 @@
     height: 2em;
     margin-bottom:5px;
 }
-.star-white {
+.initial-fame-star {
     position:relative;
     bottom:0;
     background-image:url(Icons/FameStarWhite.svg);
@@ -324,6 +331,9 @@
 }
 
 /* Money Icons */
+.money-0 {
+    background-image:url(Icons/Money0.svg);
+}
 .money-1 {
      background-image:url(Icons/Money1.svg);
 }
@@ -350,6 +360,39 @@
 }
 .money-9 {
      background-image:url(Icons/Money9.svg);
+}
+.money-10 {
+    background-image:url(Icons/Money10.svg);
+}
+.money-11 {
+    background-image:url(Icons/Money11.svg)
+}
+.money-12 {
+    background-image:url(Icons/Money12.svg)
+}
+.money-13 {
+    background-image:url(Icons/Money13.svg)
+}
+.money-14 {
+    background-image:url(Icons/Money14.svg)
+}
+.money-15 {
+    background-image:url(Icons/Money15.svg)
+}
+.money-16 {
+    background-image:url(Icons/Money16.svg)
+}
+.money-17 {
+    background-image:url(Icons/Money17.svg)
+}
+.money-18 {
+    background-image:url(Icons/Money18.svg)
+}
+.money-19 {
+    background-image:url(Icons/Money20.svg)
+}
+.money-20 {
+    background-image:url(Icons/Money20.svg)
 }
 
 /* Bonuses */
@@ -464,6 +507,9 @@
 .star-size-med {
     min-height:30px;
 }
+.star-white {
+    background-image: url(Icons/FameStarWhite.svg)
+}
 
 /* Art Tiles */
 .art-tile {
@@ -495,6 +541,10 @@
 }
 .art-tile-ticket {
     min-height:15px;
+    background-position: center;
+}
+.art-tile-ticket-single {
+    min-height:30px;
     background-position: center;
 }
 .art-tile-ticket:first-child {
@@ -593,6 +643,43 @@
     width: 35px;
     height: 35px;
     margin: 0 auto;
+}
+
+/* Influence Track */
+.influence-track {
+    text-align:center;
+}
+.influence-track-section {
+    margin-top: 30px;
+}
+.influence-track-space {
+    height:30px;
+    width: 30px;
+    background-color: rgba(255,255,255,.5);
+    margin: 0 auto;
+}
+.influence-track-number {
+    color: #5c1201;
+    position:relative;
+}
+.has-star > .influence-track-number, .has-star > .influence-money-icon {
+    position:relative;
+    top: -60%;
+}
+.influence-kicked-out {
+    background-color: #e63f7d;
+}
+.influence-money-icon {
+    height: 25px;
+    width: 25px;
+    margin: 0 auto;
+}
+.influence-star-icon {
+    height:18px;
+    width:18px;
+    margin: 0 auto;
+    position:relative;
+    top: -50%
 }
 
 /*Default Stuff*/
