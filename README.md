@@ -12,6 +12,7 @@ You will need the following software installed to this application:
 - Visual Studio
 - LocalDB (SQL Server Express)
     - Other databases work but LocalDB works without any modifications
+- Papercut SMTP Client
 
 #### Setup
 
