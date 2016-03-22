@@ -16,25 +16,31 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
 
         public static void assignReputationTiles(this Game newGame)
         {
-            var tileList = newGame.ReputationTiles.ToList();
-            int i = 0, count = 3;
+            int row = 0, column = 0, count = 3;
             if (newGame.Players.Count() < 3)
+            {
                 count = 2;
+                newGame.ReputationTiles = new HashSet<GameReputationTile>(newGame.ReputationTiles.Shuffle().Take(12));
+            }
+            var tileList = newGame.ReputationTiles.ToList();
             foreach (ArtType type in Enum.GetValues(typeof(ArtType)))
             {
-                foreach (GameReputationTile tile in tileList.Skip(count*i).Take(count))
+                foreach (GameReputationTile tile in tileList.Skip(count*row).Take(count))
                 {
-                    for (int j = 0; j < count; j++)
+                    tile.Row = type;
+                    if (column < count)
                     {
-                        tile.Row = type;
-                        if (j == 0)
+                        if (column == 0)
                             tile.Column = GameReputationTileLocation.ThreeInfluence;
-                        else if (j == 1)
+                        else if (column == 1)
                             tile.Column = GameReputationTileLocation.OneInfluence;
                         else
                             tile.Column = GameReputationTileLocation.TwoInfluence;
-                    }
+                        column++;
+                    }                    
                 }
+                column = 0;
+                row++;
             }
             var startTiles = tileList.Skip(4 * count).Take(4).ToList(); ;
             for (int j = 0; j < 4; j++)

@@ -48,7 +48,7 @@
 .icon-background, .artist-bonus, .contract-bonus, .art-icon, .media-icon, .international-market-visitor, .international-market-influence,
 .auction-tile, .reputation-tile-influence, .reputation-tile-money, .reputation-tile-scoring, .art-type-scoring-art, .fame-star,
 .aquired-scoring-icon, .reputation-row-art-icon, .auction-row-icon, .auction-row-cost, .minus-icon, .art-tile-icon, .influence-money-icon,
-.influence-star-icon {
+.influence-star-icon, .reputation-tile-none, .influence-icon {
     background-size:contain;
     background-repeat:no-repeat;
     background-position:50%;
@@ -203,6 +203,14 @@
     height: 75px;
     background: linear-gradient(to bottom, rgba(173, 216, 230, 0.50) 50%, lightblue 50%, lightblue 100%);
     background-color: white;
+    margin: 0 auto;
+}
+.reputation-tile-none {
+    width: 75px;
+    height: 75px;
+    background-color: grey;
+    background-image: url(Icons/ReputationWhite.svg);
+    background-size: 80%;
     margin: 0 auto;
 }
 .reputation-tile-influence {
@@ -661,6 +669,7 @@
 .influence-track-number {
     color: #5c1201;
     position:relative;
+    height:1.4em;
 }
 .has-star > .influence-track-number, .has-star > .influence-money-icon {
     position:relative;
@@ -680,6 +689,11 @@
     margin: 0 auto;
     position:relative;
     top: -50%
+}
+.influence-icon {
+    background-image:url(Icons/Influence.svg);
+    background-size: 60%;
+    background-position-y:25%;
 }
 
 /*Default Stuff*/

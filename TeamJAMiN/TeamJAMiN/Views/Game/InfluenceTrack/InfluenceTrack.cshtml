@@ -35,7 +35,7 @@
                                 kickedClass += "influence-icon";
                             }
                             <div class="col-xs-4">
-                                <div id="influence-track-@i" class="@kickedClass influence-track-space">@Html.Raw(starHTML)<div class="influence-track-number">@i</div>@Html.Raw(moneyHTML)</div>
+                                <div id="influence-track-@i" class="@kickedClass influence-track-space">@Html.Raw(starHTML)<div class="influence-track-number">@if (i != 0) {@i}</div>@Html.Raw(moneyHTML)</div>
                             </div>
                             i++;
                         }

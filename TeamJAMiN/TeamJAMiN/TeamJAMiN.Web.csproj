@@ -309,6 +309,7 @@
     <Content Include="Content\Icons\FameStarGreenThree.svg" />
     <Content Include="Content\Icons\FameStarGreenTwo.svg" />
     <Content Include="Content\Icons\FameStarWhite.svg" />
+    <Content Include="Content\Icons\Influence.svg" />
     <Content Include="Content\Icons\InfluenceOne.svg" />
     <Content Include="Content\Icons\InfluenceThree.svg" />
     <Content Include="Content\Icons\InfluenceTwo.svg" />
@@ -337,6 +338,7 @@
     <Content Include="Content\Icons\Promotion.svg" />
     <Content Include="Content\Icons\PromotionFive.svg" />
     <Content Include="Content\Icons\Reputation.svg" />
+    <Content Include="Content\Icons\ReputationWhite.svg" />
     <Content Include="Content\Icons\Sell.svg" />
     <Content Include="Content\Icons\TicketAny.svg" />
     <Content Include="Content\Icons\TicketAnyTwo.svg" />
