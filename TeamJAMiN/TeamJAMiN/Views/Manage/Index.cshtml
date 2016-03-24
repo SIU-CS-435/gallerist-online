@@ -10,6 +10,25 @@
     <h4>Change your account settings</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>Username:</dt>
+        <dd>
+            [
+            @if (Model.HasUserName)
+            {
+                 @Model.UserName 
+            }
+            ]
+        </dd>
+        <dt>Email:</dt>
+        <dd>
+            [
+            @if (Model.HasEmail)
+            {
+                @Model.Email
+            }
+            ]
+        </dd>
+
         <dt>Password:</dt>
         <dd>
             [
