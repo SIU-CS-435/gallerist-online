@@ -1,4 +1,9 @@
-﻿
+﻿@model TeamJAMiN.GalleristComponentEntities.Game
+@using TeamJAMiN.GalleristComponentEntities
+@using TeamJAMiN.Models.GameViewHelpers
+
+
+@{ ViewBag.DisplayVisitors = Model.VisitorByPlayerAndLocation((PlayerColor)ViewBag.Color, GameVisitorLocation.Lobby); }
 <div id="@ViewBag.Color.ToString()-lobby" class="player-lobby">
     @Html.Partial("~/Views/Game/PlayerGallery/VisitorDisplay.cshtml")
 </div>

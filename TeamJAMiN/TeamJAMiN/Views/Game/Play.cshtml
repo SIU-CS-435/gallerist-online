@@ -1,5 +1,6 @@
 ﻿@model TeamJAMiN.GalleristComponentEntities.Game
 @using TeamJAMiN.GalleristComponentEntities
+@using TeamJAMiN.Models.GameViewHelpers
 @{
     ViewBag.Title = "Play";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -25,19 +26,14 @@
                 @foreach (PlayerColor color in new List<PlayerColor> { PlayerColor.yellow, PlayerColor.purple, PlayerColor.blue, PlayerColor.orange })
                 {
                     ViewBag.Color = color;
-                    ViewBag.IsPlayer = false;
-                    var player = Model.Players.Where(p => p.Color == color).FirstOrDefault();
-                    if (player != null)
-                    {
-                        ViewBag.IsPlayer = true;
-                    }
                     <div class="col-xs-6">
                         <div class="row no-margin">
-                            @Html.Partial("~/Views/Game/PlayerGallery/GalleryAndLobby.cshtml")
+                            @Html.Partial("~/Views/Game/PlayerGallery/GalleryAndLobby.cshtml", Model)
                         </div>
                     </div>
-                    if(color == PlayerColor.purple)
+                    if (color == PlayerColor.purple)
                     {
+                        ViewBag.DisplayVisitors = Model.VisitorByLocation(GameVisitorLocation.Plaza);
                         @Html.Raw(@"</div>
                         <div class=""row"">
                             <div class=""col-xs-12"">

@@ -8,6 +8,6 @@ namespace TeamJAMiN.GalleristComponentEntities
 {
     public enum PlayerColor
     {
-        orange, yellow, blue, purple
+        orange, yellow, blue, purple, none
     }
 }

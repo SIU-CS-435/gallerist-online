@@ -68,6 +68,7 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
             foreach (GameVisitor visitor in visitorList)
             {
                 visitor.Order = i++;
+                visitor.PlayerGallery = PlayerColor.none;
             }
             newGame.Visitors = new HashSet<GameVisitor>(visitorList);
         }

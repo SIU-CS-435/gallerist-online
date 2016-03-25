@@ -99,7 +99,8 @@
 .unused-gallery-region .player-lobby {
     border-color: grey;
 }
-.unused-gallery-region .visitor-display-icons {
+.unused-gallery-region .visitor-display-icons,
+.unused-gallery-region .visitor-display-counts {
     display: none;
 }
 .player-gallery {
@@ -125,6 +126,9 @@
 .gallery-visitor {
     margin: 0 auto;
     margin-top:2px;
+}
+.gallery-visitor-count {
+    text-align:center;
 }
 
 /* Artist Tiles*/
