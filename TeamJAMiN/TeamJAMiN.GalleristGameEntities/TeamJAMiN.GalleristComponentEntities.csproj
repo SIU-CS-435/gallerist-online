@@ -52,6 +52,7 @@
     <Compile Include="GameReputationTile.cs" />
     <Compile Include="GameVisitor.cs" />
     <Compile Include="GameVisitorLocation.cs" />
+    <Compile Include="Managers\EmailManager.cs" />
     <Compile Include="Partial\Game.cs" />
     <Compile Include="PlayerAssistant.cs" />
     <Compile Include="GameReputationTileLocation.cs" />

@@ -148,5 +148,39 @@ namespace TeamJAMiN.Controllers
                 }
             }
         }
+
+        /// <summary>
+        /// Starts a game and emails all of the players that their game has started.
+        /// </summary>
+        /// <param name="id">The id of the game to start</param>
+        /// <returns>Existing game view or appropriate error</returns>
+        [Authorize]
+        [HttpPost]
+        public ActionResult Start(int id = 0)
+        {
+            using (var galleristContext = new GalleristComponentsDbContext())
+            {
+                using (var identityContext = new ApplicationDbContext())
+                {
+                    //todo: determine who is host, we need a flag for this
+                    //todo: set start time of game to datetime.now
+                    //var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
+
+                    //if (gameResponse.Success)
+                    //{
+                    //    gameResponse.Game.Players.Add(new Player { UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id });
+                    //    ViewBag.userName = User.Identity.Name;
+                    //    return View(gameResponse.Game);
+                    //}
+                    //else
+                    //{
+                    //    ViewBag.Message = gameResponse.Message;
+                    //    ViewBag.Title = gameResponse.Title;
+                    //    return View("GameError");
+                    //}
+                    return View("GameError");
+                }
+            }
+        }
     }
 }
