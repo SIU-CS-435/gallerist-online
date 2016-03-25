@@ -1,0 +1,36 @@
+﻿@using TeamJAMiN.GalleristComponentEntities
+
+@if (ViewBag.Color == PlayerColor.purple || ViewBag.Color == PlayerColor.orange)
+{
+}
+@{
+    var noPlayer = "";
+    if (!ViewBag.IsPlayer)
+    {
+        noPlayer = "unused-gallery-region";
+    }
+}
+<div class="col-xs-12">
+    <div class="player-gallery-region @noPlayer">
+        <div class="row no-gutter">
+            @if (ViewBag.Color == PlayerColor.yellow || ViewBag.Color == PlayerColor.purple)
+            {
+                @Html.Partial("~/Views/Game/PlayerGallery/Gallery.cshtml")
+            }
+            else
+            {
+                @Html.Partial("~/Views/Game/PlayerGallery/Lobby.cshtml")
+            }
+        </div>
+        <div class="row no-gutter">
+            @if (ViewBag.Color == PlayerColor.yellow || ViewBag.Color == PlayerColor.purple)
+            {
+                @Html.Partial("~/Views/Game/PlayerGallery/Lobby.cshtml")
+            }
+            else
+            {
+                @Html.Partial("~/Views/Game/PlayerGallery/Gallery.cshtml")
+            }
+        </div>
+    </div>
+</div>

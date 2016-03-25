@@ -251,6 +251,10 @@
     <Compile Include="DataContexts\GalleristComponentMigrations\201603131537476_VisitorsTicketsContracts.Designer.cs">
       <DependentUpon>201603131537476_VisitorsTicketsContracts.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603231400535_PlayerCOlor.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603231400535_PlayerCOlor.Designer.cs">
+      <DependentUpon>201603231400535_PlayerCOlor.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\GalleristComponentMigrations\Configuration.cs" />
     <Compile Include="DataContexts\GalleristComponentsDb.cs" />
     <Compile Include="DataContexts\IdentityMigrations\201602282353509_init.cs" />
@@ -442,11 +446,14 @@
     <Content Include="Views\Game\PlayerBoard\PlayerBoard.cshtml" />
     <Content Include="Views\Game\PlayerBoard\PlayerArt.cshtml" />
     <Content Include="Views\Game\PlayerBoard\PlayerContracts.cshtml" />
+    <Content Include="Views\Game\PlayerGallery\GalleryAndLobby.cshtml" />
+    <Content Include="Views\Game\PlayerGallery\Gallery.cshtml" />
+    <Content Include="Views\Game\PlayerGallery\Lobby.cshtml" />
+    <Content Include="Views\Game\PlayerGallery\VisitorDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="App_LocalResources\" />
-    <Folder Include="Views\Arts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -494,6 +501,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603131537476_VisitorsTicketsContracts.resx">
       <DependentUpon>201603131537476_VisitorsTicketsContracts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603231400535_PlayerCOlor.resx">
+      <DependentUpon>201603231400535_PlayerCOlor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201602282353509_init.resx">
       <DependentUpon>201602282353509_init.cs</DependentUpon>

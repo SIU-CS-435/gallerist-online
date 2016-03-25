@@ -48,7 +48,7 @@
 .icon-background, .artist-bonus, .contract-bonus, .art-icon, .media-icon, .international-market-visitor, .international-market-influence,
 .auction-tile, .reputation-tile-influence, .reputation-tile-money, .reputation-tile-scoring, .art-type-scoring-art, .fame-star,
 .aquired-scoring-icon, .reputation-row-art-icon, .auction-row-icon, .auction-row-cost, .minus-icon, .art-tile-icon, .influence-money-icon,
-.influence-star-icon, .reputation-tile-none, .influence-icon {
+.influence-star-icon, .reputation-tile-none, .influence-icon, .gallery-visitor {
     background-size:contain;
     background-repeat:no-repeat;
     background-position:50%;
@@ -72,6 +72,59 @@
 }
 .reputation-icon {
     background-image:url(Icons/Reputation.svg)
+}
+
+/* Player Galleries */
+#plaza {
+    border: 5px solid;
+    height:75px;
+    width:100px;
+    border-radius: 50%;
+    background-color:rgba(255,255,255,.1);
+    margin: 0 auto;
+}
+#plaza .visitor-display-icons,
+.player-lobby .visitor-display-icons {
+    margin-top:10%
+}
+.player-gallery-region {
+    margin-left: -15px;
+    margin-right: -15px;
+    padding: 5px;
+}
+#blue-lobby, #orange-lobby, #yellow-gallery, #purple-gallery {
+    margin-bottom: 10px;
+}
+.unused-gallery-region .player-gallery,
+.unused-gallery-region .player-lobby {
+    border-color: grey;
+}
+.unused-gallery-region .visitor-display-icons {
+    display: none;
+}
+.player-gallery {
+    border:5px solid;
+    height:75px;
+    padding:5px;
+    margin-bottom:5px;
+    background-color:rgba(255,255,255,.1)
+}
+.player-lobby{
+    border: 5px dashed;
+    height:75px;
+    border-radius: 50%;
+    background-color:rgba(255,255,255,.1)
+}
+#orange-gallery, #orange-lobby {
+    border-color : orangered;}
+.gallery-visitor {
+    height:18px;
+    width: 18px;
+    padding: 0;
+}
+.gallery-visitor {
+    margin: 0 auto;
+    margin-top:2px;
 }
 
 /* Artist Tiles*/

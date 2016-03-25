@@ -36,6 +36,7 @@ namespace TeamJAMiN.GalleristComponentEntities
         public HashSet<GameContract> Contracts { get; set; }
         public HashSet<GameArt> Art { get; set; }
         public GameArtist Commission { get; set; }
+        public PlayerColor Color { get; set; }
         public int VipTickets { get; set; }
         public int InvestorTickets { get; set; }
         public int CollectorTickets { get; set; }
