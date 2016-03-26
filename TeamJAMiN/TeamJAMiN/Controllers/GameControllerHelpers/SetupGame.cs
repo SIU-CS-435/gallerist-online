@@ -38,6 +38,7 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
         public static void FinalizeSetup(this Game newGame)
         {
             newGame.ChooseVisitors();
+            newGame.DrawInitialVisitors();
             newGame.SetupTickets();
             newGame.assignReputationTiles();
         }

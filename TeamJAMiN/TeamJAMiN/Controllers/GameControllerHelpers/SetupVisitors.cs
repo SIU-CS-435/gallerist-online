@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TeamJAMiN.Controllers.GameLogicHelpers;
 using TeamJAMiN.GalleristComponentEntities;
 
 namespace TeamJAMiN.Controllers.GameControllerHelpers
@@ -71,6 +72,18 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
                 visitor.PlayerGallery = PlayerColor.none;
             }
             newGame.Visitors = new HashSet<GameVisitor>(visitorList);
+        }
+        public static void DrawInitialVisitors(this Game newGame)
+        {
+            foreach (ArtType type in Enum.GetValues(typeof(ArtType)))
+            {
+                newGame.SetupNextArt(type);
+            }
+            newGame.DrawVisitors(4).UpdateVisitorLocation(GameVisitorLocation.Plaza);
+            foreach (Player player in newGame.Players)
+            {
+                newGame.DrawVisitors(1).UpdateVisitorLocation(GameVisitorLocation.Lobby, player.Color);
+            }
         }
         public static void SetupTickets(this Game newGame)
         {
