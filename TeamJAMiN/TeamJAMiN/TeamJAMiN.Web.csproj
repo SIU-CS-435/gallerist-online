@@ -188,6 +188,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GameActionHub\GameActionHub.cs" />
+    <Compile Include="App_Start\Startup.SignalR.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ArtManager.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ContractManager.cs" />
     <Compile Include="Controllers\GameController.cs" />
@@ -392,6 +394,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Gallerist\game-actions.js" />
     <Content Include="Scripts\jquery-2.2.1.js" />
     <Content Include="Scripts\jquery-2.2.1.min.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.js" />

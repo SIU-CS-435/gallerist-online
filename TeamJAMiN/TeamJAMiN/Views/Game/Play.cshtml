@@ -43,7 +43,7 @@
                 </div>
             </div>
             @* Player Galleries *@
-            <div class="row">
+            <div class="row separate-top">
                 @foreach (PlayerColor color in new List<PlayerColor> { PlayerColor.yellow, PlayerColor.purple })
                 {
                     ViewBag.Color = color;
@@ -137,3 +137,6 @@
         }
     </div>
 </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/gallerist")    
+}
