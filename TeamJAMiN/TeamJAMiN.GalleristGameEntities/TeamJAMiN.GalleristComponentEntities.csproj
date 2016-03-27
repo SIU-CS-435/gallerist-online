@@ -57,6 +57,7 @@
     <Compile Include="GameReputationTileLocation.cs" />
     <Compile Include="PlayerAssistantLocation.cs" />
     <Compile Include="PlayerColor.cs" />
+    <Compile Include="PlayerLocation.cs" />
     <Compile Include="TemplateArt.cs" />
     <Compile Include="GameArtist.cs" />
     <Compile Include="TemplateArtist.cs" />

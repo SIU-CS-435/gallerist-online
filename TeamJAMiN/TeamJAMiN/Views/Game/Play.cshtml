@@ -11,7 +11,7 @@
         <div class="col-md-4">
             <div class="row board-region" id="sales-office">
                 @*Sales Office (Contracts)*@
-                <div class="col-md-12 no-padding">@Html.Partial("~/Views/Game/SalesOffice/SalesOffice.cshtml",Model)</div>
+                <div class="col-md-12 no-padding">@Html.Partial("~/Views/Game/SalesOffice/SalesOffice.cshtml", Model)</div>
             </div>
             <div class="row board-region separate-top">
                 <div class="col-md-12">
@@ -19,11 +19,32 @@
                     @Html.Partial("~/Views/Game/InternationalMarket/InternationalMarket.cshtml")
                 </div>
             </div>
-        </div>
-        @* Player Galleries *@
+        </div> 
         <div class="col-md-3">
+            @* Top Actions *@
+            @{ 
+                var actionList = new List<PlayerLocation> { PlayerLocation.SalesOffice, PlayerLocation.ArtistColony, PlayerLocation.InternationalMarket, PlayerLocation.MediaCenter };
+                var actionEnum = actionList.GetEnumerator();
+            }
             <div class="row">
-                @foreach (PlayerColor color in new List<PlayerColor> { PlayerColor.yellow, PlayerColor.purple, PlayerColor.blue, PlayerColor.orange })
+                <div class="col-xs-6">
+                    @{ 
+                        actionEnum.MoveNext();
+                        ViewBag.ActionId = actionEnum.Current;
+                    }
+                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml")
+                </div>
+                <div class="col-xs-6">
+                    @{
+                        actionEnum.MoveNext();
+                        ViewBag.ActionId = actionEnum.Current;
+                    }
+                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml")
+                </div>
+            </div>
+            @* Player Galleries *@
+            <div class="row">
+                @foreach (PlayerColor color in new List<PlayerColor> { PlayerColor.yellow, PlayerColor.purple })
                 {
                     ViewBag.Color = color;
                     <div class="col-xs-6">
@@ -31,20 +52,43 @@
                             @Html.Partial("~/Views/Game/PlayerGallery/GalleryAndLobby.cshtml", Model)
                         </div>
                     </div>
-                    if (color == PlayerColor.purple)
-                    {
-                        ViewBag.DisplayVisitors = Model.VisitorByLocation(GameVisitorLocation.Plaza);
-                        @Html.Raw(@"</div>
-                        <div class=""row"">
-                            <div class=""col-xs-12"">
-                                <div id=""plaza"" class="""">")
-                                    @Html.Partial("~/Views/Game/PlayerGallery/VisitorDisplay.cshtml")
-                                @Html.Raw(@"</div>
-                            </div>
-                        </div>
-                        <div class=""row"">")
-                    }
                 }
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="plaza" class="">
+                        @{ ViewBag.DisplayVisitors = Model.VisitorByLocation(GameVisitorLocation.Plaza); }
+                        @Html.Partial("~/Views/Game/PlayerGallery/VisitorDisplay.cshtml")
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (PlayerColor color in new List<PlayerColor> { PlayerColor.blue, PlayerColor.orange })
+                {
+                    ViewBag.Color = color;
+                    <div class="col-xs-6">
+                        <div class="row no-margin">
+                            @Html.Partial("~/Views/Game/PlayerGallery/GalleryAndLobby.cshtml", Model)
+                        </div>
+                    </div>
+                }
+            </div>
+            @* Bottom Actions *@
+            <div class="row">
+                <div class="col-xs-6">
+                    @{
+                        actionEnum.MoveNext();
+                        ViewBag.ActionId = actionEnum.Current;
+                    }
+                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml")
+                </div>
+                <div class="col-xs-6">
+                    @{
+                        actionEnum.MoveNext();
+                        ViewBag.ActionId = actionEnum.Current;
+                    }
+                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml")
+                </div>
             </div>
         </div>
         <div class="col-md-5">

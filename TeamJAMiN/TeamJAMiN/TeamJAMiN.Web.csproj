@@ -261,6 +261,10 @@
     <Compile Include="DataContexts\GalleristComponentMigrations\201603251514175_PlayerGalleries.Designer.cs">
       <DependentUpon>201603251514175_PlayerGalleries.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603271404450_GalleristLocation.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603271404450_GalleristLocation.Designer.cs">
+      <DependentUpon>201603271404450_GalleristLocation.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\GalleristComponentMigrations\Configuration.cs" />
     <Compile Include="DataContexts\GalleristComponentsDb.cs" />
     <Compile Include="DataContexts\IdentityMigrations\201602282353509_init.cs" />
@@ -307,6 +311,7 @@
     <Content Include="Content\Icons\BonusVisitorPlazaAny.svg" />
     <Content Include="Content\Icons\BonusVisitorPlazaInvestorVip.svg" />
     <Content Include="Content\Icons\BonusVisitorVisitorBag.svg" />
+    <Content Include="Content\Icons\Discover.svg" />
     <Content Include="Content\Icons\Exhibit.svg" />
     <Content Include="Content\Icons\FameGainCollector.svg" />
     <Content Include="Content\Icons\FameGainStarOne.svg" />
@@ -320,6 +325,7 @@
     <Content Include="Content\Icons\FameStarGreenThree.svg" />
     <Content Include="Content\Icons\FameStarGreenTwo.svg" />
     <Content Include="Content\Icons\FameStarWhite.svg" />
+    <Content Include="Content\Icons\Hire.svg" />
     <Content Include="Content\Icons\Influence.svg" />
     <Content Include="Content\Icons\InfluenceOne.svg" />
     <Content Include="Content\Icons\InfluenceThree.svg" />
@@ -457,6 +463,7 @@
     <Content Include="Views\Game\PlayerGallery\Gallery.cshtml" />
     <Content Include="Views\Game\PlayerGallery\Lobby.cshtml" />
     <Content Include="Views\Game\PlayerGallery\VisitorDisplay.cshtml" />
+    <Content Include="Views\Game\ActionSpaces\ActionSpace.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -514,6 +521,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603251514175_PlayerGalleries.resx">
       <DependentUpon>201603251514175_PlayerGalleries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603271404450_GalleristLocation.resx">
+      <DependentUpon>201603271404450_GalleristLocation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201602282353509_init.resx">
       <DependentUpon>201602282353509_init.cs</DependentUpon>

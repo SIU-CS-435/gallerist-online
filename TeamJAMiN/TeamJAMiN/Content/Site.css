@@ -48,7 +48,9 @@
 .icon-background, .artist-bonus, .contract-bonus, .art-icon, .media-icon, .international-market-visitor, .international-market-influence,
 .auction-tile, .reputation-tile-influence, .reputation-tile-money, .reputation-tile-scoring, .art-type-scoring-art, .fame-star,
 .aquired-scoring-icon, .reputation-row-art-icon, .auction-row-icon, .auction-row-cost, .minus-icon, .art-tile-icon, .influence-money-icon,
-.influence-star-icon, .reputation-tile-none, .influence-icon, .gallery-visitor {
+.influence-star-icon, .reputation-tile-none, .influence-icon, .gallery-visitor, #international-market-reputation-action,
+#international-market-auction-action, #sales-office-contract-action, #sales-office-sell-action, #artist-colony-buy-action,
+#media-center-promote-action, #artist-colony-discover-action, #media-center-hire-action {
     background-size:contain;
     background-repeat:no-repeat;
     background-position:50%;
@@ -72,6 +74,96 @@
 }
 .reputation-icon {
     background-image:url(Icons/Reputation.svg)
+}
+
+/* Action Spaces */
+.action-space {
+    height:50px;
+    width:50px;
+    border: 3px solid grey;
+    border-radius: 50%;
+    margin: 0 auto;
+    background-color: rgba(22,31,40,1);
+}
+.action-space-center {
+    background-color: white;
+    height:40px;
+    width:40px;
+    margin: 5% auto auto;
+    border-radius: 50%;
+}
+.action-arrow-body {
+	border-top: 20px solid white;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	height: 0;
+	width: 30px;
+    margin: 0 auto;
+    position: relative;
+    top: -10px;
+    z-index:-1;
+}
+.action-arrow-head {
+    content:"";
+    width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 10px solid white;
+    margin: 0 auto;
+    position: relative;
+    top: -10px;
+}
+.kicked-out-space {
+    height:50px;
+    width:50px;
+    border: 3px solid white;
+    box-shadow: 0 0 5px 3px rgba(22,31,40,1);
+    border-radius: 50%;
+    margin: 0 auto;
+    background-color: rgba(22,31,40,1);
+}
+.sub-action-space {
+    height:50px;
+    width:50px;
+    background-color: rgba(255,255,255,.6);
+    background-size: 80% !important;
+}
+.col-xs-pull-6 .sub-action-space {
+    margin: 0 0 0 auto;
+}
+.sub-action-space:first-child {
+    margin-top:12.5px;
+    margin-bottom: 5px;
+}
+#international-market-reputation-action {
+    background-image:url(Icons/Reputation.svg)
+}
+#international-market-auction-action {
+    background-image:url(Icons/Auction.svg)
+}
+#sales-office-contract-action {
+    background-image:url(Icons/BonusContract.svg);
+    background-size: 60% !important;
+}
+#sales-office-sell-action {
+    background-image:url(Icons/Sell.svg);
+}
+#artist-colony-buy-action {
+    background-image:url(Icons/Exhibit.svg);
+    background-size: 70% !important;
+
+}
+#artist-colony-discover-action {
+    background-image:url(Icons/Discover.svg);
+}
+#media-center-promote-action {
+    background-image:url(Icons/Promotion.svg);
+    background-size: 60% !important;
+
+}
+#media-center-hire-action {
+    background-image:url(Icons/Hire.svg);
 }
 
 /* Player Galleries */
