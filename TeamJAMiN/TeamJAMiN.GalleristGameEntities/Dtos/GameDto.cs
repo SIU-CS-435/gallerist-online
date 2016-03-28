@@ -17,5 +17,6 @@ namespace TeamJAMiN.GalleristComponentEntities.Dtos
         public string MaxTurnLengthString { get; set; }
         public string PlayersString { get; set; }
         public int RemainingSlots { get; set; }
+        public bool isJoinable { get; set; }
     }
 }

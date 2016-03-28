@@ -34,8 +34,14 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
                 gameResponse.Message = "Sorry but you are not authorized to play this game.";
                 gameResponse.Success = false;
             }
-            //new player joining a game
-            else if (!game.Players.Any(m => m.UserId == identityContext.Users.First(u => u.UserName == username).Id))
+            //is the player already in the game?
+            else if (game.Players.Any(m => m.UserId == identityContext.Users.First(u => u.UserName == username).Id))
+            {
+                gameResponse.Success = false;
+            }
+
+            //nothing bad happened
+            else
             {
                 //TODO: check game player restrictions (e.g. friends only, are there invites sent to a specific player, etc.). This is not yet implemented
 
@@ -49,12 +55,6 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
                 {
                     gameResponse.Success = true;
                 }
-            }
-
-            //nothing bad happened
-            else
-            {
-                gameResponse.Success = true;
             }
 
             return gameResponse;

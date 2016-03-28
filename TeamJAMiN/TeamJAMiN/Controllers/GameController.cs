@@ -29,6 +29,7 @@ namespace TeamJAMiN.Controllers
 
                     var allGamesList = allGames.Select(m => new GameDto
                     {
+                        Id = m.Id,
                         Url = "/Game/Play/" + m.Id,
                         Name = m.Name,
                         CurrentNumberOfPlayers = m.Players.Count,
@@ -36,11 +37,13 @@ namespace TeamJAMiN.Controllers
                         RemainingSlots = m.MaxNumberOfPlayers - m.Players.Count,
                         MaxTurnLength = m.TurnLength,
                         MaxTurnLengthString = m.TurnLength + " Minutes Per Turn",
-                        PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers + " players"
+                        PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers + " players",
+                        isJoinable = !m.Players.Any(p => p.UserId == userId) && m.Players.Count < m.MaxNumberOfPlayers
                     }).ToList();
 
                     var myGamesList = myGames.Select(m => new GameDto
                     {
+                        Id = m.Id,
                         Url = "/Game/Play/" + m.Id,
                         Name = m.Name,
                         CurrentNumberOfPlayers = m.Players.Count,
@@ -125,19 +128,21 @@ namespace TeamJAMiN.Controllers
         /// <returns>Existing game view or appropriate error</returns>
         [Authorize]
         [HttpPost]
-        public ActionResult Join(int id = 0)
+        public ActionResult Join(int gameId = 0)
+
         {
             using (var galleristContext = new GalleristComponentsDbContext())
             {
                 using (var identityContext = new ApplicationDbContext())
                 {
-                    var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
+                    var gameResponse = GameManager.GetGame(gameId, User.Identity.Name, galleristContext, identityContext);
 
                     if (gameResponse.Success)
                     {
                         gameResponse.Game.Players.Add(new Player { UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id });
                         ViewBag.userName = User.Identity.Name;
-                        return View(gameResponse.Game);
+                        galleristContext.SaveChanges();
+                        return Redirect("/Game/List");
                     }
                     else
                     {

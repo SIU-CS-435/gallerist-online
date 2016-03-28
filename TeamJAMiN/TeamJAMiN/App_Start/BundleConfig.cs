@@ -9,7 +9,8 @@ namespace TeamJAMiN
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/gallerist").Include(
-                        "~/Scripts/Gallerist/game-actions.js"));
+                        "~/Scripts/Gallerist/game-actions.js",
+                        "~/Scripts/jquery.signalR-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));

@@ -8,9 +8,9 @@ namespace TeamJAMiN.Controllers.ActionHub
 {
     public class GameActionHub : Hub
     {
-        public void Hello()
+        public void Update()
         {
-            Clients.All.hello();
+            Clients.All.serverResponse("Action Clicked!");
         }
     }
 }
