@@ -267,6 +267,10 @@
     <Compile Include="DataContexts\GalleristComponentMigrations\201603271404450_GalleristLocation.Designer.cs">
       <DependentUpon>201603271404450_GalleristLocation.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603280201435_GameStartPlayerHost.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603280201435_GameStartPlayerHost.Designer.cs">
+      <DependentUpon>201603280201435_GameStartPlayerHost.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\GalleristComponentMigrations\Configuration.cs" />
     <Compile Include="DataContexts\GalleristComponentsDb.cs" />
     <Compile Include="DataContexts\IdentityMigrations\201602282353509_init.cs" />
@@ -527,6 +531,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603271404450_GalleristLocation.resx">
       <DependentUpon>201603271404450_GalleristLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603280201435_GameStartPlayerHost.resx">
+      <DependentUpon>201603280201435_GameStartPlayerHost.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201602282353509_init.resx">
       <DependentUpon>201602282353509_init.cs</DependentUpon>

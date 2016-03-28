@@ -38,6 +38,9 @@ namespace TeamJAMiN.GalleristComponentEntities
         [DefaultValue(false)]
         public bool IsCompleted { get; set; }
 
+        [DefaultValue(false)]
+        public bool IsStarted { get; set; }
+
         public virtual HashSet<GameArtist> Artists { get; set; }
         public virtual HashSet<GameArt> Art { get; set; }
         public virtual HashSet<GameReputationTile> ReputationTiles { get; set; }

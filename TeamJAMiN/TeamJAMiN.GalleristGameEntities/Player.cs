@@ -28,6 +28,8 @@ namespace TeamJAMiN.GalleristComponentEntities
         [MaxLength(128)]
         public string UserId { get; set; }
 
+        public bool IsHost { get; set; }
+
         public Game Game { get; set; }
         public int Money { get; set; }
         public int Influence { get; set; }
