@@ -190,6 +190,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GameActionHub\GameActionHub.cs" />
     <Compile Include="App_Start\Startup.SignalR.cs" />
+    <Compile Include="Controllers\GameControllerHelpers\SetupPlayers.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ArtManager.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ContractManager.cs" />
     <Compile Include="Controllers\GameController.cs" />
@@ -278,6 +279,10 @@
     <Compile Include="DataContexts\GalleristComponentMigrations\201603281506203_PlayerOrderSchema.cs" />
     <Compile Include="DataContexts\GalleristComponentMigrations\201603281506203_PlayerOrderSchema.Designer.cs">
       <DependentUpon>201603281506203_PlayerOrderSchema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603282227349_TemplateGame.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603282227349_TemplateGame.Designer.cs">
+      <DependentUpon>201603282227349_TemplateGame.cs</DependentUpon>
     </Compile>
     <Compile Include="DataContexts\GalleristComponentMigrations\Configuration.cs" />
     <Compile Include="DataContexts\GalleristComponentsDb.cs" />
@@ -548,6 +553,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603281506203_PlayerOrderSchema.resx">
       <DependentUpon>201603281506203_PlayerOrderSchema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603282227349_TemplateGame.resx">
+      <DependentUpon>201603282227349_TemplateGame.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201602282353509_init.resx">
       <DependentUpon>201602282353509_init.cs</DependentUpon>

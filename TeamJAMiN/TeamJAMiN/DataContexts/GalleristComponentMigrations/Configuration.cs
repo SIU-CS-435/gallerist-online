@@ -5,7 +5,7 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-
+    using System.Collections.Generic;
     internal sealed class Configuration : DbMigrationsConfiguration<GalleristComponentsDbContext>
     {
         public Configuration()
@@ -16,6 +16,17 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
 
         protected override void Seed(GalleristComponentsDbContext context)
         {
+            context.TemplateGames.AddOrUpdate(
+                g => g.Name,
+                new TemplateGame
+                {
+                    Name = "GameResources",
+                    Art = new HashSet<TemplateArt>(context.TemplateArt.ToList()),
+                    Artists = new HashSet<TemplateArtist>(context.TemplateArtists.ToList()),
+                    ReputationTiles = new HashSet<TemplateReputationTile>(context.TemplateReputationTiles.ToList()),
+                    Contracts = new HashSet<TemplateContract>(context.TemplateContracts.ToList())
+                }
+            );
             context.TemplateArt.AddOrUpdate(
                 a => a.Slug,
                 new TemplateArt

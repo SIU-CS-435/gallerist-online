@@ -15,21 +15,22 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
             using (var galleristContext = new GalleristComponentsDbContext())
             {
                 //put list building on separate lines for clarity
-                var artLists = galleristContext.TemplateArt.ToList().chooseArt();
+                var gameTemplate = galleristContext.TemplateGames.Where(g => g.Name == "GameResources").FirstOrDefault();
+                var artLists = gameTemplate.Art.ToList().chooseArt();
                 newGame.AddArtStack(artLists);
 
-                var blueArtists = galleristContext.TemplateArtists.Where(a => a.Category == ArtistCategory.red).ToList().chooseArtists();
-                var redArtists = galleristContext.TemplateArtists.Where(a => a.Category == ArtistCategory.blue).ToList().chooseArtists();
+                var blueArtists = gameTemplate.Artists.Where(a => a.Category == ArtistCategory.red).ToList().chooseArtists();
+                var redArtists = gameTemplate.Artists.Where(a => a.Category == ArtistCategory.blue).ToList().chooseArtists();
                 var artBonuses = ArtColonySetup.chooseArtBonuses();
 
                 newGame.AddArtists(blueArtists.Values.ToList(),artBonuses);
                 newGame.AddArtists(redArtists.Values.ToList(),artBonuses);
 
 
-                var reputationTiles = galleristContext.TemplateReputationTiles.ToList().chooseReputationTiles();
+                var reputationTiles = gameTemplate.ReputationTiles.ToList().chooseReputationTiles();
                 newGame.AddReputationTiles(reputationTiles);
 
-                var contracts = galleristContext.TemplateContracts.ToList().Shuffle().ToList();
+                var contracts = gameTemplate.Contracts.ToList().Shuffle().ToList();
                 newGame.AddContracts(contracts);
                 newGame.DrawContracts();
             }
@@ -41,6 +42,7 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
             newGame.DrawInitialVisitors();
             newGame.SetupTickets();
             newGame.assignReputationTiles();
+            newGame.assignColors();
             newGame.PlayerOrder = newGame.Players.Shuffle().ToList();
         }
     }

@@ -68,6 +68,7 @@
     <Compile Include="TemplateContract.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TemplateGame.cs" />
     <Compile Include="TemplateReputationTile.cs" />
     <Compile Include="ReputationTileScoring.cs" />
     <Compile Include="VisitorTicketType.cs" />
