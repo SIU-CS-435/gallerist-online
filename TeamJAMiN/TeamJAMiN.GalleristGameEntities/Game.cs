@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,5 +51,30 @@ namespace TeamJAMiN.GalleristComponentEntities
         public int AvailableVipTickets { get; set; }
         public int AvailableInvestorTickets { get; set; }
         public int AvailableCollectorTickets { get; set; }
+        public string PlayerOrderData { get; set; }
+
+        [NotMapped]
+        public List<Player> PlayerOrder
+        {
+            get
+            {
+                if (PlayerOrderData != null && PlayerOrderData.Count() == 0 )
+                {
+                    var idArray = Array.ConvertAll(PlayerOrderData.Split(';'), p => int.Parse(p));
+                    var result = new List<Player>();
+                    foreach (int id in idArray)
+                    {
+                        result.Add(this.Players.Where(p => p.Id == id).First());
+                    }
+                    return result;
+                }
+                else
+                    return null;
+            }
+            set
+            {
+                PlayerOrderData = String.Join(";", value.Select(p => p.Id.ToString()).ToArray());
+            }
+        }
     }
 }
