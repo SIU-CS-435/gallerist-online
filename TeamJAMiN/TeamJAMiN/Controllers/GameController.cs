@@ -78,13 +78,11 @@ namespace TeamJAMiN.Controllers
             {
                 using (var galleristContext = new GalleristComponentsDbContext())
                 {
-                    newGame.CreateRandomSetup();
                     galleristContext.Games.Add(newGame);
                     using (var identityContext = new ApplicationDbContext())
                     {
                         //add me to the game
                         newGame.Players.Add(new Player { UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id, IsHost = true });
-                        newGame.FinalizeSetup();
                     }
                     galleristContext.SaveChanges();
                     return Redirect("/Game/List"); //redirect to actual game might be better for demo purposes
@@ -174,6 +172,8 @@ namespace TeamJAMiN.Controllers
 
                     if (gameResponse.Success)
                     {
+                        gameResponse.Game.CreateRandomSetup();
+                        gameResponse.Game.FinalizeSetup();
                         gameResponse.Game.IsStarted = true;
                         galleristContext.SaveChanges();
                         return Redirect("Play/"+gameResponse.Game.Id);
