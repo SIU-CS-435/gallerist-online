@@ -1,0 +1,26 @@
+﻿@using TeamJAMiN.Models.GameViewHelpers
+@using TeamJAMiN.GalleristComponentEntities
+@{ 
+    var push = "";
+    var pull = "";
+    if (ViewBag.ActionId == PlayerLocation.ArtistColony || ViewBag.ActionId == PlayerLocation.MediaCenter)
+    {
+        push = "col-xs-push-6";
+        pull = "col-xs-pull-6";
+    }
+}
+<div class="row">
+    <div class="col-xs-6 @push no-padding">
+        <div id="@IconCss.actionIds[ViewBag.ActionId][0]-action" class="action-space">
+            <div class="action-space-center"></div>
+        </div>
+        <div class="action-arrow-body"></div>
+        <div class="action-arrow-head"></div>
+        <div id="@IconCss.actionIds[ViewBag.ActionId][0]-kicked-out" class="kicked-out-space"></div>
+    </div>
+    <div class="col-xs-6 @pull no-padding">
+        <div id="@IconCss.actionIds[ViewBag.ActionId][0]-@IconCss.actionIds[ViewBag.ActionId][1]-action" class="sub-action-space tile"></div>
+        <div id="@IconCss.actionIds[ViewBag.ActionId][0]-action-label" class="action-space-label"></div>
+        <div id="@IconCss.actionIds[ViewBag.ActionId][0]-@IconCss.actionIds[ViewBag.ActionId][2]-action" class="sub-action-space tile"></div>
+    </div>
+</div>

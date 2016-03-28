@@ -26,7 +26,23 @@
                         <td>@myGame.PlayersString</td>
                         <td>@myGame.MaxTurnLengthString</td>
                         <td>
-                            <a href="@myGame.Url" class="btn-sm btn-success">Open</a>
+                            @if (myGame.isStartable)
+                            {
+                                using (Html.BeginForm("Start", "Game", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input class="form-control hidden" type="hidden" name="gameId" value="@myGame.Id" />
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" class="btn btn-default" value="Start" />
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else if (myGame.isStarted)
+                            {
+                                <a href="@myGame.Url" class="btn-sm btn-success">Open</a>
+                            }
                         </td>
                     </tr>
                     index++;
@@ -72,7 +88,6 @@
                                         </div>
                                     </div>
                                 }
-                                @*<a href="@game.Url" class="btn-sm btn-success">Join</a>*@
                             }
                         </td>
                     </tr>

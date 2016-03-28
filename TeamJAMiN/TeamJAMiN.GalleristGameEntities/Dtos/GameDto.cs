@@ -18,5 +18,7 @@ namespace TeamJAMiN.GalleristComponentEntities.Dtos
         public string PlayersString { get; set; }
         public int RemainingSlots { get; set; }
         public bool isJoinable { get; set; }
+        public bool isStarted { get; set; }
+        public bool isStartable { get; set; }
     }
 }
