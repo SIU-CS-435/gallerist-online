@@ -1,26 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net.Mail;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace TeamJAMiN.GalleristComponentEntities.Managers
 {
     public class EmailManager
     {
-        public static void SendEmail(string body, string title, List<string> recipients)
+        public static void SendEmail(string subject, string body, List<string> recipients)
         {
-            var smtpClient = new SmtpClient();
+            //do email things
             var message = new MailMessage();
             message.Body = body;
-            message.Subject = title;
+            message.Subject = subject;
             foreach (var recipient in recipients)
             {
                 message.To.Add(recipient);
             }
-            smtpClient.Send(message);
-            //do email things
+            using (var smtpClient = new SmtpClient())
+            {
+                smtpClient.Send(message);
+            }
+        }
+
+        public static async Task SendEmailAsync(string subject, string body, List<string> recipients)
+        {
+            //do async email things
+            var message = new MailMessage();
+            message.Body = body;
+            message.Subject = subject;
+            foreach (var recipient in recipients)
+            {
+                message.To.Add(recipient);
+            }
+            using (var smtpClient = new SmtpClient())
+            {
+                await smtpClient.SendMailAsync(message);
+            }
         }
     }
 }

@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using TeamJAMiN.Models;
+using TeamJAMiN.GalleristComponentEntities.Managers;
 
 namespace TeamJAMiN
 {
@@ -18,8 +19,7 @@ namespace TeamJAMiN
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            return EmailManager.SendEmailAsync(message.Subject, message.Body, new List<string> { message.Destination });
         }
     }
 

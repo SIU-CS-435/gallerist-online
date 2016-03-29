@@ -46,12 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\GameActionDto.cs" />
     <Compile Include="Dtos\GameDto.cs" />
     <Compile Include="GameArt.cs" />
     <Compile Include="GameContractLocation.cs" />
     <Compile Include="GameReputationTile.cs" />
     <Compile Include="GameVisitor.cs" />
     <Compile Include="GameVisitorLocation.cs" />
+    <Compile Include="Managers\EmailManager.cs" />
     <Compile Include="Partial\Game.cs" />
     <Compile Include="PlayerAssistant.cs" />
     <Compile Include="GameReputationTileLocation.cs" />

@@ -10,7 +10,7 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
 {
     public class GameManager
     {
-        private static GameResponse CheckGameState(Game game, GalleristComponentsDbContext galleristContext, string username, ApplicationDbContext identityContext)
+        private static GameResponse CheckGameState(Game game, GalleristComponentsDbContext galleristContext, string username, ApplicationDbContext identityContext) //take out identity after verifying that authorize extension works
         {
             var gameResponse = new GameResponse
             {

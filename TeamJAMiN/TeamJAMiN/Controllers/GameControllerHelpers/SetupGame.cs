@@ -36,13 +36,14 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
             }
         }
 
-        public static void FinalizeSetup(this Game newGame)
+        public static void StartGame(this Game newGame)
         {
             newGame.ChooseVisitors();
             newGame.DrawInitialVisitors();
             newGame.SetupTickets();
             newGame.assignReputationTiles();
             newGame.setupPlayers();
+            newGame.IsStarted = true;
         }
     }
 }
