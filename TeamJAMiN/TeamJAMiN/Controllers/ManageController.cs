@@ -74,8 +74,9 @@ namespace TeamJAMiN.Controllers
                 UserName = User.Identity.GetUserName(),
                 HasUserName = (User.Identity.GetUserName() != null),
                 HasEmail = (await UserManager.GetEmailAsync(userId) != null),
+                AllowsEmails = AllowsEmails(),
+                IsPrivate = IsPrivate(),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-                //AllowsEmails = AllowsEmails(),
             };
             return View(model);
         }
@@ -376,15 +377,25 @@ namespace TeamJAMiN.Controllers
             return false;
         }
 
-        /*private bool AllowsEmails()
+        private bool AllowsEmails()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
             if (user != null)
             {
-                return user.PasswordHash != null;
+                return user.AllowsEmails;
             }
-            return true;
-        }*/
+            return false;
+        }
+        
+        private bool IsPrivate()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user != null)
+            {
+                return user.IsPrivate;
+            }
+            return false;
+        }
 
         public enum ManageMessageId
         {

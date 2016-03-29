@@ -95,5 +95,31 @@
                     }
                 }*@
         </dd>
+        <dt>Publicity: </dt>
+        <dd>
+            [
+            @if (Model.IsPrivate)
+            {
+                @Html.ActionLink("Make Public", "MakePublic")
+            }
+            else
+            {
+                @Html.ActionLink("Make Private", "MakePrivate")
+            }
+            ]
+        </dd>
+        <dt>Email Settings: </dt>
+        <dd>
+            [
+            @if (Model.AllowsEmails)
+            {
+                @Html.ActionLink("Block Emails", "BlockEmails")
+            }
+            else
+            {
+                @Html.ActionLink("Allow Emails", "AllowEmails")
+            }
+            ]
+        </dd>
     </dl>
 </div>
