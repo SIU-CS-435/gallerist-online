@@ -134,7 +134,11 @@ namespace TeamJAMiN.Controllers
                     using (var identityContext = new ApplicationDbContext())
                     {
                         //add me to the game
-                        newGame.Players.Add(new Player { UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id, IsHost = true });
+                        newGame.Players.Add(new Player
+                        {
+                            UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id,
+                            IsHost = true
+                        });
                     }
                     galleristContext.SaveChanges();
                     return Redirect("/Game/List"); //redirect to actual game might be better for demo purposes
