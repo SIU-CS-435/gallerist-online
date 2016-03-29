@@ -36,7 +36,7 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
             }
         }
 
-        public static void FinalizeSetup(this Game newGame)
+        public static void StartGame(this Game newGame)
         {
             newGame.ChooseVisitors();
             newGame.DrawInitialVisitors();
@@ -44,6 +44,7 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
             newGame.assignReputationTiles();
             newGame.assignColors();
             newGame.PlayerOrder = newGame.Players.Shuffle().ToList();
+            newGame.IsStarted = true;
         }
     }
 }

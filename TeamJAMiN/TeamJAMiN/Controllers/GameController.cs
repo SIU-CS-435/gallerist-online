@@ -7,6 +7,7 @@ using TeamJAMiN.Controllers.GameControllerHelpers;
 using TeamJAMiN.GalleristComponentEntities;
 using TeamJAMiN.Models;
 using TeamJAMiN.GalleristComponentEntities.Dtos;
+using TeamJAMiN.GalleristComponentEntities.Managers;
 
 namespace TeamJAMiN.Controllers
 {
@@ -169,14 +170,31 @@ namespace TeamJAMiN.Controllers
                 {
                     //todo: set start time of game to datetime.now
                     var gameResponse = GameManager.GetGame(gameId, User.Identity.Name, galleristContext, identityContext);
+                    var game = gameResponse.Game;
 
                     if (gameResponse.Success)
                     {
-                        gameResponse.Game.CreateRandomSetup();
-                        gameResponse.Game.FinalizeSetup();
-                        gameResponse.Game.IsStarted = true;
+                        game.CreateRandomSetup();
+                        game.StartGame();
                         galleristContext.SaveChanges();
-                        return Redirect("Play/"+gameResponse.Game.Id);
+
+                        //todo make a helper in email manager for this
+                        foreach(var player in game.Players)
+                        {
+                            var user = identityContext.Users.Single(m => m.Id == player.UserId);
+                            if (player.IsHost || string.IsNullOrWhiteSpace(user.Email)) //todo check email prefs
+                                continue;
+
+                            var gameUrl = Request.Url.GetLeftPart(UriPartial.Authority) + "/Play/" + game.Id;
+                            
+                            var emailTitle = user.UserName + ", your game has started!"; //todo: get full name of player. We don't have names in the system yet
+                            var emailBody = "A game that you are a member of has started. You can play it by visiting The Gallerist Online" +
+                                " and viewing your active games or by clicking the following link: <a href='" + gameUrl + "'></a>";
+
+                            EmailManager.SendEmail(emailTitle, emailBody, new List<string> { user.Email });
+                        }
+
+                        return Redirect("Play/" + gameResponse.Game.Id);
                     }
                     else
                     {

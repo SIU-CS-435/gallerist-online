@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TeamJAMiN.GalleristComponentEntities.Managers
 {
     public class EmailManager
     {
-        public static void SendEmail(string body, string title, List<string> recipients)
+        public static void SendEmail(string title, string body, List<string> recipients)
         {
+            //do email things
             var smtpClient = new SmtpClient();
             var message = new MailMessage();
             message.Body = body;
@@ -20,7 +17,6 @@ namespace TeamJAMiN.GalleristComponentEntities.Managers
                 message.To.Add(recipient);
             }
             smtpClient.Send(message);
-            //do email things
         }
     }
 }
