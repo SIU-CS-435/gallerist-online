@@ -12,6 +12,7 @@ using System.Web;
 
 namespace TeamJAMiN.Controllers
 {
+    //todo move out into a different place
     public class AuthorizePlayerOfCurrentGame : AuthorizeAttribute
     {
         protected override bool AuthorizeCore(HttpContextBase httpContext)
@@ -59,6 +60,52 @@ namespace TeamJAMiN.Controllers
                 }
             }
             return isPlayerInGame;
+        }
+    }
+
+    public class AuthorizeHostOfCurrentGame : AuthorizeAttribute
+    {
+        protected override bool AuthorizeCore(HttpContextBase httpContext)
+        {
+            var authorized = base.AuthorizeCore(httpContext);
+            if (!authorized) return false;            
+
+            var user = httpContext.User;
+
+            var rd = httpContext.Request.RequestContext.RouteData;
+            var id = rd.Values["id"] as int?;
+            if (id == null || id < 1)
+            {
+                return false;
+            }
+
+            return IsPlayerHostOfGame(user.Identity.Name, id.Value);
+        }
+
+        private bool IsPlayerHostOfGame(string username, int gameId)
+        {
+            var isPlayerHost = false;
+
+            using (var galleristContext = new GalleristComponentsDbContext())
+            {
+                var game = galleristContext.Games.SingleOrDefault(m => m.Id == gameId);
+                if (game == null) return false;
+
+                using (var identityContext = new ApplicationDbContext())
+                {
+                    var currentUser = identityContext.Users.FirstOrDefault(m => m.UserName == username); //todo: make sure usernames are unique
+                    if (currentUser == null) return false;
+
+                    foreach (var player in game.Players)
+                    {
+                        if (currentUser.Id == player.UserId && player.IsHost)
+                        {
+                            isPlayerHost = true;
+                        }
+                    }
+                }
+            }
+            return isPlayerHost;
         }
     }
 
@@ -214,7 +261,7 @@ namespace TeamJAMiN.Controllers
         /// </summary>
         /// <param name="gameId">The id of the game to start</param>
         /// <returns>Existing game view or appropriate error</returns>
-        [Authorize]
+        [AuthorizeHostOfCurrentGame]
         [HttpPost]
         public ActionResult Start(int gameId = 0)
         {
