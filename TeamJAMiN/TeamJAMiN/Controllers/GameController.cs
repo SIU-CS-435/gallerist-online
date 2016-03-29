@@ -73,6 +73,7 @@ namespace TeamJAMiN.Controllers
             {
                 using (var galleristContext = new GalleristComponentsDbContext())
                 {
+                    newGame.CreatedTime = DateTime.Now;
                     newGame.CreateRandomSetup();
                     galleristContext.Games.Add(newGame);
                     using (var identityContext = new ApplicationDbContext())

@@ -35,6 +35,10 @@ namespace TeamJAMiN.GalleristComponentEntities
         [DefaultValue(60)]
         public int TurnLength { get; set; }
 
+        public DateTime CreatedTime { get; set; }
+
+        public DateTime StartTime { get; set; }
+
         [DefaultValue(false)]
         public bool IsCompleted { get; set; }
 
