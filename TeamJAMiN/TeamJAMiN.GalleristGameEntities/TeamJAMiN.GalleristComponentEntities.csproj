@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\GameActionDto.cs" />
     <Compile Include="Dtos\GameDto.cs" />
     <Compile Include="GameArt.cs" />
     <Compile Include="GameContractLocation.cs" />

@@ -8,9 +8,60 @@ using TeamJAMiN.GalleristComponentEntities;
 using TeamJAMiN.Models;
 using TeamJAMiN.GalleristComponentEntities.Dtos;
 using TeamJAMiN.GalleristComponentEntities.Managers;
+using System.Web;
 
 namespace TeamJAMiN.Controllers
 {
+    public class AuthorizePlayerOfCurrentGame : AuthorizeAttribute
+    {
+        protected override bool AuthorizeCore(HttpContextBase httpContext)
+        {
+            var authorized = base.AuthorizeCore(httpContext);
+            if (!authorized)
+            {
+                // The user is not authenticated
+                return false;
+            }
+
+            var user = httpContext.User;
+
+            var rd = httpContext.Request.RequestContext.RouteData;
+            var id = rd.Values["id"] as int?;
+            if (id == null || id < 1)
+            {
+                return false;
+            }
+
+            return IsPlayerInGame(user.Identity.Name, id.Value);
+        }
+
+        private bool IsPlayerInGame(string username, int gameId)
+        {
+            var isPlayerInGame = false;
+
+            using (var galleristContext = new GalleristComponentsDbContext())
+            {
+                var game = galleristContext.Games.SingleOrDefault(m => m.Id == gameId);
+                if (game == null) return false;
+
+                using (var identityContext = new ApplicationDbContext())
+                {
+                    var currentUser = identityContext.Users.FirstOrDefault(m => m.UserName == username); //todo: make sure usernames are unique
+                    if (currentUser == null) return false;
+
+                    foreach (var player in game.Players)
+                    {
+                        if (currentUser.Id == player.UserId)
+                        {
+                            isPlayerInGame = true;
+                        }
+                    }
+                }
+            }
+            return isPlayerInGame;
+        }
+    }
+
     public class GameController : Controller
     {
         // GET: Game List
@@ -130,7 +181,6 @@ namespace TeamJAMiN.Controllers
         [Authorize]
         [HttpPost]
         public ActionResult Join(int gameId = 0)
-
         {
             using (var galleristContext = new GalleristComponentsDbContext())
             {
@@ -202,6 +252,48 @@ namespace TeamJAMiN.Controllers
                         ViewBag.Title = gameResponse.Title;
                         return View("GameError");
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Skeleton method for taking an action/turn in the game
+        /// </summary>
+        /// <param name="id">The id of the game to take an action in</param>
+        /// <param name="gameAction">The type of action to take along with appropriate values of money/influence spent etc</param>
+        /// <returns>Existing game view or appropriate error</returns>
+        [AuthorizePlayerOfCurrentGame]
+        [HttpPost]
+        public ActionResult TakeGameAction(int id, GameActionDto gameAction)
+        {
+            using (var galleristContext = new GalleristComponentsDbContext())
+            {
+                using (var identityContext = new ApplicationDbContext()) //may not need this anymore after adding the authorize helper
+                {
+                    var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
+                    var game = gameResponse.Game;
+
+                    //todo todo todo
+                    //make sure the player taking an action is the current player
+                    //compare current action to game state to make sure a valid action was taken (e.g. player can't move to board spot A from board spot A) [states..]
+                    //check if it is one of the special cases where the action must be confirmed before allowing the next step to proceed (e.g. player must draw cards)
+                    //if yes take an intermediate step, still remains current player's turn
+                    //if no, continue doing logic things  //determine order of bumped player's actions, can these happen at the end of current player's turn?
+                    //check player locations for action taken by current player to see if any players need to be "bumped" to another spot
+                    //somewhere in here we need to inject bumped player into turn order, we also need a way to specify that the current "turn" for a bumped player is not a full turn [bumped turn flag or something]
+                    //let said player take bumped turn if necessary
+                    //again do the updatey
+                    //need some signalr stuff so we can show the action to everyone when it is done (intermediate step or not) as well as update money, influence, board, etc.
+                    //update money, influence, board, etc.
+
+                    //Can't comment anymore.. must sleep
+
+                    //send email to next player in turn order
+                    //EmailManager.SendEmail("Player X, it is your turn to play!", "It's your turn to play at: LINK", "Mr Guy Who Gets Email.com");
+
+                    ViewBag.Message = "Not Yet Implemented";
+                    ViewBag.Title = "Not Yet Implemented";
+                    return View("GameError");
                 }
             }
         }
