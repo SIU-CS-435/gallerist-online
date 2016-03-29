@@ -285,6 +285,14 @@
     <Compile Include="DataContexts\GalleristComponentMigrations\201603282227349_TemplateGame.Designer.cs">
       <DependentUpon>201603282227349_TemplateGame.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603292236544_CreatedTime.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603292236544_CreatedTime.Designer.cs">
+      <DependentUpon>201603292236544_CreatedTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603292242469_CreatedTime1.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603292242469_CreatedTime1.Designer.cs">
+      <DependentUpon>201603292242469_CreatedTime1.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\GalleristComponentMigrations\Configuration.cs" />
     <Compile Include="DataContexts\GalleristComponentsDb.cs" />
     <Compile Include="DataContexts\IdentityMigrations\201602282353509_init.cs" />
@@ -557,6 +565,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603282227349_TemplateGame.resx">
       <DependentUpon>201603282227349_TemplateGame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603292236544_CreatedTime.resx">
+      <DependentUpon>201603292236544_CreatedTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603292242469_CreatedTime1.resx">
+      <DependentUpon>201603292242469_CreatedTime1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201602282353509_init.resx">
       <DependentUpon>201602282353509_init.cs</DependentUpon>

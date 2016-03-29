@@ -38,7 +38,7 @@ namespace TeamJAMiN.GalleristComponentEntities
 
         public DateTime CreatedTime { get; set; }
 
-        public DateTime StartTime { get; set; }
+        public DateTime? StartTime { get; set; }
 
         [DefaultValue(false)]
         public bool IsCompleted { get; set; }
