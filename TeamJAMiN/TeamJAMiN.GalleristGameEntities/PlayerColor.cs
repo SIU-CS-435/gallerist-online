@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace TeamJAMiN.GalleristComponentEntities
 {
-    public enum GalleryColor
+    public enum PlayerColor
     {
-        Orange,Blue,Purple,Yellow,None
+        orange, yellow, blue, purple, none
     }
 }

@@ -28,6 +28,8 @@ namespace TeamJAMiN.GalleristComponentEntities
         [MaxLength(128)]
         public string UserId { get; set; }
 
+        public bool IsHost { get; set; }
+
         public Game Game { get; set; }
         public int Money { get; set; }
         public int Influence { get; set; }
@@ -36,6 +38,8 @@ namespace TeamJAMiN.GalleristComponentEntities
         public HashSet<GameContract> Contracts { get; set; }
         public HashSet<GameArt> Art { get; set; }
         public GameArtist Commission { get; set; }
+        public PlayerColor Color { get; set; }
+        public PlayerLocation GalleristLocation { get; set; }
         public int VipTickets { get; set; }
         public int InvestorTickets { get; set; }
         public int CollectorTickets { get; set; }

@@ -6,7 +6,7 @@ using TeamJAMiN.GalleristComponentEntities;
 
 namespace TeamJAMiN.Controllers.GameLogicHelpers
 {
-    public static class GameContractActions
+    public static class ContractManager
     {
         public static List<GameContract> DrawContracts(this Game game)
         {

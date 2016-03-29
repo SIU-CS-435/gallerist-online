@@ -9,6 +9,7 @@ namespace TeamJAMiN.DataContexts
 {
     public class GalleristComponentsDbContext : DbContext
     {
+        public DbSet<TemplateGame> TemplateGames { get; set; }
         public DbSet<TemplateArt> TemplateArt { get; set; }
         public DbSet<TemplateArtist> TemplateArtists { get; set; }
         public DbSet<TemplateReputationTile> TemplateReputationTiles { get; set; }
