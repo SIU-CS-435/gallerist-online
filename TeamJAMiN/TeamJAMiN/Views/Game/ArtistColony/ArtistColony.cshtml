@@ -1,4 +1,6 @@
 ﻿@using TeamJAMiN.GalleristComponentEntities
+@using TeamJAMiN.Models.GameViewHelpers
+@using TeamJAMiN.Controllers.GameLogicHelpers
 @model TeamJAMiN.GalleristComponentEntities.Game
 @{ var listOrder = new List<ArtType> { ArtType.digital, ArtType.painting, ArtType.sculpture, ArtType.photo };}
 @{ var artists = Model.Artists.ToList(); }
@@ -39,7 +41,8 @@
 <div class="col-xs-4">
     @foreach (ArtType type in listOrder)
     {
-        var art = Model.Art.Where(a => a.Type == type).FirstOrDefault();
+        ViewBag.Visitors = Model.VisitorByLocation(TypeLocationMap.TypeToLocation[type]);
+        var art = Model.Art.Where(a => a.Type == type).OrderBy(a => a.Order).FirstOrDefault();
         <div class="row tile artist-colony-tile art-tile">@Html.Partial("~/Views/Game/ArtistColony/Art.cshtml", art)</div>
     }
 </div>

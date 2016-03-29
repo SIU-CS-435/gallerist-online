@@ -34,23 +34,6 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
                 gameResponse.Message = "Sorry but you are not authorized to play this game.";
                 gameResponse.Success = false;
             }
-            //new player joining a game
-            else if (!game.Players.Any(m => m.UserId == identityContext.Users.First(u => u.UserName == username).Id))
-            {
-                //TODO: check game player restrictions (e.g. friends only, are there invites sent to a specific player, etc.). This is not yet implemented
-
-                if (game.Players.Count() >= game.MaxNumberOfPlayers) //no room left
-                {
-                    gameResponse.Title = "Game Full";
-                    gameResponse.Message = "Sorry, but this game is full and cannot support any additional players =(";
-                    gameResponse.Success = false;
-                }
-                else
-                {
-                    gameResponse.Success = true;
-                }
-            }
-
             //nothing bad happened
             else
             {

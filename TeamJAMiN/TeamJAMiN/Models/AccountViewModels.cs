@@ -6,6 +6,11 @@ namespace TeamJAMiN.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
+        [Required]
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -42,6 +47,7 @@ namespace TeamJAMiN.Models
     public class ForgotViewModel
     {
         [Required]
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -49,9 +55,8 @@ namespace TeamJAMiN.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -64,6 +69,10 @@ namespace TeamJAMiN.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -83,6 +92,10 @@ namespace TeamJAMiN.Models
 
     public class ResetPasswordViewModel
     {
+        [Required]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

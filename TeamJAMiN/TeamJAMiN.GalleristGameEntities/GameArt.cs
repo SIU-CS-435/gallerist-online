@@ -26,14 +26,13 @@ namespace TeamJAMiN.GalleristComponentEntities
             SecondTicket = new VisitorTicketType[] { };
         }
 
-        public int Id { get; set; }
-        
+        public int Id { get; set; }  
         public ArtType Type { get; set; }
         public GameArtist Artist { get; set; }
         public int Fame { get; set; }
         public int NumTickets { get; set; }
-        public string FirstTicketData { get; set; }
         public int Order { get; set; }
+        public string FirstTicketData { get; set; }
         public VisitorTicketType[] FirstTicket
         {
             get

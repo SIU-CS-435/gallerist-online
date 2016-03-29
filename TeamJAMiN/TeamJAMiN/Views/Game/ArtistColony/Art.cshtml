@@ -4,9 +4,10 @@
 @*Art Tile*@
 <div class="row no-gutter art-tile-top-row">
     <div class="art-tile-visitor-row">
-        <div class="col-xs-4 visitor-investor art-tile-icon art-tile-visitor"></div>
-        <div class="col-xs-4 visitor-collector art-tile-icon art-tile-visitor"></div>
-        <div class="col-xs-4 visitor-vip art-tile-icon art-tile-visitor"></div>
+        @foreach (GameVisitor visitor in ViewBag.Visitors)
+        {
+            <div class="col-xs-6 visitor-@visitor.Type.ToString() art-tile-icon art-tile-visitor"></div>
+        }
     </div>
 </div>
 <div class="row no-gutter art-tile-icon-row">

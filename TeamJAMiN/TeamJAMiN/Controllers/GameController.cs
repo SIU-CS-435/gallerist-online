@@ -29,6 +29,7 @@ namespace TeamJAMiN.Controllers
 
                     var allGamesList = allGames.Select(m => new GameDto
                     {
+                        Id = m.Id,
                         Url = "/Game/Play/" + m.Id,
                         Name = m.Name,
                         CurrentNumberOfPlayers = m.Players.Count,
@@ -36,11 +37,13 @@ namespace TeamJAMiN.Controllers
                         RemainingSlots = m.MaxNumberOfPlayers - m.Players.Count,
                         MaxTurnLength = m.TurnLength,
                         MaxTurnLengthString = m.TurnLength + " Minutes Per Turn",
-                        PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers + " players"
+                        PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers + " players",
+                        isJoinable = !m.Players.Any(p => p.UserId == userId) && m.Players.Count < m.MaxNumberOfPlayers && !m.IsStarted,
                     }).ToList();
 
                     var myGamesList = myGames.Select(m => new GameDto
                     {
+                        Id = m.Id,
                         Url = "/Game/Play/" + m.Id,
                         Name = m.Name,
                         CurrentNumberOfPlayers = m.Players.Count,
@@ -48,7 +51,9 @@ namespace TeamJAMiN.Controllers
                         RemainingSlots = m.MaxNumberOfPlayers - m.Players.Count,
                         MaxTurnLength = m.TurnLength,
                         MaxTurnLengthString = m.TurnLength + " Minutes Per Turn",
-                        PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers + " players"
+                        PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers + " players",
+                        isStartable = m.Players.Any(p => p.UserId == userId && p.IsHost) && !m.IsStarted,
+                        isStarted = m.IsStarted
                     }).ToList();
 
                     ViewBag.allGames = allGamesList;
@@ -74,13 +79,11 @@ namespace TeamJAMiN.Controllers
                 using (var galleristContext = new GalleristComponentsDbContext())
                 {
                     newGame.CreatedTime = DateTime.Now;
-                    newGame.CreateRandomSetup();
                     galleristContext.Games.Add(newGame);
                     using (var identityContext = new ApplicationDbContext())
                     {
                         //add me to the game
-                        newGame.Players.Add(new Player { UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id });
-                        newGame.FinalizeSetup();
+                        newGame.Players.Add(new Player { UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id, IsHost = true });
                     }
                     galleristContext.SaveChanges();
                     return Redirect("/Game/List"); //redirect to actual game might be better for demo purposes
@@ -105,7 +108,7 @@ namespace TeamJAMiN.Controllers
                 {
                     var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
 
-                    if (gameResponse.Success)
+                    if (gameResponse.Success && gameResponse.Game.IsStarted)
                     {
                         ViewBag.userName = User.Identity.Name;
                         return View(gameResponse.Game);
@@ -126,19 +129,55 @@ namespace TeamJAMiN.Controllers
         /// <returns>Existing game view or appropriate error</returns>
         [Authorize]
         [HttpPost]
-        public ActionResult Join(int id = 0)
+        public ActionResult Join(int gameId = 0)
+
         {
             using (var galleristContext = new GalleristComponentsDbContext())
             {
                 using (var identityContext = new ApplicationDbContext())
                 {
-                    var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
+                    var gameResponse = GameManager.GetGame(gameId, User.Identity.Name, galleristContext, identityContext);
 
                     if (gameResponse.Success)
                     {
                         gameResponse.Game.Players.Add(new Player { UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id });
                         ViewBag.userName = User.Identity.Name;
-                        return View(gameResponse.Game);
+                        galleristContext.SaveChanges();
+                        return Redirect("/Game/List");
+                    }
+                    else
+                    {
+                        ViewBag.Message = gameResponse.Message;
+                        ViewBag.Title = gameResponse.Title;
+                        return View("GameError");
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Starts a game and emails all of the players that their game has started.
+        /// </summary>
+        /// <param name="gameId">The id of the game to start</param>
+        /// <returns>Existing game view or appropriate error</returns>
+        [Authorize]
+        [HttpPost]
+        public ActionResult Start(int gameId = 0)
+        {
+            using (var galleristContext = new GalleristComponentsDbContext())
+            {
+                using (var identityContext = new ApplicationDbContext())
+                {
+                    //todo: set start time of game to datetime.now
+                    var gameResponse = GameManager.GetGame(gameId, User.Identity.Name, galleristContext, identityContext);
+
+                    if (gameResponse.Success)
+                    {
+                        gameResponse.Game.CreateRandomSetup();
+                        gameResponse.Game.FinalizeSetup();
+                        gameResponse.Game.IsStarted = true;
+                        galleristContext.SaveChanges();
+                        return Redirect("Play/"+gameResponse.Game.Id);
                     }
                     else
                     {

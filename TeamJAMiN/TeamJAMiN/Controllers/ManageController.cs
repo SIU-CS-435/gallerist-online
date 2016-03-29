@@ -32,9 +32,9 @@ namespace TeamJAMiN.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -70,7 +70,12 @@ namespace TeamJAMiN.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
+                Email = await UserManager.GetEmailAsync(userId),
+                UserName = User.Identity.GetUserName(),
+                HasUserName = (User.Identity.GetUserName() != null),
+                HasEmail = (await UserManager.GetEmailAsync(userId) != null),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                //AllowsEmails = AllowsEmails(),
             };
             return View(model);
         }
@@ -331,7 +336,7 @@ namespace TeamJAMiN.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -371,6 +376,16 @@ namespace TeamJAMiN.Controllers
             return false;
         }
 
+        /*private bool AllowsEmails()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user != null)
+            {
+                return user.PasswordHash != null;
+            }
+            return true;
+        }*/
+
         public enum ManageMessageId
         {
             AddPhoneSuccess,
@@ -382,6 +397,6 @@ namespace TeamJAMiN.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }
