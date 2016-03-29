@@ -42,8 +42,7 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
             newGame.DrawInitialVisitors();
             newGame.SetupTickets();
             newGame.assignReputationTiles();
-            newGame.assignColors();
-            newGame.PlayerOrder = newGame.Players.Shuffle().ToList();
+            newGame.setupPlayers();
             newGame.IsStarted = true;
         }
     }

@@ -191,6 +191,7 @@
     <Compile Include="Controllers\GameActionHub\GameActionHub.cs" />
     <Compile Include="App_Start\Startup.SignalR.cs" />
     <Compile Include="Controllers\GameControllerHelpers\SetupPlayers.cs" />
+    <Compile Include="Controllers\GameLogicHelpers\ActionManager.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ArtManager.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ContractManager.cs" />
     <Compile Include="Controllers\GameController.cs" />

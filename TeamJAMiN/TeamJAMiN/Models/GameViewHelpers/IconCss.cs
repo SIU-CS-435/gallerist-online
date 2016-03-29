@@ -10,10 +10,10 @@ namespace TeamJAMiN.Models.GameViewHelpers
     {
         public static Dictionary<PlayerLocation, string[]> actionIds = new Dictionary<PlayerLocation, string[]>
         {
-            {PlayerLocation.ArtistColony, new string[] { "artist-colony", "discover", "buy" } },
-            {PlayerLocation.MediaCenter, new string[] { "media-center", "promote", "hire" } },
-            {PlayerLocation.InternationalMarket, new string[] { "international-market", "reputation", "auction" } },
-            {PlayerLocation.SalesOffice, new string[] { "sales-office", "contract", "sell" } }
+            {PlayerLocation.ArtistColony, new string[] { "artist-colony", "discover", "buy", PlayerLocation.ArtistColony.ToString() } },
+            {PlayerLocation.MediaCenter, new string[] { "media-center", "promote", "hire", PlayerLocation.MediaCenter.ToString() } },
+            {PlayerLocation.InternationalMarket, new string[] { "international-market", "reputation", "auction", PlayerLocation.InternationalMarket.ToString() } },
+            {PlayerLocation.SalesOffice, new string[] { "sales-office", "contract", "sell", PlayerLocation.SalesOffice.ToString() } }
         };
         public static string[] StarClass = { "", "star-green-1", "star-green-2", "star-green-3", "star-gold-1", "star-gold-2", "star-celebrity" };
         public static Dictionary<BonusType, string> BonusClass = new Dictionary<BonusType, string>
