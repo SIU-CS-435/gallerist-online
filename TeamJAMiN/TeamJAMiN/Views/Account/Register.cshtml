@@ -45,7 +45,7 @@
         @Html.LabelFor(m => m.Private, new { @class = "col-md-2 control-label" })
         <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary active">
-                @Html.RadioButtonFor(m => m.Private, false) Public
+                @Html.RadioButtonFor(m => m.Private, false, new { Checked = "checked" }) Public
             </label>
             <label class="btn btn-primary">
                 @Html.RadioButtonFor(m => m.Private, true) Private
@@ -56,7 +56,7 @@
         @Html.LabelFor(m => m.AllowEmails, new { @class = "col-md-2 control-label" })
         <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary active">
-                @Html.RadioButtonFor(m => m.AllowEmails, true) Yes
+                @Html.RadioButtonFor(m => m.AllowEmails, true, new { Checked = "checked" }) Yes
             </label>
             <label class="btn btn-primary">
                 @Html.RadioButtonFor(m => m.AllowEmails, false) No
