@@ -362,7 +362,7 @@ namespace TeamJAMiN.Controllers
 
                     game.UpdatePlayerOrder();
                     galleristContext.SaveChanges();
-
+                    return Redirect("~/Game/Play/" + id);
                     //send email to next player in turn order
                     //EmailManager.SendEmail("Player X, it is your turn to play!", "It's your turn to play at: LINK", "Mr Guy Who Gets Email.com");
 
