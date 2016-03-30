@@ -9,6 +9,8 @@ using TeamJAMiN.Models;
 using TeamJAMiN.GalleristComponentEntities.Dtos;
 using TeamJAMiN.GalleristComponentEntities.Managers;
 using System.Web;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace TeamJAMiN.Controllers
 {
@@ -214,11 +216,16 @@ namespace TeamJAMiN.Controllers
             {
                 using (var identityContext = new ApplicationDbContext())
                 {
+
+                    UserManager<ApplicationUser> uManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(identityContext));
+
                     var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
 
                     if (gameResponse.Success && gameResponse.Game.IsStarted)
                     {
                         ViewBag.userName = User.Identity.Name;
+                        var user = uManager.FindByName(User.Identity.Name);
+                        ViewBag.userId = user.Id;
                         return View(gameResponse.Game);
                     }
                     else
@@ -325,6 +332,7 @@ namespace TeamJAMiN.Controllers
         /// <param name="id">The id of the game to take an action in</param>
         /// <param name="gameAction">The type of action to take along with appropriate values of money/influence spent etc</param>
         /// <returns>Existing game view or appropriate error</returns>
+        [ValidateAntiForgeryToken]
         [AuthorizePlayerOfCurrentGame]
         [HttpPost]
         public ActionResult TakeGameAction(int id, GameActionDto gameAction)
@@ -335,7 +343,7 @@ namespace TeamJAMiN.Controllers
                 {
                     var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
                     var game = gameResponse.Game;
-
+                    
                     //todo todo todo
                     //make sure the player taking an action is the current player
                     //compare current action to game state to make sure a valid action was taken (e.g. player can't move to board spot A from board spot A) [states..]
@@ -349,7 +357,8 @@ namespace TeamJAMiN.Controllers
                     //need some signalr stuff so we can show the action to everyone when it is done (intermediate step or not) as well as update money, influence, board, etc.
                     //update money, influence, board, etc.
 
-                    //Can't comment anymore.. must sleep
+                    game.UpdatePlayerOrder();
+                    galleristContext.SaveChanges();
 
                     //send email to next player in turn order
                     //EmailManager.SendEmail("Player X, it is your turn to play!", "It's your turn to play at: LINK", "Mr Guy Who Gets Email.com");

@@ -90,6 +90,18 @@
                     @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml")
                 </div>
             </div>
+            @if (Model.Players.Single(m => m.Id == Model.CurrentPlayerId).UserId == ViewBag.userId)
+            {
+                using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" class="btn btn-success" value="Take Turn" />
+                        </div>
+                    </div>
+                }
+            }
         </div>
         <div class="col-md-5">
             <div class="row board-region">
