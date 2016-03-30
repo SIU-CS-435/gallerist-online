@@ -56,13 +56,15 @@ namespace TeamJAMiN.GalleristComponentEntities
         public int AvailableInvestorTickets { get; set; }
         public int AvailableCollectorTickets { get; set; }
         public string PlayerOrderData { get; set; }
+        public int CurrentPlayerId { get; set; }
+        public int? KickedOutPlayerId { get; set; }
 
         [NotMapped]
         public List<Player> PlayerOrder
         {
             get
             {
-                if (PlayerOrderData != null && PlayerOrderData.Count() == 0 )
+                if (PlayerOrderData != null && PlayerOrder.Count() == 0 )
                 {
                     var idArray = Array.ConvertAll(PlayerOrderData.Split(';'), p => int.Parse(p));
                     var result = new List<Player>();

@@ -44,6 +44,7 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
             newGame.assignReputationTiles();
             newGame.setupPlayers();
             newGame.IsStarted = true;
+            newGame.UpdatePlayerOrder();
         }
     }
 }

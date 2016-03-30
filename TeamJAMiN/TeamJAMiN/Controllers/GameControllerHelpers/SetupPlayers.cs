@@ -19,7 +19,8 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
                 };
                 player.GalleristLocation = PlayerLocation.Gallery;
             }
-            newGame.PlayerOrder = newGame.Players.Shuffle().ToList();
+            var test = newGame.Players.Shuffle();
+            newGame.PlayerOrder = test.ToList();
         }
         public static void assignColors(this Game newGame)
         {
@@ -30,6 +31,14 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
                 colorEnum.MoveNext();
                 player.Color = (PlayerColor)colorEnum.Current;
             }
+        }
+
+        public static void UpdatePlayerOrder(this Game game)
+        {
+            var currentPlayer = game.PlayerOrder.First();
+            game.CurrentPlayerId = currentPlayer.Id;
+            game.PlayerOrder.Remove(currentPlayer);
+            game.PlayerOrder.Add(currentPlayer);
         }
     }
 }
