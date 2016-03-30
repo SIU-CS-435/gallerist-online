@@ -36,7 +36,7 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
         {
             var currentPlayer = game.PlayerOrder.First();
             game.CurrentPlayerId = currentPlayer.Id;
-            game.PlayerOrder.Remove(currentPlayer);
+            var isRemoved = game.PlayerOrder.Remove(currentPlayer);
             game.PlayerOrder.Add(currentPlayer);
         }
     }

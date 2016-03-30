@@ -60,21 +60,30 @@ namespace TeamJAMiN.GalleristComponentEntities
         public int? KickedOutPlayerId { get; set; }
 
         [NotMapped]
+        private List<Player> _playerOrder;
+        [NotMapped]
         public List<Player> PlayerOrder
         {
             get
             {
-                var idArray = Array.ConvertAll(PlayerOrderData.Split(';'), p => int.Parse(p));
-                var result = new List<Player>();
-                foreach (int id in idArray)
+                if (_playerOrder == null)
                 {
-                    result.Add(this.Players.Where(p => p.Id == id).First());
+                    var idArray = Array.ConvertAll(PlayerOrderData.Split(';'), p => int.Parse(p));
+                    var result = new List<Player>();
+                    foreach (int id in idArray)
+                    {
+                        result.Add(this.Players.Where(p => p.Id == id).First());
+                    }
+                    _playerOrder = result;
+                    return result;
                 }
-                return result;
+                PlayerOrderData = String.Join(";", _playerOrder.Select(p => p.Id.ToString()).ToArray());
+                return _playerOrder;
             }
             set
             {
                 PlayerOrderData = String.Join(";", value.Select(p => p.Id.ToString()).ToArray());
+                _playerOrder = value;
             }
         }
     }
