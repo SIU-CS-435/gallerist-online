@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace TeamJAMiN.Models
@@ -102,6 +103,7 @@ namespace TeamJAMiN.Models
 
         [Required]
         [Display(Name = "Profile Publicity")]
+        [DefaultValue(false)]
         public bool Private { get; set; }
 
         [Required]
@@ -126,6 +128,7 @@ namespace TeamJAMiN.Models
 
         [Required]
         [Display(Name = "Allow Emails?")]
+        [DefaultValue(true)]
         public bool AllowEmails { get; set; }
 
         [Required]
