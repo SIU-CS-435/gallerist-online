@@ -11,6 +11,8 @@ using TeamJAMiN.GalleristComponentEntities.Managers;
 using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using TeamJAMiN.Controllers.Hubs;
+using TeamJAMiN.Controllers.Hubs.HubHelpers;
 
 namespace TeamJAMiN.Controllers
 {
@@ -302,21 +304,22 @@ namespace TeamJAMiN.Controllers
                         galleristContext.SaveChanges();
 
                         //todo make a helper in email manager for this
-                        foreach(var player in game.Players)
+                        //todo also use the user and url params for signalr ajax update of game list
+                        var gameUrl = Request.Url.GetLeftPart(UriPartial.Authority) + "/Game/Play/" + game.Id;
+                        foreach (var player in game.Players)
                         {
                             var user = identityContext.Users.Single(m => m.Id == player.UserId);
                             if (string.IsNullOrWhiteSpace(user.Email)) //todo check email prefs
                                 continue;
-
-                            var gameUrl = Request.Url.GetLeftPart(UriPartial.Authority) + "/Game/Play/" + game.Id;
-                            
+                                                       
                             var emailTitle = user.UserName + ", your game has started!"; //todo: get full name of player. We don't have names in the system yet
                             var emailBody = "A game that you are a member of has started. You can play it by visiting The Gallerist Online" +
                                 " and viewing your active games or by clicking the following link: <a href='" + gameUrl + "'></a>";
 
                             EmailManager.SendEmail(emailTitle, emailBody, new List<string> { user.Email });
                         }
-
+                        //todo expand module to use signalr for all game list actions
+                        PushHelper.UpdateMyGamesList(game.Players.Select(p => p.UserId).ToList(), gameUrl, game.Id);
                         return Redirect("~/Game/Play/" + gameResponse.Game.Id);
                     }
                     else

@@ -26,7 +26,7 @@
                         <td>@myGame.Name</td>
                         <td>@myGame.PlayersString</td>
                         <td>@myGame.MaxTurnLengthString</td>
-                        <td>
+                        <td id="start-open-button-container-@myGame.Id" class="game-list-button-container">
                             @if (myGame.isStartable)
                             {
                                 using (Html.BeginForm("Start", "Game", new { id = myGame.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -102,3 +102,7 @@
         </tbody>
     </table>
 </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/gamelist")
+    <script src="~/signalr/hubs"></script>
+}

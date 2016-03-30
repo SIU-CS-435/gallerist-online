@@ -188,7 +188,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\GameActionHub\GameActionHub.cs" />
+    <Compile Include="Controllers\Hubs\GameActionHub.cs" />
     <Compile Include="App_Start\Startup.SignalR.cs" />
     <Compile Include="Controllers\GameControllerHelpers\SetupPlayers.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ActionManager.cs" />
@@ -200,6 +200,8 @@
     <Compile Include="Controllers\GameLogicHelpers\GameInfluenceTrack.cs" />
     <Compile Include="Controllers\GameLogicHelpers\VisitorManager.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Hubs\GameListHub.cs" />
+    <Compile Include="Controllers\Hubs\HubHelpers\PushHelper.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DataContexts\GalleristComponentMigrations\201602200341065_InitialCreate.cs" />
     <Compile Include="DataContexts\GalleristComponentMigrations\201602200341065_InitialCreate.Designer.cs">
@@ -429,6 +431,7 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="Scripts\GameList\game.list.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -505,6 +508,7 @@
     <Content Include="Views\Game\PlayerGallery\Lobby.cshtml" />
     <Content Include="Views\Game\PlayerGallery\VisitorDisplay.cshtml" />
     <Content Include="Views\Game\ActionSpaces\ActionSpace.cshtml" />
+    <Content Include="Views\Game\PostButtons\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

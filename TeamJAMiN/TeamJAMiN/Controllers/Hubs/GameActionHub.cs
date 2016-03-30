@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Microsoft.AspNet.SignalR;
 
-namespace TeamJAMiN.Controllers.ActionHub
+namespace TeamJAMiN.Controllers.Hubs
 {
     public class GameActionHub : Hub
     {

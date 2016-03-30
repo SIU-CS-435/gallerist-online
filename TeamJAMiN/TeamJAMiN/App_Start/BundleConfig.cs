@@ -8,6 +8,9 @@ namespace TeamJAMiN
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new ScriptBundle("~/bundles/gamelist").Include(
+                        "~/Scripts/GameList/game.list.js",
+                        "~/Scripts/jquery.signalR-{version}.js"));
             bundles.Add(new ScriptBundle("~/bundles/gallerist").Include(
                         "~/Scripts/Gallerist/game-actions.js",
                         "~/Scripts/jquery.signalR-{version}.js"));
