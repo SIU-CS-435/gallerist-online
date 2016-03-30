@@ -73,13 +73,17 @@ namespace TeamJAMiN.Controllers
             var user = httpContext.User;
 
             var rd = httpContext.Request.RequestContext.RouteData;
-            var id = rd.Values["id"] as int?;
-            if (id == null || id < 1)
+            var gameIdString = rd.Values["id"].ToString();
+            if (String.IsNullOrWhiteSpace(gameIdString)) return false;
+            int gameId = -1;
+            int.TryParse(gameIdString, out gameId);
+
+            if (gameId < 1)
             {
                 return false;
             }
 
-            return IsPlayerHostOfGame(user.Identity.Name, id.Value);
+            return IsPlayerHostOfGame(user.Identity.Name, gameId);
         }
 
         private bool IsPlayerHostOfGame(string username, int gameId)
@@ -101,6 +105,7 @@ namespace TeamJAMiN.Controllers
                         if (currentUser.Id == player.UserId && player.IsHost)
                         {
                             isPlayerHost = true;
+                            break;
                         }
                     }
                 }
@@ -232,13 +237,13 @@ namespace TeamJAMiN.Controllers
         /// <returns>Existing game view or appropriate error</returns>
         [Authorize]
         [HttpPost]
-        public ActionResult Join(int gameId = 0)
+        public ActionResult Join(int id = 0)
         {
             using (var galleristContext = new GalleristComponentsDbContext())
             {
                 using (var identityContext = new ApplicationDbContext())
                 {
-                    var gameResponse = GameManager.GetGame(gameId, User.Identity.Name, galleristContext, identityContext);
+                    var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
 
                     if (gameResponse.Success)
                     {
@@ -260,18 +265,18 @@ namespace TeamJAMiN.Controllers
         /// <summary>
         /// Starts a game and emails all of the players that their game has started.
         /// </summary>
-        /// <param name="gameId">The id of the game to start</param>
+        /// <param name="id">The id of the game to start</param>
         /// <returns>Existing game view or appropriate error</returns>
         [AuthorizeHostOfCurrentGame]
         [HttpPost]
-        public ActionResult Start(int gameId = 0)
+        public ActionResult Start(int id = 0)
         {
             using (var galleristContext = new GalleristComponentsDbContext())
             {
                 using (var identityContext = new ApplicationDbContext())
                 {
                     //todo: set start time of game to datetime.now
-                    var gameResponse = GameManager.GetGame(gameId, User.Identity.Name, galleristContext, identityContext);
+                    var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
                     var game = gameResponse.Game;
 
                     if (gameResponse.Success)
