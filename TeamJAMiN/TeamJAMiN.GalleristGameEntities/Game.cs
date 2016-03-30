@@ -64,18 +64,13 @@ namespace TeamJAMiN.GalleristComponentEntities
         {
             get
             {
-                if (PlayerOrderData != null && PlayerOrder.Count() == 0 )
+                var idArray = Array.ConvertAll(PlayerOrderData.Split(';'), p => int.Parse(p));
+                var result = new List<Player>();
+                foreach (int id in idArray)
                 {
-                    var idArray = Array.ConvertAll(PlayerOrderData.Split(';'), p => int.Parse(p));
-                    var result = new List<Player>();
-                    foreach (int id in idArray)
-                    {
-                        result.Add(this.Players.Where(p => p.Id == id).First());
-                    }
-                    return result;
+                    result.Add(this.Players.Where(p => p.Id == id).First());
                 }
-                else
-                    return null;
+                return result;
             }
             set
             {

@@ -19,13 +19,12 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
                 };
                 player.GalleristLocation = PlayerLocation.Gallery;
             }
-            var test = newGame.Players.Shuffle();
-            newGame.PlayerOrder = test.ToList();
+            newGame.PlayerOrder = newGame.Players.Shuffle().ToList();
         }
         public static void assignColors(this Game newGame)
         {
             var rPlayers = newGame.Players.Shuffle();
-            var colorEnum = Enum.GetValues(typeof(PlayerColor)).GetEnumerator();
+            var colorEnum = ((PlayerColor[])Enum.GetValues(typeof(PlayerColor))).Shuffle().GetEnumerator(); ;
             foreach (Player player in rPlayers)
             {
                 colorEnum.MoveNext();

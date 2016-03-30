@@ -29,13 +29,16 @@ namespace TeamJAMiN.Controllers
             var user = httpContext.User;
 
             var rd = httpContext.Request.RequestContext.RouteData;
-            var id = rd.Values["id"] as int?;
-            if (id == null || id < 1)
+            var gameIdString = rd.Values["id"].ToString();
+            if (String.IsNullOrWhiteSpace(gameIdString)) return false;
+            int gameId = -1;
+            int.TryParse(gameIdString, out gameId);
+            if (gameId < 1)
             {
                 return false;
             }
 
-            return IsPlayerInGame(user.Identity.Name, id.Value);
+            return IsPlayerInGame(user.Identity.Name, gameId);
         }
 
         private bool IsPlayerInGame(string username, int gameId)
@@ -363,9 +366,9 @@ namespace TeamJAMiN.Controllers
                     //send email to next player in turn order
                     //EmailManager.SendEmail("Player X, it is your turn to play!", "It's your turn to play at: LINK", "Mr Guy Who Gets Email.com");
 
-                    ViewBag.Message = "Not Yet Implemented";
-                    ViewBag.Title = "Not Yet Implemented";
-                    return View("GameError");
+                    //ViewBag.Message = "Not Yet Implemented";
+                    //ViewBag.Title = "Not Yet Implemented";
+                    //return View("GameError");
                 }
             }
         }

@@ -211,8 +211,18 @@
     border-radius: 50%;
     background-color:rgba(255,255,255,.1)
 }
+#yellow-gallery, #yellow-lobby {
+    border-color : gold;
+}
+#purple-gallery, #purple-lobby {
+    border-color : rebeccapurple;
+}
+#blue-gallery, #blue-lobby {
+    border-color : dodgerblue;
+}
 #orange-gallery, #orange-lobby {
-    border-color : orangered;}
+    border-color : orangered;
+}
 .gallery-visitor {
     height:18px;
     width: 18px;
