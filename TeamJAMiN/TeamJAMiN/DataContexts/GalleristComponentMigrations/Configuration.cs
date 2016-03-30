@@ -16,17 +16,7 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
 
         protected override void Seed(GalleristComponentsDbContext context)
         {
-            context.TemplateGames.AddOrUpdate(
-                g => g.Name,
-                new TemplateGame
-                {
-                    Name = "GameResources",
-                    Art = new HashSet<TemplateArt>(context.TemplateArt.ToList()),
-                    Artists = new HashSet<TemplateArtist>(context.TemplateArtists.ToList()),
-                    ReputationTiles = new HashSet<TemplateReputationTile>(context.TemplateReputationTiles.ToList()),
-                    Contracts = new HashSet<TemplateContract>(context.TemplateContracts.ToList())
-                }
-            );
+            
             context.TemplateArt.AddOrUpdate(
                 a => a.Slug,
                 new TemplateArt
@@ -690,6 +680,18 @@ namespace TeamJAMiN.DataContexts.GalleristComponentMigrations
                 Influence = 2,
                 Scoring = ReputationTileScoring.masterpiece,
             }
+            );
+            context.SaveChanges();
+            context.TemplateGames.AddOrUpdate(
+                g => g.Name,
+                new TemplateGame
+                {
+                    Name = "GameResources",
+                    Art = new HashSet<TemplateArt>(context.TemplateArt.ToList()),
+                    Artists = new HashSet<TemplateArtist>(context.TemplateArtists.ToList()),
+                    ReputationTiles = new HashSet<TemplateReputationTile>(context.TemplateReputationTiles.ToList()),
+                    Contracts = new HashSet<TemplateContract>(context.TemplateContracts.ToList())
+                }
             );
             //  This method will be called after migrating to the latest version.
 
