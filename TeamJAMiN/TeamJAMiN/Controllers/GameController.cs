@@ -341,7 +341,7 @@ namespace TeamJAMiN.Controllers
         [ValidateAntiForgeryToken]
         [AuthorizePlayerOfCurrentGame]
         [HttpPost]
-        public ActionResult TakeGameAction(int id, GameActionDto gameAction)
+        public ActionResult TakeGameAction(int id, PlayerLocation gameAction)
         {
             using (var galleristContext = new GalleristComponentsDbContext())
             {
