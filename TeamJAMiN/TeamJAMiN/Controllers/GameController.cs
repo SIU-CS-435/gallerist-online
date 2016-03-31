@@ -353,6 +353,30 @@ namespace TeamJAMiN.Controllers
                     //todo todo todo
                     //make sure the player taking an action is the current player
                     //compare current action to game state to make sure a valid action was taken (e.g. player can't move to board spot A from board spot A) [states..]
+		    //todo make getting user by username a method (is it one already?)
+		    var currentUser = identityContext.Users.FirstOrDefault(m => m.UserName == username);
+
+		    //todo refactor some of this into a game logic module
+		    var player = game.Players.FirstOrDefault(p => p.UserId == currentUser.Id);
+		    if (player == null)
+		    {
+		    	return View("GameError");
+		    }
+		    if (player.Id != game.CurrentPlayerId )
+		    {
+		    	return View("GameError");
+		    }
+		    if(player.GalleristLocation == gameAction)
+		    {
+			//todo disallow player to take the same action twice
+			return Redirect("~/Game/Play/" + id);
+		    }
+		    var kickedPlayer = game.Players.FirstOrDefault(p => p.GalleristLocation == gameAction);
+		    if(kickedPlayer != null)
+		    {
+			game.KickedOutPlayerId = kickedPlayer.Id;
+		    }
+		    player.GalleristLocation = gameAction;
                     //check if it is one of the special cases where the action must be confirmed before allowing the next step to proceed (e.g. player must draw cards)
                     //if yes take an intermediate step, still remains current player's turn
                     //if no, continue doing logic things  //determine order of bumped player's actions, can these happen at the end of current player's turn?
