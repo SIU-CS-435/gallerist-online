@@ -87,6 +87,16 @@
     border-radius: 50%;
     margin: 0 auto;
     background-color: rgba(22,31,40,1);
+    position:relative;
+}
+.action-button {
+    background: transparent;
+    border: none;
+    position:absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
 }
 .action-space-center {
     background-color: white;

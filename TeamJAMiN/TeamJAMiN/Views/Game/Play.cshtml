@@ -32,14 +32,14 @@
                         actionEnum.MoveNext();
                         ViewBag.ActionId = actionEnum.Current;
                     }
-                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml")
+                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", Model)
                 </div>
                 <div class="col-xs-6">
                     @{
                         actionEnum.MoveNext();
                         ViewBag.ActionId = actionEnum.Current;
                     }
-                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml")
+                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", Model)
                 </div>
             </div>
             @* Player Galleries *@
@@ -80,14 +80,14 @@
                         actionEnum.MoveNext();
                         ViewBag.ActionId = actionEnum.Current;
                     }
-                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml")
+                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", Model)
                 </div>
                 <div class="col-xs-6">
                     @{
                         actionEnum.MoveNext();
                         ViewBag.ActionId = actionEnum.Current;
                     }
-                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml")
+                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", Model)
                 </div>
             </div>
             @if (Model.Players.Single(m => m.Id == Model.CurrentPlayerId).UserId == ViewBag.userId)
