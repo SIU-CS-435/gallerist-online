@@ -319,7 +319,7 @@ namespace TeamJAMiN.Controllers
                             EmailManager.SendEmail(emailTitle, emailBody, new List<string> { user.Email });
                         }
                         //todo expand module to use signalr for all game list actions
-                        PushHelper.UpdateMyGamesList(game.Players.Select(p => p.UserId).ToList(), gameUrl, game.Id);
+                        PushHelper.UpdateMyGamesList(game.Players.Where(p => p.UserId != User.Identity.GetUserId()).Select(p => p.UserId).ToList(), gameUrl, game.Id);
                         return Redirect("~/Game/Play/" + gameResponse.Game.Id);
                     }
                     else
@@ -354,7 +354,7 @@ namespace TeamJAMiN.Controllers
                     //make sure the player taking an action is the current player
                     //compare current action to game state to make sure a valid action was taken (e.g. player can't move to board spot A from board spot A) [states..]
 		    //todo make getting user by username a method (is it one already?)
-		    var currentUser = identityContext.Users.FirstOrDefault(m => m.UserName == username);
+		    var currentUser = identityContext.Users.FirstOrDefault(m => m.UserName == User.Identity.Name);
 
 		    //todo refactor some of this into a game logic module
 		    var player = game.Players.FirstOrDefault(p => p.UserId == currentUser.Id);
