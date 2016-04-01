@@ -53,7 +53,7 @@
 .aquired-scoring-icon, .reputation-row-art-icon, .auction-row-icon, .auction-row-cost, .minus-icon, .art-tile-icon, .influence-money-icon,
 .influence-star-icon, .reputation-tile-none, .influence-icon, .gallery-visitor, #international-market-reputation-action,
 #international-market-auction-action, #sales-office-contract-action, #sales-office-sell-action, #artist-colony-buy-action,
-#media-center-promote-action, #artist-colony-discover-action, #media-center-hire-action {
+#media-center-promote-action, #artist-colony-discover-action, #media-center-hire-action, .draw-contract-icon {
     background-size:contain;
     background-repeat:no-repeat;
     background-position:50%;
@@ -330,9 +330,20 @@
 }
 
 /* Contract Cards */
+.contract-draw-deck {
+    height: 130px;
+    color: #5c1201;
+}
+.contract-draw-deck-section {
+    height:40px;
+    line-height:40px;
+}
+.draw-contract-icon {
+    background-image: url(Icons/BonusContract.svg);
+}
 .contract-card {
     background-color:white;
-    margin: 0 5px;
+    margin: 0 2px;
 }
 .contract-art-row {
     background-color:lightpink;
