@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using TeamJAMiN.Controllers.Hubs;
 using TeamJAMiN.Controllers.Hubs.HubHelpers;
+using TeamJAMiN.Controllers.GameLogicHelpers;
 
 namespace TeamJAMiN.Controllers
 {
@@ -341,7 +342,7 @@ namespace TeamJAMiN.Controllers
         [ValidateAntiForgeryToken]
         [AuthorizePlayerOfCurrentGame]
         [HttpPost]
-        public ActionResult TakeGameAction(int id, PlayerLocation gameAction)
+        public ActionResult TakeGameAction(int id, GameActionState gameAction)
         {
             using (var galleristContext = new GalleristComponentsDbContext())
             {
@@ -366,17 +367,13 @@ namespace TeamJAMiN.Controllers
 		            {
 		    	        return View("GameError");
 		            }
-		            if(player.GalleristLocation == gameAction)
+                    var actionManager = new ActionManager(game);
+                    
+		            if(!actionManager.DoAction(gameAction))
 		            {
-			        //todo disallow player to take the same action twice
-			        return Redirect("~/Game/Play/" + id);
+			            return Redirect("~/Game/Play/" + id);
 		            }
-		            var kickedPlayer = game.Players.FirstOrDefault(p => p.GalleristLocation == gameAction);
-		            if(kickedPlayer != null)
-		            {
-			        game.KickedOutPlayerId = kickedPlayer.Id;
-		            }
-		            player.GalleristLocation = gameAction;
+
                     //check if it is one of the special cases where the action must be confirmed before allowing the next step to proceed (e.g. player must draw cards)
                     //if yes take an intermediate step, still remains current player's turn
                     //if no, continue doing logic things  //determine order of bumped player's actions, can these happen at the end of current player's turn?
@@ -387,7 +384,6 @@ namespace TeamJAMiN.Controllers
                     //need some signalr stuff so we can show the action to everyone when it is done (intermediate step or not) as well as update money, influence, board, etc.
                     //update money, influence, board, etc.
 
-                    game.UpdatePlayerOrder();
                     galleristContext.SaveChanges();
                     return Redirect("~/Game/Play/" + id);
                     //send email to next player in turn order

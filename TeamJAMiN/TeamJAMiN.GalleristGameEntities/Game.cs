@@ -56,7 +56,9 @@ namespace TeamJAMiN.GalleristComponentEntities
         public int AvailableInvestorTickets { get; set; }
         public int AvailableCollectorTickets { get; set; }
         public string PlayerOrderData { get; set; }
+
         public int CurrentPlayerId { get; set; }
+        public GameActionState CurrentActionState { get; set; }
         public int? KickedOutPlayerId { get; set; }
 
         [NotMapped]

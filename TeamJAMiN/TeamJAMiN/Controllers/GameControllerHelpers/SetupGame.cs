@@ -44,7 +44,8 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
             newGame.assignReputationTiles();
             newGame.setupPlayers();
             newGame.IsStarted = true;
-            newGame.UpdatePlayerOrder();
+            newGame.CurrentActionState = GameActionState.GameStart;
+            (new ActionManager(newGame)).DoAction(GameActionState.Pass);
         }
     }
 }
