@@ -13,6 +13,9 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         public Game Game { get; set; }
         public Dictionary<GameActionState, Type> ActionToContextType = new Dictionary<GameActionState, Type>
             {
+                { GameActionState.ArtistColony, typeof(ArtistColonyContext) },
+                { GameActionState.ArtistDiscover, typeof(ArtistColonyContext) },
+                { GameActionState.ArtBuy, typeof(ArtistColonyContext) },
                 { GameActionState.SalesOffice, typeof(SalesOfficeContext) },
                 { GameActionState.ContractDraft, typeof(SalesOfficeContext) },
                 { GameActionState.ContractDraw, typeof(SalesOfficeContext) },
@@ -113,16 +116,8 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         public HashSet<GameActionState> TransitionTo;
         public abstract void DoAction<TContext>(TContext context)
             where TContext: ActionContext;
-        public bool CanTransitionTo<TContext>(GameActionState action, TContext context)
-            where TContext : ActionContext
-        {
-            if (TransitionTo.Contains(action))
-            {
-                return true;
-            }
-
-            return false;
-        }
+        public abstract bool CanTransitionTo<TContext>(GameActionState action, TContext context)
+            where TContext : ActionContext;
     }
     public class GameStart : ActionState
     {
@@ -136,7 +131,16 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         {
 
         }
-    }
+        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
+        {
+            if (TransitionTo.Contains(action))
+            {
+                return true;
+            }
+
+            return false;
+        }
+}
 
 
     public class ChooseLocation : ActionState
@@ -151,8 +155,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         public override void DoAction<ActionContext>(ActionContext context)
         { }
 
-        public new bool CanTransitionTo<TContext>(GameActionState action, TContext context)
-            where TContext : ActionContext
+        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
         {
             if (!TransitionTo.Contains(action))
             {
@@ -179,6 +182,15 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         {
             context.Game.UpdatePlayerOrder();
             context.Game.CurrentActionState = GameActionState.ChooseLocation;
+        }
+        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
+        {
+            if (TransitionTo.Contains(action))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

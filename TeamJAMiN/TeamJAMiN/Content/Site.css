@@ -37,9 +37,40 @@
 
 .player-board {
     margin-top:100px;
+
 }
 .player-contract-empty {
     background-color: rgba(255,255,255,.6) !important;
+}
+.player-art-tile {
+    height:100px;
+    background-color: #f3ebd6;
+}
+.player-art-money,
+.player-art-artist {
+    height:40px;
+}
+.player-art-artist {
+    height: 50px;
+    margin: 0px -5px -5px -5px !important;
+    padding: 5px 0;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.player-art-artist-red {
+    background-color: indianred;
+}
+.player-art-artist-blue {
+    background-color: royalblue;
+}
+.player-art-type {
+    height: 40px;
+    width: 40px;
+}
+.player-art-exhibit {
+    height:50px;
+    padding: 5px 0;
+    background-size: 50% !important;
 }
 
 .border {
@@ -60,7 +91,8 @@
 .aquired-scoring-icon, .reputation-row-art-icon, .auction-row-icon, .auction-row-cost, .minus-icon, .art-tile-icon, .influence-money-icon,
 .influence-star-icon, .reputation-tile-none, .influence-icon, .gallery-visitor, #international-market-reputation-action,
 #international-market-auction-action, #sales-office-contract-action, #sales-office-sell-action, #artist-colony-buy-action,
-#media-center-promote-action, #artist-colony-discover-action, #media-center-hire-action, .draw-contract-icon {
+#media-center-promote-action, #artist-colony-discover-action, #media-center-hire-action, .draw-contract-icon, .player-art-money,
+.player-art-type, .player-art-exhibit {
     background-size:contain;
     background-repeat:no-repeat;
     background-position:50%;
@@ -116,6 +148,18 @@
     width:40px;
     margin: 5% auto auto;
     border-radius: 50%;
+}
+.action-space-center.orange-gallerist {
+    background-color: orangered;
+}
+.action-space-center.yellow-gallerist {
+    background-color: gold;
+}
+.action-space-center.blue-gallerist {
+    background-color: dodgerblue;
+}
+.action-space-center.purple-gallerist {
+    background-color: rebeccapurple;
 }
 .action-arrow-body {
 	border-top: 20px solid white;
@@ -261,8 +305,9 @@
 /* Artist Tiles*/
 .artist-colony-tile {
     height:125px;
+    position: relative;
 }
-.artist-colony-tile:not(:first-child) {
+.artist-colony-tile:not(.artist-digital) {
     margin-top:10px;
 }
 .artist-blue {

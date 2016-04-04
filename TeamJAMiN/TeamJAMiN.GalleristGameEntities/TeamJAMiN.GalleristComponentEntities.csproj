@@ -50,6 +50,7 @@
     <Compile Include="Dtos\GameDto.cs" />
     <Compile Include="GameActionState.cs" />
     <Compile Include="GameArt.cs" />
+    <Compile Include="GameArtLocation.cs" />
     <Compile Include="GameContractLocation.cs" />
     <Compile Include="GameReputationTile.cs" />
     <Compile Include="GameVisitor.cs" />
