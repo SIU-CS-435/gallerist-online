@@ -8,6 +8,26 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
 {
     public static class ContractManager
     {
+        //todo check if draw deck is empty before drawing and take actions as appropriate
+        //i.e. write method for shuffling discard/draft as per the rulebook
+        public static bool IsContractLocationEmpty(this Game game, GameContractLocation location)
+        {
+            return game.Contracts.Any(c => c.Location == location);
+        }
+        public static void ReplaceContract(this Game game, GameContractLocation location)
+        {
+            game.DrawContract(location);
+        }
+
+        public static GameContract DrawContract(this Game game, GameContractLocation location)
+        {
+            var deckDict = game.GetContractDecks();
+            var contract = deckDict[GameContractLocation.DrawDeck].First();
+            contract.Location = location;
+            contract.Order = deckDict[location].Count;
+            return contract;
+        }
+
         public static List<GameContract> DrawContracts(this Game game)
         {
             var locationOrder = new List<GameContractLocation> { GameContractLocation.Draft0, GameContractLocation.Draft1, GameContractLocation.Draft2, GameContractLocation.Draft3 };

@@ -198,6 +198,7 @@ namespace TeamJAMiN.Controllers
                         newGame.Players.Add(new Player
                         {
                             UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id,
+                            UserName = User.Identity.Name,
                             IsHost = true
                         });
                     }
@@ -260,7 +261,11 @@ namespace TeamJAMiN.Controllers
 
                     if (gameResponse.Success)
                     {
-                        gameResponse.Game.Players.Add(new Player { UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id });
+                        gameResponse.Game.Players.Add(new Player
+                        {
+                            UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id,
+                            UserName = User.Identity.Name
+                        });
                         ViewBag.userName = User.Identity.Name;
                         galleristContext.SaveChanges();
                         return Redirect("/Game/List");
@@ -342,7 +347,7 @@ namespace TeamJAMiN.Controllers
         [ValidateAntiForgeryToken]
         [AuthorizePlayerOfCurrentGame]
         [HttpPost]
-        public ActionResult TakeGameAction(int id, GameActionState gameAction)
+        public ActionResult TakeGameAction(int id, GameActionState gameAction, string actionLocation = "")
         {
             using (var galleristContext = new GalleristComponentsDbContext())
             {
@@ -369,7 +374,7 @@ namespace TeamJAMiN.Controllers
 		            }
                     var actionManager = new ActionManager(game);
                     
-		            if(!actionManager.DoAction(gameAction))
+		            if(!actionManager.DoAction(gameAction, actionLocation))
 		            {
 			            return Redirect("~/Game/Play/" + id);
 		            }

@@ -24,6 +24,10 @@
     padding: 0 !important;
 }
 
+.margin-center {
+    margin: 0 auto;
+}
+
 .board-region {
     background-color: rgba(255, 255, 255,.1);
     text-align:center;
@@ -33,6 +37,9 @@
 
 .player-board {
     margin-top:100px;
+}
+.player-contract-empty {
+    background-color: rgba(255,255,255,.6) !important;
 }
 
 .border {
@@ -64,6 +71,20 @@
     border-radius:15px;
     padding: 5px;
 }
+/* Actions */
+.highlight {
+    box-shadow: 0 0 5px 5px white;
+}
+.action-button {
+    background: transparent;
+    border: none;
+    position:absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
 
 /* Action Icons */
 .sell-icon {
@@ -88,15 +109,6 @@
     margin: 0 auto;
     background-color: rgba(22,31,40,1);
     position:relative;
-}
-.action-button {
-    background: transparent;
-    border: none;
-    position:absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
 }
 .action-space-center {
     background-color: white;

@@ -1,8 +1,8 @@
-﻿@model TeamJAMiN.GalleristComponentEntities.Player
+﻿@model Player
 @using TeamJAMiN.GalleristComponentEntities
 
 <div class="row">
-    Player: @ViewBag.userName <br />
+    Player: @Model.UserName <br />
     Money: @Model.Money <br />
     @{
         var commission = "No Commissioned Art";
@@ -36,7 +36,7 @@
                     <div class="col-xs-4">
                         @if(i<artCount)
                         {
-                            Html.Partial("~/Views/Game/PlayerBoard/PlayerArt.cshtml", art[i]);
+                            @Html.Partial("~/Views/Game/PlayerBoard/PlayerArt.cshtml", art[i]);
                         }
                     </div>
                     }
@@ -61,10 +61,7 @@
                 </div>
             </div>
             <div class="col-xs-7">
-                @foreach (GameContract contract in Model.Contracts)
-                {
-                    Html.Partial("~/Views/Game/PlayerBoard/PlayerContracts.cshtml", contract);
-                }
+                @Html.Partial("~/Views/Game/PlayerBoard/PlayerContracts.cshtml", Model)
             </div>
             <div class="col-xs-2">
                 

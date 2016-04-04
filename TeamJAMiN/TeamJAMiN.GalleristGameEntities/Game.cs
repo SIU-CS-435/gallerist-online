@@ -58,7 +58,19 @@ namespace TeamJAMiN.GalleristComponentEntities
         public string PlayerOrderData { get; set; }
 
         public int CurrentPlayerId { get; set; }
+        [NotMapped]
+        public Player CurrentPlayer
+        {
+            get
+            {
+                return this.Players.First(p => p.Id == CurrentPlayerId);
+            }
+        }
+
+        //todo create GameAction object
         public GameActionState CurrentActionState { get; set; }
+        public string CurrentActionLocation { get; set; }
+
         public int? KickedOutPlayerId { get; set; }
 
         [NotMapped]

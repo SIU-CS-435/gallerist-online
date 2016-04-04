@@ -8,6 +8,10 @@ namespace TeamJAMiN.GalleristComponentEntities
 {
     public enum GameActionState
     {
-        GameStart, ChooseLocation, SalesOffice, ContractDraw, ContractDraft, ContractToPlayerBoard, Pass, SellChooseArt, SellChooseVisitor, End
+        GameStart, ChooseLocation, Pass, GameEnd,
+        SalesOffice, ContractDraw, ContractDraft, ContractToPlayerBoard, SellChooseArt, SellChooseVisitor,
+        InternationalMarket,
+        ArtistColony,
+        MediaCenter
     }
 }

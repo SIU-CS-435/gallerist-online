@@ -14,6 +14,9 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         public Dictionary<GameActionState, Type> ActionToContextType = new Dictionary<GameActionState, Type>
             {
                 { GameActionState.SalesOffice, typeof(SalesOfficeContext) },
+                { GameActionState.ContractDraft, typeof(SalesOfficeContext) },
+                { GameActionState.ContractDraw, typeof(SalesOfficeContext) },
+                { GameActionState.ContractToPlayerBoard, typeof(SalesOfficeContext) },
                 { GameActionState.ChooseLocation, typeof(SetupContext) },
                 { GameActionState.GameStart, typeof(SetupContext) },
                 { GameActionState.Pass, typeof(SetupContext) }
@@ -26,11 +29,17 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             _context = (ActionContext)Activator.CreateInstance(contextType, game) ;
         }
 
-        public bool DoAction(GameActionState action)
+        public bool DoAction(GameActionState action, string actionLocation = "")
         {
             if (!IsValidAction(action))
             {
                 return false;
+            }
+            Game.CurrentActionLocation = actionLocation;
+            if (!_context.NameToState.ContainsKey(action))
+            {
+                Type contextType = ActionToContextType[action];
+                _context = (ActionContext)Activator.CreateInstance(contextType, Game);
             }
             _context.DoAction(action);
             return true;
@@ -46,9 +55,8 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
     public class ActionContext
     {
         ActionState _state;
-        Dictionary<GameActionState, Type> NameToState;
-        public Game Game { get; set;
-        }
+        public Dictionary<GameActionState, Type> NameToState;
+        public Game Game { get; set; }
 
         public GameActionState State
         {
@@ -71,11 +79,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
 
         public bool IsValidTransition(GameActionState state)
         {
-            if(!NameToState.Keys.Contains(state))
-            {
-                return false;
-            }
-            if(!_state.CanTransitionTo(state))
+            if(!_state.CanTransitionTo(state, this))
             {
                 return false;
             }
@@ -101,6 +105,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
                 { GameActionState.GameStart, typeof(GameStart) }
             })
         { }
+
     }
     public abstract class ActionState
     {
@@ -108,7 +113,8 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         public HashSet<GameActionState> TransitionTo;
         public abstract void DoAction<TContext>(TContext context)
             where TContext: ActionContext;
-        public bool CanTransitionTo(GameActionState action)
+        public bool CanTransitionTo<TContext>(GameActionState action, TContext context)
+            where TContext : ActionContext
         {
             if (TransitionTo.Contains(action))
             {
@@ -138,11 +144,28 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         public ChooseLocation()
         {
             Name = GameActionState.ChooseLocation;
-            TransitionTo = new HashSet<GameActionState> { GameActionState.SalesOffice };
+            TransitionTo = new HashSet<GameActionState>
+                { GameActionState.SalesOffice, GameActionState.InternationalMarket, GameActionState.MediaCenter, GameActionState.ArtistColony };
         }
 
         public override void DoAction<ActionContext>(ActionContext context)
         { }
+
+        public new bool CanTransitionTo<TContext>(GameActionState action, TContext context)
+            where TContext : ActionContext
+        {
+            if (!TransitionTo.Contains(action))
+            {
+                return false;
+            }
+            var game = context.Game;
+            var currentPlayerLocation = game.Players.First(p => p.Id == context.Game.CurrentPlayerId).GalleristLocation;
+            if (currentPlayerLocation == (PlayerLocation)Enum.Parse(typeof(PlayerLocation), action.ToString()))
+            {
+                return false;
+            }
+            return true;
+        }
     }
     public class Pass : ActionState
     {
