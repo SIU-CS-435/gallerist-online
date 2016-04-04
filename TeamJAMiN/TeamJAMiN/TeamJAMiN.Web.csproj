@@ -189,7 +189,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ActionArtistColony.cs" />
+    <Compile Include="Controllers\GameLogicHelpers\ActionMediaCenter.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ActionSalesOffice.cs" />
+    <Compile Include="Controllers\GameLogicHelpers\AssistantManager.cs" />
     <Compile Include="Controllers\Hubs\GameActionHub.cs" />
     <Compile Include="App_Start\Startup.SignalR.cs" />
     <Compile Include="Controllers\GameControllerHelpers\SetupPlayers.cs" />
@@ -359,6 +361,10 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Icons\Assistant.svg" />
+    <Content Include="Content\Icons\AssistantBlue.svg" />
+    <Content Include="Content\Icons\AssistantOrange.svg" />
+    <Content Include="Content\Icons\AssistantPurple.svg" />
+    <Content Include="Content\Icons\AssistantYellow.svg" />
     <Content Include="Content\Icons\Auction.svg" />
     <Content Include="Content\Icons\BonusAssistant.svg" />
     <Content Include="Content\Icons\BonusContract.svg" />
@@ -385,6 +391,8 @@
     <Content Include="Content\Icons\FameStarWhite.svg" />
     <Content Include="Content\Icons\Hire.svg" />
     <Content Include="Content\Icons\Influence.svg" />
+    <Content Include="Content\Icons\InfluenceFive.svg" />
+    <Content Include="Content\Icons\InfluenceFour.svg" />
     <Content Include="Content\Icons\InfluenceOne.svg" />
     <Content Include="Content\Icons\InfluenceThree.svg" />
     <Content Include="Content\Icons\InfluenceTwo.svg" />
@@ -525,6 +533,7 @@
     <Content Include="Views\Game\PlayerGallery\VisitorDisplay.cshtml" />
     <Content Include="Views\Game\ActionSpaces\ActionSpace.cshtml" />
     <Content Include="Views\Game\PostButtons\View.cshtml" />
+    <Content Include="Views\Game\PlayerBoard\UnemployedAssistant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

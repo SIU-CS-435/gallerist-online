@@ -35,44 +35,6 @@
     padding: 5px 10px;
 }
 
-.player-board {
-    margin-top:100px;
-
-}
-.player-contract-empty {
-    background-color: rgba(255,255,255,.6) !important;
-}
-.player-art-tile {
-    height:100px;
-    background-color: #f3ebd6;
-}
-.player-art-money,
-.player-art-artist {
-    height:40px;
-}
-.player-art-artist {
-    height: 50px;
-    margin: 0px -5px 0 -5px !important;
-    padding: 5px 0;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-.player-art-artist-red {
-    background-color: indianred;
-}
-.player-art-artist-blue {
-    background-color: royalblue;
-}
-.player-art-type {
-    height: 40px;
-    width: 40px;
-}
-.player-art-exhibit {
-    height:50px;
-    padding: 5px 0;
-    background-size: 50% !important;
-}
-
 .border {
     border: 1px solid white;
 }
@@ -92,7 +54,7 @@
 .influence-star-icon, .reputation-tile-none, .influence-icon, .gallery-visitor, #international-market-reputation-action,
 #international-market-auction-action, #sales-office-contract-action, #sales-office-sell-action, #artist-colony-buy-action,
 #media-center-promote-action, #artist-colony-discover-action, #media-center-hire-action, .draw-contract-icon, .player-art-money,
-.player-art-type, .player-art-exhibit {
+.player-art-type, .player-art-exhibit, .player-assistant-icon, .player-assistant-cost {
     background-size:contain;
     background-repeat:no-repeat;
     background-position:50%;
@@ -302,6 +264,95 @@
     text-align:center;
 }
 
+/*Player Boards*/
+.player-board {
+    margin-top:100px;
+}
+.player-contract-empty {
+    background-color: rgba(255,255,255,.6) !important;
+}
+.player-art-tile {
+    height:100px;
+    background-color: #f3ebd6;
+}
+.player-art-money,
+.player-art-artist {
+    height:40px;
+}
+.player-art-artist {
+    height: 50px;
+    margin: 0px -5px 0 -5px !important;
+    padding: 5px 0;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.player-art-artist-red {
+    background-color: indianred;
+}
+.player-art-artist-blue {
+    background-color: royalblue;
+}
+.player-art-type {
+    height: 40px;
+    width: 40px;
+}
+.player-art-exhibit {
+    height:50px;
+    padding: 5px 0;
+    background-size: 50% !important;
+}
+.player-assistant-icon {
+    height: 25px;
+}
+.player-assistant-blue {
+    background-image: url(Icons/AssistantBlue.svg)
+}
+.player-assistant-yellow {
+    background-image: url(Icons/AssistantYellow.svg)
+}
+.player-assistant-orange {
+    background-image: url(Icons/AssistantOrange.svg)
+}
+.player-assistant-purple {
+    background-image: url(Icons/AssistantPurple.svg)
+}
+.player-assistant-cost {
+    height:25px;
+    width: 25px;
+    margin: 0 auto;
+}
+.player-assistant-icon.highlight::before {
+    box-shadow: -15px 0 5px -10px inset;
+    content: " ";
+    height: 100%;
+    left: -15px;
+    position: absolute;
+    top: 0;
+    width: 15px;
+}
+.player-assistant-icon.highlight {
+    position: relative;
+    box-shadow: none;
+}
+.player-assistant-icon.highlight::after {
+    box-shadow: 15px 0 5px -10px inset;
+    content: " ";
+    height: 100%;
+    position: absolute;
+    right: -15px;
+    width: 15px;
+}
+.player-assistant-icon.highlight.first {
+    position: relative;
+    box-shadow: 0 -5px 10px 0px white;
+
+}
+.player-assistant-icon.highlight.last {
+    position: relative;
+    box-shadow: 0 5px 10px 0px white;
+
+}
+
 /* Artist Tiles*/
 .artist-colony-tile {
     height:125px;
@@ -317,8 +368,8 @@
     background-color: indianred;
 }
 .row.artist-colony-tile {
-    margin-left: -12px;
-    margin-right: -12px;
+    margin-left: -8px;
+    margin-right: -8px;
 }
 .undiscovered-top-row {
     background-color: rgba(255,255,255,.4);
@@ -575,6 +626,12 @@
      background-image:url(Icons/InfluenceTwo.svg);
 }
 .influence-3 {
+     background-image:url(Icons/InfluenceThree.svg);
+}
+.influence-4 {
+     background-image:url(Icons/InfluenceThree.svg);
+}
+.influence-5 {
      background-image:url(Icons/InfluenceThree.svg);
 }
 

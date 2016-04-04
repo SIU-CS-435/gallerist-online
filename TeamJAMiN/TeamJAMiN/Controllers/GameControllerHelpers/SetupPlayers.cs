@@ -39,7 +39,7 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
         {
             var currentPlayer = game.PlayerOrder.First();
             game.CurrentPlayerId = currentPlayer.Id;
-            if(game.Players.Count != 1)
+            if(game.Players.Count != 1) //todo add logic for kicked out or executive actions
             {
                 var isRemoved = game.PlayerOrder.Remove(currentPlayer);
                 game.PlayerOrder.Add(currentPlayer);

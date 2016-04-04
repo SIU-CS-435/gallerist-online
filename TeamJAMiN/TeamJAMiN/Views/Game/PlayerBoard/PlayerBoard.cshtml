@@ -16,14 +16,11 @@
 
 <div class="row">
     <div class="col-xs-2">
-        <div class="col-xs-12">a</div>
-        <div class="col-xs-12">a</div>
-        <div class="col-xs-12">a</div>
-        <div class="col-xs-12">a</div>
-        <div class="col-xs-12">a</div>
-        <div class="col-xs-12">a</div>
-        <div class="col-xs-12">a</div>
-        <div class="col-xs-12">a</div>
+        @for (int i = 0; i < 8; i++ )
+        {
+            ViewBag.AssistantCount = i;
+            @Html.Partial("~/Views/Game/PlayerBoard/UnemployedAssistant.cshtml", Model)
+        }
     </div>
     <div class="col-xs-8">
         <div class="row">

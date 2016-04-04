@@ -1,0 +1,51 @@
+﻿@using TeamJAMiN.Controllers.GameLogicHelpers
+@using TeamJAMiN.Models.GameViewHelpers
+@using TeamJAMiN.GalleristComponentEntities
+@model Player
+
+@{ 
+    var assistantIndex = (int)ViewBag.AssistantCount;
+    var assistantIcon = "";
+    if (Model.Assistants.Count - 2 < assistantIndex)
+    {
+        assistantIcon = "player-assistant-" + @Model.Color;
+    }
+    var firstOrLast = "";
+    if(assistantIndex == 0)
+    {
+        firstOrLast = "first";
+    }
+    if(assistantIndex == 7)
+    {
+        firstOrLast = "last";
+    }
+}
+
+<div class="col-xs-12">
+    @*Assistant Icon*@
+    @if (Model.Game.CurrentPlayer.UserId == ViewBag.userId && Model.Game.CurrentActionState == GameActionState.MediaCenter && assistantIcon != "")
+    {
+        using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Game.Id, gameAction = GameActionState.Hire, actionLocation = assistantIndex.ToString() }, FormMethod.Post, new { role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="col-xs-4 no-padding">
+                <input type="submit" class="action-button" value="" />
+                <div class="player-assistant-icon @assistantIcon @Model.Game.Highlight(GameActionState.MediaCenter) @firstOrLast"></div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-xs-4 no-padding">
+            <div class="player-assistant-icon @assistantIcon"></div>
+        </div>
+    }
+    @*Assistant Cost*@
+    <div class="col-xs-4 no-padding">
+        <div class="player-assistant-cost money-@Model.GetAssistantCostByIndex(assistantIndex)">
+            <div class="minus-icon"></div>
+        </div>
+    </div>
+    @*Assistant Bonus*@
+    <div class="col-xs-4 no-padding"></div>
+</div>

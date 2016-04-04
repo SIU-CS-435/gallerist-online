@@ -13,6 +13,9 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         public Game Game { get; set; }
         public Dictionary<GameActionState, Type> ActionToContextType = new Dictionary<GameActionState, Type>
             {
+                { GameActionState.MediaCenter, typeof(MediaCenterContext) },
+                { GameActionState.Promote, typeof(MediaCenterContext) },
+                { GameActionState.Hire, typeof(MediaCenterContext) },
                 { GameActionState.ArtistColony, typeof(ArtistColonyContext) },
                 { GameActionState.ArtistDiscover, typeof(ArtistColonyContext) },
                 { GameActionState.ArtBuy, typeof(ArtistColonyContext) },
