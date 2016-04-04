@@ -61,6 +61,7 @@ namespace TeamJAMiN.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.UpdateProfileSuccess ? "Your profile has been updated."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -78,6 +79,29 @@ namespace TeamJAMiN.Controllers
                 IsPrivate = IsPrivate(),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+            return View(model);
+        }
+
+        public async Task<ActionResult> ManageProfile(ManageProfileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = UserManager.FindById(User.Identity.GetUserId());
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Birthday = model.Birthday;
+                user.City = model.City;
+                user.State = model.State;
+                user.IsPrivate = model.Private;
+                user.AllowsEmails = model.AllowEmails;
+                user.UserName = model.UserName;
+                user.Email = model.Email;
+
+                var result = await UserManager.UpdateAsync(user);
+                if (result.Succeeded)
+                    return RedirectToAction("Index", "Manage");
+                AddErrors(result);
+            }
             return View(model);
         }
 
@@ -405,6 +429,7 @@ namespace TeamJAMiN.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
+            UpdateProfileSuccess,
             Error
         }
 

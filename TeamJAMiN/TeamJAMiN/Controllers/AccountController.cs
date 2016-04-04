@@ -151,7 +151,7 @@ namespace TeamJAMiN.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, AllowsEmails = model.AllowEmails, IsPrivate = model.Private };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, AllowsEmails = true, IsPrivate = false, FirstName = model.FirstName, LastName = model.LastName, City = "", State = "", Birthday = DateTime.Now };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

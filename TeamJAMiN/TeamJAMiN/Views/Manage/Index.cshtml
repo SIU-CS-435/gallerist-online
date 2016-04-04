@@ -100,11 +100,11 @@
             [
             @if (Model.IsPrivate)
             {
-                @Html.ActionLink("Make Public", "MakePublic")
+                @Html.Label("Private")
             }
             else
             {
-                @Html.ActionLink("Make Private", "MakePrivate")
+                @Html.Label("Public")
             }
             ]
         </dd>
@@ -113,12 +113,18 @@
             [
             @if (Model.AllowsEmails)
             {
-                @Html.ActionLink("Block Emails", "BlockEmails")
+                @Html.Label("Emails are unblocked")
             }
             else
             {
-                @Html.ActionLink("Allow Emails", "AllowEmails")
+                @Html.Label("Emails are blocked")
             }
+            ]
+        </dd>
+        <dt>Profile Settings: </dt>
+        <dd>
+            [
+            @Html.ActionLink("Manage", "ManageProfile")
             ]
         </dd>
     </dl>
