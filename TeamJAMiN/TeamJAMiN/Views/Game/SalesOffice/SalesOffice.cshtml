@@ -4,17 +4,64 @@
 
 @*Contracts Container*@
 
+@{ 
+    var contractDict = Model.GetContractDecks();
+    var actionManager = new ActionManager(Model);
+}
+
 <div class="row no-gutter">
-    @{
-        var draftLocations = new List<GameContractLocation>
-            { GameContractLocation.Draft0, GameContractLocation.Draft1, GameContractLocation.Draft2, GameContractLocation.Draft3 };
-        var contractDict = Model.GetContractDecks();
-        foreach (GameContractLocation location in draftLocations)
-        {
-            <div class="col-xs-3 no-padding">
-                <div class="contract-card tile">@Html.Partial("~/Views/Game/SalesOffice/Contract.cshtml", contractDict[location].FirstOrDefault())</div>
-            </div>
+    <div class="col-xs-2">
+        <div class="col-xs-12 no-padding">
+            @if (Model.Players.Single(m => m.Id == Model.CurrentPlayerId).UserId == ViewBag.userId && actionManager.IsValidAction(GameActionState.ContractDraw))
+            {
+                using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = GameActionState.ContractDraw }, FormMethod.Post, new { role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="contract-card tile contract-draw-deck">
+                        <input type="submit" class="action-button" value="" />
+                        <div class="contract-draw-title contract-draw-deck-section">Draw</div>
+                        <div class="draw-contract-icon contract-draw-deck-section"></div>
+                        <div class="contract-draw-count contract-draw-deck-section">x @contractDict[GameContractLocation.DrawDeck].Count</div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="contract-card tile contract-draw-deck">
+                    <div class="contract-draw-title contract-draw-deck-section">Draw</div>
+                    <div class="draw-contract-icon contract-draw-deck-section"></div>
+                    <div class="contract-draw-count contract-draw-deck-section">x @contractDict[GameContractLocation.DrawDeck].Count</div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-xs-10">
+        @{
+            var draftLocations = new List<GameContractLocation>
+                { GameContractLocation.Draft0, GameContractLocation.Draft1, GameContractLocation.Draft2, GameContractLocation.Draft3 };
+            foreach (GameContractLocation location in draftLocations)
+            {
+                <div class="col-xs-3 no-padding">
+                    @if (Model.Players.Single(m => m.Id == Model.CurrentPlayerId).UserId == ViewBag.userId && actionManager.IsValidAction(GameActionState.ContractDraft))
+                    {
+                        using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = GameActionState.ContractDraft, actionLocation = location }, FormMethod.Post, new { role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="contract-card tile">
+                                <input type="submit" class="action-button" value="" />
+                                @Html.Partial("~/Views/Game/SalesOffice/Contract.cshtml", contractDict[location].FirstOrDefault())
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="contract-card tile">
+                            @Html.Partial("~/Views/Game/SalesOffice/Contract.cshtml", contractDict[location].FirstOrDefault())
+                        </div>
+                    }
+                </div>
+            }
         }
-    }
+    </div>
 </div>
 

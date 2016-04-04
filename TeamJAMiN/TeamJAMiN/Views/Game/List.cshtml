@@ -26,13 +26,12 @@
                         <td>@myGame.Name</td>
                         <td>@myGame.PlayersString</td>
                         <td>@myGame.MaxTurnLengthString</td>
-                        <td>
+                        <td id="start-open-button-container-@myGame.Id" class="game-list-button-container">
                             @if (myGame.isStartable)
                             {
-                                using (Html.BeginForm("Start", "Game", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                using (Html.BeginForm("Start", "Game", new { id = myGame.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                                 {
                                     @Html.AntiForgeryToken()
-                                    <input class="form-control hidden" type="hidden" name="gameId" value="@myGame.Id" />
                                     <div class="form-group">
                                         <div class="col-md-offset-2 col-md-10">
                                             <input type="submit" class="btn btn-success" value="Start" />
@@ -46,9 +45,9 @@
                             }
                         </td>
                         <td>
-                            <div class="col-md-offset-2 col-md-10">
+                            @*<div class="col-md-offset-2 col-md-10">
                                 <input type="submit" class="btn btn-default" value="Delete" />
-                            </div>
+                            </div>*@
                         </td>
                     </tr>
                     index++;
@@ -87,7 +86,7 @@
                                 using (Html.BeginForm("Join", "Game", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                                 {
                                     @Html.AntiForgeryToken()
-                                    <input class="form-control hidden" type="hidden" name="gameId" value="@game.Id" />
+                                    <input class="form-control hidden" type="hidden" name="id" value="@game.Id" />
                                     <div class="form-group">
                                         <div class="col-md-offset-2 col-md-10">
                                             <input type="submit" class="btn btn-success" value="Join" />
@@ -103,3 +102,7 @@
         </tbody>
     </table>
 </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/gamelist")
+    <script src="~/signalr/hubs"></script>
+}

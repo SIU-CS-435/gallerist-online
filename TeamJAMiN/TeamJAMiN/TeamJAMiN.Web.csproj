@@ -188,7 +188,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\GameActionHub\GameActionHub.cs" />
+    <Compile Include="Controllers\GameLogicHelpers\ActionArtistColony.cs" />
+    <Compile Include="Controllers\GameLogicHelpers\ActionMediaCenter.cs" />
+    <Compile Include="Controllers\GameLogicHelpers\ActionSalesOffice.cs" />
+    <Compile Include="Controllers\GameLogicHelpers\AssistantManager.cs" />
+    <Compile Include="Controllers\Hubs\GameActionHub.cs" />
     <Compile Include="App_Start\Startup.SignalR.cs" />
     <Compile Include="Controllers\GameControllerHelpers\SetupPlayers.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ActionManager.cs" />
@@ -200,6 +204,8 @@
     <Compile Include="Controllers\GameLogicHelpers\GameInfluenceTrack.cs" />
     <Compile Include="Controllers\GameLogicHelpers\VisitorManager.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Hubs\GameListHub.cs" />
+    <Compile Include="Controllers\Hubs\HubHelpers\PushHelper.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DataContexts\GalleristComponentMigrations\201602200341065_InitialCreate.cs" />
     <Compile Include="DataContexts\GalleristComponentMigrations\201602200341065_InitialCreate.Designer.cs">
@@ -293,6 +299,22 @@
     <Compile Include="DataContexts\GalleristComponentMigrations\201603292242469_CreatedTime1.Designer.cs">
       <DependentUpon>201603292242469_CreatedTime1.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603300153538_currentplayer.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201603300153538_currentplayer.Designer.cs">
+      <DependentUpon>201603300153538_currentplayer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\GalleristComponentMigrations\201604030017433_InitialState.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201604030017433_InitialState.Designer.cs">
+      <DependentUpon>201604030017433_InitialState.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\GalleristComponentMigrations\201604031944016_ContractAction.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201604031944016_ContractAction.Designer.cs">
+      <DependentUpon>201604031944016_ContractAction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\GalleristComponentMigrations\201604032137489_ContractAction1.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201604032137489_ContractAction1.Designer.cs">
+      <DependentUpon>201604032137489_ContractAction1.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\GalleristComponentMigrations\Configuration.cs" />
     <Compile Include="DataContexts\GalleristComponentsDb.cs" />
     <Compile Include="DataContexts\IdentityMigrations\201602282353509_init.cs" />
@@ -307,10 +329,6 @@
     <Compile Include="DataContexts\IdentityMigrations\201603300017209_DefaultedBooleansOnProfile.Designer.cs">
       <DependentUpon>201603300017209_DefaultedBooleansOnProfile.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataContexts\IdentityMigrations\201604042203145_ViewShift.cs" />
-    <Compile Include="DataContexts\IdentityMigrations\201604042203145_ViewShift.Designer.cs">
-      <DependentUpon>201604042203145_ViewShift.cs</DependentUpon>
-    </Compile>
     <Compile Include="DataContexts\IdentityMigrations\Configuration.cs" />
     <Compile Include="Controllers\GameControllerHelpers\SetupReputationTiles.cs" />
     <Compile Include="Global.asax.cs">
@@ -320,6 +338,8 @@
     <Compile Include="Controllers\GameControllerHelpers\Shuffler.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\GameViewHelpers\ActionHighlighter.cs" />
+    <Compile Include="Models\GameViewHelpers\ContractSort.cs" />
     <Compile Include="Models\GameViewHelpers\IconCss.cs" />
     <Compile Include="Models\GameViewHelpers\VisitorSort.cs" />
     <Compile Include="Models\GameViewModel.cs" />
@@ -341,6 +361,10 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Icons\Assistant.svg" />
+    <Content Include="Content\Icons\AssistantBlue.svg" />
+    <Content Include="Content\Icons\AssistantOrange.svg" />
+    <Content Include="Content\Icons\AssistantPurple.svg" />
+    <Content Include="Content\Icons\AssistantYellow.svg" />
     <Content Include="Content\Icons\Auction.svg" />
     <Content Include="Content\Icons\BonusAssistant.svg" />
     <Content Include="Content\Icons\BonusContract.svg" />
@@ -367,6 +391,8 @@
     <Content Include="Content\Icons\FameStarWhite.svg" />
     <Content Include="Content\Icons\Hire.svg" />
     <Content Include="Content\Icons\Influence.svg" />
+    <Content Include="Content\Icons\InfluenceFive.svg" />
+    <Content Include="Content\Icons\InfluenceFour.svg" />
     <Content Include="Content\Icons\InfluenceOne.svg" />
     <Content Include="Content\Icons\InfluenceThree.svg" />
     <Content Include="Content\Icons\InfluenceTwo.svg" />
@@ -429,6 +455,7 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="Scripts\GameList\game.list.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -505,7 +532,8 @@
     <Content Include="Views\Game\PlayerGallery\Lobby.cshtml" />
     <Content Include="Views\Game\PlayerGallery\VisitorDisplay.cshtml" />
     <Content Include="Views\Game\ActionSpaces\ActionSpace.cshtml" />
-    <Content Include="Views\Manage\ManageProfile.cshtml" />
+    <Content Include="Views\Game\PostButtons\View.cshtml" />
+    <Content Include="Views\Game\PlayerBoard\UnemployedAssistant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -585,6 +613,18 @@
     <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603292242469_CreatedTime1.resx">
       <DependentUpon>201603292242469_CreatedTime1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201603300153538_currentplayer.resx">
+      <DependentUpon>201603300153538_currentplayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201604030017433_InitialState.resx">
+      <DependentUpon>201604030017433_InitialState.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201604031944016_ContractAction.resx">
+      <DependentUpon>201604031944016_ContractAction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201604032137489_ContractAction1.resx">
+      <DependentUpon>201604032137489_ContractAction1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201602282353509_init.resx">
       <DependentUpon>201602282353509_init.cs</DependentUpon>
     </EmbeddedResource>
@@ -593,9 +633,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201603300017209_DefaultedBooleansOnProfile.resx">
       <DependentUpon>201603300017209_DefaultedBooleansOnProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DataContexts\IdentityMigrations\201604042203145_ViewShift.resx">
-      <DependentUpon>201604042203145_ViewShift.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

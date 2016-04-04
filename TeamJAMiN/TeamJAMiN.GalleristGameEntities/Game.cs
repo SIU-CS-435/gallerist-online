@@ -57,12 +57,30 @@ namespace TeamJAMiN.GalleristComponentEntities
         public int AvailableCollectorTickets { get; set; }
         public string PlayerOrderData { get; set; }
 
+        public int CurrentPlayerId { get; set; }
+        [NotMapped]
+        public Player CurrentPlayer
+        {
+            get
+            {
+                return this.Players.First(p => p.Id == CurrentPlayerId);
+            }
+        }
+
+        //todo create GameAction object
+        public GameActionState CurrentActionState { get; set; }
+        public string CurrentActionLocation { get; set; }
+
+        public int? KickedOutPlayerId { get; set; }
+
+        [NotMapped]
+        private List<Player> _playerOrder;
         [NotMapped]
         public List<Player> PlayerOrder
         {
             get
             {
-                if (PlayerOrderData != null && PlayerOrderData.Count() == 0 )
+                if (_playerOrder == null)
                 {
                     var idArray = Array.ConvertAll(PlayerOrderData.Split(';'), p => int.Parse(p));
                     var result = new List<Player>();
@@ -70,14 +88,16 @@ namespace TeamJAMiN.GalleristComponentEntities
                     {
                         result.Add(this.Players.Where(p => p.Id == id).First());
                     }
+                    _playerOrder = result;
                     return result;
                 }
-                else
-                    return null;
+                PlayerOrderData = String.Join(";", _playerOrder.Select(p => p.Id.ToString()).ToArray());
+                return _playerOrder;
             }
             set
             {
                 PlayerOrderData = String.Join(";", value.Select(p => p.Id.ToString()).ToArray());
+                _playerOrder = value;
             }
         }
     }

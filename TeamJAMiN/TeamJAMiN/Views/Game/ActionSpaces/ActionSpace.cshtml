@@ -1,19 +1,46 @@
-﻿@using TeamJAMiN.Models.GameViewHelpers
+﻿@model TeamJAMiN.GalleristComponentEntities.Game
+@using TeamJAMiN.Models.GameViewHelpers
 @using TeamJAMiN.GalleristComponentEntities
 @{ 
     var push = "";
     var pull = "";
+    var highlight = "";
+    var color = "";
     if (ViewBag.ActionId == PlayerLocation.ArtistColony || ViewBag.ActionId == PlayerLocation.MediaCenter)
     {
         push = "col-xs-push-6";
         pull = "col-xs-pull-6";
     }
+    var playerAtLocation = Model.Players.FirstOrDefault(p => p.GalleristLocation == (PlayerLocation)ViewBag.ActionId);
+    if(playerAtLocation != null)
+    {
+        color = playerAtLocation.Color.ToString();
+    }
+    var isValid = Model.IsValidLocation((PlayerLocation)ViewBag.ActionId);
+    if (Model.CurrentActionState == GameActionState.ChooseLocation && isValid)
+    {
+        highlight = "highlight";
+    }
 }
 <div class="row">
     <div class="col-xs-6 @push no-padding">
-        <div data-location="@ViewBag.ActionId" id="@IconCss.actionIds[ViewBag.ActionId][0]-action" class="action-space">
-            <div class="action-space-center"></div>
-        </div>
+        @if (Model.CurrentPlayer.UserId == ViewBag.userId && isValid)
+    	{
+                using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = ViewBag.ActionId }, FormMethod.Post, new { role = "form" }))
+                {
+		        @Html.AntiForgeryToken()
+		        <div data-location="@ViewBag.ActionId" id="@IconCss.actionIds[ViewBag.ActionId][0]-action" class="action-space current-player @highlight">
+		            <div class="action-space-center @color-gallerist"></div>
+		            <input type="submit" class="action-button" value="" />
+		        </div>
+    		}
+        }
+	    else
+	    {
+		    <div data-location="@ViewBag.ActionId" id="@IconCss.actionIds[ViewBag.ActionId][0]-action" class="action-space current-player">
+		        <div class="action-space-center @color-gallerist"></div>
+	        </div>
+	    }
         <div class="action-arrow-body"></div>
         <div class="action-arrow-head"></div>
         <div id="@IconCss.actionIds[ViewBag.ActionId][0]-kicked-out" class="kicked-out-space"></div>

@@ -16,7 +16,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         {
             game.DrawVisitors(count).UpdateVisitorLocation(TypeLocationMap.TypeToLocation[type]);            
         }
-        public static void MoveFromArtStackToPlaza(this Game game, ArtType type, int count)
+        public static void MoveFromArtStackToPlaza(this Game game, ArtType type)
         {
             game.Visitors.Where(v => v.Location == TypeLocationMap.TypeToLocation[type]).UpdateVisitorLocation(GameVisitorLocation.Plaza);
         }

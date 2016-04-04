@@ -9,6 +9,11 @@ using TeamJAMiN.Models;
 using TeamJAMiN.GalleristComponentEntities.Dtos;
 using TeamJAMiN.GalleristComponentEntities.Managers;
 using System.Web;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using TeamJAMiN.Controllers.Hubs;
+using TeamJAMiN.Controllers.Hubs.HubHelpers;
+using TeamJAMiN.Controllers.GameLogicHelpers;
 
 namespace TeamJAMiN.Controllers
 {
@@ -27,13 +32,16 @@ namespace TeamJAMiN.Controllers
             var user = httpContext.User;
 
             var rd = httpContext.Request.RequestContext.RouteData;
-            var id = rd.Values["id"] as int?;
-            if (id == null || id < 1)
+            var gameIdString = rd.Values["id"].ToString();
+            if (String.IsNullOrWhiteSpace(gameIdString)) return false;
+            int gameId = -1;
+            int.TryParse(gameIdString, out gameId);
+            if (gameId < 1)
             {
                 return false;
             }
 
-            return IsPlayerInGame(user.Identity.Name, id.Value);
+            return IsPlayerInGame(user.Identity.Name, gameId);
         }
 
         private bool IsPlayerInGame(string username, int gameId)
@@ -73,13 +81,17 @@ namespace TeamJAMiN.Controllers
             var user = httpContext.User;
 
             var rd = httpContext.Request.RequestContext.RouteData;
-            var id = rd.Values["id"] as int?;
-            if (id == null || id < 1)
+            var gameIdString = rd.Values["id"].ToString();
+            if (String.IsNullOrWhiteSpace(gameIdString)) return false;
+            int gameId = -1;
+            int.TryParse(gameIdString, out gameId);
+
+            if (gameId < 1)
             {
                 return false;
             }
 
-            return IsPlayerHostOfGame(user.Identity.Name, id.Value);
+            return IsPlayerHostOfGame(user.Identity.Name, gameId);
         }
 
         private bool IsPlayerHostOfGame(string username, int gameId)
@@ -101,6 +113,7 @@ namespace TeamJAMiN.Controllers
                         if (currentUser.Id == player.UserId && player.IsHost)
                         {
                             isPlayerHost = true;
+                            break;
                         }
                     }
                 }
@@ -185,6 +198,7 @@ namespace TeamJAMiN.Controllers
                         newGame.Players.Add(new Player
                         {
                             UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id,
+                            UserName = User.Identity.Name,
                             IsHost = true
                         });
                     }
@@ -209,11 +223,16 @@ namespace TeamJAMiN.Controllers
             {
                 using (var identityContext = new ApplicationDbContext())
                 {
+
+                    UserManager<ApplicationUser> uManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(identityContext));
+
                     var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
 
                     if (gameResponse.Success && gameResponse.Game.IsStarted)
                     {
                         ViewBag.userName = User.Identity.Name;
+                        var user = uManager.FindByName(User.Identity.Name);
+                        ViewBag.userId = user.Id;
                         return View(gameResponse.Game);
                     }
                     else
@@ -232,17 +251,21 @@ namespace TeamJAMiN.Controllers
         /// <returns>Existing game view or appropriate error</returns>
         [Authorize]
         [HttpPost]
-        public ActionResult Join(int gameId = 0)
+        public ActionResult Join(int id = 0)
         {
             using (var galleristContext = new GalleristComponentsDbContext())
             {
                 using (var identityContext = new ApplicationDbContext())
                 {
-                    var gameResponse = GameManager.GetGame(gameId, User.Identity.Name, galleristContext, identityContext);
+                    var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
 
                     if (gameResponse.Success)
                     {
-                        gameResponse.Game.Players.Add(new Player { UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id });
+                        gameResponse.Game.Players.Add(new Player
+                        {
+                            UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id,
+                            UserName = User.Identity.Name
+                        });
                         ViewBag.userName = User.Identity.Name;
                         galleristContext.SaveChanges();
                         return Redirect("/Game/List");
@@ -260,19 +283,25 @@ namespace TeamJAMiN.Controllers
         /// <summary>
         /// Starts a game and emails all of the players that their game has started.
         /// </summary>
-        /// <param name="gameId">The id of the game to start</param>
+        /// <param name="id">The id of the game to start</param>
         /// <returns>Existing game view or appropriate error</returns>
         [AuthorizeHostOfCurrentGame]
         [HttpPost]
-        public ActionResult Start(int gameId = 0)
+        public ActionResult Start(int id = 0)
         {
             using (var galleristContext = new GalleristComponentsDbContext())
             {
                 using (var identityContext = new ApplicationDbContext())
                 {
                     //todo: set start time of game to datetime.now
-                    var gameResponse = GameManager.GetGame(gameId, User.Identity.Name, galleristContext, identityContext);
+                    var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
                     var game = gameResponse.Game;
+                    game.StartTime = DateTime.Now;
+
+                    if (game.IsStarted)
+                    {
+                        return Redirect("~/Game/Play/" + gameResponse.Game.Id);
+                    }
 
                     if (gameResponse.Success)
                     {
@@ -281,22 +310,23 @@ namespace TeamJAMiN.Controllers
                         galleristContext.SaveChanges();
 
                         //todo make a helper in email manager for this
-                        foreach(var player in game.Players)
+                        //todo also use the user and url params for signalr ajax update of game list
+                        var gameUrl = Request.Url.GetLeftPart(UriPartial.Authority) + "/Game/Play/" + game.Id;
+                        foreach (var player in game.Players)
                         {
                             var user = identityContext.Users.Single(m => m.Id == player.UserId);
-                            if (player.IsHost || string.IsNullOrWhiteSpace(user.Email)) //todo check email prefs
+                            if (string.IsNullOrWhiteSpace(user.Email)) //todo check email prefs
                                 continue;
-
-                            var gameUrl = Request.Url.GetLeftPart(UriPartial.Authority) + "/Play/" + game.Id;
-                            
+                                                       
                             var emailTitle = user.UserName + ", your game has started!"; //todo: get full name of player. We don't have names in the system yet
                             var emailBody = "A game that you are a member of has started. You can play it by visiting The Gallerist Online" +
                                 " and viewing your active games or by clicking the following link: <a href='" + gameUrl + "'></a>";
 
                             EmailManager.SendEmail(emailTitle, emailBody, new List<string> { user.Email });
                         }
-
-                        return Redirect("Play/" + gameResponse.Game.Id);
+                        //todo expand module to use signalr for all game list actions
+                        PushHelper.UpdateMyGamesList(game.Players.Where(p => p.UserId != User.Identity.GetUserId()).Select(p => p.UserId).ToList(), gameUrl, game.Id);
+                        return Redirect("~/Game/Play/" + gameResponse.Game.Id);
                     }
                     else
                     {
@@ -314,9 +344,10 @@ namespace TeamJAMiN.Controllers
         /// <param name="id">The id of the game to take an action in</param>
         /// <param name="gameAction">The type of action to take along with appropriate values of money/influence spent etc</param>
         /// <returns>Existing game view or appropriate error</returns>
+        [ValidateAntiForgeryToken]
         [AuthorizePlayerOfCurrentGame]
         [HttpPost]
-        public ActionResult TakeGameAction(int id, GameActionDto gameAction)
+        public ActionResult TakeGameAction(int id, GameActionState gameAction, string actionLocation = "")
         {
             using (var galleristContext = new GalleristComponentsDbContext())
             {
@@ -324,10 +355,30 @@ namespace TeamJAMiN.Controllers
                 {
                     var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
                     var game = gameResponse.Game;
-
+                    
                     //todo todo todo
                     //make sure the player taking an action is the current player
                     //compare current action to game state to make sure a valid action was taken (e.g. player can't move to board spot A from board spot A) [states..]
+		            //todo make getting user by username a method (is it one already?)
+		            var currentUser = identityContext.Users.FirstOrDefault(m => m.UserName == User.Identity.Name);
+
+		            //todo refactor some of this into a game logic module
+		            var player = game.Players.FirstOrDefault(p => p.UserId == currentUser.Id);
+		            if (player == null)
+		            {
+		    	        return View("GameError");
+		            }
+		            if (player.Id != game.CurrentPlayerId )
+		            {
+		    	        return View("GameError");
+		            }
+                    var actionManager = new ActionManager(game);
+                    
+		            if(!actionManager.DoAction(gameAction, actionLocation))
+		            {
+			            return Redirect("~/Game/Play/" + id);
+		            }
+
                     //check if it is one of the special cases where the action must be confirmed before allowing the next step to proceed (e.g. player must draw cards)
                     //if yes take an intermediate step, still remains current player's turn
                     //if no, continue doing logic things  //determine order of bumped player's actions, can these happen at the end of current player's turn?
@@ -338,14 +389,14 @@ namespace TeamJAMiN.Controllers
                     //need some signalr stuff so we can show the action to everyone when it is done (intermediate step or not) as well as update money, influence, board, etc.
                     //update money, influence, board, etc.
 
-                    //Can't comment anymore.. must sleep
-
+                    galleristContext.SaveChanges();
+                    return Redirect("~/Game/Play/" + id);
                     //send email to next player in turn order
                     //EmailManager.SendEmail("Player X, it is your turn to play!", "It's your turn to play at: LINK", "Mr Guy Who Gets Email.com");
 
-                    ViewBag.Message = "Not Yet Implemented";
-                    ViewBag.Title = "Not Yet Implemented";
-                    return View("GameError");
+                    //ViewBag.Message = "Not Yet Implemented";
+                    //ViewBag.Title = "Not Yet Implemented";
+                    //return View("GameError");
                 }
             }
         }

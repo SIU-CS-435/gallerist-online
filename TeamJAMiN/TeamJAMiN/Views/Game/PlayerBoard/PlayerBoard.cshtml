@@ -1,8 +1,8 @@
-﻿@model TeamJAMiN.GalleristComponentEntities.Player
+﻿@model Player
 @using TeamJAMiN.GalleristComponentEntities
 
 <div class="row">
-    Player: @ViewBag.userName <br />
+    Player: @Model.UserName <br />
     Money: @Model.Money <br />
     @{
         var commission = "No Commissioned Art";
@@ -16,27 +16,26 @@
 
 <div class="row">
     <div class="col-xs-2">
-        <div class="col-xs-12">a</div>
-        <div class="col-xs-12">a</div>
-        <div class="col-xs-12">a</div>
-        <div class="col-xs-12">a</div>
-        <div class="col-xs-12">a</div>
-        <div class="col-xs-12">a</div>
-        <div class="col-xs-12">a</div>
-        <div class="col-xs-12">a</div>
+        @for (int i = 0; i < 8; i++ )
+        {
+            ViewBag.AssistantCount = i;
+            @Html.Partial("~/Views/Game/PlayerBoard/UnemployedAssistant.cshtml", Model)
+        }
     </div>
     <div class="col-xs-8">
         <div class="row">
-            <div class="col-xs-10 border">
+            <div class="col-xs-10">
                 @{                          
                     var art = Model.Art.ToList();
                     var artCount = art.Count;
                     for (var i = 0; i < 3; i++)
                     {
-                    <div class="col-xs-4">
+                    <div class="col-xs-3">
                         @if(i<artCount)
                         {
-                            Html.Partial("~/Views/Game/PlayerBoard/PlayerArt.cshtml", art[i]);
+                            <div class="player-art-tile tile">
+                                @Html.Partial("~/Views/Game/PlayerBoard/PlayerArt.cshtml", art[i])
+                            </div>
                         }
                     </div>
                     }
@@ -61,10 +60,7 @@
                 </div>
             </div>
             <div class="col-xs-7">
-                @foreach (GameContract contract in Model.Contracts)
-                {
-                    Html.Partial("~/Views/Game/PlayerBoard/PlayerContracts.cshtml", contract);
-                }
+                @Html.Partial("~/Views/Game/PlayerBoard/PlayerContracts.cshtml", Model)
             </div>
             <div class="col-xs-2">
                 

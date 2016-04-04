@@ -27,6 +27,7 @@ namespace TeamJAMiN.GalleristComponentEntities
 
         [MaxLength(128)]
         public string UserId { get; set; }
+        public string UserName { get; set; }
 
         public bool IsHost { get; set; }
 
@@ -43,5 +44,7 @@ namespace TeamJAMiN.GalleristComponentEntities
         public int VipTickets { get; set; }
         public int InvestorTickets { get; set; }
         public int CollectorTickets { get; set; }
+
+
     }        
 }

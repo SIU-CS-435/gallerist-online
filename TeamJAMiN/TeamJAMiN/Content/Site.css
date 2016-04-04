@@ -24,15 +24,15 @@
     padding: 0 !important;
 }
 
+.margin-center {
+    margin: 0 auto;
+}
+
 .board-region {
     background-color: rgba(255, 255, 255,.1);
     text-align:center;
     border-radius:15px;
     padding: 5px 10px;
-}
-
-.player-board {
-    margin-top:100px;
 }
 
 .border {
@@ -53,7 +53,8 @@
 .aquired-scoring-icon, .reputation-row-art-icon, .auction-row-icon, .auction-row-cost, .minus-icon, .art-tile-icon, .influence-money-icon,
 .influence-star-icon, .reputation-tile-none, .influence-icon, .gallery-visitor, #international-market-reputation-action,
 #international-market-auction-action, #sales-office-contract-action, #sales-office-sell-action, #artist-colony-buy-action,
-#media-center-promote-action, #artist-colony-discover-action, #media-center-hire-action {
+#media-center-promote-action, #artist-colony-discover-action, #media-center-hire-action, .draw-contract-icon, .player-art-money,
+.player-art-type, .player-art-exhibit, .player-assistant-icon, .player-assistant-cost {
     background-size:contain;
     background-repeat:no-repeat;
     background-position:50%;
@@ -63,6 +64,20 @@
 .tile {
     border-radius:15px;
     padding: 5px;
+}
+/* Actions */
+.highlight {
+    box-shadow: 0 0 5px 5px white;
+}
+.action-button {
+    background: transparent;
+    border: none;
+    position:absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 
 /* Action Icons */
@@ -87,6 +102,7 @@
     border-radius: 50%;
     margin: 0 auto;
     background-color: rgba(22,31,40,1);
+    position:relative;
 }
 .action-space-center {
     background-color: white;
@@ -94,6 +110,18 @@
     width:40px;
     margin: 5% auto auto;
     border-radius: 50%;
+}
+.action-space-center.orange-gallerist {
+    background-color: orangered;
+}
+.action-space-center.yellow-gallerist {
+    background-color: gold;
+}
+.action-space-center.blue-gallerist {
+    background-color: dodgerblue;
+}
+.action-space-center.purple-gallerist {
+    background-color: rebeccapurple;
 }
 .action-arrow-body {
 	border-top: 20px solid white;
@@ -211,8 +239,18 @@
     border-radius: 50%;
     background-color:rgba(255,255,255,.1)
 }
+#yellow-gallery, #yellow-lobby {
+    border-color : gold;
+}
+#purple-gallery, #purple-lobby {
+    border-color : rebeccapurple;
+}
+#blue-gallery, #blue-lobby {
+    border-color : dodgerblue;
+}
 #orange-gallery, #orange-lobby {
-    border-color : orangered;}
+    border-color : orangered;
+}
 .gallery-visitor {
     height:18px;
     width: 18px;
@@ -226,11 +264,101 @@
     text-align:center;
 }
 
+/*Player Boards*/
+.player-board {
+    margin-top:100px;
+}
+.player-contract-empty {
+    background-color: rgba(255,255,255,.6) !important;
+}
+.player-art-tile {
+    height:100px;
+    background-color: #f3ebd6;
+}
+.player-art-money,
+.player-art-artist {
+    height:40px;
+}
+.player-art-artist {
+    height: 50px;
+    margin: 0px -5px 0 -5px !important;
+    padding: 5px 0;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.player-art-artist-red {
+    background-color: indianred;
+}
+.player-art-artist-blue {
+    background-color: royalblue;
+}
+.player-art-type {
+    height: 40px;
+    width: 40px;
+}
+.player-art-exhibit {
+    height:50px;
+    padding: 5px 0;
+    background-size: 50% !important;
+}
+.player-assistant-icon {
+    height: 25px;
+}
+.player-assistant-blue {
+    background-image: url(Icons/AssistantBlue.svg)
+}
+.player-assistant-yellow {
+    background-image: url(Icons/AssistantYellow.svg)
+}
+.player-assistant-orange {
+    background-image: url(Icons/AssistantOrange.svg)
+}
+.player-assistant-purple {
+    background-image: url(Icons/AssistantPurple.svg)
+}
+.player-assistant-cost {
+    height:25px;
+    width: 25px;
+    margin: 0 auto;
+}
+.player-assistant-icon.highlight::before {
+    box-shadow: -15px 0 5px -10px inset;
+    content: " ";
+    height: 100%;
+    left: -15px;
+    position: absolute;
+    top: 0;
+    width: 15px;
+}
+.player-assistant-icon.highlight {
+    position: relative;
+    box-shadow: none;
+}
+.player-assistant-icon.highlight::after {
+    box-shadow: 15px 0 5px -10px inset;
+    content: " ";
+    height: 100%;
+    position: absolute;
+    right: -15px;
+    width: 15px;
+}
+.player-assistant-icon.highlight.first {
+    position: relative;
+    box-shadow: 0 -5px 10px 0px white;
+
+}
+.player-assistant-icon.highlight.last {
+    position: relative;
+    box-shadow: 0 5px 10px 0px white;
+
+}
+
 /* Artist Tiles*/
 .artist-colony-tile {
     height:125px;
+    position: relative;
 }
-.artist-colony-tile:not(:first-child) {
+.artist-colony-tile:not(.artist-digital) {
     margin-top:10px;
 }
 .artist-blue {
@@ -240,8 +368,8 @@
     background-color: indianred;
 }
 .row.artist-colony-tile {
-    margin-left: -12px;
-    margin-right: -12px;
+    margin-left: -8px;
+    margin-right: -8px;
 }
 .undiscovered-top-row {
     background-color: rgba(255,255,255,.4);
@@ -310,9 +438,20 @@
 }
 
 /* Contract Cards */
+.contract-draw-deck {
+    height: 130px;
+    color: #5c1201;
+}
+.contract-draw-deck-section {
+    height:40px;
+    line-height:40px;
+}
+.draw-contract-icon {
+    background-image: url(Icons/BonusContract.svg);
+}
 .contract-card {
     background-color:white;
-    margin: 0 5px;
+    margin: 0 2px;
 }
 .contract-art-row {
     background-color:lightpink;
@@ -487,6 +626,12 @@
      background-image:url(Icons/InfluenceTwo.svg);
 }
 .influence-3 {
+     background-image:url(Icons/InfluenceThree.svg);
+}
+.influence-4 {
+     background-image:url(Icons/InfluenceThree.svg);
+}
+.influence-5 {
      background-image:url(Icons/InfluenceThree.svg);
 }
 

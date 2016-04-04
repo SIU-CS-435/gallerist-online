@@ -24,11 +24,25 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
         public static void assignColors(this Game newGame)
         {
             var rPlayers = newGame.Players.Shuffle();
-            var colorEnum = Enum.GetValues(typeof(PlayerColor)).GetEnumerator();
+            var colorEnum = ((PlayerColor[])Enum.GetValues(typeof(PlayerColor))).Shuffle().GetEnumerator(); ;
             foreach (Player player in rPlayers)
             {
                 colorEnum.MoveNext();
-                player.Color = (PlayerColor)colorEnum.Current;
+                if (colorEnum.Current != PlayerColor.none)
+                {
+                    player.Color = (PlayerColor)colorEnum.Current;
+                }
+            }
+        }
+
+        public static void UpdatePlayerOrder(this Game game)
+        {
+            var currentPlayer = game.PlayerOrder.First();
+            game.CurrentPlayerId = currentPlayer.Id;
+            if(game.Players.Count != 1) //todo add logic for kicked out or executive actions
+            {
+                var isRemoved = game.PlayerOrder.Remove(currentPlayer);
+                game.PlayerOrder.Add(currentPlayer);
             }
         }
     }
