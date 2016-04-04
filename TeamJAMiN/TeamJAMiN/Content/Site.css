@@ -52,7 +52,7 @@
 }
 .player-art-artist {
     height: 50px;
-    margin: 0px -5px -5px -5px !important;
+    margin: 0px -5px 0 -5px !important;
     padding: 5px 0;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;

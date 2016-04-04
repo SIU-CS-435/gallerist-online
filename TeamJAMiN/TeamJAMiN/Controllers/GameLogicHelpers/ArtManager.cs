@@ -39,9 +39,9 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
 
         public static int GetArtValue(this GameArt art)
         {
-            var fame = art.Fame;
-            var starLevel = 0;
             var artist = art.Artist;
+            var fame = artist.Fame;
+            var starLevel = 0;
             for (starLevel = 0; starLevel < artist.StarLevels.Count()+1; starLevel++)
             {
                 if(starLevel == artist.StarLevels.Count() || fame < artist.StarLevels[starLevel])
