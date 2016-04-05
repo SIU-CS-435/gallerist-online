@@ -10,7 +10,7 @@ namespace TeamJAMiN.Controllers.Hubs
     {
         public void Update(string action)
         {
-            Clients.All.serverResponse(action);
+            Clients.Others.serverResponse(action);
         }
     }
 }

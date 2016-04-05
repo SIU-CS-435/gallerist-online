@@ -2,8 +2,8 @@
 
 $(function () {
     var actionManager = $.connection.gameActionHub;
-    actionManager.client.serverResponse = function (message) {
-        alert(message);
+    actionManager.client.serverResponse = function () {
+        window.location.reload(true);
     };
     $.connection.hub.start().done(function () {
         var actionSpace = $('.action-space');
