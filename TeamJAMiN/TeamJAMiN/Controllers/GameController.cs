@@ -412,6 +412,7 @@ namespace TeamJAMiN.Controllers
                     //again do the updatey
                     //need some signalr stuff so we can show the action to everyone when it is done (intermediate step or not) as well as update money, influence, board, etc.
                     //update money, influence, board, etc.
+                    galleristContext.SaveChanges();
 
                     var gameUrl = Request.Url.GetLeftPart(UriPartial.Authority) + "/Game/Play/" + game.Id;
                     var nextPlayer = identityContext.Users.First(m => m.Id == game.CurrentPlayer.UserId);
@@ -421,8 +422,7 @@ namespace TeamJAMiN.Controllers
                         " and viewing your active games or by clicking the following link: " + gameUrl;
 
                     EmailManager.SendEmail(emailTitle, emailBody, new List<string> { nextPlayer.Email });
-
-                    galleristContext.SaveChanges();
+                    PushHelper.RefreshGame(game.Players.Where(p => p.UserId != User.Identity.GetUserId()).Select(p => p.UserId).ToList());
                     return Redirect("~/Game/Play/" + id);
                     //send email to next player in turn order
                     //EmailManager.SendEmail("Player X, it is your turn to play!", "It's your turn to play at: LINK", "Mr Guy Who Gets Email.com");

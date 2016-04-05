@@ -12,5 +12,15 @@ namespace TeamJAMiN.Controllers.Hubs
         {
             Clients.Others.serverResponse(action);
         }
+
+        public void Activate()
+        {
+            //activate client
+        }
+
+        public void RefreshGame(List<string> userIds)
+        {
+            Clients.Users(userIds).refresh();
+        }
     }
 }

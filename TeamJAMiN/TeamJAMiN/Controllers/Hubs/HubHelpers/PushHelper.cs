@@ -20,5 +20,11 @@ namespace TeamJAMiN.Controllers.Hubs.HubHelpers
             hubContext.Clients.Users(userIds).updateListItem(linkUrl, gameId);
         }
 
+        public static void RefreshGame(List<string> userIds)
+        {
+            var hubContext = GetHub<GameActionHub>();
+            hubContext.Clients.Users(userIds).refresh();
+
+        }
     }
 }
