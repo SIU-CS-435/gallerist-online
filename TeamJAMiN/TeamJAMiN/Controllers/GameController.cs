@@ -138,7 +138,7 @@ namespace TeamJAMiN.Controllers
                 var userId = identityContext.Users.First(m => m.UserName == userName).Id;
                 using (var galleristContext = new GalleristComponentsDbContext())
                 {
-                    var allGames = galleristContext.Games.Where(m => !m.IsCompleted && !m.IsDeleted);
+                    var allGames = galleristContext.Games.Where(m => !m.IsCompleted && !m.IsDeleted).OrderByDescending(m => m.CreatedTime);
                     var myGames = allGames.Where(m => m.Players.Any(n => n.UserId == userId));
 
                     var allGamesList = allGames.Select(m => new GameDto
@@ -344,7 +344,7 @@ namespace TeamJAMiN.Controllers
                                                        
                             var emailTitle = user.UserName + ", your game has started!"; //todo: get full name of player. We don't have names in the system yet
                             var emailBody = "A game that you are a member of has started. You can play it by visiting The Gallerist Online" +
-                                " and viewing your active games or by clicking the following link: <a href='" + gameUrl + "'></a>";
+                                " and viewing your active games or by clicking the following link: " + gameUrl;
 
                             EmailManager.SendEmail(emailTitle, emailBody, new List<string> { user.Email });
                         }
@@ -412,6 +412,15 @@ namespace TeamJAMiN.Controllers
                     //again do the updatey
                     //need some signalr stuff so we can show the action to everyone when it is done (intermediate step or not) as well as update money, influence, board, etc.
                     //update money, influence, board, etc.
+
+                    var gameUrl = Request.Url.GetLeftPart(UriPartial.Authority) + "/Game/Play/" + game.Id;
+                    var nextPlayer = identityContext.Users.First(m => m.Id == game.CurrentPlayer.UserId);
+
+                    var emailTitle = nextPlayer.UserName + ", it is your turn!";
+                    var emailBody = "It is your turn in a game you are playing. You can take your turn by visiting The Gallerist Online" +
+                        " and viewing your active games or by clicking the following link: " + gameUrl;
+
+                    EmailManager.SendEmail(emailTitle, emailBody, new List<string> { nextPlayer.Email });
 
                     galleristContext.SaveChanges();
                     return Redirect("~/Game/Play/" + id);
