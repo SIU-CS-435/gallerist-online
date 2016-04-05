@@ -329,6 +329,10 @@
     <Compile Include="DataContexts\IdentityMigrations\201603300017209_DefaultedBooleansOnProfile.Designer.cs">
       <DependentUpon>201603300017209_DefaultedBooleansOnProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\IdentityMigrations\201604042203145_ViewShift.cs" />
+    <Compile Include="DataContexts\IdentityMigrations\201604042203145_ViewShift.Designer.cs">
+      <DependentUpon>201604042203145_ViewShift.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\IdentityMigrations\Configuration.cs" />
     <Compile Include="Controllers\GameControllerHelpers\SetupReputationTiles.cs" />
     <Compile Include="Global.asax.cs">
@@ -532,8 +536,6 @@
     <Content Include="Views\Game\PlayerGallery\Lobby.cshtml" />
     <Content Include="Views\Game\PlayerGallery\VisitorDisplay.cshtml" />
     <Content Include="Views\Game\ActionSpaces\ActionSpace.cshtml" />
-    <Content Include="Views\Game\PostButtons\View.cshtml" />
-    <Content Include="Views\Game\PlayerBoard\UnemployedAssistant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -633,6 +635,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201603300017209_DefaultedBooleansOnProfile.resx">
       <DependentUpon>201603300017209_DefaultedBooleansOnProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\IdentityMigrations\201604042203145_ViewShift.resx">
+      <DependentUpon>201604042203145_ViewShift.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
