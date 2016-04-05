@@ -339,14 +339,17 @@ namespace TeamJAMiN.Controllers
                         foreach (var player in game.Players)
                         {
                             var user = identityContext.Users.Single(m => m.Id == player.UserId);
-                            if (string.IsNullOrWhiteSpace(user.Email)) //todo check email prefs
-                                continue;
-                                                       
-                            var emailTitle = user.UserName + ", your game has started!"; //todo: get full name of player. We don't have names in the system yet
-                            var emailBody = "A game that you are a member of has started. You can play it by visiting The Gallerist Online" +
-                                " and viewing your active games or by clicking the following link: " + gameUrl;
+                            if (user.AllowsEmails)
+                            {
+                                if (string.IsNullOrWhiteSpace(user.Email)) //todo check email prefs
+                                    continue;
 
-                            EmailManager.SendEmail(emailTitle, emailBody, new List<string> { user.Email });
+                                var emailTitle = user.UserName + ", your game has started!"; //todo: get full name of player. We don't have names in the system yet
+                                var emailBody = "A game that you are a member of has started. You can play it by visiting The Gallerist Online" +
+                                    " and viewing your active games or by clicking the following link: " + gameUrl;
+
+                                EmailManager.SendEmail(emailTitle, emailBody, new List<string> { user.Email });
+                            }
                         }
                         //todo expand module to use signalr for all game list actions
                         PushHelper singleton = PushHelper.GetPushEngine();
@@ -414,15 +417,17 @@ namespace TeamJAMiN.Controllers
                     //need some signalr stuff so we can show the action to everyone when it is done (intermediate step or not) as well as update money, influence, board, etc.
                     //update money, influence, board, etc.
                     galleristContext.SaveChanges();
-
-                    var gameUrl = Request.Url.GetLeftPart(UriPartial.Authority) + "/Game/Play/" + game.Id;
+                    
                     var nextPlayer = identityContext.Users.First(m => m.Id == game.CurrentPlayer.UserId);
+                    if (nextPlayer.AllowsEmails)
+                    {
+                        var gameUrl = Request.Url.GetLeftPart(UriPartial.Authority) + "/Game/Play/" + game.Id;
+                        var emailTitle = nextPlayer.UserName + ", it is your turn!";
+                        var emailBody = "It is your turn in a game you are playing. You can take your turn by visiting The Gallerist Online" +
+                            " and viewing your active games or by clicking the following link: " + gameUrl;
 
-                    var emailTitle = nextPlayer.UserName + ", it is your turn!";
-                    var emailBody = "It is your turn in a game you are playing. You can take your turn by visiting The Gallerist Online" +
-                        " and viewing your active games or by clicking the following link: " + gameUrl;
-
-                    EmailManager.SendEmail(emailTitle, emailBody, new List<string> { nextPlayer.Email });
+                        EmailManager.SendEmail(emailTitle, emailBody, new List<string> { nextPlayer.Email });
+                    }
                     PushHelper singleton = PushHelper.GetPushEngine();
                     singleton.RefreshGame(game.Players.Where(p => p.UserName != User.Identity.Name).Select(p => p.UserName).ToList());
                     return Redirect("~/Game/Play/" + id);
