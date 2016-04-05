@@ -4,104 +4,78 @@
 <h2>@ViewBag.Title</h2>
 
 
-<div class="jumbotron">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <td></td>
-                <td>Games</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                var index = 1;
-                foreach (var myGame in ViewBag.myGames)
-                {
-                    <tr>
-                        <td>@index</td>
-                        <td>@myGame.Name</td>
-                        <td>@myGame.PlayersString</td>
-                        <td>@myGame.MaxTurnLengthString</td>
-                        <td id="start-open-button-container-@myGame.Id" class="game-list-button-container">
+<div class="jumbotron row">
+    <div class="game-list">
+        @{
+            var index = 1;
+            foreach (var myGame in ViewBag.myGames)
+            {
+                <div class="col-md-12">
+                    <div class="col-md-5 game-list-name">@myGame.Name</div>
+                    <div class="col-md-2 game-list-field">@myGame.PlayersString</div>
+                    <div class="col-md-2 game-list-field">@myGame.MaxTurnLengthString</div>
+                    <div id="start-open-button-container-@myGame.Id" class="col-md-3 game-list-button-container no-padding">
+                        <div class="col-md-6">
                             @if (myGame.isStartable)
                             {
                                 using (Html.BeginForm("Start", "Game", new { id = myGame.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                                 {
                                     @Html.AntiForgeryToken()
-                                    <div class="form-group">
-                                        <div class="col-md-offset-2 col-md-10">
-                                            <input type="submit" class="btn btn-success" value="Start" />
-                                        </div>
-                                    </div>
+                                    <input type="submit" class="btn btn-sm btn-success " value="Start" />
                                 }
                             }
                             else if (myGame.isStarted)
                             {
-                                <a href="@myGame.Url" class="btn-sm btn-success">Open</a>
+                                <a href="@myGame.Url" class="btn btn-sm btn-success">Open</a>
                             }
-                        </td>
-                        <td>
-                            @*<div class="col-md-offset-2 col-md-10">
-                                <input type="submit" class="btn btn-default" value="Delete" />
-                            </div>*@
-                        </td>
-                    </tr>
-                    index++;
-                }
+                        </div>
+                        <div class="col-md-6">
+                            <input type="submit" class="btn btn-danger btn-sm" value="Delete" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <hr />
+                </div>
+                index++;
             }
-        </tbody>
-    </table>
+        }
+    </div>
 </div>
    
 <h2>All Games</h2>
 
-<div class="jumbotron">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <td></td>
-                <td>Games</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                var allGameIndex = 1;
-                foreach (var game in ViewBag.allGames)
-                {
-                    <tr>
-                        <td>@allGameIndex</td>
-                        <td>@game.Name</td>
-                        <td>@game.PlayersString</td>
-                        <td>@game.MaxTurnLengthString</td>
-                        <td>
-                            @if (game.isJoinable)
+<div class="jumbotron row">
+    <div class="game-list">
+        @{
+            var allGameIndex = 1;
+            foreach (var game in ViewBag.allGames)
+            {
+                <div class="col-md-12">
+                    <div class="col-md-5 game-list-name">@game.Name</div>
+                    <div class="col-md-2 game-list-field">@game.PlayersString</div>
+                    <div class="col-md-2 game-list-field">@game.MaxTurnLengthString</div>
+                    <div class="col-md-2 no-padding">
+                        @if (game.isJoinable)
+                        {
+                            using (Html.BeginForm("Join", "Game", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                             {
-                                using (Html.BeginForm("Join", "Game", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    <input class="form-control hidden" type="hidden" name="id" value="@game.Id" />
-                                    <div class="form-group">
-                                        <div class="col-md-offset-2 col-md-10">
-                                            <input type="submit" class="btn btn-success" value="Join" />
-                                        </div>
-                                    </div>
-                                }
+                                @Html.AntiForgeryToken()
+                                <input class="form-control hidden" type="hidden" name="id" value="@game.Id" />
+                                <input type="submit" class="btn btn-sm btn-success col-md-5" value="Join" />
                             }
-                        </td>
-                    </tr>
-                    allGameIndex++;
-                }
+                        }
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <hr />
+                </div>
+                allGameIndex++;
             }
-        </tbody>
-    </table>
-</div>
+        }
+    </div>
+ </div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/gamelist")
     <script src="~/signalr/hubs"></script>

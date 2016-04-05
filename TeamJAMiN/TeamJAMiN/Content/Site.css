@@ -1035,3 +1035,21 @@ textarea {
 td{
     padding:5px;
 }
+
+.game-list-name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.game-list .btn{
+    width: 100%;
+    font-size: 16px;
+}
+
+.game-list-name{
+    font-size: 20px;
+}
+
+.game-list-field{
+    padding-top: 5px;
+}
