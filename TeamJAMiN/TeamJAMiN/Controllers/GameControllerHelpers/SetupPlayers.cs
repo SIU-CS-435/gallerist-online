@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using TeamJAMiN.GalleristComponentEntities;
 
 namespace TeamJAMiN.Controllers.GameControllerHelpers
@@ -28,10 +27,11 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
             foreach (Player player in rPlayers)
             {
                 colorEnum.MoveNext();
-                if (colorEnum.Current != PlayerColor.none)
+                if (colorEnum.Current == PlayerColor.none)
                 {
-                    player.Color = (PlayerColor)colorEnum.Current;
+                    colorEnum.MoveNext();
                 }
+                player.Color = (PlayerColor)colorEnum.Current;
             }
         }
 
@@ -43,6 +43,7 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
             {
                 var isRemoved = game.PlayerOrder.Remove(currentPlayer);
                 game.PlayerOrder.Add(currentPlayer);
+                game.PlayerOrder = game.PlayerOrder;
             }
         }
     }

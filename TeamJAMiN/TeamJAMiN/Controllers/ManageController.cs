@@ -82,6 +82,27 @@ namespace TeamJAMiN.Controllers
             return View(model);
         }
 
+        public async Task<ActionResult> ManageProfile()
+        {
+            var userId = User.Identity.GetUserId();
+            var um = UserManager.FindById(userId);
+
+            var model = new ManageProfileViewModel
+            {
+                Email = await UserManager.GetEmailAsync(userId),
+                UserName = User.Identity.GetUserName(),
+                FirstName = um.FirstName,
+                LastName = um.LastName,
+                Birthday = um.Birthday,
+                City = um.City,
+                State = um.State,
+                Private = um.IsPrivate,
+                AllowEmails = um.AllowsEmails
+            };
+            return View(model);
+        }
+
+        [HttpPost]
         public async Task<ActionResult> ManageProfile(ManageProfileViewModel model)
         {
             if (ModelState.IsValid)

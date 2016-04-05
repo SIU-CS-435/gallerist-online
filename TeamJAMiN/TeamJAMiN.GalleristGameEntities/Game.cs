@@ -46,6 +46,9 @@ namespace TeamJAMiN.GalleristComponentEntities
         [DefaultValue(false)]
         public bool IsStarted { get; set; }
 
+        [DefaultValue(false)]
+        public bool IsDeleted { get; set; }
+
         public virtual HashSet<GameArtist> Artists { get; set; }
         public virtual HashSet<GameArt> Art { get; set; }
         public virtual HashSet<GameReputationTile> ReputationTiles { get; set; }
@@ -56,6 +59,7 @@ namespace TeamJAMiN.GalleristComponentEntities
         public int AvailableInvestorTickets { get; set; }
         public int AvailableCollectorTickets { get; set; }
         public string PlayerOrderData { get; set; }
+        
 
         public int CurrentPlayerId { get; set; }
         [NotMapped]

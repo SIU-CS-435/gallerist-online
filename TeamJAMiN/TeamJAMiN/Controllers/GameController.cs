@@ -17,6 +17,7 @@ using TeamJAMiN.Controllers.GameLogicHelpers;
 
 namespace TeamJAMiN.Controllers
 {
+    #region Authentication Attributes
     //todo move out into a different place
     public class AuthorizePlayerOfCurrentGame : AuthorizeAttribute
     {
@@ -121,6 +122,7 @@ namespace TeamJAMiN.Controllers
             return isPlayerHost;
         }
     }
+    #endregion
 
     public class GameController : Controller
     {
@@ -136,7 +138,7 @@ namespace TeamJAMiN.Controllers
                 var userId = identityContext.Users.First(m => m.UserName == userName).Id;
                 using (var galleristContext = new GalleristComponentsDbContext())
                 {
-                    var allGames = galleristContext.Games.Where(m => !m.IsCompleted);
+                    var allGames = galleristContext.Games.Where(m => !m.IsCompleted && !m.IsDeleted).OrderByDescending(m => m.CreatedTime);
                     var myGames = allGames.Where(m => m.Players.Any(n => n.UserId == userId));
 
                     var allGamesList = allGames.Select(m => new GameDto
@@ -209,6 +211,28 @@ namespace TeamJAMiN.Controllers
             else
             {
                 return View(newGame);
+            }
+        }
+
+        [AuthorizeHostOfCurrentGame]
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            using (var galleristContext = new GalleristComponentsDbContext())
+            {
+                var game = galleristContext.Games.FirstOrDefault(m => m.Id == id);
+
+                if(game == null)
+                {
+                    ViewBag.Message = "This does not appear to be a valid game";
+                    ViewBag.Title = "Invalid Game";
+                    return View("GameError");
+                }
+
+                game.IsDeleted = true;
+                
+                galleristContext.SaveChanges();
+                return Redirect("/Game/List");
             }
         }
 
@@ -320,12 +344,13 @@ namespace TeamJAMiN.Controllers
                                                        
                             var emailTitle = user.UserName + ", your game has started!"; //todo: get full name of player. We don't have names in the system yet
                             var emailBody = "A game that you are a member of has started. You can play it by visiting The Gallerist Online" +
-                                " and viewing your active games or by clicking the following link: <a href='" + gameUrl + "'></a>";
+                                " and viewing your active games or by clicking the following link: " + gameUrl;
 
                             EmailManager.SendEmail(emailTitle, emailBody, new List<string> { user.Email });
                         }
                         //todo expand module to use signalr for all game list actions
-                        PushHelper.UpdateMyGamesList(game.Players.Where(p => p.UserId != User.Identity.GetUserId()).Select(p => p.UserId).ToList(), gameUrl, game.Id);
+                        PushHelper singleton = PushHelper.GetPushEngine();
+                        singleton.UpdateMyGamesList(game.Players.Where(p => p.UserName != User.Identity.Name).Select(p => p.UserName).ToList(), gameUrl, game.Id);
                         return Redirect("~/Game/Play/" + gameResponse.Game.Id);
                     }
                     else
@@ -388,8 +413,18 @@ namespace TeamJAMiN.Controllers
                     //again do the updatey
                     //need some signalr stuff so we can show the action to everyone when it is done (intermediate step or not) as well as update money, influence, board, etc.
                     //update money, influence, board, etc.
-
                     galleristContext.SaveChanges();
+
+                    var gameUrl = Request.Url.GetLeftPart(UriPartial.Authority) + "/Game/Play/" + game.Id;
+                    var nextPlayer = identityContext.Users.First(m => m.Id == game.CurrentPlayer.UserId);
+
+                    var emailTitle = nextPlayer.UserName + ", it is your turn!";
+                    var emailBody = "It is your turn in a game you are playing. You can take your turn by visiting The Gallerist Online" +
+                        " and viewing your active games or by clicking the following link: " + gameUrl;
+
+                    EmailManager.SendEmail(emailTitle, emailBody, new List<string> { nextPlayer.Email });
+                    PushHelper singleton = PushHelper.GetPushEngine();
+                    singleton.RefreshGame(game.Players.Where(p => p.UserName != User.Identity.Name).Select(p => p.UserName).ToList());
                     return Redirect("~/Game/Play/" + id);
                     //send email to next player in turn order
                     //EmailManager.SendEmail("Player X, it is your turn to play!", "It's your turn to play at: LINK", "Mr Guy Who Gets Email.com");

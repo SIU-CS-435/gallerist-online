@@ -9,16 +9,35 @@ namespace TeamJAMiN.Controllers.Hubs.HubHelpers
 {
     public class PushHelper
     {
+        private static PushHelper pushEngine = new PushHelper();
+
+        private PushHelper()
+        {
+
+        }
+
         private static IHubContext GetHub<T>()
             where T : IHub
         {
             return GlobalHost.ConnectionManager.GetHubContext<T>();
         }
-        public static void UpdateMyGamesList(List<string> userIds, string linkUrl, int gameId)
+
+        public static PushHelper GetPushEngine()
+        {
+            return pushEngine;
+        }
+
+        public void UpdateMyGamesList(List<string> userIds, string linkUrl, int gameId)
         {
             var hubContext = GetHub<GameListHub>();
             hubContext.Clients.Users(userIds).updateListItem(linkUrl, gameId);
         }
 
+        public void RefreshGame(List<string> userIds)
+        {
+            var hubContext = GetHub<GameActionHub>();
+            hubContext.Clients.Users(userIds).refresh();
+
+        }
     }
 }

@@ -3,14 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.SignalR;
+using TeamJAMiN.Controllers.Hubs.HubHelpers;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 
 namespace TeamJAMiN.Controllers.Hubs
 {
     public class GameActionHub : Hub
     {
+
+        public void Activate()
+        {
+
+        }
+
         public void Update(string action)
         {
-            Clients.All.serverResponse(action);
+            Clients.Others.serverResponse(action);
+        }
+
+        public void RefreshGame(List<string> userIds)
+        {
+            Clients.Users(userIds).refresh();
         }
     }
 }
