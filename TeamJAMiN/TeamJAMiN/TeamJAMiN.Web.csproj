@@ -329,6 +329,10 @@
     <Compile Include="DataContexts\IdentityMigrations\201603300017209_DefaultedBooleansOnProfile.Designer.cs">
       <DependentUpon>201603300017209_DefaultedBooleansOnProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\IdentityMigrations\201604042258035_userdata.cs" />
+    <Compile Include="DataContexts\IdentityMigrations\201604042258035_userdata.Designer.cs">
+      <DependentUpon>201604042258035_userdata.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\IdentityMigrations\Configuration.cs" />
     <Compile Include="Controllers\GameControllerHelpers\SetupReputationTiles.cs" />
     <Compile Include="Global.asax.cs">
@@ -633,6 +637,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201603300017209_DefaultedBooleansOnProfile.resx">
       <DependentUpon>201603300017209_DefaultedBooleansOnProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\IdentityMigrations\201604042258035_userdata.resx">
+      <DependentUpon>201604042258035_userdata.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
