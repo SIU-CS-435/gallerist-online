@@ -27,10 +27,11 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
             foreach (Player player in rPlayers)
             {
                 colorEnum.MoveNext();
-                if (colorEnum.Current != PlayerColor.none)
+                if (colorEnum.Current == PlayerColor.none)
                 {
-                    player.Color = (PlayerColor)colorEnum.Current;
+                    colorEnum.MoveNext();
                 }
+                player.Color = (PlayerColor)colorEnum.Current;
             }
         }
 

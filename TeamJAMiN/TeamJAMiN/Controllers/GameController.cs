@@ -349,7 +349,8 @@ namespace TeamJAMiN.Controllers
                             EmailManager.SendEmail(emailTitle, emailBody, new List<string> { user.Email });
                         }
                         //todo expand module to use signalr for all game list actions
-                        PushHelper.UpdateMyGamesList(game.Players.Where(p => p.UserId != User.Identity.GetUserId()).Select(p => p.UserId).ToList(), gameUrl, game.Id);
+                        PushHelper singleton = PushHelper.GetPushEngine();
+                        singleton.UpdateMyGamesList(game.Players.Where(p => p.UserName != User.Identity.Name).Select(p => p.UserName).ToList(), gameUrl, game.Id);
                         return Redirect("~/Game/Play/" + gameResponse.Game.Id);
                     }
                     else
@@ -422,7 +423,8 @@ namespace TeamJAMiN.Controllers
                         " and viewing your active games or by clicking the following link: " + gameUrl;
 
                     EmailManager.SendEmail(emailTitle, emailBody, new List<string> { nextPlayer.Email });
-                    PushHelper.RefreshGame(game.Players.Where(p => p.UserId != User.Identity.GetUserId()).Select(p => p.UserId).ToList());
+                    PushHelper singleton = PushHelper.GetPushEngine();
+                    singleton.RefreshGame(game.Players.Where(p => p.UserName != User.Identity.Name).Select(p => p.UserName).ToList());
                     return Redirect("~/Game/Play/" + id);
                     //send email to next player in turn order
                     //EmailManager.SendEmail("Player X, it is your turn to play!", "It's your turn to play at: LINK", "Mr Guy Who Gets Email.com");
