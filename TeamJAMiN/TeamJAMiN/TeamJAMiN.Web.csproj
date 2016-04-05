@@ -315,6 +315,10 @@
     <Compile Include="DataContexts\GalleristComponentMigrations\201604032137489_ContractAction1.Designer.cs">
       <DependentUpon>201604032137489_ContractAction1.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\GalleristComponentMigrations\201604050017021_deleted-games.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201604050017021_deleted-games.Designer.cs">
+      <DependentUpon>201604050017021_deleted-games.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\GalleristComponentMigrations\Configuration.cs" />
     <Compile Include="DataContexts\GalleristComponentsDb.cs" />
     <Compile Include="DataContexts\IdentityMigrations\201602282353509_init.cs" />
@@ -538,6 +542,7 @@
     <Content Include="Views\Game\ActionSpaces\ActionSpace.cshtml" />
     <Content Include="Views\Game\PostButtons\View.cshtml" />
     <Content Include="Views\Game\PlayerBoard\UnemployedAssistant.cshtml" />
+    <Content Include="Views\Manage\ManageProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -628,6 +633,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201604032137489_ContractAction1.resx">
       <DependentUpon>201604032137489_ContractAction1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201604050017021_deleted-games.resx">
+      <DependentUpon>201604050017021_deleted-games.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201602282353509_init.resx">
       <DependentUpon>201602282353509_init.cs</DependentUpon>

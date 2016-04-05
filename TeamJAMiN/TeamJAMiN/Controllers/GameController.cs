@@ -17,6 +17,7 @@ using TeamJAMiN.Controllers.GameLogicHelpers;
 
 namespace TeamJAMiN.Controllers
 {
+    #region Authentication Attributes
     //todo move out into a different place
     public class AuthorizePlayerOfCurrentGame : AuthorizeAttribute
     {
@@ -121,6 +122,7 @@ namespace TeamJAMiN.Controllers
             return isPlayerHost;
         }
     }
+    #endregion
 
     public class GameController : Controller
     {
@@ -136,7 +138,7 @@ namespace TeamJAMiN.Controllers
                 var userId = identityContext.Users.First(m => m.UserName == userName).Id;
                 using (var galleristContext = new GalleristComponentsDbContext())
                 {
-                    var allGames = galleristContext.Games.Where(m => !m.IsCompleted);
+                    var allGames = galleristContext.Games.Where(m => !m.IsCompleted && !m.IsDeleted);
                     var myGames = allGames.Where(m => m.Players.Any(n => n.UserId == userId));
 
                     var allGamesList = allGames.Select(m => new GameDto
@@ -209,6 +211,28 @@ namespace TeamJAMiN.Controllers
             else
             {
                 return View(newGame);
+            }
+        }
+
+        [AuthorizeHostOfCurrentGame]
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            using (var galleristContext = new GalleristComponentsDbContext())
+            {
+                var game = galleristContext.Games.FirstOrDefault(m => m.Id == id);
+
+                if(game == null)
+                {
+                    ViewBag.Message = "This does not appear to be a valid game";
+                    ViewBag.Title = "Invalid Game";
+                    return View("GameError");
+                }
+
+                game.IsDeleted = true;
+                
+                galleristContext.SaveChanges();
+                return Redirect("/Game/List");
             }
         }
 
