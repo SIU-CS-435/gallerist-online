@@ -23,7 +23,7 @@
 
 <div class="col-xs-12">
     @*Assistant Icon*@
-    @if (Model.Game.CurrentPlayer.UserId == ViewBag.userId && Model.Game.CurrentActionState == GameActionState.MediaCenter && assistantIcon != "")
+    @if (Model.Id == Model.Game.CurrentPlayer.Id && Model.Game.CurrentPlayer.UserId == ViewBag.userId && Model.Game.CurrentActionState == GameActionState.MediaCenter && assistantIcon != "")
     {
         using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Game.Id, gameAction = GameActionState.Hire, actionLocation = assistantIndex.ToString() }, FormMethod.Post, new { role = "form" }))
         {

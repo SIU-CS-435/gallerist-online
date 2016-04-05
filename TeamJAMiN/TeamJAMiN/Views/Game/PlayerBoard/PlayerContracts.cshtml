@@ -25,7 +25,7 @@
         empty = "player-contract-empty";
     }
     <div class="col-xs-4">
-        @if (Model.Game.CurrentPlayer.UserId == ViewBag.userId && Model.Game.CurrentActionState == GameActionState.ContractDraft)
+        @if (Model.Id == Model.Game.CurrentPlayer.Id && Model.Game.CurrentPlayer.UserId == ViewBag.userId && Model.Game.CurrentActionState == GameActionState.ContractDraft)
         {
             using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.GameId, gameAction = GameActionState.ContractToPlayerBoard, actionLocation = location }, FormMethod.Post, new { role = "form" }))
             {

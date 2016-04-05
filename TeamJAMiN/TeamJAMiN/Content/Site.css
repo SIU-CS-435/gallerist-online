@@ -769,6 +769,7 @@
 .promotion-tile {
     background-size: 35%, auto;
     background-repeat:no-repeat;
+    background-position: 80% 50%;
     background-position-x: 80%;
     background-position-y: 50%;
     color: #5c1201;

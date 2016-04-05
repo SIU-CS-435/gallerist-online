@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,8 +19,9 @@ namespace TeamJAMiN.Models.GameViewHelpers
 
         public static string Highlight(this Game game, GameActionState state)
         {
+            var userId = HttpContext.Current.User.Identity.GetUserId();
             var highlight = "";
-            if (game.CurrentActionState == state)
+            if (game.CurrentActionState == state && game.CurrentPlayer.UserId == userId)
             {
                 highlight = "highlight";
             }
