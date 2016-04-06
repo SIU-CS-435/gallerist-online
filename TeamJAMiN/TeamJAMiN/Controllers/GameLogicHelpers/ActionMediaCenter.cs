@@ -102,7 +102,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             game.CurrentActionState = Name;
             var player = context.Game.CurrentPlayer;
             //todo allow players to buy multiple assistants
-            player.Money += player.GetNextAssistantCost();
+            player.Money -= player.GetNextAssistantCost();
             player.GetNewAssistant();
             //todo give player hire bonus
             //todo replace below with a pass button or something.

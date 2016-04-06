@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TeamJAMiN.Controllers.GameLogicHelpers;
 using TeamJAMiN.GalleristComponentEntities;
 
 namespace TeamJAMiN.Controllers.GameControllerHelpers
@@ -12,10 +13,8 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
             newGame.assignColors();
             foreach (Player player in newGame.Players)
             {
-                player.Assistants = new HashSet<PlayerAssistant> {
-                    new PlayerAssistant { Location = PlayerAssistantLocation.Office, Player = player },
-                    new PlayerAssistant { Location = PlayerAssistantLocation.Office, Player = player }
-                };
+                player.GetNewAssistant();
+                player.GetNewAssistant();
                 player.GalleristLocation = PlayerLocation.Gallery;
             }
             newGame.PlayerOrder = newGame.Players.Shuffle().ToList();

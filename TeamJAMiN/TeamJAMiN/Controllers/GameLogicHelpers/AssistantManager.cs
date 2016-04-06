@@ -12,7 +12,9 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         public static BonusType[] AssistantBonus = new BonusType[] { };
         public static void GetNewAssistant(this Player player)
         {
-            player.Assistants.Add(new PlayerAssistant() { Location = PlayerAssistantLocation.Office, Player = player });
+            var assistant = new PlayerAssistant() { Location = PlayerAssistantLocation.Office };
+            player.Assistants.Add(assistant);
+            player.Game.Assistants.Add(assistant);
         }
         public static int GetNextAssistantCost(this Player player)
         {

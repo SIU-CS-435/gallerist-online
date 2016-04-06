@@ -6,7 +6,7 @@
 @{ 
     var assistantIndex = (int)ViewBag.AssistantCount;
     var assistantIcon = "";
-    if (Model.Assistants.Count - 2 < assistantIndex)
+    if (Model.Assistants.Count - 2 <= assistantIndex)
     {
         assistantIcon = "player-assistant-" + @Model.Color;
     }

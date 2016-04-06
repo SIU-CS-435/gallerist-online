@@ -319,6 +319,14 @@
     <Compile Include="DataContexts\GalleristComponentMigrations\201604050017021_deleted-games.Designer.cs">
       <DependentUpon>201604050017021_deleted-games.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\GalleristComponentMigrations\201604061434546_Assistants.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201604061434546_Assistants.Designer.cs">
+      <DependentUpon>201604061434546_Assistants.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\GalleristComponentMigrations\201604061455216_AssistantsToGames.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201604061455216_AssistantsToGames.Designer.cs">
+      <DependentUpon>201604061455216_AssistantsToGames.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\GalleristComponentMigrations\Configuration.cs" />
     <Compile Include="DataContexts\GalleristComponentsDb.cs" />
     <Compile Include="DataContexts\IdentityMigrations\201602282353509_init.cs" />
@@ -636,6 +644,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201604050017021_deleted-games.resx">
       <DependentUpon>201604050017021_deleted-games.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201604061434546_Assistants.resx">
+      <DependentUpon>201604061434546_Assistants.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201604061455216_AssistantsToGames.resx">
+      <DependentUpon>201604061455216_AssistantsToGames.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201602282353509_init.resx">
       <DependentUpon>201602282353509_init.cs</DependentUpon>
