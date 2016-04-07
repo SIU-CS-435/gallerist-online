@@ -321,12 +321,6 @@ namespace TeamJAMiN.Controllers
                     PushHelper singleton = PushHelper.GetPushEngine();
                     singleton.RefreshGame(game.Players.Where(p => p.UserName != User.Identity.Name).Select(p => p.UserName).ToList());
                     return Redirect("~/Game/Play/" + id);
-                    //send email to next player in turn order
-                    //EmailManager.SendEmail("Player X, it is your turn to play!", "It's your turn to play at: LINK", "Mr Guy Who Gets Email.com");
-
-                    //ViewBag.Message = "Not Yet Implemented";
-                    //ViewBag.Title = "Not Yet Implemented";
-                    //return View("GameError");
                 }
             }
         }
