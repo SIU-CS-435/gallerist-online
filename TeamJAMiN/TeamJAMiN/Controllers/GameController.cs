@@ -339,17 +339,14 @@ namespace TeamJAMiN.Controllers
                         foreach (var player in game.Players)
                         {
                             var user = identityContext.Users.Single(m => m.Id == player.UserId);
-                            if (user.AllowsEmails)
-                            {
-                                if (string.IsNullOrWhiteSpace(user.Email)) //todo check email prefs
-                                    continue;
+                            if (string.IsNullOrWhiteSpace(user.Email) || !user.AllowsEmails)
+                                continue;
 
-                                var emailTitle = user.UserName + ", your game has started!"; //todo: get full name of player. We don't have names in the system yet
-                                var emailBody = "A game that you are a member of has started. You can play it by visiting The Gallerist Online" +
-                                    " and viewing your active games or by clicking the following link: " + gameUrl;
+                            var emailTitle = user.UserName + ", your game has started!"; //todo: get full name of player. We don't have names in the system yet
+                            var emailBody = "A game that you are a member of has started. You can play it by visiting The Gallerist Online" +
+                                " and viewing your active games or by clicking the following link: " + gameUrl;
 
-                                EmailManager.SendEmail(emailTitle, emailBody, new List<string> { user.Email });
-                            }
+                            EmailManager.SendEmail(emailTitle, emailBody, new List<string> { user.Email });
                         }
                         //todo expand module to use signalr for all game list actions
                         PushHelper singleton = PushHelper.GetPushEngine();
