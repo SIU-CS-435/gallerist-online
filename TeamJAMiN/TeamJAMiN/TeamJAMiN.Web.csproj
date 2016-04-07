@@ -188,6 +188,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GameControllerHelpers\GameAuthorizationAttributes.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ActionArtistColony.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ActionMediaCenter.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ActionSalesOffice.cs" />

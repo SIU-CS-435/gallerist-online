@@ -17,113 +17,6 @@ using TeamJAMiN.Controllers.GameLogicHelpers;
 
 namespace TeamJAMiN.Controllers
 {
-    #region Authentication Attributes
-    //todo move out into a different place
-    public class AuthorizePlayerOfCurrentGame : AuthorizeAttribute
-    {
-        protected override bool AuthorizeCore(HttpContextBase httpContext)
-        {
-            var authorized = base.AuthorizeCore(httpContext);
-            if (!authorized)
-            {
-                // The user is not authenticated
-                return false;
-            }
-
-            var user = httpContext.User;
-
-            var rd = httpContext.Request.RequestContext.RouteData;
-            var gameIdString = rd.Values["id"].ToString();
-            if (String.IsNullOrWhiteSpace(gameIdString)) return false;
-            int gameId = -1;
-            int.TryParse(gameIdString, out gameId);
-            if (gameId < 1)
-            {
-                return false;
-            }
-
-            return IsPlayerInGame(user.Identity.Name, gameId);
-        }
-
-        private bool IsPlayerInGame(string username, int gameId)
-        {
-            var isPlayerInGame = false;
-
-            using (var galleristContext = new GalleristComponentsDbContext())
-            {
-                var game = galleristContext.Games.SingleOrDefault(m => m.Id == gameId);
-                if (game == null) return false;
-
-                using (var identityContext = new ApplicationDbContext())
-                {
-                    var currentUser = identityContext.Users.FirstOrDefault(m => m.UserName == username); //todo: make sure usernames are unique
-                    if (currentUser == null) return false;
-
-                    foreach (var player in game.Players)
-                    {
-                        if (currentUser.Id == player.UserId)
-                        {
-                            isPlayerInGame = true;
-                        }
-                    }
-                }
-            }
-            return isPlayerInGame;
-        }
-    }
-
-    public class AuthorizeHostOfCurrentGame : AuthorizeAttribute
-    {
-        protected override bool AuthorizeCore(HttpContextBase httpContext)
-        {
-            var authorized = base.AuthorizeCore(httpContext);
-            if (!authorized) return false;            
-
-            var user = httpContext.User;
-
-            var rd = httpContext.Request.RequestContext.RouteData;
-            var gameIdString = rd.Values["id"].ToString();
-            if (String.IsNullOrWhiteSpace(gameIdString)) return false;
-            int gameId = -1;
-            int.TryParse(gameIdString, out gameId);
-
-            if (gameId < 1)
-            {
-                return false;
-            }
-
-            return IsPlayerHostOfGame(user.Identity.Name, gameId);
-        }
-
-        private bool IsPlayerHostOfGame(string username, int gameId)
-        {
-            var isPlayerHost = false;
-
-            using (var galleristContext = new GalleristComponentsDbContext())
-            {
-                var game = galleristContext.Games.SingleOrDefault(m => m.Id == gameId);
-                if (game == null) return false;
-
-                using (var identityContext = new ApplicationDbContext())
-                {
-                    var currentUser = identityContext.Users.FirstOrDefault(m => m.UserName == username); //todo: make sure usernames are unique
-                    if (currentUser == null) return false;
-
-                    foreach (var player in game.Players)
-                    {
-                        if (currentUser.Id == player.UserId && player.IsHost)
-                        {
-                            isPlayerHost = true;
-                            break;
-                        }
-                    }
-                }
-            }
-            return isPlayerHost;
-        }
-    }
-    #endregion
-
     public class GameController : Controller
     {
         // GET: Game List
@@ -214,7 +107,7 @@ namespace TeamJAMiN.Controllers
             }
         }
 
-        [AuthorizeHostOfCurrentGame]
+        [AuthorizeHostOfGame]
         [HttpPost]
         public ActionResult Delete(int id)
         {
@@ -309,7 +202,7 @@ namespace TeamJAMiN.Controllers
         /// </summary>
         /// <param name="id">The id of the game to start</param>
         /// <returns>Existing game view or appropriate error</returns>
-        [AuthorizeHostOfCurrentGame]
+        [AuthorizeHostOfGame] //this makes sure the user taking this action is the host of the game
         [HttpPost]
         public ActionResult Start(int id = 0)
         {
@@ -339,7 +232,7 @@ namespace TeamJAMiN.Controllers
                         foreach (var player in game.Players)
                         {
                             var user = identityContext.Users.Single(m => m.Id == player.UserId);
-                            if (string.IsNullOrWhiteSpace(user.Email) || !user.AllowsEmails)
+                            if (!user.AllowsEmails || string.IsNullOrWhiteSpace(user.Email))
                                 continue;
 
                             var emailTitle = user.UserName + ", your game has started!"; //todo: get full name of player. We don't have names in the system yet
@@ -370,7 +263,7 @@ namespace TeamJAMiN.Controllers
         /// <param name="gameAction">The type of action to take along with appropriate values of money/influence spent etc</param>
         /// <returns>Existing game view or appropriate error</returns>
         [ValidateAntiForgeryToken]
-        [AuthorizePlayerOfCurrentGame]
+        [AuthorizeTurnInGame] //this makes sure it is the current user's turn
         [HttpPost]
         public ActionResult TakeGameAction(int id, GameActionState gameAction, string actionLocation = "")
         {
