@@ -9,7 +9,7 @@ namespace TeamJAMiN.GalleristComponentEntities
     public enum GameReputationTileLocation
     {
         ThreeInfluence, TwoInfluence, OneInfluence,
-        Money, Influence, Assistant, Fame, Visitor, Tickets, Exhibit,
+        ReputationToBoard, Money, Influence, Assistant, Fame, Visitor, Tickets, Exhibit,
         MediaCenter, InternationalMarket, ArtistColony, SalesOffice
     }
 }

@@ -1,0 +1,19 @@
+﻿@using TeamJAMiN.GalleristComponentEntities
+@model Game
+
+
+
+@if (Model.CurrentPlayer.UserId == ViewBag.userId && Model.CurrentActionState == GameActionState.InternationalMarket)
+{
+    using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = GameActionState.Auction, actionLocation = ViewBag.Row + ':' + ViewBag.Column }, FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="@ViewBag.AuctionClass auction-tile tile">
+            <input type="submit" class="action-button" value="" />
+        </div>
+    }
+}
+else
+{
+    <div class="@ViewBag.AuctionClass auction-tile tile"></div>
+}

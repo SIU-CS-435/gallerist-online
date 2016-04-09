@@ -54,7 +54,7 @@
 .influence-star-icon, .reputation-tile-none, .influence-icon, .gallery-visitor, #international-market-reputation-action,
 #international-market-auction-action, #sales-office-contract-action, #sales-office-sell-action, #artist-colony-buy-action,
 #media-center-promote-action, #artist-colony-discover-action, #media-center-hire-action, .draw-contract-icon, .player-art-money,
-.player-art-type, .player-art-exhibit, .player-assistant-icon, .player-assistant-cost {
+.player-art-type, .player-art-exhibit, .player-assistant-icon, .player-assistant-cost, .player-reputation-icon {
     background-size:contain;
     background-repeat:no-repeat;
     background-position:50%;
@@ -268,6 +268,9 @@
 .player-board {
     margin-top:100px;
 }
+.player-contract {
+    height: 130px;
+}
 .player-contract-empty {
     background-color: rgba(255,255,255,.6) !important;
 }
@@ -351,6 +354,17 @@
     position: relative;
     box-shadow: 0 5px 10px 0px white;
 
+}
+.player-reputation-icon {
+    height:75px;
+    width: 75px;
+    background-color: grey;
+    background-size: 80%;
+    margin: 0 auto;
+}
+
+.player-reputation-icon.bonus-fame {
+    background-size: 70%;
 }
 
 /* Artist Tiles*/

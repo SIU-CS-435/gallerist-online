@@ -26,13 +26,13 @@
     <div class="col-xs-6 @push no-padding">
         @if (Model.CurrentPlayer.UserId == ViewBag.userId && isValid)
     	{
-                using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = ViewBag.ActionId }, FormMethod.Post, new { role = "form" }))
-                {
-		        @Html.AntiForgeryToken()
-		        <div data-location="@ViewBag.ActionId" id="@IconCss.actionIds[ViewBag.ActionId][0]-action" class="action-space current-player @highlight">
-		            <div class="action-space-center @color-gallerist"></div>
-		            <input type="submit" class="action-button" value="" />
-		        </div>
+            using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = ViewBag.ActionId }, FormMethod.Post, new { role = "form" }))
+            {
+		    @Html.AntiForgeryToken()
+		    <div data-location="@ViewBag.ActionId" id="@IconCss.actionIds[ViewBag.ActionId][0]-action" class="action-space current-player @highlight">
+		        <div class="action-space-center @color-gallerist"></div>
+		        <input type="submit" class="action-button" value="" />
+		    </div>
     		}
         }
 	    else

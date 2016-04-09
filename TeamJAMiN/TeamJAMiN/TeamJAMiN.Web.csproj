@@ -189,9 +189,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ActionArtistColony.cs" />
+    <Compile Include="Controllers\GameLogicHelpers\ActionInternationalMarket.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ActionMediaCenter.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ActionSalesOffice.cs" />
     <Compile Include="Controllers\GameLogicHelpers\AssistantManager.cs" />
+    <Compile Include="Controllers\GameLogicHelpers\AuctionManager.cs" />
+    <Compile Include="Controllers\GameLogicHelpers\ReputationManager.cs" />
     <Compile Include="Controllers\Hubs\GameActionHub.cs" />
     <Compile Include="App_Start\Startup.SignalR.cs" />
     <Compile Include="Controllers\GameControllerHelpers\SetupPlayers.cs" />
@@ -551,6 +554,8 @@
     <Content Include="Views\Game\PostButtons\View.cshtml" />
     <Content Include="Views\Game\PlayerBoard\UnemployedAssistant.cshtml" />
     <Content Include="Views\Manage\ManageProfile.cshtml" />
+    <Content Include="Views\Game\InternationalMarket\AuctionLocation.cshtml" />
+    <Content Include="Views\Game\PlayerBoard\ReputationTileLocation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

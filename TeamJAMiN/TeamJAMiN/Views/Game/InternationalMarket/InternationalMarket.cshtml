@@ -49,7 +49,23 @@
                     <div class="col-xs-3">
                         @if (tile != null)
                         {
-                            <div class="tile reputation-tile">@Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml", tile)</div>
+                            if (Model.CurrentPlayer.UserId == ViewBag.userId && Model.CurrentActionState == GameActionState.InternationalMarket)
+                            {
+                                using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = GameActionState.Reputation, actionLocation = tile.Row.ToString() + ':' + tile.Column.ToString() }, FormMethod.Post, new { role = "form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="tile reputation-tile">
+                                        <input type="submit" class="action-button" value="" />
+                                        @Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml", tile)
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="tile reputation-tile">
+                                    @Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml", tile)
+                                </div>
+                            }
                         }
                         else
                         {
@@ -73,9 +89,19 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-3"><div class="ticket-any auction-tile tile"></div></div>
-        <div class="col-xs-3"><div class="bonus-assistant auction-tile tile"></div></div>
-        <div class="col-xs-3"><div class="bonus-ticket-two auction-tile tile"></div></div>
+        @{ ViewBag.Row = "Auction1";}
+        <div class="col-xs-3">
+            @{ ViewBag.AuctionClass = "ticket-any"; ViewBag.Column = "InfluenceThree"; }
+            @Html.Partial("~/Views/Game/InternationalMarket/AuctionLocation.cshtml",Model)
+        </div>
+        <div class="col-xs-3">
+            @{ ViewBag.AuctionClass = "bonus-assistant"; ViewBag.Column = "InfluenceTwo"; }
+            @Html.Partial("~/Views/Game/InternationalMarket/AuctionLocation.cshtml", Model)
+        </div>
+        <div class="col-xs-3">
+            @{ ViewBag.AuctionClass = "bonus-ticket-two"; ViewBag.Column = "InfluenceOne"; }
+            @Html.Partial("~/Views/Game/InternationalMarket/AuctionLocation.cshtml", Model)
+        </div>
     </div>
     @*bid 3*@
     <div class="row separate-top">
@@ -87,9 +113,19 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-3"><div class="bonus-assistant auction-tile tile"></div></div>
-        <div class="col-xs-3"><div class="bonus-influence auction-tile tile"></div></div>
-        <div class="col-xs-3"><div class="bonus-money auction-tile tile"></div></div>
+        @{ ViewBag.Row = "Auction3";}
+        <div class="col-xs-3">
+            @{ ViewBag.AuctionClass = "bonus-assistant"; ViewBag.Column = "InfluenceThree"; }
+            @Html.Partial("~/Views/Game/InternationalMarket/AuctionLocation.cshtml", Model)
+        </div>
+        <div class="col-xs-3">
+            @{ ViewBag.AuctionClass = "bonus-influence"; ViewBag.Column = "InfluenceOne"; }
+            @Html.Partial("~/Views/Game/InternationalMarket/AuctionLocation.cshtml", Model)
+        </div>
+        <div class="col-xs-3">
+            @{ ViewBag.AuctionClass = "bonus-money"; ViewBag.Column = "InfluenceTwo"; }
+            @Html.Partial("~/Views/Game/InternationalMarket/AuctionLocation.cshtml", Model)
+        </div>
     </div>
     @*bid 6*@
     <div class="row separate-top">
@@ -101,9 +137,19 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-3"><div class="bonus-visitor-any auction-tile tile"></div></div>
-        <div class="col-xs-3"><div class="bonus-money auction-tile tile"></div></div>
-        <div class="col-xs-3"><div class="bonus-influence auction-tile tile"></div></div>
+        @{ ViewBag.Row = "Auction6";}
+        <div class="col-xs-3">
+            @{ ViewBag.AuctionClass = "bonus-visitor-any"; ViewBag.Column = "InfluenceThree"; }
+            @Html.Partial("~/Views/Game/InternationalMarket/AuctionLocation.cshtml", Model)
+        </div>
+        <div class="col-xs-3">
+            @{ ViewBag.AuctionClass = "bonus-money"; ViewBag.Column = "InfluenceTwo"; }
+            @Html.Partial("~/Views/Game/InternationalMarket/AuctionLocation.cshtml", Model)
+        </div>
+        <div class="col-xs-3">
+            @{ ViewBag.AuctionClass = "bonus-influence"; ViewBag.Column = "InfluenceOne"; }
+            @Html.Partial("~/Views/Game/InternationalMarket/AuctionLocation.cshtml", Model)
+        </div>
     </div>
 </div>
 @*column scoring*@

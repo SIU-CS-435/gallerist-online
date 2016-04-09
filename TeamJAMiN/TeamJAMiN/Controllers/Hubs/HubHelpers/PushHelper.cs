@@ -16,7 +16,7 @@ namespace TeamJAMiN.Controllers.Hubs.HubHelpers
 
         }
 
-        private static IHubContext GetHub<T>()
+        private IHubContext GetHub<T>()
             where T : IHub
         {
             return GlobalHost.ConnectionManager.GetHubContext<T>();

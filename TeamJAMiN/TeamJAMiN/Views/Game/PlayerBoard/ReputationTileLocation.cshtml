@@ -1,0 +1,31 @@
+﻿@using TeamJAMiN.GalleristComponentEntities
+@model Player
+
+@{ var tile = Model.Tiles.FirstOrDefault(t => t.Column == (GameReputationTileLocation)ViewBag.Location); }
+
+@if (tile != null)
+{
+    <div class="reputation-tile tile">
+        @Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml", tile)
+    </div>
+}
+else
+{
+    if (Model.Id == Model.Game.CurrentPlayer.Id && Model.Game.CurrentPlayer.UserId == ViewBag.userId && Model.Game.CurrentActionState == GameActionState.Reputation)
+    {
+        using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.GameId, gameAction = GameActionState.ReputationToBoard, actionLocation = ViewBag.Location.ToString() }, FormMethod.Post, new { role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="@ViewBag.Bonus player-reputation-icon tile">
+                <input type="submit" class="action-button" value="" />
+            </div>
+        }
+    }
+    else
+    {
+        <div class="@ViewBag.Bonus player-reputation-icon tile"></div>
+    }
+}
+
+
+

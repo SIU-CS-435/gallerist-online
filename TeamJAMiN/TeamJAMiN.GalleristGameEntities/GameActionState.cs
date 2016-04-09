@@ -10,7 +10,7 @@ namespace TeamJAMiN.GalleristComponentEntities
     {
         GameStart, ChooseLocation, Pass, GameEnd,
         SalesOffice, ContractDraw, ContractDraft, ContractToPlayerBoard, SellChooseArt, SellChooseVisitor,
-        InternationalMarket, 
+        InternationalMarket, Reputation, ReputationToBoard, Auction,
         ArtistColony, ArtistDiscover, ArtBuy,
         MediaCenter, Promote, Hire
     }
