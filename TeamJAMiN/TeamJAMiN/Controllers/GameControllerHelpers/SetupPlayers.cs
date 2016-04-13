@@ -8,9 +8,9 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
 {
     public static class SetupPlayers
     {
-        public static void setupPlayers(this Game newGame)
+        public static void SetupPlayerStart(this Game newGame)
         {
-            newGame.assignColors();
+            newGame.AssignColors();
             foreach (Player player in newGame.Players)
             {
                 player.GetNewAssistant();
@@ -18,8 +18,9 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
                 player.GalleristLocation = PlayerLocation.Gallery;
             }
             newGame.PlayerOrder = newGame.Players.Shuffle().ToList();
+            newGame.SetupFirstTurn();
         }
-        public static void assignColors(this Game newGame)
+        public static void AssignColors(this Game newGame)
         {
             var rPlayers = newGame.Players.Shuffle();
             var colorEnum = ((PlayerColor[])Enum.GetValues(typeof(PlayerColor))).Shuffle().GetEnumerator(); ;
@@ -34,16 +35,15 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
             }
         }
 
-        public static void UpdatePlayerOrder(this Game game)
+        public static void SetNextPlayer(this Game game)
         {
-            var currentPlayer = game.PlayerOrder.First();
-            game.CurrentPlayerId = currentPlayer.Id;
-            if(game.Players.Count != 1) //todo add logic for kicked out or executive actions
+            game.CurrentPlayerId = game.PlayerOrder[0].Id;
+            if (game.Players.Count != 1) //todo add logic for kicked out or executive actions
             {
-                var isRemoved = game.PlayerOrder.Remove(currentPlayer);
-                game.PlayerOrder.Add(currentPlayer);
+                var isRemoved = game.PlayerOrder.Remove(game.CurrentPlayer);
+                game.PlayerOrder.Add(game.CurrentPlayer);
                 game.PlayerOrder = game.PlayerOrder;
             }
         }
-    }
+}
 }

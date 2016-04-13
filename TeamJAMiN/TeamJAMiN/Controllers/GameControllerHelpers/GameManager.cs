@@ -45,7 +45,7 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
 
         public static GameResponse GetGame(int gameId, string username, GalleristComponentsDbContext galleristContext, ApplicationDbContext userContext)
         {
-            var game = galleristContext.Games.Include("Art").Include("Artists").Include("ReputationTiles").Include("Contracts").Include("Visitors").Include("Players").Include("Assistants").FirstOrDefault(m => m.Id == gameId);
+            var game = galleristContext.Games.Include("Art").Include("Artists").Include("ReputationTiles").Include("Contracts").Include("Visitors").Include("Players").Include("Assistants").Include("Turns").FirstOrDefault(m => m.Id == gameId);
             return CheckGameState(game, galleristContext, username, userContext);
         }
     }

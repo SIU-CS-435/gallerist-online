@@ -30,6 +30,7 @@ namespace TeamJAMiN.GalleristComponentEntities
         public string UserName { get; set; }
 
         public bool IsHost { get; set; }
+        public bool IsStartPlayer { get; set; }
 
         public Game Game { get; set; }
         public int Money { get; set; }

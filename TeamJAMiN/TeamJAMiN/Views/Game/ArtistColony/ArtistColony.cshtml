@@ -4,7 +4,7 @@
 @model TeamJAMiN.GalleristComponentEntities.Game
 @{ var listOrder = new List<ArtType> { ArtType.digital, ArtType.painting, ArtType.sculpture, ArtType.photo };}
 @{ var artists = Model.Artists.ToList(); }
-@{ var submitAction = Model.CurrentActionState == GameActionState.ArtistColony ? GameActionState.ArtBuy : GameActionState.Promote; }
+@{ var submitAction = Model.CurrentTurn.CurrentAction.State == GameActionState.ArtistColony ? GameActionState.ArtBuy : GameActionState.Promote; }
 
 
 @*New (Blue) Artists*@
@@ -14,7 +14,7 @@
             var artist = artists.Where(a => a.ArtType == type && a.Category == ArtistCategory.blue).FirstOrDefault();
             if (artist.IsDiscovered)
             {
-                if (Model.CurrentPlayer.UserId == ViewBag.userId && (Model.CurrentActionState == GameActionState.ArtistColony || Model.CurrentActionState == GameActionState.MediaCenter))
+                if (Model.CurrentPlayer.UserId == ViewBag.userId && (Model.CurrentTurn.CurrentAction.State == GameActionState.ArtistColony || Model.CurrentTurn.CurrentAction.State == GameActionState.MediaCenter))
                 {
                     using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = submitAction, actionLocation = type.ToString() + ":" + @artist.Category.ToString() }, FormMethod.Post, new { role = "form" }))
                     {
@@ -33,7 +33,7 @@
             }
             else
             {
-                if (Model.CurrentPlayer.UserId == ViewBag.userId && Model.CurrentActionState == GameActionState.ArtistColony)
+                if (Model.CurrentPlayer.UserId == ViewBag.userId && Model.CurrentTurn.CurrentAction.State == GameActionState.ArtistColony)
                 {
                     using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = GameActionState.ArtistDiscover, actionLocation = type.ToString() + ":" + @artist.Category.ToString() }, FormMethod.Post, new { role = "form" }))
                     {
@@ -61,7 +61,7 @@
         var artist = artists.Where(a => a.ArtType == type && a.Category == ArtistCategory.red).FirstOrDefault();
         if (artist.IsDiscovered)
         {
-            if (Model.CurrentPlayer.UserId == ViewBag.userId && (Model.CurrentActionState == GameActionState.ArtistColony || Model.CurrentActionState == GameActionState.MediaCenter))
+            if (Model.CurrentPlayer.UserId == ViewBag.userId && (Model.CurrentTurn.CurrentAction.State == GameActionState.ArtistColony || Model.CurrentTurn.CurrentAction.State == GameActionState.MediaCenter))
             {
                 using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = GameActionState.ArtBuy, actionLocation = type.ToString()+":"+@artist.Category.ToString() }, FormMethod.Post, new { role = "form" }))
                 {
@@ -80,7 +80,7 @@
         }
         else
         {
-            if (Model.CurrentPlayer.UserId == ViewBag.userId && Model.CurrentActionState == GameActionState.ArtistColony)
+            if (Model.CurrentPlayer.UserId == ViewBag.userId && Model.CurrentTurn.CurrentAction.State == GameActionState.ArtistColony)
             {
                 using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = GameActionState.ArtistDiscover, actionLocation = type.ToString() + ":" + @artist.Category.ToString() }, FormMethod.Post, new { role = "form" }))
                 {

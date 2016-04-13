@@ -19,34 +19,13 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         { }
     }
 
-    public class MediaCenter : ActionState
+    public class MediaCenter : LocationAction
     {
-        public PlayerLocation location = PlayerLocation.MediaCenter;
         public MediaCenter()
         {
             Name = GameActionState.MediaCenter;
+            location = PlayerLocation.MediaCenter;
             TransitionTo = new HashSet<GameActionState> { GameActionState.Promote, GameActionState.Hire };
-        }
-
-        public override void DoAction<MediaCenterContext>(MediaCenterContext context)
-        {
-            var game = context.Game;
-            game.CurrentActionState = Name;
-            var kickedPlayer = game.Players.FirstOrDefault(p => p.GalleristLocation == location);
-            if (kickedPlayer != null)
-            {
-                game.KickedOutPlayerId = kickedPlayer.Id;
-            }
-            game.CurrentPlayer.GalleristLocation = location;
-        }
-        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
-        {
-            if (TransitionTo.Contains(action))
-            {
-                return true;
-            }
-
-            return false;
         }
     }
 
@@ -62,8 +41,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         {
             //todo move setting current action state to wrapper method
             var game = context.Game;
-            game.CurrentActionState = Name;
-            var artist = context.Game.GetArtistByLocationString(context.Game.CurrentActionLocation);
+            var artist = context.Game.GetArtistByLocationString(context.Action.Location);
             var promotion = ++artist.Promotion;
             //todo give player promotion bonus
             context.Game.CurrentPlayer.Influence -= promotion;
@@ -71,20 +49,12 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             //todo increase fame by collectors in player gallery
             //todo allow players to increase fame with influence
             //todo replace below with a pass button or something.
+            context.Game.CurrentTurn.AddCompletedAction(context.Action);
             context.DoAction(GameActionState.Pass);
         }
         //todo validate location string
         //todo check is artist can be promoted
         //todo check if player has enough influence
-        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
-        {
-            if (TransitionTo.Contains(action))
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
 
     public class Hire : ActionState
@@ -99,26 +69,17 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         {
             //todo move setting current action state to wrapper method
             var game = context.Game;
-            game.CurrentActionState = Name;
             var player = context.Game.CurrentPlayer;
             //todo allow players to buy multiple assistants
             player.Money -= player.GetNextAssistantCost();
             player.GetNewAssistant();
             //todo give player hire bonus
             //todo replace below with a pass button or something.
+            context.Game.CurrentTurn.AddCompletedAction(context.Action);
             context.DoAction(GameActionState.Pass);
         }
         //todo validate location string
         //todo check is artist can be promoted
         //todo check if player has enough influence
-        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
-        {
-            if (TransitionTo.Contains(action))
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
 }

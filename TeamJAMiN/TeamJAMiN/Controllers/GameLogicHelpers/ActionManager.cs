@@ -12,51 +12,88 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         ActionContext _context;
         public Game Game { get; set; }
         public Dictionary<GameActionState, Type> ActionToContextType = new Dictionary<GameActionState, Type>
-            {
-                { GameActionState.InternationalMarket, typeof(InternationalMarketContext) },
-                { GameActionState.Reputation, typeof(InternationalMarketContext) },
-                { GameActionState.Auction, typeof(InternationalMarketContext) },
-                { GameActionState.MediaCenter, typeof(MediaCenterContext) },
-                { GameActionState.Promote, typeof(MediaCenterContext) },
-                { GameActionState.Hire, typeof(MediaCenterContext) },
-                { GameActionState.ArtistColony, typeof(ArtistColonyContext) },
-                { GameActionState.ArtistDiscover, typeof(ArtistColonyContext) },
-                { GameActionState.ArtBuy, typeof(ArtistColonyContext) },
-                { GameActionState.SalesOffice, typeof(SalesOfficeContext) },
-                { GameActionState.ContractDraft, typeof(SalesOfficeContext) },
-                { GameActionState.ContractDraw, typeof(SalesOfficeContext) },
-                { GameActionState.ContractToPlayerBoard, typeof(SalesOfficeContext) },
-                { GameActionState.ChooseLocation, typeof(SetupContext) },
-                { GameActionState.GameStart, typeof(SetupContext) },
-                { GameActionState.Pass, typeof(SetupContext) }
-            };
+        {
+            { GameActionState.InternationalMarket, typeof(InternationalMarketContext) },
+            { GameActionState.Reputation, typeof(InternationalMarketContext) },
+            { GameActionState.Auction, typeof(InternationalMarketContext) },
+            { GameActionState.MediaCenter, typeof(MediaCenterContext) },
+            { GameActionState.Promote, typeof(MediaCenterContext) },
+            { GameActionState.Hire, typeof(MediaCenterContext) },
+            { GameActionState.ArtistColony, typeof(ArtistColonyContext) },
+            { GameActionState.ArtistDiscover, typeof(ArtistColonyContext) },
+            { GameActionState.ArtBuy, typeof(ArtistColonyContext) },
+            { GameActionState.SalesOffice, typeof(SalesOfficeContext) },
+            { GameActionState.ContractDraft, typeof(SalesOfficeContext) },
+            { GameActionState.ContractDraw, typeof(SalesOfficeContext) },
+            { GameActionState.ContractToPlayerBoard, typeof(SalesOfficeContext) },
+            { GameActionState.ChooseLocation, typeof(SetupContext) },
+            { GameActionState.GameStart, typeof(SetupContext) },
+            { GameActionState.Pass, typeof(SetupContext) }
+        };
 
         public ActionManager(Game game)
         {
             Game = game;
-            Type contextType = ActionToContextType[game.CurrentActionState];
-            _context = (ActionContext)Activator.CreateInstance(contextType, game) ;
+            _context = GetContext(game.CurrentTurn.CurrentAction.State);
         }
 
-        public bool DoAction(GameActionState action, string actionLocation = "")
+        private ActionContext GetContext(GameActionState state)
         {
-            if (!IsValidAction(action))
+            Type contextType = ActionToContextType[state];
+            return (ActionContext)Activator.CreateInstance(contextType, Game);
+        }
+
+        public bool DoAction(GameActionState state, string actionLocation = "")
+        {
+            var newAction = new GameAction { State = state, Location = actionLocation, isExecutable = true };
+
+            if (!IsValidTransition(newAction))
             {
                 return false;
             }
-            Game.CurrentActionLocation = actionLocation;
-            if (!_context.NameToState.ContainsKey(action))
+
+            Game.CurrentTurn.SetCurrentAction(newAction.State, newAction.Location);
+
+            if (!_context.NameToState.ContainsKey(newAction.State))
             {
-                Type contextType = ActionToContextType[action];
-                _context = (ActionContext)Activator.CreateInstance(contextType, Game);
+                _context = GetContext(newAction.State);
             }
-            _context.DoAction(action);
+            _context.DoAction(newAction);
+            Game.CurrentTurn.AddCompletedAction(newAction);
+
+            var nextAction = Game.CurrentTurn.PendingActions.FirstOrDefault(a => a.isExecutable == true);
+            if (nextAction != null)
+            {
+                Game.CurrentTurn.RemovePendingAction(nextAction);
+                this.DoAction(nextAction.State, nextAction.Location);
+                Game.CurrentTurn.AddCompletedAction(nextAction);
+            }
             return true;
         }
 
-        public bool IsValidAction(GameActionState action)
+        public bool IsValidTransition(GameAction action)
         {
-            return _context.IsValidTransition(action);
+            if (Game.CurrentTurn.PendingActions.Any(a => a.State == action.State))
+            {
+                return true;
+            }
+            return _context.IsValidTransition(action) && IsValidGameState(action);
+        }
+
+        public bool IsValidTransition(GameActionState state)
+        {
+            if (Game.CurrentTurn.PendingActions.Any(a => a.State == state))
+            {
+                return true;
+            }
+            var action = new GameAction { State = state };
+            return _context.IsValidTransition(action) && IsValidGameState(action);
+        }
+
+        private bool IsValidGameState(GameAction action)
+        {
+            var context = GetContext(action.State);
+            return context.IsValidGameState(action);
         }
 
     }
@@ -66,6 +103,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         ActionState _state;
         public Dictionary<GameActionState, Type> NameToState;
         public Game Game { get; set; }
+        public GameAction Action { get; set; }
 
         public GameActionState State
         {
@@ -82,121 +120,58 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         protected ActionContext(Game game, Dictionary<GameActionState, Type> NameToState)
         {
             Game = game;
+            Action = game.CurrentTurn.CurrentAction;
             this.NameToState = NameToState;
-            State = Game.CurrentActionState;
+            State = Game.CurrentTurn.CurrentAction.State;
         }
 
-        public bool IsValidTransition(GameActionState state)
+        public bool IsValidTransition(GameAction action)
         {
-            if(!_state.CanTransitionTo(state, this))
-            {
-                return false;
-            }
-            return true;
+            return _state.IsValidTransition(action, this);
         }
 
-        public void DoAction(GameActionState action)
+        public bool IsValidGameState(GameAction action)
         {
-            if ( IsValidTransition(action) )
-            {
-                State = action;
-                _state.DoAction(this);
-            }
+            State = action.State;
+            Action = action;
+            return _state.IsValidGameState(this);
+        }
+
+        public void DoAction(GameActionState state)
+        {
+            Action = new GameAction { State = state, isExecutable = true, Location = "" };
+            State = Action.State;
+            _state.DoAction(this);
+        }
+
+        public void DoAction(GameAction action)
+        {
+            Action = action;
+            State = action.State;
+            _state.DoAction(this);
         }
     }
-    public class SetupContext : ActionContext
-    {
-        public SetupContext(Game game) 
-            : base(game, new Dictionary<GameActionState, Type>
-            {
-                { GameActionState.ChooseLocation, typeof(ChooseLocation) },
-                { GameActionState.Pass, typeof(Pass) },
-                { GameActionState.GameStart, typeof(GameStart) }
-            })
-        { }
-
-    }
+    
     public abstract class ActionState
     {
         public GameActionState Name;
         public HashSet<GameActionState> TransitionTo;
         public abstract void DoAction<TContext>(TContext context)
             where TContext: ActionContext;
-        public abstract bool CanTransitionTo<TContext>(GameActionState action, TContext context)
-            where TContext : ActionContext;
-    }
-    public class GameStart : ActionState
-    {
-        public GameStart()
+        public virtual bool IsValidTransition<TContext>(GameAction action, TContext context)
+            where TContext : ActionContext
         {
-            Name = GameActionState.GameStart;
-            TransitionTo = new HashSet<GameActionState> { GameActionState.Pass };
-        }
-
-        public override void DoAction<ActionContext>(ActionContext context)
-        {
-
-        }
-        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
-        {
-            if (TransitionTo.Contains(action))
+            if (TransitionTo.Contains(action.State))
             {
+
                 return true;
             }
 
             return false;
         }
-}
-
-
-    public class ChooseLocation : ActionState
-    {
-        public ChooseLocation()
+        public virtual bool IsValidGameState(ActionContext context)
         {
-            Name = GameActionState.ChooseLocation;
-            TransitionTo = new HashSet<GameActionState>
-                { GameActionState.SalesOffice, GameActionState.InternationalMarket, GameActionState.MediaCenter, GameActionState.ArtistColony };
-        }
-
-        public override void DoAction<ActionContext>(ActionContext context)
-        { }
-
-        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
-        {
-            if (!TransitionTo.Contains(action))
-            {
-                return false;
-            }
-            var game = context.Game;
-            var currentPlayerLocation = game.Players.First(p => p.Id == context.Game.CurrentPlayerId).GalleristLocation;
-            if (currentPlayerLocation == (PlayerLocation)Enum.Parse(typeof(PlayerLocation), action.ToString()))
-            {
-                return false;
-            }
             return true;
-        }
-    }
-    public class Pass : ActionState
-    {
-        public Pass()
-        {
-            Name = GameActionState.Pass;
-            TransitionTo = new HashSet<GameActionState> { };
-        }
-
-        public override void DoAction<ActionContext>(ActionContext context)
-        {
-            context.Game.UpdatePlayerOrder();
-            context.Game.CurrentActionState = GameActionState.ChooseLocation;
-        }
-        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
-        {
-            if (TransitionTo.Contains(action))
-            {
-                return true;
-            }
-
-            return false;
         }
     }
 }

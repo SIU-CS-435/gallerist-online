@@ -290,6 +290,7 @@ namespace TeamJAMiN.Controllers
 		            {
 		    	        return View("GameError");
 		            }
+
                     var actionManager = new ActionManager(game);
                     
 		            if(!actionManager.DoAction(gameAction, actionLocation))

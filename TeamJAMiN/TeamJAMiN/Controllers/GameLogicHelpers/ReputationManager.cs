@@ -17,14 +17,14 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
 
         public static GameReputationTileLocation GetReputationColumn(this Game game)
         {
-            var currentLocation = game.CurrentActionLocation;
+            var currentLocation = game.CurrentTurn.CurrentAction.Location;
             var locationParams = currentLocation.Split(':');
             return (GameReputationTileLocation)Enum.Parse(typeof(GameReputationTileLocation),locationParams[1]);
         }
 
         public static ArtType GetReputationRow(this Game game)
         {
-            var currentLocation = game.CurrentActionLocation;
+            var currentLocation = game.CurrentTurn.CurrentAction.Location;
             var locationParams = currentLocation.Split(':');
             return (ArtType)Enum.Parse(typeof(ArtType), locationParams[0]);
         }

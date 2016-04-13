@@ -11,7 +11,7 @@
 }
 else
 {
-    if (Model.Id == Model.Game.CurrentPlayer.Id && Model.Game.CurrentPlayer.UserId == ViewBag.userId && Model.Game.CurrentActionState == GameActionState.Reputation)
+    if (Model.Id == Model.Game.CurrentPlayer.Id && Model.Game.CurrentPlayer.UserId == ViewBag.userId && Model.Game.CurrentTurn.CurrentAction.State == GameActionState.Reputation)
     {
         using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.GameId, gameAction = GameActionState.ReputationToBoard, actionLocation = ViewBag.Location.ToString() }, FormMethod.Post, new { role = "form" }))
         {

@@ -49,7 +49,7 @@
                     <div class="col-xs-3">
                         @if (tile != null)
                         {
-                            if (Model.CurrentPlayer.UserId == ViewBag.userId && Model.CurrentActionState == GameActionState.InternationalMarket)
+                            if (Model.CurrentPlayer.UserId == ViewBag.userId && Model.CurrentTurn.CurrentAction.State == GameActionState.InternationalMarket)
                             {
                                 using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = GameActionState.Reputation, actionLocation = tile.Row.ToString() + ':' + tile.Column.ToString() }, FormMethod.Post, new { role = "form" }))
                                 {

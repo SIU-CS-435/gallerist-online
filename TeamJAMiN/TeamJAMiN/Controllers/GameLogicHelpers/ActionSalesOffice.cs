@@ -20,36 +20,16 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         { }
     }
 
-    public class SalesOffice : ActionState
+    public class SalesOffice : LocationAction
     {
-        public PlayerLocation location = PlayerLocation.SalesOffice;
         public SalesOffice()
         {
             Name = GameActionState.SalesOffice;
+            location = PlayerLocation.SalesOffice;
             TransitionTo = new HashSet<GameActionState> { GameActionState.ContractDraw, GameActionState.ContractDraft };
         }
-
-        public override void DoAction<SalesOfficeContext>(SalesOfficeContext context)
-        {
-            var game = context.Game;
-            game.CurrentActionState = Name;
-            var kickedPlayer = game.Players.FirstOrDefault(p => p.GalleristLocation == location);
-            if (kickedPlayer != null)
-            {
-                game.KickedOutPlayerId = kickedPlayer.Id;
-            }
-            game.CurrentPlayer.GalleristLocation = location;
-        }
-        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
-        {
-            if (TransitionTo.Contains(action))
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
+
     public class ContractDraw : ActionState
     {
         public ContractDraw()
@@ -61,19 +41,9 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         public override void DoAction<SalesOfficeContext>(SalesOfficeContext context)
         {
             var game = context.Game;
-            game.CurrentActionState = Name;
             context.Game.DrawContracts();
         }
         //todo add check if the player can take a contract
-        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
-        {
-            if (TransitionTo.Contains(action))
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
     public class ContractDraft : ActionState
     {
@@ -85,8 +55,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         public override void DoAction<SalesOfficeContext>(SalesOfficeContext context)
         {
             var game = context.Game;
-            game.CurrentActionState = Name;
-            var location = (GameContractLocation)Enum.Parse(typeof(GameContractLocation), context.Game.CurrentActionLocation);
+            var location = (GameContractLocation)Enum.Parse(typeof(GameContractLocation), context.Action.Location);
             var contracts = context.Game.GetContractDecks();
             var contract = contracts[location].First();
             if(context.Game.IsContractLocationEmpty(location))
@@ -97,15 +66,6 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             context.Game.CurrentPlayer.Contracts.Add(contract);
         }
         //todo override validate method to check for valid contract location
-        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
-        {
-            if (TransitionTo.Contains(action))
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
     public class ContractToPlayerBoard : ActionState
     {
@@ -116,7 +76,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         }
         public override void DoAction<SalesOfficeContext>(SalesOfficeContext context)
         {
-            var location = (GameContractLocation)Enum.Parse(typeof(GameContractLocation), context.Game.CurrentActionLocation);
+            var location = (GameContractLocation)Enum.Parse(typeof(GameContractLocation), context.Action.Location);
             var player = context.Game.CurrentPlayer;
             var contract = player.Contracts.First(c => c.Location == GameContractLocation.ChooseLocation);
             if(context.Game.IsContractLocationEmpty(location))
@@ -129,19 +89,11 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             }
             contract.Location = location;
             //todo replace below with a pass button or something.
+            context.Game.CurrentTurn.AddCompletedAction(context.Action);
             context.DoAction(GameActionState.Pass);
         }
         //todo override validate method to check for valid contract location
         //and to check if the location has a contract that can be replaced
-        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
-        {
-            if (TransitionTo.Contains(action))
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
     public class SellChooseArt : ActionState
     {
@@ -149,30 +101,12 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         {
 
         }
-        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
-        {
-            if (TransitionTo.Contains(action))
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
     public class SellChooseVisitor : ActionState
     {
         public override void DoAction<SalesOfficeContext>(SalesOfficeContext context)
         {
 
-        }
-        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
-        {
-            if (TransitionTo.Contains(action))
-            {
-                return true;
-            }
-
-            return false;
         }
     }
 }

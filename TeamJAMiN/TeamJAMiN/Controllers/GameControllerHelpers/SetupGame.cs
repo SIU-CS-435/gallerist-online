@@ -39,13 +39,11 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
         public static void StartGame(this Game newGame)
         {
             newGame.ChooseVisitors();
-            newGame.setupPlayers(); //must happen before visitor draw
+            newGame.SetupPlayerStart(); //must happen before visitor draw
             newGame.DrawInitialVisitors();
             newGame.SetupTickets();
             newGame.assignReputationTiles();
             newGame.IsStarted = true;
-            newGame.CurrentActionState = GameActionState.GameStart;
-            (new ActionManager(newGame)).DoAction(GameActionState.Pass);
         }
     }
 }

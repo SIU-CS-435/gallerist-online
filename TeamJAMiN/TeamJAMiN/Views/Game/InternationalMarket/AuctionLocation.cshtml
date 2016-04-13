@@ -3,7 +3,7 @@
 
 
 
-@if (Model.CurrentPlayer.UserId == ViewBag.userId && Model.CurrentActionState == GameActionState.InternationalMarket)
+@if (Model.CurrentPlayer.UserId == ViewBag.userId && Model.CurrentTurn.CurrentAction.State == GameActionState.InternationalMarket)
 {
     using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = GameActionState.Auction, actionLocation = ViewBag.Row + ':' + ViewBag.Column }, FormMethod.Post, new { role = "form" }))
     {

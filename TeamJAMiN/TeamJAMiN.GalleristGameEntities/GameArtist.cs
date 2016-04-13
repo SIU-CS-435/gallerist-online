@@ -45,6 +45,6 @@ namespace TeamJAMiN.GalleristComponentEntities
             }
         }
         public bool IsDiscovered { get; set; }
-        int AvailableArt { get; set; }
+        public int AvailableArt { get; set; }
     }
 }

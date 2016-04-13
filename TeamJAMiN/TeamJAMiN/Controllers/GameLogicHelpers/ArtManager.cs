@@ -18,6 +18,27 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             }
         }
 
+        public static bool ValidateArtistLocationString (this GameAction action)
+        {
+            var locationParams = action.Location.Split(':');
+            if( locationParams.Count() != 2)
+            {
+                return false;
+            }
+
+            if ( !Enum.IsDefined(typeof(ArtType),locationParams[0] ))
+            {
+                return false;
+            }
+
+            if (!Enum.IsDefined(typeof(ArtistCategory), locationParams[1]))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public static GameArtist GetArtistByLocationString (this Game game, string location)
         {
             var locationParams = location.Split(':');

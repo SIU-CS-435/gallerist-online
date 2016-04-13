@@ -17,7 +17,7 @@
         color = playerAtLocation.Color.ToString();
     }
     var isValid = Model.IsValidLocation((PlayerLocation)ViewBag.ActionId);
-    if (Model.CurrentActionState == GameActionState.ChooseLocation && isValid)
+    if (Model.CurrentTurn.CurrentAction.State == GameActionState.ChooseLocation && isValid)
     {
         highlight = "highlight";
     }

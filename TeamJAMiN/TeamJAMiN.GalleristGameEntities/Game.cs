@@ -18,6 +18,7 @@ namespace TeamJAMiN.GalleristComponentEntities
             ReputationTiles = new HashSet<GameReputationTile>();
             Contracts = new HashSet<GameContract>();
             Players = new HashSet<Player>();
+            Turns = new HashSet<GameTurn>();
         }
 
         [Key]
@@ -49,6 +50,7 @@ namespace TeamJAMiN.GalleristComponentEntities
         [DefaultValue(false)]
         public bool IsDeleted { get; set; }
 
+        public virtual HashSet<GameTurn> Turns { get; set; }
         public virtual HashSet<GameArtist> Artists { get; set; }
         public virtual HashSet<GameArt> Art { get; set; }
         public virtual HashSet<GameReputationTile> ReputationTiles { get; set; }
@@ -60,9 +62,18 @@ namespace TeamJAMiN.GalleristComponentEntities
         public int AvailableInvestorTickets { get; set; }
         public int AvailableCollectorTickets { get; set; }
         public string PlayerOrderData { get; set; }
-        
-
         public int CurrentPlayerId { get; set; }
+        public int? KickedOutPlayerId { get; set; }
+
+        [NotMapped]
+        public GameTurn CurrentTurn
+        {
+            get
+            {
+                return Turns.ToList().OrderByDescending(t => t.TurnNumber).First();
+            }
+        }
+
         [NotMapped]
         public Player CurrentPlayer
         {
@@ -71,12 +82,6 @@ namespace TeamJAMiN.GalleristComponentEntities
                 return this.Players.First(p => p.Id == CurrentPlayerId);
             }
         }
-
-        //todo create GameAction object
-        public GameActionState CurrentActionState { get; set; }
-        public string CurrentActionLocation { get; set; }
-
-        public int? KickedOutPlayerId { get; set; }
 
         [NotMapped]
         private List<Player> _playerOrder;

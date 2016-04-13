@@ -17,14 +17,14 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
 
         public static string GetAuctionColumn(this Game game)
         {
-            var currentLocation = game.CurrentActionLocation;
+            var currentLocation = game.CurrentTurn.CurrentAction.Location;
             var locationParams = currentLocation.Split(':');
             return locationParams[1];
         }
 
         public static string GetAuctionRow(this Game game)
         {
-            var currentLocation = game.CurrentActionLocation;
+            var currentLocation = game.CurrentTurn.CurrentAction.Location;
             var locationParams = currentLocation.Split(':');
             return locationParams[0];
         }

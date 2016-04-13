@@ -18,11 +18,11 @@ namespace TeamJAMiN.DataContexts
         public DbSet<GameArt> Art { get; set; }
         public DbSet<GameArtist> Artists { get; set; }
         public DbSet<GameReputationTile> ReputationTiles { get; set; }
-
         public DbSet<GameVisitor> Visitors { get; set; }
 
 
         public DbSet<Game> Games { get; set; }
+        public DbSet<GameTurn> Turns { get; set; }
         public DbSet<Player> Players { get; set; }
 
         public GalleristComponentsDbContext()

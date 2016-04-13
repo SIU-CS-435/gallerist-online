@@ -20,34 +20,13 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         { }
     }
 
-    public class InternationalMarket : ActionState
+    public class InternationalMarket : LocationAction
     {
-        public PlayerLocation location = PlayerLocation.InternationalMarket;
         public InternationalMarket()
         {
             Name = GameActionState.InternationalMarket;
+            location = PlayerLocation.InternationalMarket;
             TransitionTo = new HashSet<GameActionState> { GameActionState.Reputation, GameActionState.Auction };
-        }
-
-        public override void DoAction<InternationalMarketContext>(InternationalMarketContext context)
-        {
-            var game = context.Game;
-            game.CurrentActionState = Name;
-            var kickedPlayer = game.Players.FirstOrDefault(p => p.GalleristLocation == location);
-            if (kickedPlayer != null)
-            {
-                game.KickedOutPlayerId = kickedPlayer.Id;
-            }
-            game.CurrentPlayer.GalleristLocation = location;
-        }
-        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
-        {
-            if (TransitionTo.Contains(action))
-            {
-                return true;
-            }
-
-            return false;
         }
     }
 
@@ -63,7 +42,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         {
             //todo move setting current action state to wrapper method
             var game = context.Game;
-            game.CurrentActionState = Name;
+            game.CurrentTurn.CurrentAction.State = Name;
             var column = context.Game.GetReputationColumn();
             game.CurrentPlayer.Influence += game.GetInfluenceByColumn(column);
             var row = context.Game.GetReputationRow();
@@ -75,15 +54,6 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         //todo validate location string
         //todo check if player can take tile (can access that column/row)
         //todo check if player has an assistant
-        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
-        {
-            if (TransitionTo.Contains(action))
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
     public class ReputationToBoard : ActionState
     {
@@ -97,28 +67,20 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         {
             //todo move setting current action state to wrapper method
             var game = context.Game;
-            game.CurrentActionState = Name;
-            var location = (GameReputationTileLocation)Enum.Parse(typeof(GameReputationTileLocation), context.Game.CurrentActionLocation);
+            game.CurrentTurn.CurrentAction.State = Name;
+            var location = (GameReputationTileLocation)Enum.Parse(typeof(GameReputationTileLocation), context.Action.Location);
             var player = context.Game.CurrentPlayer;
             var reputationTile = player.Tiles.First(c => c.Column == GameReputationTileLocation.ReputationToBoard);
             reputationTile.Column = location;
             //todo send out a visitor from the lobby
             //todo replace below with a pass button or something.
+            context.Game.CurrentTurn.AddCompletedAction(context.Action);
             context.DoAction(GameActionState.Pass);
 
         }
         //todo validate location string
         //todo check if player can take tile (can access that column/row)
         //todo check if player has an assistant
-        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
-        {
-            if (TransitionTo.Contains(action))
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
 
     public class Auction : ActionState
@@ -133,13 +95,13 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         {
             //todo move setting current action state to wrapper method
             var game = context.Game;
-            game.CurrentActionState = Name;
             var column = context.Game.GetAuctionColumn();
             game.CurrentPlayer.Influence += game.GetInfluenceByColumn(column);
             var row = context.Game.GetAuctionRow();
             //todo set assistant location
             //give bonus
             //todo replace below with a pass button or something.
+            context.Game.CurrentTurn.AddCompletedAction(context.Action);
             context.DoAction(GameActionState.Pass);
 
         }
@@ -147,14 +109,5 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         //todo check if player can place an assistant there (can access that column)
         // check if player can produce that much money
         //todo check if player has an assistant
-        public override bool CanTransitionTo<ActionContext>(GameActionState action, ActionContext context)
-        {
-            if (TransitionTo.Contains(action))
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
 }
