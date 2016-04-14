@@ -40,5 +40,30 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
                 player.Influence = InfluenceToMoney[max - amount];
             }
         }
+
+        public static bool HasInfluenceAsFame(this Player player, int amount)
+        {
+            if(player.Influence/5 < amount)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static int GetMaxFameFromInfluence(this Player player)
+        {
+            int max = 0;
+            while (max*5 < player.Influence) { max++; }
+            return max;
+        }
+
+        public static void UseInfluenceAsFame(this Player player, int amount)
+        {
+            if(player.HasInfluenceAsFame(amount))
+            {
+                int max = player.GetMaxFameFromInfluence();
+                player.Influence = 5 * (max - amount);
+            }
+        }
     }
 }
