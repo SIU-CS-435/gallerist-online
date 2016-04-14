@@ -47,7 +47,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         {
             var firstTurn = new GameTurn { TurnNumber = 0, Type = GameTurnType.Setup, CurrentAction = new GameAction { State = GameActionState.GameStart } };
             newGame.Turns.Add(firstTurn);
-            (new ActionManager(newGame)).DoAction(GameActionState.Pass);
+            (new ActionContextInvoker(newGame)).DoAction(GameActionState.Pass);
 
         }
         public static void SetupNextTurn(this Game game)

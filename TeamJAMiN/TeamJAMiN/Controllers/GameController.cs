@@ -291,7 +291,7 @@ namespace TeamJAMiN.Controllers
 		    	        return View("GameError");
 		            }
 
-                    var actionManager = new ActionManager(game);
+                    var actionManager = new ActionContextInvoker(game);
                     
 		            if(!actionManager.DoAction(gameAction, actionLocation))
 		            {

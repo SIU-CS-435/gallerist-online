@@ -6,7 +6,7 @@
 
 @{ 
     var contractDict = Model.GetContractDecks();
-    var actionManager = new ActionManager(Model);
+    var actionManager = new ActionContextInvoker(Model);
 }
 
 <div class="row no-gutter">
