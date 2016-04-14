@@ -45,7 +45,11 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             var art = context.Game.GetArtFromStack(type);
             art.Artist = artist;
             context.Game.MoveFromArtStackToPlaza(art.Type);
-            artist.AvailableArt -= 1;
+            if (context.Game.CurrentPlayer.Commission != artist)
+            {
+                artist.AvailableArt -= 1;
+            }
+            //todo check if price is less because of comission
             //todo let player pay with influence
             context.Game.CurrentPlayer.Money -= artist.Fame;
             artist.Fame += art.Fame;
@@ -54,6 +58,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             //todo check if player has commission for artist
             context.Game.CurrentPlayer.Art.Add(art);
             //todo give player tickets
+            //todo remove comission if applicable
             //todo see if player should gain reputation tile
             context.Game.SetupNextArt(type);
             //todo replace below with a pass button or something.
@@ -102,7 +107,6 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             context.Game.CurrentTurn.AddCompletedAction(context.Action);
             context.DoAction(GameActionState.Pass);
         }
-        //todo add action location parameter in case this is called for an action other than the current action.
         public override bool IsValidGameState(ActionContext context)
         {
             if (!context.Action.ValidateArtistLocationString())
