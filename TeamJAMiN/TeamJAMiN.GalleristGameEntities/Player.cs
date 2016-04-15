@@ -45,7 +45,5 @@ namespace TeamJAMiN.GalleristComponentEntities
         public int VipTickets { get; set; }
         public int InvestorTickets { get; set; }
         public int CollectorTickets { get; set; }
-
-
     }        
 }

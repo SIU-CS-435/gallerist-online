@@ -12,6 +12,11 @@ namespace TeamJAMiN.GalleristComponentEntities
         SalesOffice, ContractDraw, ContractDraft, ContractToPlayerBoard, SellChooseArt, SellChooseVisitor,
         InternationalMarket, Reputation, ReputationToBoard, Auction,
         ArtistColony, ArtistDiscover, ArtBuy,
-        MediaCenter, Promote, Hire
+        MediaCenter, Promote, Hire,
+        ChooseTicketAny, ChooseTicketAnyTwo, ChooseTicketCollectorVip, ChooseTicketCollectorInvestor, ChooseTicketToThrowAway,
+        ChooseVisitorFromPlaza, ChooseVisitorFromPlazaVipInvestor, ChooseVisitorFromBag,
+        ChooseArtistFame, ChooseContract,
+        GetTicketInvestor, GetMoney, GetTicketVip, GetInfluence, GetAssistant,
+        GetTicketCollector
     }
 }

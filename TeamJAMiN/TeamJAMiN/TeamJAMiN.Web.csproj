@@ -191,6 +191,7 @@
     <Compile Include="Controllers\GameControllerHelpers\GameAuthorizationAttributes.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ActionContext.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ActionContextArtistColony.cs" />
+    <Compile Include="Controllers\GameLogicHelpers\ActionContextBonus.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ActionContextFactory.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ActionContextGeneral.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ActionContextInternationalMarket.cs" />
@@ -200,6 +201,7 @@
     <Compile Include="Controllers\GameLogicHelpers\AssistantManager.cs" />
     <Compile Include="Controllers\GameLogicHelpers\AuctionManager.cs" />
     <Compile Include="Controllers\GameLogicHelpers\ReputationManager.cs" />
+    <Compile Include="Controllers\GameLogicHelpers\TicketManager.cs" />
     <Compile Include="Controllers\GameLogicHelpers\TurnManager.cs" />
     <Compile Include="Controllers\Hubs\GameActionHub.cs" />
     <Compile Include="App_Start\Startup.SignalR.cs" />

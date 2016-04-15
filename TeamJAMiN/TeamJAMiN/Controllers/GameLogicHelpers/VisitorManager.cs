@@ -35,6 +35,12 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
                 v.PlayerGallery = color;
             }
         }
+
+        public static int GetGalleryVisitorCountByType(this Player player, VisitorTicketType type)
+        {
+            return player.Game.Visitors.Where(v => v.PlayerGallery == player.Color && v.Location == GameVisitorLocation.Gallery && v.Type == type).Count();
+        }
+
     }
     public static class TypeLocationMap
     {
