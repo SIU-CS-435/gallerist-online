@@ -2,6 +2,7 @@
 {
     public enum GameActionPriority
     {
-        Mandatory, Optional, Unavailable, Complete
+        Mandatory, Optional, Unavailable, Complete,
+        OptionalExclusive
     }
 }

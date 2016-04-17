@@ -42,6 +42,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         {
             var game = context.Game;
             context.Game.DrawContracts();
+            base.DoAction(context);
         }
         //todo add check if the player can take a contract
     }
@@ -64,6 +65,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             }
             contract.Location = GameContractLocation.ChooseLocation;
             context.Game.CurrentPlayer.Contracts.Add(contract);
+            base.DoAction(context);
         }
         //todo override validate method to check for valid contract location
     }

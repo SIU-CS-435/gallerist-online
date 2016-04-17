@@ -50,6 +50,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             reputationTile.Column = GameReputationTileLocation.ReputationToBoard;
             context.Game.CurrentPlayer.Tiles.Add(reputationTile);
             //todo set assistant location
+            base.DoAction(context);
         }
         //todo validate location string
         //todo check if player can take tile (can access that column/row)

@@ -14,8 +14,8 @@ namespace TeamJAMiN.Models.GameViewHelpers
         {
             var state = (GameActionState)Enum.Parse(typeof(GameActionState), location.ToString());
             var action = new GameAction { State = state, Location = game.CurrentTurn.CurrentAction.Location };
-            var manager = new ActionContextInvoker(game);
-            return manager.IsValidTransition(action);
+            var invoker = new ActionContextInvoker(game);
+            return invoker.IsValidTransition(action);
         }
 
         public static string Highlight(this Game game, GameActionState state)

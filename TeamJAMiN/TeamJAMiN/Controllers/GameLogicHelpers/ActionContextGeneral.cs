@@ -27,11 +27,6 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             Name = GameActionState.GameStart;
             TransitionTo = new HashSet<GameActionState> { GameActionState.Pass };
         }
-
-        public override void DoAction<ActionContext>(ActionContext context)
-        {
-
-        }
     }
 
 
@@ -43,10 +38,6 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             TransitionTo = new HashSet<GameActionState>
                 { GameActionState.SalesOffice, GameActionState.InternationalMarket, GameActionState.MediaCenter, GameActionState.ArtistColony };
         }
-
-        public override void DoAction<ActionContext>(ActionContext context)
-        { }
-
     }
     public class Pass : ActionState
     {
@@ -65,8 +56,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
 
     public abstract class LocationAction: ActionState
     {
-        public
-            PlayerLocation location;
+        public PlayerLocation location;
         public override void DoAction<InternationalMarketContext>(InternationalMarketContext context)
         {
             var game = context.Game;
@@ -76,6 +66,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
                 game.KickedOutPlayerId = kickedPlayer.Id;
             }
             game.CurrentPlayer.GalleristLocation = location;
+            base.DoAction(context);
         }
 
         public override bool IsValidGameState(ActionContext context)

@@ -33,11 +33,6 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             State = Game.CurrentTurn.CurrentAction.State;
         }
 
-        public bool IsValidTransition(GameAction action)
-        {
-            return _state.IsValidTransition(action, this);
-        }
-
         public bool IsValidGameState(GameAction action)
         {
             State = action.State;
@@ -47,7 +42,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
 
         public void DoAction(GameActionState state)
         {
-            Action = new GameAction { State = state, isExecutable = true, Location = "" };
+            Action = new GameAction { State = state, IsExecutable = true, Location = "" };
             State = Action.State;
             _state.DoAction(this);
         }
@@ -64,18 +59,17 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
     {
         public GameActionState Name;
         public HashSet<GameActionState> TransitionTo;
-        public abstract void DoAction<TContext>(TContext context)
-            where TContext : ActionContext;
-        public virtual bool IsValidTransition<TContext>(GameAction action, TContext context)
+        public virtual void DoAction<TContext>(TContext context)
             where TContext : ActionContext
         {
-            if (TransitionTo.Contains(action.State))
+            if(TransitionTo.Count <= 1 )
             {
-
-                return true;
+                context.Game.CurrentTurn.AddPendingActions(TransitionTo.ToList(), GameActionPriority.Optional, false);
             }
-
-            return false;
+            else
+            {
+                context.Game.CurrentTurn.AddPendingActions(TransitionTo.ToList(), context.Action, GameActionPriority.OptionalExclusive, false);
+            }
         }
         public virtual bool IsValidGameState(ActionContext context)
         {

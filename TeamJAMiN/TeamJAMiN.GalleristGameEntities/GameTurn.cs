@@ -67,7 +67,7 @@ namespace TeamJAMiN.GalleristComponentEntities
                     }
                     else
                     {
-                        _pendingActions = (List<GameAction>)JsonConvert.DeserializeObject(PendingActionData);
+                        _pendingActions = JsonConvert.DeserializeObject<List<GameAction>>(PendingActionData);
                     }
                 }
                 return _pendingActions;

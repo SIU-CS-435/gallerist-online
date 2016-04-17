@@ -21,49 +21,53 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
 
         public bool DoAction(GameActionState state, string actionLocation = "")
         {
-            var newAction = new GameAction { State = state, Location = actionLocation, isExecutable = true };
-
+            var newAction = new GameAction { State = state, Location = actionLocation, IsExecutable = true };
             if (!IsValidTransition(newAction))
             {
                 return false;
             }
+            //todo remove the pending action that corresponds to the new action request
+            Game.CurrentTurn.RemoveAllSiblingActions(newAction.State);
 
-            Game.CurrentTurn.SetCurrentAction(newAction.State, newAction.Location);
+            DoActionSingle(newAction);
 
-            if (!_context.NameToState.ContainsKey(newAction.State))
-            {
-                _context = ActionContextFactory.GetContext(newAction.State, Game);
-            }
-            _context.DoAction(newAction);
-            Game.CurrentTurn.AddCompletedAction(newAction);
-
-            var nextAction = Game.CurrentTurn.PendingActions.FirstOrDefault(a => a.isExecutable == true);
+            var nextAction = Game.CurrentTurn.PendingActions.FirstOrDefault(a => a.IsExecutable == true);
             if (nextAction != null)
             {
-                Game.CurrentTurn.RemovePendingAction(nextAction);
-                this.DoAction(nextAction.State, nextAction.Location);
-                Game.CurrentTurn.AddCompletedAction(nextAction);
+                Game.CurrentTurn.RemoveAllSiblingActions(nextAction);
+                DoActionSingle(nextAction);
             }
             return true;
+        }
+
+        public void DoActionSingle(GameAction action)
+        {
+            Game.CurrentTurn.SetCurrentAction(action.State, action.Location);
+            if (!_context.NameToState.ContainsKey(action.State))
+            {
+                _context = ActionContextFactory.GetContext(action.State, Game);
+            }
+            _context.DoAction(action);
+            Game.CurrentTurn.AddCompletedAction(action);
         }
 
         public bool IsValidTransition(GameAction action)
         {
             if (Game.CurrentTurn.PendingActions.Any(a => a.State == action.State))
             {
-                return true;
+                return IsValidGameState(action);
             }
-            return _context.IsValidTransition(action) && IsValidGameState(action);
+            return false;
         }
 
         public bool IsValidTransition(GameActionState state)
         {
             if (Game.CurrentTurn.PendingActions.Any(a => a.State == state))
             {
-                return true;
+                var action = new GameAction { State = state };
+                return IsValidGameState(action);
             }
-            var action = new GameAction { State = state };
-            return _context.IsValidTransition(action) && IsValidGameState(action);
+            return false;
         }
 
         private bool IsValidGameState(GameAction action)

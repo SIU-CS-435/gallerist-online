@@ -30,14 +30,10 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         { }
         public abstract class BonusAction : ActionState
         {
-            public override bool IsValidTransition<TContext>(GameAction action, TContext context)
-            {
-                //need a solution for this, possibly compile a list of places the bonus action occurs, and use base.IsValidTransition
-                //possibly add a checkPendingAction method to validate transition and enforce setting a pending action after a bonus
-                //possibly add a set transition method just for bonus actions that caller can use since it probably knows what happens next
-                //oh we can use the set transition method for handling executive actions too?
-                return true;
-            }
+            //need a solution for transition validation, possibly compile a list of places the bonus action occurs, and use base.IsValidTransition
+            //possibly add a checkPendingAction method to validate transition and enforce setting a pending action after a bonus
+            //possibly add a set transition method just for bonus actions that caller can use since it probably knows what happens next
+            //oh we can use the set transition method for handling executive actions too? except an in memory solution doesn't really work
         }
 
         public abstract class GetTicket : BonusAction
@@ -130,10 +126,6 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
                 var money = player.GetGalleryVisitorCountByType(VisitorTicketType.investor) + player.GetGalleryVisitorCountByType(VisitorTicketType.collector);
                 player.Money += money;
             }
-            public override bool IsValidGameState(ActionContext context)
-            {
-                return true;
-            }
         }
         public class GetInfluence : BonusAction
         {
@@ -148,9 +140,18 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
                 var influence = player.GetGalleryVisitorCountByType(VisitorTicketType.vip) + player.GetGalleryVisitorCountByType(VisitorTicketType.collector);
                 player.Influence += influence;
             }
-            public override bool IsValidGameState(ActionContext context)
+        }
+        public class ChooseContract : BonusAction
+        {
+            public ChooseContract()
             {
-                return true;
+                Name = GameActionState.ChooseContract;
+                TransitionTo = new HashSet<GameActionState> { };
+            }
+            public override void DoAction<ArtistColonyContext>(ArtistColonyContext context)
+            {
+                var newAction = new GameAction { Location = context.Action.Location, State = GameActionState.ContractDraft, IsExecutable = true };
+                context.Game.CurrentTurn.AddPendingAction(newAction);
             }
         }
     }

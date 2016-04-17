@@ -291,9 +291,9 @@ namespace TeamJAMiN.Controllers
 		    	        return View("GameError");
 		            }
 
-                    var actionManager = new ActionContextInvoker(game);
+                    var actionInvoker = new ActionContextInvoker(game);
                     
-		            if(!actionManager.DoAction(gameAction, actionLocation))
+		            if(!actionInvoker.DoAction(gameAction, actionLocation))
 		            {
 			            return Redirect("~/Game/Play/" + id);
 		            }
