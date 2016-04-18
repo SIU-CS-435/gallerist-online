@@ -35,10 +35,42 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
                 v.PlayerGallery = color;
             }
         }
+        public static void UpdateVisitorLocation(this GameVisitor visitor, GameVisitorLocation location, PlayerColor color)
+        {
+            visitor.Location = location;
+            visitor.PlayerGallery = color;
+        }
 
         public static int GetGalleryVisitorCountByType(this Player player, VisitorTicketType type)
         {
             return player.Game.Visitors.Where(v => v.PlayerGallery == player.Color && v.Location == GameVisitorLocation.Gallery && v.Type == type).Count();
+        }
+
+        public static int GetPlazaVisitorCountByType(this Game game, VisitorTicketType type)
+        {
+            return game.Visitors.Where(v => v.Type == type && v.Location == GameVisitorLocation.Plaza).Count();
+        }
+
+        public static void MoveVisitorPlazaToGallery(this Player player, VisitorTicketType type)
+        {
+            var visitor = player.Game.Visitors.FirstOrDefault(v => v.Type == type && v.Location == GameVisitorLocation.Plaza);
+            if(visitor != null)
+            {
+                visitor.UpdateVisitorLocation(GameVisitorLocation.Gallery, player.Color);
+            }
+        }
+        public static int GetBagVisitorCountByType(this Game game, VisitorTicketType type)
+        {
+            return game.Visitors.Where(v => v.Type == type && v.Location == GameVisitorLocation.Bag).Count();
+        }
+
+        public static void MoveVisitorBagToGallery(this Player player, VisitorTicketType type)
+        {
+            var visitor = player.Game.Visitors.FirstOrDefault(v => v.Type == type && v.Location == GameVisitorLocation.Bag);
+            if (visitor != null)
+            {
+                visitor.UpdateVisitorLocation(GameVisitorLocation.Gallery, player.Color);
+            }
         }
 
     }

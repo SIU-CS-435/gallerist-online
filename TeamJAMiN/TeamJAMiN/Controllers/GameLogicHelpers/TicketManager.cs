@@ -26,6 +26,42 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
 
             }
         }
+        public static int GetAvailableTicketsByType(this Game game, VisitorTicketType type)
+        {
+            switch (type)
+            {
+                case VisitorTicketType.collector:
+                    return game.AvailableCollectorTickets;
+                case VisitorTicketType.investor:
+                    return game.AvailableInvestorTickets;
+                case VisitorTicketType.vip:
+                    return game.AvailableVipTickets;
+                default:
+                    return -1;
+            }
+        }
+
+        public static void RemoveTicketByType(this Game game, VisitorTicketType type)
+        {
+            if( game.GetAvailableTicketsByType(type) != 0 )
+            {
+                switch (type)
+                {
+                    case VisitorTicketType.collector:
+                        game.AvailableCollectorTickets--;
+                        break;
+                    case VisitorTicketType.investor:
+                        game.AvailableInvestorTickets--;
+                        break;
+                    case VisitorTicketType.vip:
+                        game.AvailableVipTickets--;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
         public static void GetTicketCollector(this Player player)
         {
             if(player.Game.AvailableCollectorTickets > 0)

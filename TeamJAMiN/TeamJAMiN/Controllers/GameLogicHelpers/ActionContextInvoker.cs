@@ -70,7 +70,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             return false;
         }
 
-        private bool IsValidGameState(GameAction action)
+        public bool IsValidGameState(GameAction action)
         {
             var context = ActionContextFactory.GetContext(action.State, Game);
             return context.IsValidGameState(action);
