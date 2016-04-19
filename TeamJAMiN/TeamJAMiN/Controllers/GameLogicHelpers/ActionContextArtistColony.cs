@@ -49,13 +49,13 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             {
                 artist.AvailableArt -= 1;
             }
+            //todo check if player has commission for artist
             //todo check if price is less because of comission
             //todo let player pay with influence
             context.Game.CurrentPlayer.Money -= artist.Fame;
             artist.Fame += art.Fame;
-            //todo add number of collectors in gallery to artist fame
+            artist.Fame += context.Game.CurrentPlayer.GetGalleryVisitorCountByType(VisitorTicketType.collector);
             //todo let player increase fame using influence
-            //todo check if player has commission for artist
             context.Game.CurrentPlayer.Art.Add(art);
             //todo give player tickets
             //todo remove comission if applicable
@@ -100,6 +100,11 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             var game = context.Game;
             var artist = context.Game.GetArtistByLocationString(context.Action.Location);
             artist.IsDiscovered = true;
+            if(artist.Category == ArtistCategory.red)
+            {
+                var newCollector = new GameVisitor { Location = GameVisitorLocation.Plaza, Type = VisitorTicketType.collector };
+                game.Visitors.Add(newCollector);
+            }
             context.Game.CurrentPlayer.Commission = artist;
             artist.AvailableArt -= 1;
             //todo give player artist bonus

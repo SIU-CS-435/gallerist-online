@@ -41,6 +41,21 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             }
         }
 
+        public static int GetPlayerTicketCountByType(this Player player, VisitorTicketType type)
+        {
+            switch (type)
+            {
+                case VisitorTicketType.collector:
+                    return player.CollectorTickets;
+                case VisitorTicketType.investor:
+                    return player.InvestorTickets;
+                case VisitorTicketType.vip:
+                    return player.VipTickets;
+                default:
+                    return -1;
+            }
+        }
+
         public static void RemoveTicketByType(this Game game, VisitorTicketType type)
         {
             if( game.GetAvailableTicketsByType(type) != 0 )

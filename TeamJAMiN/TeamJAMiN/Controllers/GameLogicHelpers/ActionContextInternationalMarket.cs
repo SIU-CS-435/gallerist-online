@@ -73,6 +73,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             var player = context.Game.CurrentPlayer;
             var reputationTile = player.Tiles.First(c => c.Column == GameReputationTileLocation.ReputationToBoard);
             reputationTile.Column = location;
+            //todo give player bonus by location
             //todo send out a visitor from the lobby
             //todo replace below with a pass button or something.
             context.Game.CurrentTurn.AddCompletedAction(context.Action);

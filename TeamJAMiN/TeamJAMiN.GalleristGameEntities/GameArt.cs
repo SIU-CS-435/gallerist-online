@@ -32,6 +32,8 @@ namespace TeamJAMiN.GalleristComponentEntities
         public int Fame { get; set; }
         public int NumTickets { get; set; }
         public int Order { get; set; }
+        public bool IsSold { get; set; }
+
         public string FirstTicketData { get; set; }
         public VisitorTicketType[] FirstTicket
         {

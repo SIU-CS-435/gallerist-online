@@ -46,7 +46,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             //todo give player promotion bonus
             context.Game.CurrentPlayer.Influence -= promotion;
             artist.Fame += 1;
-            //todo increase fame by collectors in player gallery
+            artist.Fame += context.Game.CurrentPlayer.GetGalleryVisitorCountByType(VisitorTicketType.collector);
             //todo allow players to increase fame with influence
             //todo replace below with a pass button or something.
             context.Game.CurrentTurn.AddCompletedAction(context.Action);

@@ -17,6 +17,10 @@ namespace TeamJAMiN.GalleristComponentEntities
         ChooseVisitorFromPlaza, ChooseVisitorFromPlazaVipInvestor, ChooseVisitorFromBag,
         ChooseArtistFame, ChooseContract,
         GetTicketInvestor, GetMoney, GetTicketVip, GetInfluence, GetAssistant,
-        GetTicketCollector
+        GetTicketCollector,
+        UseTicket,
+        UseContractBonus,
+        MoveVisitorStart,
+        MoveVisitorEnd
     }
 }

@@ -72,6 +72,38 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
                 visitor.UpdateVisitorLocation(GameVisitorLocation.Gallery, player.Color);
             }
         }
+        public static bool ValidateVisitorLocationString(string location)
+        {
+            var locationParams = location.Split(':');
+            if (locationParams.Count() != 2)
+            {
+                return false;
+            }
+            if (!Enum.IsDefined(typeof(ArtType), locationParams[0]))
+            {
+                return false;
+            }
+            if (!Enum.IsDefined(typeof(GameVisitorLocation), locationParams[1]))
+            {
+                return false;
+            }
+            return true;
+        }
+        public static VisitorTicketType GetVisitorTypeFromLocationString(string location)
+        {
+            var locationParams = location.Split(':');
+            return (VisitorTicketType)Enum.Parse(typeof(VisitorTicketType), locationParams[0]);
+        }
+        public static GameVisitorLocation GetVisitorLocationFromLocationString(string location)
+        {
+            var locationParams = location.Split(':');
+            return (GameVisitorLocation)Enum.Parse(typeof(GameVisitorLocation), locationParams[1]);
+        }
+        public static PlayerColor GetPlayerColorFromVisitorLocationString(string location)
+        {
+            var locationParams = location.Split(':');
+            return (PlayerColor)Enum.Parse(typeof(PlayerColor), locationParams[3]);
+        }
 
     }
     public static class TypeLocationMap
