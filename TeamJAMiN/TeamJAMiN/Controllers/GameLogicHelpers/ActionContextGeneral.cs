@@ -80,4 +80,76 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             return true;
         }
     }
+
+    public interface IMoneyTransaction
+    {
+        int GetCost();
+        bool PlayerHasMoney(Player player);
+    }
+
+    public class UseInfluenceAsMoney : ActionState
+    {
+        public override void DoAction<InternationalMarketContext>(InternationalMarketContext context)
+        {
+            var parent = (IMoneyTransaction)context.Action.Parent;
+            var cost = parent.GetCost();
+            int influenceAsMoney = int.Parse(context.Action.Location);
+            context.Game.CurrentPlayer.UseInfluenceAsMoney(influenceAsMoney);
+            cost -= influenceAsMoney;
+            context.Game.CurrentPlayer.Money -= cost;
+        }
+
+        public override bool IsValidGameState(ActionContext context)
+        {
+            if ( context.Action.Parent is IMoneyTransaction == false )
+            {
+                return false;
+            }
+            var parent = (IMoneyTransaction)context.Action.Parent;
+            var cost = parent.GetCost();
+            int influenceAsMoney;
+            var locationIsInt = int.TryParse(context.Action.Location, out influenceAsMoney);
+            if (locationIsInt == false)
+            {
+                return false;
+            }
+            if(context.Game.CurrentPlayer.HasInfluenceAsMoney(influenceAsMoney) == false)
+            {
+                return false;
+            }
+            cost -= influenceAsMoney;
+            if(context.Game.CurrentPlayer.Money < cost)
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+
+    public class UseInfluenceAsFame : ActionState
+    {
+        public override void DoAction<InternationalMarketContext>(InternationalMarketContext context)
+        {
+            int influenceAsFame = int.Parse(context.Action.Location);
+            context.Game.CurrentPlayer.UseInfluenceAsFame(influenceAsFame);
+            var artist = context.Game.GetArtistByLocationString(context.Action.Parent.Location);
+            artist.Fame += influenceAsFame;
+        }
+
+        public override bool IsValidGameState(ActionContext context)
+        {
+            int influenceAsFame;
+            var locationIsInt = int.TryParse(context.Action.Location, out influenceAsFame);
+            if (locationIsInt == false)
+            {
+                return false;
+            }
+            if (context.Game.CurrentPlayer.HasInfluenceAsFame(influenceAsFame) == false)
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+
 }
