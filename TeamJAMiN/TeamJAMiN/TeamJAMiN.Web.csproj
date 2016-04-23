@@ -189,32 +189,36 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GameControllerHelpers\GameAuthorizationAttributes.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\ActionContext.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\ActionContextArtistColony.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\ActionContextBonus.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\ActionContextExecutive.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\ActionContextFactory.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\ActionContextGeneral.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\ActionContextInternationalMarket.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\ActionManager.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\ActionContextMediaCenter.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\ActionContextSalesOffice.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\AssistantManager.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\AuctionManager.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\ReputationManager.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\TicketManager.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\TurnManager.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201604231413225_executiveactions.cs" />
+    <Compile Include="DataContexts\GalleristComponentMigrations\201604231413225_executiveactions.Designer.cs">
+      <DependentUpon>201604231413225_executiveactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GameLogic\ActionContexts\ActionContext.cs" />
+    <Compile Include="GameLogic\ActionContexts\ActionContextArtistColony.cs" />
+    <Compile Include="GameLogic\ActionContexts\ActionContextBonus.cs" />
+    <Compile Include="GameLogic\ActionContexts\ActionContextExecutive.cs" />
+    <Compile Include="GameLogic\ActionContexts\ActionContextFactory.cs" />
+    <Compile Include="GameLogic\ActionContexts\ActionContextGeneral.cs" />
+    <Compile Include="GameLogic\ActionContexts\ActionContextInternationalMarket.cs" />
+    <Compile Include="GameLogic\ComponentManagers\ActionManager.cs" />
+    <Compile Include="GameLogic\ActionContexts\ActionContextMediaCenter.cs" />
+    <Compile Include="GameLogic\ActionContexts\ActionContextSalesOffice.cs" />
+    <Compile Include="GameLogic\ComponentManagers\AssistantManager.cs" />
+    <Compile Include="GameLogic\ComponentManagers\AuctionManager.cs" />
+    <Compile Include="GameLogic\ComponentManagers\ReputationManager.cs" />
+    <Compile Include="GameLogic\ComponentManagers\TicketManager.cs" />
+    <Compile Include="GameLogic\ComponentManagers\TurnManager.cs" />
     <Compile Include="Controllers\Hubs\GameActionHub.cs" />
     <Compile Include="App_Start\Startup.SignalR.cs" />
-    <Compile Include="Controllers\GameControllerHelpers\SetupPlayers.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\ActionContextInvoker.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\ArtManager.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\ContractManager.cs" />
+    <Compile Include="GameLogic\GameSetup\SetupPlayers.cs" />
+    <Compile Include="GameLogic\ActionContextInvoker.cs" />
+    <Compile Include="GameLogic\ComponentManagers\ArtManager.cs" />
+    <Compile Include="GameLogic\ComponentManagers\ContractManager.cs" />
     <Compile Include="Controllers\GameController.cs" />
-    <Compile Include="Controllers\GameControllerHelpers\SetupGame.cs" />
-    <Compile Include="Controllers\GameControllerHelpers\SetupVisitors.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\GameInfluenceTrack.cs" />
-    <Compile Include="Controllers\GameLogicHelpers\VisitorManager.cs" />
+    <Compile Include="GameLogic\GameSetup\SetupGame.cs" />
+    <Compile Include="GameLogic\GameSetup\SetupVisitors.cs" />
+    <Compile Include="GameLogic\ComponentManagers\GameInfluenceTrack.cs" />
+    <Compile Include="GameLogic\ComponentManagers\VisitorManager.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Hubs\GameListHub.cs" />
     <Compile Include="Controllers\Hubs\HubHelpers\PushHelper.cs" />
@@ -366,13 +370,12 @@
       <DependentUpon>201604042258035_userdata.cs</DependentUpon>
     </Compile>
     <Compile Include="DataContexts\IdentityMigrations\Configuration.cs" />
-    <Compile Include="Controllers\GameControllerHelpers\SetupReputationTiles.cs" />
+    <Compile Include="GameLogic\GameSetup\SetupReputationTiles.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\GameControllerHelpers\SetupArtColony.cs" />
-    <Compile Include="Controllers\GameControllerHelpers\Shuffler.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="GameLogic\GameSetup\SetupArtColony.cs" />
+    <Compile Include="GameLogic\Shuffler.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\GameViewHelpers\ActionHighlighter.cs" />
     <Compile Include="Models\GameViewHelpers\ContractSort.cs" />
@@ -678,6 +681,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201604131553339_updategameforturns.resx">
       <DependentUpon>201604131553339_updategameforturns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\GalleristComponentMigrations\201604231413225_executiveactions.resx">
+      <DependentUpon>201604231413225_executiveactions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201602282353509_init.resx">
       <DependentUpon>201602282353509_init.cs</DependentUpon>
