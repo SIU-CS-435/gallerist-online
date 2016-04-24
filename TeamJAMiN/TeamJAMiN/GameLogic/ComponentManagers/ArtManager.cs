@@ -49,8 +49,8 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
 
         public static GameArt GetArtFromStack(this Game game, ArtType type)
         {
-            return game.GetArtStack(type).FirstOrDefault();
-            
+            //todo check if stack is empty
+            return game.GetArtStack(type).FirstOrDefault();            
         }
 
         public static List<GameArt> GetArtStack(this Game game, ArtType type)
