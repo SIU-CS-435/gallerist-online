@@ -1,35 +1,23 @@
-﻿@model TeamJAMiN.GalleristComponentEntities.GameArtist
-@using TeamJAMiN.Models.GameViewHelpers
+﻿@model TeamJAMiN.Models.ComponentViewModels.ArtistViewModel
 
 @*Undiscovered Artist (Back Side)*@
 <div class="row no-gutter undiscovered-top-row">
     @*Starting Fame*@
-    <div class="col-xs-3"><div class="artist-fame">@Model.Fame<div class="initial-fame-star fame-star"></div></div></div>
+    <div class="col-xs-3"><div class="artist-fame">@Model.Artist.Fame<div class="initial-fame-star fame-star"></div></div></div>
     @*Starting Stars*@
     <div class="col-xs-3">
-        @{
-            int i = 0;
-            while (Model.StarLevels[i] < Model.Fame) { i++; }
-        }
-        <div class="@IconCss.StarClass[i] fame-star star-size-med"></div>
+        <div class="@Model.CurrentStar fame-star star-size-med"></div>
     </div>
     @*Starting Promotion Level*@
     <div class="col-xs-6">
-        <div class="promotion-tile promotion-@Model.Promotion">
-        @{ 
-            var output = "-";
-            if (Model.Promotion > 0)
-            {
-                output = Model.Promotion.ToString();
-            }
-            @output
-        }
+        <div class="promotion-tile promotion-@Model.Artist.Promotion">
+            @Model.PromotionText
         </div>
     </div>
 </div>
 <div class="row no-gutter">
     @*Art Type*@
-    <div class="col-xs-4"><div class="@Model.ArtType.ToString()-icon art-icon"></div></div>
+    <div class="col-xs-4"><div class="@Model.Artist.ArtType.ToString()-icon art-icon"></div></div>
     @*Artist Bonus*@
-    <div class="col-xs-4 col-xs-offset-4"><div class="artist-bonus @IconCss.BonusClass[Model.DiscoverBonus]"></div></div>
+    <div class="col-xs-4 col-xs-offset-4"><div class="artist-bonus @Model.BonusClass"></div></div>
 </div>

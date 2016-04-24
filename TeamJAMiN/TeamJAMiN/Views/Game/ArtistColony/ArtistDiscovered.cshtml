@@ -1,47 +1,35 @@
-﻿@model TeamJAMiN.GalleristComponentEntities.GameArtist
-@using TeamJAMiN.Models.GameViewHelpers
+﻿@model TeamJAMiN.Models.ComponentViewModels.ArtistViewModel
 
 @*Discovered Artist (Front Side)*@
 
 
 <div class="row no-gutter discovered-top-row">
     @*Art Type*@
-    <div class="col-xs-6"><div class="@Model.ArtType.ToString()-icon art-icon"></div></div>
+    <div class="col-xs-6"><div class="@Model.Artist.ArtType.ToString()-icon art-icon"></div></div>
     @*Promotion Level*@
     <div class="col-xs-6 promotion-container">
-        <div class="promotion-tile promotion-@Model.Promotion">
-            @{
-                var output = "-";
-                if (Model.Promotion > 0)
-                {
-                    output = Model.Promotion.ToString();
-                }
-                @output
-            }
+        <div class="promotion-tile promotion-@Model.Artist.Promotion">
+            @Model.PromotionText
         </div>
     </div>
 </div>
 <div class="row no-gutter discovered-bottom-row">
     @*Initial Fame*@
-    <div class="col-xs-4 initial-fame"><div class="artist-fame">@Model.InitialFame<div class="initial-fame-star fame-star"></div></div></div>
+    <div class="col-xs-4 initial-fame"><div class="artist-fame">@Model.Artist.InitialFame<div class="initial-fame-star fame-star"></div></div></div>
     @*Fame Track*@
-    @{
-        int i = 0;
-        while (Model.StarLevels[i] < Model.Fame) { i++; }
-    }
     <div class="col-xs-8 fame-track">
         <div class="row no-gutter">
             <div class="col-xs-6">
                 <div class="current-fame">
-                    <div class="col-xs-12">@Model.Fame</div>
-                    <div class="col-xs-12 @IconCss.StarClass[i] fame-star star-size-xs"></div>
+                    <div class="col-xs-12">@Model.Artist.Fame</div>
+                    <div class="col-xs-12 @Model.CurrentStar fame-star star-size-xs"></div>
                     <div class="arrow-right"></div>
                 </div>
             </div>
             <div class="col-xs-6">
                 <div class="next-fame-star">
-                    <div class="col-xs-12">@Model.StarLevels[i]</div>
-                    <div class="col-xs-12 @IconCss.StarClass[i+1] fame-star star-size-xs"></div>
+                    <div class="col-xs-12">@Model.FameAtNextStar</div>
+                    <div class="col-xs-12 @Model.NextStar fame-star star-size-xs"></div>
                 </div>
             </div>
         </div>    
