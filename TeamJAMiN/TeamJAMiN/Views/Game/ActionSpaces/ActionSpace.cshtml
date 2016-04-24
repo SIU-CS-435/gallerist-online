@@ -1,53 +1,32 @@
-﻿@model TeamJAMiN.GalleristComponentEntities.Game
+﻿@model TeamJAMiN.Models.ComponentViewModels.ActionSpaceViewModel
 @using TeamJAMiN.Models.GameViewHelpers
-@using TeamJAMiN.GalleristComponentEntities
-@{ 
-    var push = "";
-    var pull = "";
-    var highlight = "";
-    var color = "";
-    if (ViewBag.ActionId == PlayerLocation.ArtistColony || ViewBag.ActionId == PlayerLocation.MediaCenter)
-    {
-        push = "col-xs-push-6";
-        pull = "col-xs-pull-6";
-    }
-    var playerAtLocation = Model.Players.FirstOrDefault(p => p.GalleristLocation == (PlayerLocation)ViewBag.ActionId);
-    if(playerAtLocation != null)
-    {
-        color = playerAtLocation.Color.ToString();
-    }
-    var isValid = Model.IsValidLocation((PlayerLocation)ViewBag.ActionId);
-    if (Model.CurrentTurn.CurrentAction.State == GameActionState.ChooseLocation && isValid)
-    {
-        highlight = "highlight";
-    }
-}
+
 <div class="row">
-    <div class="col-xs-6 @push no-padding">
-        @if (Model.CurrentPlayer.UserId == ViewBag.userId && isValid)
+    <div class="col-xs-6 @Model.Push no-padding">
+        @if (Model.IsActivePlayer && Model.IsValidSpace)
     	{
-            using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = ViewBag.ActionId }, FormMethod.Post, new { role = "form" }))
+            using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Game.Id, gameAction = Model.State }, FormMethod.Post, new { role = "form" }))
             {
 		    @Html.AntiForgeryToken()
-		    <div data-location="@ViewBag.ActionId" id="@IconCss.actionIds[ViewBag.ActionId][0]-action" class="action-space current-player @highlight">
-		        <div class="action-space-center @color-gallerist"></div>
+		    <div data-location="@Model.Location" id="@Model.LocationName-action" class="action-space current-player highlight">
+		        <div class="action-space-center @Model.GalleristColorClass"></div>
 		        <input type="submit" class="action-button" value="" />
 		    </div>
     		}
         }
 	    else
 	    {
-		    <div data-location="@ViewBag.ActionId" id="@IconCss.actionIds[ViewBag.ActionId][0]-action" class="action-space current-player">
-		        <div class="action-space-center @color-gallerist"></div>
+		    <div data-location="@ViewBag.ActionId" id="@Model.LocationName-action" class="action-space current-player">
+		        <div class="action-space-center @Model.GalleristColorClass"></div>
 	        </div>
 	    }
         <div class="action-arrow-body"></div>
         <div class="action-arrow-head"></div>
-        <div id="@IconCss.actionIds[ViewBag.ActionId][0]-kicked-out" class="kicked-out-space"></div>
+        <div id="@Model.LocationName-kicked-out" class="kicked-out-space"></div>
     </div>
-    <div class="col-xs-6 @pull no-padding">
-        <div id="@IconCss.actionIds[ViewBag.ActionId][0]-@IconCss.actionIds[ViewBag.ActionId][1]-action" class="sub-action-space tile"></div>
-        <div id="@IconCss.actionIds[ViewBag.ActionId][0]-action-label" class="action-space-label"></div>
-        <div id="@IconCss.actionIds[ViewBag.ActionId][0]-@IconCss.actionIds[ViewBag.ActionId][2]-action" class="sub-action-space tile"></div>
+    <div class="col-xs-6 @Model.Pull no-padding">
+        <div id="@Model.LocationName-@Model.FirstActionName-action" class="sub-action-space tile"></div>
+        <div id="@Model.LocationName-action-label" class="action-space-label"></div>
+        <div id="@Model.LocationName-@Model.SecondActionName-action" class="sub-action-space tile"></div>
     </div>
 </div>

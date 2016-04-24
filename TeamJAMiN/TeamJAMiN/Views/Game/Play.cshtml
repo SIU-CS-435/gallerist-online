@@ -1,6 +1,7 @@
 ﻿@model TeamJAMiN.GalleristComponentEntities.Game
 @using TeamJAMiN.GalleristComponentEntities
 @using TeamJAMiN.Models.GameViewHelpers
+@using TeamJAMiN.Models.ComponentViewModels
 @{
     ViewBag.Title = "Play";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -30,16 +31,14 @@
                 <div class="col-xs-6">
                     @{ 
                         actionEnum.MoveNext();
-                        ViewBag.ActionId = actionEnum.Current;
                     }
-                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", Model)
+                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", new ActionSpaceViewModel(ViewBag.userName, Model, actionEnum.Current))
                 </div>
                 <div class="col-xs-6">
                     @{
                         actionEnum.MoveNext();
-                        ViewBag.ActionId = actionEnum.Current;
                     }
-                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", Model)
+                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", new ActionSpaceViewModel(ViewBag.userName, Model, actionEnum.Current))
                 </div>
             </div>
             @* Player Galleries *@
@@ -78,16 +77,14 @@
                 <div class="col-xs-6">
                     @{
                         actionEnum.MoveNext();
-                        ViewBag.ActionId = actionEnum.Current;
                     }
-                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", Model)
+                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", new ActionSpaceViewModel(ViewBag.userName, Model, actionEnum.Current))
                 </div>
                 <div class="col-xs-6">
                     @{
                         actionEnum.MoveNext();
-                        ViewBag.ActionId = actionEnum.Current;
                     }
-                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", Model)
+                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", new ActionSpaceViewModel(ViewBag.userName, Model, actionEnum.Current))
                 </div>
             </div>
         </div>

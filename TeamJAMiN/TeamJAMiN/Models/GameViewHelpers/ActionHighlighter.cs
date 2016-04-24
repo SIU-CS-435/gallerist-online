@@ -10,13 +10,7 @@ namespace TeamJAMiN.Models.GameViewHelpers
 {
     public static class ActionHighlighter
     {
-        public static bool IsValidLocation(this Game game, PlayerLocation location)
-        {
-            var state = (GameActionState)Enum.Parse(typeof(GameActionState), location.ToString());
-            var action = new GameAction { State = state, Location = game.CurrentTurn.CurrentAction.Location };
-            var invoker = new ActionContextInvoker(game);
-            return invoker.IsValidTransition(action);
-        }
+        
 
         public static string Highlight(this Game game, GameActionState state)
         {

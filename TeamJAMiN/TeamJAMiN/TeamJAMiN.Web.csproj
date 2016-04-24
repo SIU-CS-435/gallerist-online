@@ -377,8 +377,10 @@
     <Compile Include="GameLogic\GameSetup\SetupArtColony.cs" />
     <Compile Include="GameLogic\Shuffler.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ComponentViewModels\ActionSpaceViewModel.cs" />
     <Compile Include="Models\GameViewHelpers\ActionHighlighter.cs" />
     <Compile Include="Models\GameViewHelpers\ContractSort.cs" />
+    <Compile Include="Models\GameViewHelpers\FormHelper.cs" />
     <Compile Include="Models\GameViewHelpers\IconCss.cs" />
     <Compile Include="Models\GameViewHelpers\VisitorSort.cs" />
     <Compile Include="Models\GameViewModel.cs" />
