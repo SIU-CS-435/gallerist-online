@@ -14,6 +14,7 @@
                     <div class="col-xs-5 game-list-name">@myGame.Name</div>
                     <div class="col-xs-2 game-list-field">@myGame.PlayersString</div>
                     <div class="col-xs-2 game-list-field">@myGame.MaxTurnLengthString</div>
+                    <p data-utcdate="@myGame.CreatedTimeString"></p>
                     <div id="start-open-button-container-@myGame.Id" class="col-xs-3 game-list-button-container no-padding">
                         <div class="col-xs-6 open-button-container">
                             @if (myGame.isStartable)

@@ -46,6 +46,7 @@ namespace TeamJAMiN.Controllers
                         MaxTurnLengthString = m.TurnLength + " Minutes Per Turn",
                         PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers + " players",
                         isJoinable = !m.Players.Any(p => p.UserId == userId) && m.Players.Count < m.MaxNumberOfPlayers && !m.IsStarted,
+                        CreatedTimeString = m.CreatedTime.ToString()
                     }).ToList();
 
                     var myGamesList = myGames.Select(m => new GameDto
