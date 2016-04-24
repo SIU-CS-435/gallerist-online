@@ -378,6 +378,7 @@
     <Compile Include="GameLogic\Shuffler.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ComponentViewModels\ActionSpaceViewModel.cs" />
+    <Compile Include="Models\ComponentViewModels\ArtistColonyViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\ArtistViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\ArtViewModel.cs" />
     <Compile Include="Models\GameViewHelpers\ActionHighlighter.cs" />

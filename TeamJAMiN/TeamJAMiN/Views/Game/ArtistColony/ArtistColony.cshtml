@@ -1,65 +1,38 @@
 ﻿@using TeamJAMiN.GalleristComponentEntities
 @using TeamJAMiN.Models.GameViewHelpers
 @using TeamJAMiN.Models.ComponentViewModels
-@using TeamJAMiN.Controllers.GameLogicHelpers
-@model TeamJAMiN.GalleristComponentEntities.Game
-@{ var listOrder = new List<ArtType> { ArtType.digital, ArtType.painting, ArtType.sculpture, ArtType.photo };}
-@{ var artists = Model.Artists.ToList(); }
-@{ var submitAction = Model.CurrentTurn.CurrentAction.State == GameActionState.ArtistColony ? GameActionState.ArtBuy : GameActionState.Promote; }
+@model ArtistColonyViewModel
+
 
 @*Artists*@
-@foreach (ArtistCategory category in new List<ArtistCategory> { ArtistCategory.blue, ArtistCategory.red })
+@foreach (List<GameArtist> artistList in new List<List<GameArtist>>{ Model.BlueArtists, Model.RedArtists })
 {
     <div class="col-xs-4">
-        @foreach (ArtType type in listOrder)
+        @foreach (GameArtist artist in artistList)
         {
-            var artist = artists.Where(a => a.ArtType == type && a.Category == category).FirstOrDefault();
-            if (artist.IsDiscovered)
+            if (Model.IsActivePlayer && Model.IsValidActionState)
             {
-                if (Model.CurrentPlayer.UserId == ViewBag.userId && (Model.CurrentTurn.CurrentAction.State == GameActionState.ArtistColony || Model.CurrentTurn.CurrentAction.State == GameActionState.MediaCenter))
+                using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Game.Id, gameAction = Model.FormAction, actionLocation = artist.ArtType.ToString() + ":" + artist.Category.ToString() }, FormMethod.Post, new { role = "form" }))
                 {
-                    using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = GameActionState.ArtBuy, actionLocation = type.ToString() + ":" + @artist.Category.ToString() }, FormMethod.Post, new { role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <div class="row tile artist-colony-tile artist-@artist.Category.ToString() artist-@artist.ArtType.ToString() @Model.Highlight(GameActionState.MediaCenter)">
-                            <input type="submit" class="action-button" value="" />
-                            @Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", new ArtistViewModel(artist))
-                        </div>
+                    @Html.AntiForgeryToken()
+                    <div class="row tile artist-colony-tile artist-@artist.Category.ToString() artist-@artist.ArtType.ToString() @Model.Game.Highlight(GameActionState.MediaCenter)">
+                        <input type="submit" class="action-button" value="" />
+                        @Html.Partial(Model.ArtistToPartialViewString[artist], new ArtistViewModel(artist))
+                    </div>
 
-                    }
-                }
-                else
-                {
-                    <div class="row tile artist-colony-tile artist-@artist.Category.ToString() artist-@artist.ArtType.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistDiscovered.cshtml", new ArtistViewModel(artist))</div>
                 }
             }
             else
             {
-                if (Model.CurrentPlayer.UserId == ViewBag.userId && Model.CurrentTurn.CurrentAction.State == GameActionState.ArtistColony)
-                {
-                    using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = GameActionState.ArtistDiscover, actionLocation = type.ToString() + ":" + @artist.Category.ToString() }, FormMethod.Post, new { role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <div class="row tile artist-colony-tile artist-@artist.Category.ToString() artist-@artist.ArtType.ToString()">
-                            <input type="submit" class="action-button" value="" />
-                            @Html.Partial("~/Views/Game/ArtistColony/ArtistUndiscovered.cshtml", new ArtistViewModel(artist))
-                        </div>
-
-                    }
-                }
-                else
-                {
-                    <div class="row tile artist-colony-tile artist-@artist.Category.ToString() artist-@artist.ArtType.ToString()">@Html.Partial("~/Views/Game/ArtistColony/ArtistUndiscovered.cshtml", new ArtistViewModel(artist))</div>
-                }
+                <div class="row tile artist-colony-tile artist-@artist.Category.ToString() artist-@artist.ArtType.ToString()">@Html.Partial(Model.ArtistToPartialViewString[artist], new ArtistViewModel(artist))</div>
             }
         }
     </div>
 }
 @*Art*@
 <div class="col-xs-4">
-    @foreach (ArtType type in listOrder)
+    @foreach (GameArt art in Model.Art)
     {
-        var art = Model.GetArtFromStack(type);
-        <div class="row tile artist-colony-tile art-tile artist-@art.Type.ToString()">@Html.Partial("~/Views/Game/ArtistColony/Art.cshtml", new ArtViewModel(Model,art))</div>
+        <div class="row tile artist-colony-tile art-tile artist-@art.Type.ToString()">@Html.Partial("~/Views/Game/ArtistColony/Art.cshtml", new ArtViewModel(Model.Game,art))</div>
     }
 </div>

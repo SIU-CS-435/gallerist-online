@@ -91,7 +91,7 @@
         <div class="col-md-5">
             <div class="row board-region @Model.Highlight(GameActionState.ArtistColony)">
                 @* Artist Colony *@
-                @Html.Partial("~/Views/Game/ArtistColony/ArtistColony.cshtml", Model)
+                @Html.Partial("~/Views/Game/ArtistColony/ArtistColony.cshtml", new ArtistColonyViewModel(ViewBag.userName,Model))
             </div>
             <div class="row board-region separate-top">
                 @* Media *@
