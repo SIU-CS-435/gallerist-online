@@ -1,19 +1,16 @@
-﻿@using TeamJAMiN.GalleristComponentEntities
-@model Game
+﻿@model TeamJAMiN.Models.ComponentViewModels.AuctionLocationViewModel
 
-
-
-@if (Model.CurrentPlayer.UserId == ViewBag.userId && Model.CurrentTurn.CurrentAction.State == GameActionState.InternationalMarket)
+@if (Model.IsActivePlayer && Model.IsValidActionState)
 {
-    using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = GameActionState.Auction, actionLocation = ViewBag.Row + ':' + ViewBag.Column }, FormMethod.Post, new { role = "form" }))
+    using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Game.Id, gameAction = Model.State, actionLocation = Model.ActionLocation }, FormMethod.Post, new { role = "form" }))
     {
         @Html.AntiForgeryToken()
-        <div class="@ViewBag.AuctionClass auction-tile tile">
+        <div class="@Model.AuctionClass auction-tile tile">
             <input type="submit" class="action-button" value="" />
         </div>
     }
 }
 else
 {
-    <div class="@ViewBag.AuctionClass auction-tile tile"></div>
+    <div class="@Model.AuctionClass auction-tile tile"></div>
 }
