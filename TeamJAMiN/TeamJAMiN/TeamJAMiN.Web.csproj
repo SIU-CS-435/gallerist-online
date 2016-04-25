@@ -382,6 +382,7 @@
     <Compile Include="Models\ComponentViewModels\ArtistViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\ArtViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\AuctionLocationViewModel.cs" />
+    <Compile Include="Models\ComponentViewModels\ReputationTileViewModel.cs" />
     <Compile Include="Models\GameViewHelpers\ActionHighlighter.cs" />
     <Compile Include="Models\GameViewHelpers\ContractSort.cs" />
     <Compile Include="Models\GameViewHelpers\FormHelper.cs" />

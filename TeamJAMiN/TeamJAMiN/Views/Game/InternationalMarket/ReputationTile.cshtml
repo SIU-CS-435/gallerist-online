@@ -1,20 +1,18 @@
-﻿@model TeamJAMiN.GalleristComponentEntities.GameReputationTile
-@using TeamJAMiN.Models.GameViewHelpers
-
+﻿@model TeamJAMiN.Models.ComponentViewModels.ReputationTileViewModel
 
 <div class="row no-gutter">
     @*influence*@
     <div class="col-xs-6">
-        <div class="influence-@Model.Influence reputation-tile-influence"></div>
+        <div class="influence-@Model.Tile.Influence reputation-tile-influence"></div>
     </div>
     @*money*@
     <div class="col-xs-6">
-        <div class="money-@Model.Money reputation-tile-money"></div>
+        <div class="money-@Model.Tile.Money reputation-tile-money"></div>
     </div>
 </div>
 <div class="row no-gutter">
     <div class="col-xs-12 scoring-container no-padding">
-        @Html.Raw(IconCss.ReputationTileScoringHTML[Model.Scoring])
+        @Html.Raw(Model.ScoringHtmlString)
     </div>
 </div>
 
