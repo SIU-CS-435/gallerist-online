@@ -42,7 +42,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <script type="text/javascript" src="@Url.Content("/Scripts/Gallerist/moment-date-format.js")"></script>
+    @Scripts.Render("~/bundles/moment")
     @RenderSection("scripts", required: false)
 </body>
 </html>

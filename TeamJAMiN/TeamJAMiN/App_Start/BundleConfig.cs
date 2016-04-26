@@ -10,6 +10,7 @@ namespace TeamJAMiN
         {
             bundles.Add(new ScriptBundle("~/bundles/gamelist").Include(
                         "~/Scripts/GameList/game.list.js",
+                        "~/Scripts/Gallerist/moment-date-format.js",
                         "~/Scripts/jquery.signalR-{version}.js"));
             bundles.Add(new ScriptBundle("~/bundles/gallerist").Include(
                         "~/Scripts/Gallerist/game-actions.js",
@@ -17,6 +18,9 @@ namespace TeamJAMiN
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
+                        "~/Scripts/moment.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
