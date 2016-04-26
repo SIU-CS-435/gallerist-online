@@ -27,13 +27,13 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
                 gameResponse.Success = false;
             }
 
-            //you passed in bad variables, stop doing that
-            else if (string.IsNullOrWhiteSpace(username) || identityContext == null)
-            {
-                gameResponse.Title = "Not Authorized";
-                gameResponse.Message = "Sorry but you are not authorized to play this game.";
-                gameResponse.Success = false;
-            }
+            ////you passed in bad variables, stop doing that
+            //else if (string.IsNullOrWhiteSpace(username) || identityContext == null)
+            //{
+            //    gameResponse.Title = "Not Authorized";
+            //    gameResponse.Message = "Sorry but you are not authorized to play this game.";
+            //    gameResponse.Success = false;
+            //}
             //nothing bad happened
             else
             {
