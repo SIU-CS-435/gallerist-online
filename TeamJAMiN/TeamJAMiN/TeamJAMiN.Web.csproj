@@ -510,8 +510,15 @@
     <Content Include="Scripts\Gallerist\game-actions.js" />
     <Content Include="Scripts\jquery-2.2.1.js" />
     <Content Include="Scripts\jquery-2.2.1.min.js" />
+    <Content Include="Scripts\jquery.qtip\imagesloaded.pkg.min.js" />
+    <Content Include="Scripts\jquery.qtip\jquery.qtip.css" />
+    <Content Include="Scripts\jquery.qtip\jquery.qtip.js" />
+    <Content Include="Scripts\jquery.qtip\jquery.qtip.min.css" />
+    <Content Include="Scripts\jquery.qtip\jquery.qtip.min.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
+    <Content Include="Scripts\jquery.qtip\imagesloaded.pkg.min.js.map" />
+    <Content Include="Scripts\jquery.qtip\jquery.qtip.min.js.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
