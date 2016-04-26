@@ -504,6 +504,7 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="Scripts\Gallerist\gallerist-qtip.js" />
     <Content Include="Scripts\Gallerist\moment-date-format.js" />
     <Content Include="Scripts\GameList\game.list.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -513,9 +514,9 @@
     <Content Include="Scripts\jquery-2.2.1.js" />
     <Content Include="Scripts\jquery-2.2.1.min.js" />
     <Content Include="Scripts\jquery.qtip\imagesloaded.pkg.min.js" />
-    <Content Include="Scripts\jquery.qtip\jquery.qtip.css" />
+    <Content Include="Content\jquery.qtip.css" />
     <Content Include="Scripts\jquery.qtip\jquery.qtip.js" />
-    <Content Include="Scripts\jquery.qtip\jquery.qtip.min.css" />
+    <Content Include="Content\jquery.qtip.min.css" />
     <Content Include="Scripts\jquery.qtip\jquery.qtip.min.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
