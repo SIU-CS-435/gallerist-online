@@ -1,6 +1,8 @@
-﻿$(function () {
+﻿$(document).ready(function () {
     $('[data-utcdate]').each(function () {
-        var d = moment($(this).attr('data-utcdate').fromNow());
-        $(this).html(d.format());
+        var dateString = $(this).attr('data-utcdate');
+        var date = new Date(dateString);
+        var momentDate = moment(date).fromNow();
+        $(this).html(momentDate);
     });
 });
