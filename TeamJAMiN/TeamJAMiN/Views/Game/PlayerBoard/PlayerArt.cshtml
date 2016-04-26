@@ -1,17 +1,15 @@
-﻿@model TeamJAMiN.GalleristComponentEntities.GameArt
-@using TeamJAMiN.Controllers.GameLogicHelpers
-
+﻿@model TeamJAMiN.Models.ComponentViewModels.PlayerArtViewModel
 
 <div class="row no-gutter">
     <div class="exhibit-icon player-art-exhibit"></div>
 </div>
 @*Art Stats*@
-<div class="row no-gutter player-art-artist-@Model.Artist.Category player-art-artist">
+<div class="row no-gutter player-art-artist-@Model.Art.Artist.Category player-art-artist">
     @*Value*@
-    <div class="col-xs-6 money-@Model.GetArtValue() player-art-money"></div>
+    <div class="col-xs-6 money-@Model.ArtValue player-art-money"></div>
     @*Art Type*@
     <div class="col-xs-6">    
-        <div class="col-xs-12"><div class="@Model.Type.ToString()-icon player-art-type"></div></div>
+        <div class="col-xs-12"><div class="@Model.Art.Type.ToString()-icon player-art-type"></div></div>
     </div>
 </div>
 

@@ -1,80 +1,60 @@
-﻿@using TeamJAMiN.GalleristComponentEntities
-@using TeamJAMiN.Models.GameViewHelpers
-@model Player
+﻿@using TeamJAMiN.Models.ComponentViewModels
+@model PlayerContractsViewModel
 
 <div class="row">
-@foreach (GameContractLocation location in new GameContractLocation[] { GameContractLocation.Investor, GameContractLocation.Vip, GameContractLocation.Any })
+@foreach (ContractDTO dto in Model.Contracts)
 {
-    var contract = new GameContract();
-    var ticket = "";
-    var empty = "";
-    if (Model.HasContractAtLocation(location))
-    {
-        contract = Model.GetContractAtLocation(location);
-    }
-    else
-    {
-        if (location != GameContractLocation.Any)
-        {
-            ticket = ((VisitorTicketType)Enum.Parse(typeof(VisitorTicketType), location.ToString().ToLower())).ToString();
-        }
-        else
-        {
-            ticket = "any";
-        }
-        empty = "player-contract-empty";
-    }
     <div class="col-xs-4">
-        @if (Model.Id == Model.Game.CurrentPlayer.Id && Model.Game.CurrentPlayer.UserId == ViewBag.userId && Model.Game.CurrentTurn.CurrentAction.State == GameActionState.ContractDraft)
+        @if (Model.IsPlayerBoardOfActivePlayer && Model.IsActivePlayer && Model.IsValidActionState)
         {
-            using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.GameId, gameAction = GameActionState.ContractToPlayerBoard, actionLocation = location }, FormMethod.Post, new { role = "form" }))
+            using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Player.GameId, gameAction = Model.State, actionLocation = dto.Location }, FormMethod.Post, new { role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <div id="player-contract-@location.ToString().ToLower()" data-location="@location" class="contract-card tile player-contract @empty highlight">
+                <div id="player-contract-@dto.Location.ToString().ToLower()" data-location="@dto.Location" class="contract-card tile player-contract @dto.EmptyCssClass highlight">
                     <input type="submit" class="action-button" value="" />
-                    @if (empty == "")
+                    @if (dto.Contract != null)
                     {
                         <div class="row no-gutter contract-art-row">
                             @* Art Type *@
                             <div class="col-xs-12 no-padding">
-                                <div class="art-icon @contract.Art.ToString()-icon"></div>
+                                <div class="art-icon @dto.Contract.Art.ToString()-icon"></div>
                             </div>
                         </div>
                         <div class="row no-gutter contract-bonus-row">
                             @* Contract Action *@
                             <div class="col-xs-12 no-padding">
-                                <div class="contract-bonus @IconCss.BonusClass[contract.Bonus]"></div>
+                                <div class="contract-bonus @dto.BonusClass"></div>
                             </div>
                         </div>
                     }
                     else
                     {
-                        <div class="ticket-@ticket icon-lg icon-background margin-center"></div>
+                        <div class="ticket-@dto.Ticket icon-lg icon-background margin-center"></div>
                     }
                 </div>
             }
         }
         else
         {
-            <div id="player-contract-@location.ToString().ToLower()" data-location="@location" class="contract-card tile player-contract @empty">
-                @if (empty == "")
+            <div id="player-contract-@dto.Location.ToString().ToLower()" data-location="@dto.Location" class="contract-card tile player-contract @dto.EmptyCssClass">
+                @if (dto.Contract != null)
                     {
                     <div class="row no-gutter contract-art-row">
                         @* Art Type *@
                         <div class="col-xs-12 no-padding">
-                            <div class="art-icon @contract.Art.ToString()-icon"></div>
+                            <div class="art-icon @dto.Contract.Art.ToString()-icon"></div>
                         </div>
                     </div>
                         <div class="row no-gutter contract-bonus-row">
                             @* Contract Action *@
                             <div class="col-xs-12 no-padding">
-                                <div class="contract-bonus @IconCss.BonusClass[contract.Bonus]"></div>
+                                <div class="contract-bonus @dto.BonusClass"></div>
                             </div>
                         </div>
                 }
                 else
                 {
-                    <div class="ticket-@ticket icon-lg icon-background margin-center"></div>
+                    <div class="ticket-@dto.Ticket icon-lg icon-background margin-center"></div>
                 }
             </div>
         }

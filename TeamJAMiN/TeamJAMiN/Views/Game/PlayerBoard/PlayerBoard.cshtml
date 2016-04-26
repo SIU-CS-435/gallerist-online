@@ -1,5 +1,6 @@
 ﻿@model Player
 @using TeamJAMiN.GalleristComponentEntities
+@using TeamJAMiN.Models.ComponentViewModels
 
 <div class="row">
     Player: @Model.UserName <br />
@@ -78,7 +79,7 @@
                 </div>
             </div>
             <div class="col-xs-6">
-                @Html.Partial("~/Views/Game/PlayerBoard/PlayerContracts.cshtml", Model)
+                @Html.Partial("~/Views/Game/PlayerBoard/PlayerContracts.cshtml", new PlayerContractsViewModel(ViewBag.userName,Model))
             </div>
             <div class="col-xs-2">
                 
