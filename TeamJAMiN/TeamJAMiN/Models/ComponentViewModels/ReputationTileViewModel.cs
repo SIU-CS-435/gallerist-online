@@ -12,9 +12,12 @@ namespace TeamJAMiN.Models.ComponentViewModels
         {
             Tile = tile;
             ScoringHtmlString = ReputationTileScoringHTML[tile.Scoring];
+            ActionLocation = tile.Row.ToString() + ':' + tile.Column.ToString();
         }
 
         public GameReputationTile Tile { get; private set; }
+        public string ActionLocation { get; private set; }
+        public GameActionState State = GameActionState.Reputation;
         public string ScoringHtmlString { get; private set; }
 
         public static Dictionary<ReputationTileScoring, string> ReputationTileScoringHTML = new Dictionary<ReputationTileScoring, string>
