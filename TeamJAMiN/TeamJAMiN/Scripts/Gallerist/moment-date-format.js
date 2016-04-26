@@ -12,7 +12,7 @@
         let momentDuration = moment.duration(parseInt(minutes), 'm').humanize();
         $(this).html(durationString); // + " (" + momentDuration + ")"); we can put minutes back if we feel we need it
         $(this).attr('title', minutes + " Minutes");
-    });
+});
 });
 
 function formatMinutesAsGenericDuration(lengthInMinutes) {
