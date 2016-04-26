@@ -23,7 +23,7 @@
                 <div class="col-xs-12">
                     <div class="col-xs-3 game-list-field">@myGame.Name</div>
                     <div class="col-xs-2 game-list-field">@myGame.PlayersString</div>
-                    <div class="col-xs-2 game-list-field" data-duration="@myGame.MaxTurnLength"></div>
+                    <div class="col-xs-2 game-list-field qtip-basic" data-duration="@myGame.MaxTurnLength" data-qtip-content="@myGame.MaxTurnLength"></div>
                     <div class="col-xs-2 game-list-field" data-utcdate="@myGame.CreatedTime"></div>
                     <div id="start-open-button-container-@myGame.Id" class="col-xs-3 game-list-button-container no-padding">
                         <div class="col-xs-6 open-button-container">
@@ -83,7 +83,7 @@
                 <div class="col-xs-12">
                     <div class="col-xs-3 game-list-field">@game.Name</div>
                     <div class="col-xs-2 game-list-field">@game.PlayersString</div>
-                    <div class="col-xs-2 game-list-field" data-duration="@game.MaxTurnLength"></div>
+                    <div class="col-xs-2 game-list-field qtip-basic" data-duration="@game.MaxTurnLength" data-qtip-content="@game.MaxTurnLength"></div>
                     <div class="col-xs-2 game-list-field" data-utcdate="@game.CreatedTime"></div>
                     <div class="col-xs-2 no-padding">
                         @if (game.isJoinable)
