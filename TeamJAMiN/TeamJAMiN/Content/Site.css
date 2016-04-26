@@ -1056,6 +1056,10 @@ td{
     text-overflow: ellipsis;
 }
 
+.game-list-header{
+
+}
+
 .game-list .btn{
     width: 100%;
     font-size: 16px;
@@ -1067,4 +1071,9 @@ td{
 
 .game-list-field{
     padding-top: 5px;
+}
+
+.margin-top-bottom-10{
+    margin-bottom: 10px;
+    margin-top: 10px;
 }

@@ -20,5 +20,6 @@ namespace TeamJAMiN.GalleristComponentEntities.Dtos
         public bool isJoinable { get; set; }
         public bool isStarted { get; set; }
         public bool isStartable { get; set; }
+        public DateTime CreatedTime { get; set; }
     }
 }

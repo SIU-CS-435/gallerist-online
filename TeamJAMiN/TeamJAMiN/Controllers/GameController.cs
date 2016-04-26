@@ -43,9 +43,10 @@ namespace TeamJAMiN.Controllers
                         MaxNumberOfPlayers = m.MaxNumberOfPlayers,
                         RemainingSlots = m.MaxNumberOfPlayers - m.Players.Count,
                         MaxTurnLength = m.TurnLength,
-                        MaxTurnLengthString = m.TurnLength + " Minutes Per Turn",
-                        PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers + " players",
+                        MaxTurnLengthString = m.TurnLength.ToString(),
+                        PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers,
                         isJoinable = !m.Players.Any(p => p.UserId == userId) && m.Players.Count < m.MaxNumberOfPlayers && !m.IsStarted,
+                        CreatedTime = m.CreatedTime
                     }).ToList();
 
                     var myGamesList = myGames.Select(m => new GameDto
@@ -57,10 +58,11 @@ namespace TeamJAMiN.Controllers
                         MaxNumberOfPlayers = m.MaxNumberOfPlayers,
                         RemainingSlots = m.MaxNumberOfPlayers - m.Players.Count,
                         MaxTurnLength = m.TurnLength,
-                        MaxTurnLengthString = m.TurnLength + " Minutes Per Turn",
-                        PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers + " players",
+                        MaxTurnLengthString = m.TurnLength.ToString(),
+                        PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers,
                         isStartable = m.Players.Any(p => p.UserId == userId && p.IsHost) && !m.IsStarted,
-                        isStarted = m.IsStarted
+                        isStarted = m.IsStarted,
+                        CreatedTime = m.CreatedTime
                     }).ToList();
 
                     ViewBag.allGames = allGamesList;
