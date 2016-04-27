@@ -1,29 +1,27 @@
-﻿@using TeamJAMiN.GalleristComponentEntities
-@model Player
+﻿@using TeamJAMiN.Models.ComponentViewModels
+@model ReputationTileLocationViewModel
 
-@{ var tile = Model.Tiles.FirstOrDefault(t => t.Column == (GameReputationTileLocation)ViewBag.Location); }
-
-@if (tile != null)
+@if (Model.Tile != null)
 {
     <div class="reputation-tile tile">
-        @Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml", tile)
+        @Html.Partial("~/Views/Game/InternationalMarket/ReputationTile.cshtml", new ReputationTileViewModel(Model.Tile))
     </div>
 }
 else
 {
-    if (Model.Id == Model.Game.CurrentPlayer.Id && Model.Game.CurrentPlayer.UserId == ViewBag.userId && Model.Game.CurrentTurn.CurrentAction.State == GameActionState.Reputation)
+    if (Model.IsPlayerBoardOfActivePlayer && Model.IsActivePlayer && Model.IsValidActionState)
     {
-        using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.GameId, gameAction = GameActionState.ReputationToBoard, actionLocation = ViewBag.Location.ToString() }, FormMethod.Post, new { role = "form" }))
+        using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Player.GameId, gameAction = Model.State, actionLocation = Model.Location.ToString() }, FormMethod.Post, new { role = "form" }))
         {
             @Html.AntiForgeryToken()
-            <div class="@ViewBag.Bonus player-reputation-icon tile">
+            <div class="@Model.BonusClass player-reputation-icon tile">
                 <input type="submit" class="action-button" value="" />
             </div>
         }
     }
     else
     {
-        <div class="@ViewBag.Bonus player-reputation-icon tile"></div>
+        <div class="@Model.BonusClass player-reputation-icon tile"></div>
     }
 }
 

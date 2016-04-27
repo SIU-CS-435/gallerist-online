@@ -21,5 +21,15 @@ namespace TeamJAMiN.Models.GameViewHelpers
             { BonusType.ticket, "ticket-any" },
             { BonusType.contract, "bonus-contract" }
         };
+
+        public static Dictionary<GameReputationTileLocation, BonusType> PlayerReputationLocationToBonus = new Dictionary<GameReputationTileLocation, BonusType>
+        {
+            { GameReputationTileLocation.Assistant, BonusType.assistant },
+            { GameReputationTileLocation.Fame, BonusType.fame },
+            { GameReputationTileLocation.Influence, BonusType.influence },
+            { GameReputationTileLocation.Money, BonusType.money },
+            { GameReputationTileLocation.Tickets, BonusType.twoTickets },
+            { GameReputationTileLocation.Visitor, BonusType.plazaVisitor },
+        };
     }
 }
