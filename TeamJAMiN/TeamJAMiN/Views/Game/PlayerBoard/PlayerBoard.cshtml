@@ -1,47 +1,31 @@
-﻿@model Player
-@using TeamJAMiN.GalleristComponentEntities
+﻿@model PlayerBoardViewModel
 @using TeamJAMiN.Models.ComponentViewModels
 
 <div class="row">
-    Player: @Model.UserName <br />
-    Money: @Model.Money <br />
-    @{
-        var commission = "No Commissioned Art";
-        if (Model.Commission != null)
-        {
-            commission = Model.Commission.ArtType.ToString() + " " + Model.Commission.Category.ToString();
-        }
-    }
-    Commission: @commission
+    Player: @Model.Player.UserName <br />
+    Money: @Model.Player.Money <br />
+    Commission: @Model.ComissionDisplayString
 </div>
 
 <div class="row">
     <div class="col-xs-2">
-        @for (int i = 0; i < 8; i++ )
+        @foreach (UnemployedAssistantViewModel assistantModel in Model.UnemployedAssistants)
         {
-            ViewBag.AssistantCount = i;
-            @Html.Partial("~/Views/Game/PlayerBoard/UnemployedAssistant.cshtml", Model)
+            @Html.Partial("~/Views/Game/PlayerBoard/UnemployedAssistant.cshtml", assistantModel)
         }
     </div>
     <div class="col-xs-8">
         <div class="row">
             <div class="col-xs-10">
-                @{                          
-                    var art = Model.Art.ToList();
-                    var artCount = art.Count;
-                    for (var i = 0; i < 3; i++)
-                    {
+                @foreach (PlayerArtViewModel artModel in Model.ExhibitingArt)
+                {
                     <div class="col-xs-3">
-                        @if(i<artCount)
-                        {
                             <div class="player-art-tile tile">
-                                @Html.Partial("~/Views/Game/PlayerBoard/PlayerArt.cshtml", art[i])
+                                @Html.Partial("~/Views/Game/PlayerBoard/PlayerArt.cshtml", artModel)
                             </div>
-                        }
                     </div>
-                    }
                 }
-                    </div>
+            </div>
             <div class="col-xs-2">
                 <div class="col-xs-12">a</div>
                 <div class="col-xs-12">a</div>
@@ -50,36 +34,24 @@
         <div class="row">
             <div class="col-xs-4">
                 <div class="row">
-                    <div class="col-xs-4 no-padding">
-                        @{ ViewBag.Bonus = "bonus-influence"; ViewBag.Location = GameReputationTileLocation.Influence; }
-                        @Html.Partial("~/Views/Game/PlayerBoard/ReputationTileLocation.cshtml", Model)
-                    </div>
-                    <div class="col-xs-4 no-padding">
-                        @{ ViewBag.Bonus = "bonus-money"; ViewBag.Location = GameReputationTileLocation.Money; }
-                        @Html.Partial("~/Views/Game/PlayerBoard/ReputationTileLocation.cshtml", Model)
-                    </div>
-                    <div class="col-xs-4 no-padding">
-                        @{ ViewBag.Bonus = "bonus-fame"; ViewBag.Location = GameReputationTileLocation.Fame; }
-                        @Html.Partial("~/Views/Game/PlayerBoard/ReputationTileLocation.cshtml", Model)
-                    </div>
+                    @foreach (ReputationTileLocationViewModel tileModel in Model.TopRowTileLocationModels)
+                    {
+                        <div class="col-xs-4 no-padding">
+                            @Html.Partial("~/Views/Game/PlayerBoard/ReputationTileLocation.cshtml", tileModel)
+                        </div>
+                    }
                 </div>
                 <div class="row">
-                    <div class="col-xs-4 no-padding">
-                        @{ ViewBag.Bonus = "visitor-any"; ViewBag.Location = GameReputationTileLocation.Visitor; }
-                        @Html.Partial("~/Views/Game/PlayerBoard/ReputationTileLocation.cshtml", Model)
-                    </div>
-                    <div class="col-xs-4 no-padding">
-                        @{ ViewBag.Bonus = "bonus-ticket-two"; ViewBag.Location = GameReputationTileLocation.Tickets; }
-                        @Html.Partial("~/Views/Game/PlayerBoard/ReputationTileLocation.cshtml", Model)
-                    </div>
-                    <div class="col-xs-4 no-padding">
-                        @{ ViewBag.Bonus = "bonus-assistant"; ViewBag.Location = GameReputationTileLocation.Assistant; }
-                        @Html.Partial("~/Views/Game/PlayerBoard/ReputationTileLocation.cshtml", Model)
-                    </div>
+                    @foreach (ReputationTileLocationViewModel tileModel in Model.BottomRowTileLocationModels)
+                    {
+                        <div class="col-xs-4 no-padding">
+                            @Html.Partial("~/Views/Game/PlayerBoard/ReputationTileLocation.cshtml", tileModel)
+                        </div>
+                    }
                 </div>
             </div>
             <div class="col-xs-6">
-                @Html.Partial("~/Views/Game/PlayerBoard/PlayerContracts.cshtml", new PlayerContractsViewModel(ViewBag.userName,Model))
+                @Html.Partial("~/Views/Game/PlayerBoard/PlayerContracts.cshtml", Model.ContractView)
             </div>
             <div class="col-xs-2">
                 
@@ -87,6 +59,5 @@
         </div>
     </div>
     <div class="col-xs-2">
-           
     </div>
 </div>

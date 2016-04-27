@@ -384,6 +384,7 @@
     <Compile Include="Models\ComponentViewModels\AuctionLocationViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\InternationalMarketViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\PlayerArtViewModel.cs" />
+    <Compile Include="Models\ComponentViewModels\PlayerBoardViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\PlayerContractsViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\ReputationTileLocationViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\ReputationTileViewModel.cs" />
