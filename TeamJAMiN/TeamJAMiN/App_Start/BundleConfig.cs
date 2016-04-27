@@ -19,6 +19,11 @@ namespace TeamJAMiN
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/qtip").Include(
+                        "~/Scripts/jquery.qtip/jquery.qtip.min.js",
+                        "~/Scripts/jquery.qtip/imagesloaded.pkg.min.js",
+                        "~/Scripts/Gallerist/gallerist-qtip.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/moment").Include(
                         "~/Scripts/moment.min.js"));
 
@@ -36,6 +41,7 @@ namespace TeamJAMiN
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/jquery.qtip.min.css",
                       "~/Content/Site.css"));
         }
     }
