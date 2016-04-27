@@ -1,10 +1,5 @@
-﻿@using TeamJAMiN.GalleristComponentEntities
-@{ 
-    List<GameVisitor> visitorList = ViewBag.DisplayVisitors;
-    var investorCount = visitorList.Where(v => v.Type == VisitorTicketType.investor).ToList().Count;
-    var collectorCount = visitorList.Where(v => v.Type == VisitorTicketType.collector).ToList().Count;
-    var vipCount = visitorList.Where(v => v.Type == VisitorTicketType.vip).ToList().Count;
-}
+﻿@model List<int>
+@using TeamJAMiN.Models.ComponentViewModels
 
 <div class="row no-gutter visitor-display-icons">
     <div class="col-xs-4 no-padding">
@@ -19,12 +14,12 @@
 </div>
 <div class="row no-gutter visitor-display-counts">
     <div class="col-xs-4 no-padding">
-        <div class="visitor-investor-count gallery-visitor-count">@investorCount</div>
+        <div class="visitor-investor-count gallery-visitor-count">@Model[0]</div>
     </div>
     <div class="col-xs-4 no-padding">
-        <div class="visitor-collector-count gallery-visitor-count">@collectorCount</div>
+        <div class="visitor-collector-count gallery-visitor-count">@Model[1]</div>
     </div>
     <div class="col-xs-4 no-padding">
-        <div class="visitor-investor-count gallery-visitor-count">@vipCount</div>
+        <div class="visitor-vip-count gallery-visitor-count">@Model[2]</div>
     </div>
 </div>

@@ -1,18 +1,10 @@
-﻿@model TeamJAMiN.GalleristComponentEntities.Game
-@using TeamJAMiN.GalleristComponentEntities
+﻿@model PlayerGalleryViewModel
+@using TeamJAMiN.Models.ComponentViewModels
 
-@{
-    var noPlayer = "";
-    var player = Model.Players.Where(p => p.Color == ViewBag.Color).FirstOrDefault();
-    if (player == null)
-    {
-        noPlayer = "unused-gallery-region";
-    }
-}
 <div class="col-xs-12">
-    <div class="player-gallery-region @noPlayer">
+    <div class="player-gallery-region @Model.EmptyGalleryCssClass">
         <div class="row no-gutter">
-            @if (ViewBag.Color == PlayerColor.yellow || ViewBag.Color == PlayerColor.purple)
+            @if (Model.IsGalleryFirst)
             {
                 @Html.Partial("~/Views/Game/PlayerGallery/Gallery.cshtml", Model)
             }
@@ -22,7 +14,7 @@
             }
         </div>
         <div class="row no-gutter">
-            @if (ViewBag.Color == PlayerColor.yellow || ViewBag.Color == PlayerColor.purple)
+            @if (Model.IsGalleryFirst)
             {
                 @Html.Partial("~/Views/Game/PlayerGallery/Lobby.cshtml", Model)
             }

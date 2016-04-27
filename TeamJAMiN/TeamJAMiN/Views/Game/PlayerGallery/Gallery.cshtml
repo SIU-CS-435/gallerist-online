@@ -1,8 +1,6 @@
-﻿@model TeamJAMiN.GalleristComponentEntities.Game
-@using TeamJAMiN.GalleristComponentEntities
-@using TeamJAMiN.Models.GameViewHelpers
+﻿@model PlayerGalleryViewModel
+@using TeamJAMiN.Models.ComponentViewModels
 
-@{ ViewBag.DisplayVisitors = Model.VisitorByPlayerAndLocation((PlayerColor)ViewBag.Color, GameVisitorLocation.Gallery); }
-<div id="@ViewBag.Color.ToString()-gallery" class="player-gallery">
-    @Html.Partial("~/Views/Game/PlayerGallery/VisitorDisplay.cshtml")
+<div id="@Model.Color.ToString()-gallery" class="player-gallery">
+    @Html.Partial("~/Views/Game/PlayerGallery/VisitorDisplay.cshtml", Model.GalleryVisitorCounts)
 </div>
