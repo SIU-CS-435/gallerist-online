@@ -19,9 +19,9 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         public static int GetNextAssistantCost(this Player player)
         {
             int costIndex = player.Assistants.Count - 2;
-            return GetAssistantCostByIndex(player, costIndex);
+            return GetAssistantCostByIndex(costIndex);
         }
-        public static int GetAssistantCostByIndex(this Player player, int index)
+        public static int GetAssistantCostByIndex(int index)
         {
             return AssistantCost[index];
         }
