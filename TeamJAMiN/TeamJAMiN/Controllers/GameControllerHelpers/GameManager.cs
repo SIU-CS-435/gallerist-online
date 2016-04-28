@@ -10,7 +10,7 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
 {
     public class GameManager
     {
-        private static GameResponse CheckGameState(Game game, GalleristComponentsDbContext galleristContext, string username, ApplicationDbContext identityContext) //take out identity after verifying that authorize extension works
+        private static GameResponse CheckGameState(Game game, GalleristComponentsDbContext galleristContext)
         {
             var gameResponse = new GameResponse
             {
@@ -26,14 +26,6 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
                 gameResponse.Message = "Sorry but this does not appear to be a valid game.";
                 gameResponse.Success = false;
             }
-
-            ////you passed in bad variables, stop doing that
-            //else if (string.IsNullOrWhiteSpace(username) || identityContext == null)
-            //{
-            //    gameResponse.Title = "Not Authorized";
-            //    gameResponse.Message = "Sorry but you are not authorized to play this game.";
-            //    gameResponse.Success = false;
-            //}
             //nothing bad happened
             else
             {
@@ -43,10 +35,18 @@ namespace TeamJAMiN.Controllers.GameControllerHelpers
             return gameResponse;
         }
 
-        public static GameResponse GetGame(int gameId, string username, GalleristComponentsDbContext galleristContext, ApplicationDbContext userContext)
+        public static GameResponse GetGame(int gameId, GalleristComponentsDbContext galleristContext)
         {
-            var game = galleristContext.Games.Include("Art").Include("Artists").Include("ReputationTiles").Include("Contracts").Include("Visitors").Include("Players").Include("Assistants").Include("Turns").FirstOrDefault(m => m.Id == gameId);
-            return CheckGameState(game, galleristContext, username, userContext);
+            var game = galleristContext.Games
+                .Include("Art").Include("Artists")
+                .Include("ReputationTiles")
+                .Include("Contracts")
+                .Include("Visitors")
+                .Include("Players")
+                .Include("Assistants")
+                .Include("Turns")
+                .FirstOrDefault(m => m.Id == gameId);
+            return CheckGameState(game, galleristContext);
         }
     }
 
