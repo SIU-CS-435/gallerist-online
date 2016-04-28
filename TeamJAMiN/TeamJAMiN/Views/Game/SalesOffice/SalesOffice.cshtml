@@ -1,27 +1,20 @@
-﻿@model TeamJAMiN.GalleristComponentEntities.Game
-@using TeamJAMiN.GalleristComponentEntities
-@using TeamJAMiN.Controllers.GameLogicHelpers
+﻿@model SalesOfficeViewModel
+@using TeamJAMiN.Models.ComponentViewModels
 
 @*Contracts Container*@
-
-@{ 
-    var contractDict = Model.GetContractDecks();
-    var actionManager = new ActionContextInvoker(Model);
-}
-
 <div class="row no-gutter">
     <div class="col-xs-2">
         <div class="col-xs-12 no-padding">
-            @if (Model.Players.Single(m => m.Id == Model.CurrentPlayerId).UserId == ViewBag.userId && actionManager.IsValidTransition(GameActionState.ContractDraw))
+            @if (Model.IsActivePlayer && Model.DrawIsValidActionState)
             {
-                using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = GameActionState.ContractDraw }, FormMethod.Post, new { role = "form" }))
+                using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Game.Id, gameAction = Model.DrawState }, FormMethod.Post, new { role = "form" }))
                 {
                     @Html.AntiForgeryToken()
                     <div class="contract-card tile contract-draw-deck">
                         <input type="submit" class="action-button" value="" />
                         <div class="contract-draw-title contract-draw-deck-section">Draw</div>
                         <div class="draw-contract-icon contract-draw-deck-section"></div>
-                        <div class="contract-draw-count contract-draw-deck-section">x @contractDict[GameContractLocation.DrawDeck].Count</div>
+                        <div class="contract-draw-count contract-draw-deck-section">x @Model.DrawCount</div>
                     </div>
                 }
             }
@@ -30,33 +23,30 @@
                 <div class="contract-card tile contract-draw-deck">
                     <div class="contract-draw-title contract-draw-deck-section">Draw</div>
                     <div class="draw-contract-icon contract-draw-deck-section"></div>
-                    <div class="contract-draw-count contract-draw-deck-section">x @contractDict[GameContractLocation.DrawDeck].Count</div>
+                    <div class="contract-draw-count contract-draw-deck-section">x @Model.DrawCount</div>
                 </div>
             }
         </div>
     </div>
     <div class="col-xs-10">
-        @{
-            var draftLocations = new List<GameContractLocation>
-                { GameContractLocation.Draft0, GameContractLocation.Draft1, GameContractLocation.Draft2, GameContractLocation.Draft3 };
-            foreach (GameContractLocation location in draftLocations)
+            @foreach (DraftContractViewModel contractModel in Model.DraftContractModels)
             {
                 <div class="col-xs-3 no-padding">
-                    @if (Model.Players.Single(m => m.Id == Model.CurrentPlayerId).UserId == ViewBag.userId && actionManager.IsValidTransition(GameActionState.ContractDraft))
+                    @if (Model.IsActivePlayer && Model.DraftIsValidActionState)
                     {
-                        using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Id, gameAction = GameActionState.ContractDraft, actionLocation = location }, FormMethod.Post, new { role = "form" }))
+                        using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Game.Id, gameAction = contractModel.State, actionLocation = contractModel.Location }, FormMethod.Post, new { role = "form" }))
                         {
                             @Html.AntiForgeryToken()
                             <div class="contract-card tile">
                                 <input type="submit" class="action-button" value="" />
-                                @Html.Partial("~/Views/Game/SalesOffice/Contract.cshtml", contractDict[location].FirstOrDefault())
+                                @Html.Partial("~/Views/Game/SalesOffice/Contract.cshtml", contractModel)
                             </div>
                         }
                     }
                     else
                     {
                         <div class="contract-card tile">
-                            @Html.Partial("~/Views/Game/SalesOffice/Contract.cshtml", contractDict[location].FirstOrDefault())
+                            @Html.Partial("~/Views/Game/SalesOffice/Contract.cshtml", contractModel)
                         </div>
                     }
                 </div>

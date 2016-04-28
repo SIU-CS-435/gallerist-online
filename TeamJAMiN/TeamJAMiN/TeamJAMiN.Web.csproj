@@ -382,6 +382,7 @@
     <Compile Include="Models\ComponentViewModels\ArtistViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\ArtViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\AuctionLocationViewModel.cs" />
+    <Compile Include="Models\ComponentViewModels\DraftContractViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\InternationalMarketViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\PlayerArtViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\PlayerBoardViewModel.cs" />
@@ -389,6 +390,7 @@
     <Compile Include="Models\ComponentViewModels\PlayerGalleryViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\ReputationTileLocationViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\ReputationTileViewModel.cs" />
+    <Compile Include="Models\ComponentViewModels\SalesOfficeViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\UnemployedAssistantViewModel.cs" />
     <Compile Include="Models\GameViewHelpers\ActionHighlighter.cs" />
     <Compile Include="Models\GameViewHelpers\ContractSort.cs" />

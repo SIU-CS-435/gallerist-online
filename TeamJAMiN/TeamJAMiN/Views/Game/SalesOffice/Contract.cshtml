@@ -1,16 +1,14 @@
-﻿@model TeamJAMiN.GalleristComponentEntities.GameContract
-
-@using TeamJAMiN.Models.GameViewHelpers
+﻿@model TeamJAMiN.Models.ComponentViewModels.DraftContractViewModel
 
 <div class="row no-gutter contract-art-row">
     @* Art Type *@
     <div class="col-xs-12 no-padding">
-        <div class="art-icon @Model.Art.ToString()-icon"></div>
+        <div class="art-icon @Model.Contract.Art.ToString()-icon"></div>
     </div>
 </div>
 <div class="row no-gutter contract-bonus-row">
     @* Contract Action *@
     <div class="col-xs-12 no-padding">
-        <div class="contract-bonus @IconCss.BonusClass[Model.Bonus]"></div>
+        <div class="contract-bonus @Model.BonusClass"></div>
     </div>
 </div>
