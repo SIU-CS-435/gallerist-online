@@ -30,15 +30,15 @@ namespace TeamJAMiN.Models.ComponentViewModels
         public GameActionState State { get; private set; }
 
         private List<GameContractLocation> LocationOrder = new List<GameContractLocation> { GameContractLocation.Investor, GameContractLocation.Vip, GameContractLocation.Any };
-        public List<ContractDTO> Contracts { get; private set; }
+        public List<PlayerContractViewModel> Contracts { get; private set; }
 
         private void SetContracts(Player player)
         {
-            var result = new List<ContractDTO>();
+            var result = new List<PlayerContractViewModel>();
             foreach ( GameContractLocation location in LocationOrder )
             {
                 var contract = player.GetContractAtLocation(location);
-                var dto = new ContractDTO(contract, location);
+                var dto = new PlayerContractViewModel(contract, location);
                 result.Add(dto);
             }
             Contracts = result;
@@ -46,9 +46,9 @@ namespace TeamJAMiN.Models.ComponentViewModels
                 
     }
 
-    public class ContractDTO
+    public class PlayerContractViewModel
     {
-        public ContractDTO(GameContract contract, GameContractLocation location)
+        public PlayerContractViewModel(GameContract contract, GameContractLocation location)
         {
             Contract = contract;
             Location = location;
