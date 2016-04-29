@@ -1085,10 +1085,3 @@ td{
 .status-label{
     font-size: 15px;
 }
-
-.gamelist-namelink{
-     border: none;
-     background-color: #4e5d6c;
-     text-decoration: underline;
-     cursor: pointer;
-}
