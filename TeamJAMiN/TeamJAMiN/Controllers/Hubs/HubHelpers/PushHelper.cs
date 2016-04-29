@@ -37,7 +37,6 @@ namespace TeamJAMiN.Controllers.Hubs.HubHelpers
         {
             var hubContext = GetHub<GameActionHub>();
             hubContext.Clients.Users(userIds).refresh();
-
         }
     }
 }

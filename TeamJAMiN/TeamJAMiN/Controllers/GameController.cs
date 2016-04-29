@@ -253,6 +253,37 @@ namespace TeamJAMiN.Controllers
         }
 
         /// <summary>
+        /// Lets a player leave the game and reloads the game with a new turn order
+        /// </summary>
+        /// <param name="id">The id of the game to leave</param>
+        /// <returns>Game list view or appropriate error</returns>
+        [AuthorizePlayerInGame]
+        [HttpPost]
+        public ActionResult Leave(int id = 0)
+        {
+            using (var galleristContext = new GalleristComponentsDbContext())
+            {
+                var gameResponse = GameManager.GetGame(id, galleristContext);
+                var game = gameResponse.Game;
+
+                //todo check if we need to save changes before doing setup turn. 
+                game.SetNextPlayer();
+                game.SetupTurn(game.CurrentTurn);//todo: see if setup turn is the way we actually setup next turn
+
+                var playerLeaving = game.Players.First(m => m.UserName == User.Identity.Name);
+                game.Players.Remove(playerLeaving);
+                game.PlayerOrder.Remove(playerLeaving);
+                game.MaxNumberOfPlayers = game.MaxNumberOfPlayers--;
+                //todo: decide if this is the best course of action for leaving a game                
+
+                PushHelper singleton = PushHelper.GetPushEngine();
+                singleton.RefreshGame(game.Players.Where(p => p.UserName != User.Identity.Name).Select(p => p.UserName).ToList()); //refresh game for players left in game
+                return Redirect("~/Game/List/");
+            }
+
+        }
+
+        /// <summary>
         /// Skeleton method for taking an action/turn in the game
         /// </summary>
         /// <param name="id">The id of the game to take an action in</param>
