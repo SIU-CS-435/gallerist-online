@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using TeamJAMiN.Controllers.Hubs;
 using TeamJAMiN.Controllers.Hubs.HubHelpers;
 using TeamJAMiN.Controllers.GameLogicHelpers;
+using TeamJAMiN.Models.ComponentViewModels;
 
 namespace TeamJAMiN.Controllers
 {
@@ -140,26 +141,19 @@ namespace TeamJAMiN.Controllers
         {
             using (var galleristContext = new GalleristComponentsDbContext())
             {
-                using (var identityContext = new ApplicationDbContext())
+                var gameResponse = GameManager.GetGame(id, galleristContext);
+
+                if (gameResponse.Success && gameResponse.Game.IsStarted)
                 {
-
-                    UserManager<ApplicationUser> uManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(identityContext));
-
-                    var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
-
-                    if (gameResponse.Success && gameResponse.Game.IsStarted)
-                    {
-                        ViewBag.userName = User.Identity.Name;
-                        var user = uManager.FindByName(User.Identity.Name);
-                        ViewBag.userId = user.Id;
-                        return View(gameResponse.Game);
-                    }
-                    else
-                    {
-                        ViewBag.Message = gameResponse.Message;
-                        ViewBag.Title = gameResponse.Title;
-                        return View("GameError");
-                    }
+                    var userName = User.Identity.Name;
+                    var playModel = new PlayViewModel(userName, gameResponse.Game);
+                    return View(playModel);
+                }
+                else
+                {
+                    ViewBag.Message = gameResponse.Message;
+                    ViewBag.Title = gameResponse.Title;
+                    return View("GameError");
                 }
             }
         }
@@ -176,7 +170,7 @@ namespace TeamJAMiN.Controllers
             {
                 using (var identityContext = new ApplicationDbContext())
                 {
-                    var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
+                    var gameResponse = GameManager.GetGame(id, galleristContext);
 
                     if (gameResponse.Success)
                     {
@@ -213,7 +207,7 @@ namespace TeamJAMiN.Controllers
                 using (var identityContext = new ApplicationDbContext())
                 {
                     //todo: set start time of game to datetime.now
-                    var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
+                    var gameResponse = GameManager.GetGame(id, galleristContext);
                     var game = gameResponse.Game;
                     game.StartTime = DateTime.Now;
 
@@ -273,7 +267,7 @@ namespace TeamJAMiN.Controllers
             {
                 using (var identityContext = new ApplicationDbContext()) //may not need this anymore after adding the authorize helper
                 {
-                    var gameResponse = GameManager.GetGame(id, User.Identity.Name, galleristContext, identityContext);
+                    var gameResponse = GameManager.GetGame(id, galleristContext);
                     var game = gameResponse.Game;
                     
                     //todo todo todo
