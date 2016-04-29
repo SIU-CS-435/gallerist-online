@@ -1,4 +1,4 @@
-﻿@model TeamJAMiN.GalleristComponentEntities.Game
+﻿@model PlayViewModel
 @using TeamJAMiN.GalleristComponentEntities
 @using TeamJAMiN.Models.GameViewHelpers
 @using TeamJAMiN.Models.ComponentViewModels
@@ -10,45 +10,39 @@
 <div class="container gallerist-game-view">
     <div class="row">
         <div class="col-md-4">
-            <div class="row board-region @Model.Highlight(GameActionState.SalesOffice)" id="sales-office">
+            <div class="row board-region @Model.Game.Highlight(GameActionState.SalesOffice)" id="sales-office">
                 @*Sales Office (Contracts)*@
-                <div class="col-md-12 no-padding">@Html.Partial("~/Views/Game/SalesOffice/SalesOffice.cshtml", Model)</div>
+                <div class="col-md-12 no-padding">@Html.Partial("~/Views/Game/SalesOffice/SalesOffice.cshtml", Model.SalesOfficeModel)</div>
             </div>
-            <div class="row board-region separate-top @Model.Highlight(GameActionState.InternationalMarket)">
+            <div class="row board-region separate-top @Model.Game.Highlight(GameActionState.InternationalMarket)">
                 <div class="col-md-12">
                     @*International Market*@
-                    @Html.Partial("~/Views/Game/InternationalMarket/InternationalMarket.cshtml", new InternationalMarketViewModel(ViewBag.userName, Model))
+                    @Html.Partial("~/Views/Game/InternationalMarket/InternationalMarket.cshtml", Model.InternationalMarketModel)
                 </div>
             </div>
         </div> 
         <div class="col-md-3">
             @* Top Actions *@
             @{ 
-                var actionList = new List<PlayerLocation> { PlayerLocation.SalesOffice, PlayerLocation.ArtistColony, PlayerLocation.InternationalMarket, PlayerLocation.MediaCenter };
-                var actionEnum = actionList.GetEnumerator();
+                var actionEnum = Model.LocationViewModels.GetEnumerator();
             }
             <div class="row">
                 <div class="col-xs-6">
-                    @{ 
-                        actionEnum.MoveNext();
-                    }
-                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", new ActionSpaceViewModel(ViewBag.userName, Model, actionEnum.Current))
+                    @{ actionEnum.MoveNext(); }
+                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", actionEnum.Current)
                 </div>
                 <div class="col-xs-6">
-                    @{
-                        actionEnum.MoveNext();
-                    }
-                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", new ActionSpaceViewModel(ViewBag.userName, Model, actionEnum.Current))
+                    @{ actionEnum.MoveNext(); }
+                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", actionEnum.Current)
                 </div>
             </div>
             @* Player Galleries *@
             <div class="row separate-top">
-                @foreach (PlayerColor color in new List<PlayerColor> { PlayerColor.yellow, PlayerColor.purple })
+                @foreach (PlayerGalleryViewModel galleryModel in Model.TopGalleryModels)
                 {
-                    ViewBag.Color = color;
                     <div class="col-xs-6">
                         <div class="row no-margin">
-                            @Html.Partial("~/Views/Game/PlayerGallery/GalleryAndLobby.cshtml", Model)
+                            @Html.Partial("~/Views/Game/PlayerGallery/GalleryAndLobby.cshtml", galleryModel)
                         </div>
                     </div>
                 }
@@ -56,18 +50,16 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div id="plaza" class="">
-                        @{ ViewBag.DisplayVisitors = Model.VisitorByLocation(GameVisitorLocation.Plaza); }
-                        @Html.Partial("~/Views/Game/PlayerGallery/VisitorDisplay.cshtml")
+                        @Html.Partial("~/Views/Game/PlayerGallery/VisitorDisplay.cshtml", Model.PlazaVisitorCounts)
                     </div>
                 </div>
             </div>
             <div class="row">
-                @foreach (PlayerColor color in new List<PlayerColor> { PlayerColor.blue, PlayerColor.orange })
+                @foreach (PlayerGalleryViewModel galleryModel in Model.BottomGalleryModels)
                 {
-                    ViewBag.Color = color;
                     <div class="col-xs-6">
                         <div class="row no-margin">
-                            @Html.Partial("~/Views/Game/PlayerGallery/GalleryAndLobby.cshtml", Model)
+                            @Html.Partial("~/Views/Game/PlayerGallery/GalleryAndLobby.cshtml", galleryModel)
                         </div>
                     </div>
                 }
@@ -75,23 +67,19 @@
             @* Bottom Actions *@
             <div class="row">
                 <div class="col-xs-6">
-                    @{
-                        actionEnum.MoveNext();
-                    }
-                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", new ActionSpaceViewModel(ViewBag.userName, Model, actionEnum.Current))
+                    @{ actionEnum.MoveNext(); }
+                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", actionEnum.Current)
                 </div>
                 <div class="col-xs-6">
-                    @{
-                        actionEnum.MoveNext();
-                    }
-                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", new ActionSpaceViewModel(ViewBag.userName, Model, actionEnum.Current))
+                    @{ actionEnum.MoveNext(); }
+                    @Html.Partial("~/Views/Game/ActionSpaces/ActionSpace.cshtml", actionEnum.Current)
                 </div>
             </div>
         </div>
         <div class="col-md-5">
-            <div class="row board-region @Model.Highlight(GameActionState.ArtistColony)">
+            <div class="row board-region @Model.Game.Highlight(GameActionState.ArtistColony)">
                 @* Artist Colony *@
-                @Html.Partial("~/Views/Game/ArtistColony/ArtistColony.cshtml", new ArtistColonyViewModel(ViewBag.userName,Model))
+                @Html.Partial("~/Views/Game/ArtistColony/ArtistColony.cshtml", Model.ArtistColonyModel)
             </div>
             <div class="row board-region separate-top">
                 @* Media *@
@@ -104,19 +92,19 @@
                         <div class="col-xs-8 no-padding">
                             <div class="ticket-vip icon-lg icon-background"></div>
                         </div>
-                        <div class="col-xs-4 no-padding">x @Model.AvailableInvestorTickets</div>
+                        <div class="col-xs-4 no-padding">x @Model.Game.AvailableInvestorTickets</div>
                     </div>
                     <div class="col-md-4">
                         <div class="col-xs-8 no-padding">
                             <div class="ticket-investor icon-lg icon-background"></div>
                         </div>
-                        <div class="col-xs-4 no-padding">x @Model.AvailableInvestorTickets</div>
+                        <div class="col-xs-4 no-padding">x @Model.Game.AvailableInvestorTickets</div>
                     </div>
                     <div class="col-md-4">
                         <div class="col-xs-8 no-padding">
                             <div class="ticket-collector icon-lg icon-background"></div>
                         </div>
-                        <div class="col-xs-4 no-padding">x @Model.AvailableInvestorTickets</div>
+                        <div class="col-xs-4 no-padding">x @Model.Game.AvailableInvestorTickets</div>
                     </div>
                 </div>
             </div>
@@ -127,9 +115,9 @@
         @Html.Partial("~/Views/Game/InfluenceTrack/InfluenceTrack.cshtml")
     </div>
     <div class="row board-region player-board">
-        @{ foreach (Player player in Model.Players)
+        @{ foreach (PlayerBoardViewModel boardModel in Model.PlayerBoardModels)
             {
-                @Html.Partial("~/Views/Game/PlayerBoard/PlayerBoard.cshtml", player);
+                @Html.Partial("~/Views/Game/PlayerBoard/PlayerBoard.cshtml", boardModel);
             }
         }
     </div>
