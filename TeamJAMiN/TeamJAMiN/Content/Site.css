@@ -200,6 +200,7 @@
 /* Player Galleries */
 #plaza {
     border: 5px solid;
+    border-color: white;
     height:75px;
     width:100px;
     border-radius: 50%;
