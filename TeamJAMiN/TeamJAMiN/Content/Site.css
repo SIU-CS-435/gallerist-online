@@ -1077,3 +1077,11 @@ td{
     margin-bottom: 10px;
     margin-top: 10px;
 }
+
+.col-md-2.control-label{
+    font-size: 18px;
+}
+
+.status-label{
+    font-size: 15px;
+}

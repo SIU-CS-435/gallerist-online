@@ -100,11 +100,11 @@
             [
             @if (Model.IsPrivate)
             {
-                @Html.Label("Private")
+                @Html.Label("Private", new { @class = "status-label" })
             }
             else
             {
-                @Html.Label("Public")
+                @Html.Label("Public", new { @class = "status-label" })
             }
             ]
         </dd>
@@ -113,11 +113,11 @@
             [
             @if (Model.AllowsEmails)
             {
-                @Html.Label("Emails are unblocked")
+                @Html.Label("Emails are unblocked", new { @class = "status-label" })
             }
             else
             {
-                @Html.Label("Emails are blocked")
+                @Html.Label("Emails are blocked", new { @class = "status-label" })
             }
             ]
         </dd>
