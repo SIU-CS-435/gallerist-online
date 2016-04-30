@@ -33,7 +33,7 @@ namespace TeamJAMiN.Models.ComponentViewModels
                 result.Add(new ReputationTileLocationViewModel(userName, player, location));
             }
             TopRowTileLocationModels = result;
-            result.Clear();
+            result = new List<ReputationTileLocationViewModel>();
             foreach (GameReputationTileLocation location in BottomRowLocations)
             {
                 result.Add(new ReputationTileLocationViewModel(userName, player, location));
