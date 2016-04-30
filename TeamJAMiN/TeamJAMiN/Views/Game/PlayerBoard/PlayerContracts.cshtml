@@ -2,59 +2,59 @@
 @model PlayerContractsViewModel
 
 <div class="row">
-@foreach (ContractDTO dto in Model.Contracts)
+@foreach (PlayerContractViewModel contractModel in Model.Contracts)
 {
     <div class="col-xs-4">
         @if (Model.IsPlayerBoardOfActivePlayer && Model.IsActivePlayer && Model.IsValidActionState)
         {
-            using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Player.GameId, gameAction = Model.State, actionLocation = dto.Location }, FormMethod.Post, new { role = "form" }))
+            using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Player.GameId, gameAction = Model.State, actionLocation = contractModel.Location }, FormMethod.Post, new { role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <div id="player-contract-@dto.Location.ToString().ToLower()" data-location="@dto.Location" class="contract-card tile player-contract @dto.EmptyCssClass highlight">
+                <div id="player-contract-@contractModel.Location.ToString().ToLower()" data-location="@contractModel.Location" class="contract-card tile player-contract @contractModel.EmptyCssClass highlight">
                     <input type="submit" class="action-button" value="" />
-                    @if (dto.Contract != null)
+                    @if (contractModel.Contract != null)
                     {
                         <div class="row no-gutter contract-art-row">
                             @* Art Type *@
                             <div class="col-xs-12 no-padding">
-                                <div class="art-icon @dto.Contract.Art.ToString()-icon"></div>
+                                <div class="art-icon @contractModel.Contract.Art.ToString()-icon"></div>
                             </div>
                         </div>
                         <div class="row no-gutter contract-bonus-row">
                             @* Contract Action *@
                             <div class="col-xs-12 no-padding">
-                                <div class="contract-bonus @dto.BonusClass"></div>
+                                <div class="contract-bonus @contractModel.BonusClass"></div>
                             </div>
                         </div>
                     }
                     else
                     {
-                        <div class="ticket-@dto.Ticket icon-lg icon-background margin-center"></div>
+                        <div class="ticket-@contractModel.Ticket icon-lg icon-background margin-center"></div>
                     }
                 </div>
             }
         }
         else
         {
-            <div id="player-contract-@dto.Location.ToString().ToLower()" data-location="@dto.Location" class="contract-card tile player-contract @dto.EmptyCssClass">
-                @if (dto.Contract != null)
+            <div id="player-contract-@contractModel.Location.ToString().ToLower()" data-location="@contractModel.Location" class="contract-card tile player-contract @contractModel.EmptyCssClass">
+                @if (contractModel.Contract != null)
                     {
                     <div class="row no-gutter contract-art-row">
                         @* Art Type *@
                         <div class="col-xs-12 no-padding">
-                            <div class="art-icon @dto.Contract.Art.ToString()-icon"></div>
+                            <div class="art-icon @contractModel.Contract.Art.ToString()-icon"></div>
                         </div>
                     </div>
                         <div class="row no-gutter contract-bonus-row">
                             @* Contract Action *@
                             <div class="col-xs-12 no-padding">
-                                <div class="contract-bonus @dto.BonusClass"></div>
+                                <div class="contract-bonus @contractModel.BonusClass"></div>
                             </div>
                         </div>
                 }
                 else
                 {
-                    <div class="ticket-@dto.Ticket icon-lg icon-background margin-center"></div>
+                    <div class="ticket-@contractModel.Ticket icon-lg icon-background margin-center"></div>
                 }
             </div>
         }
