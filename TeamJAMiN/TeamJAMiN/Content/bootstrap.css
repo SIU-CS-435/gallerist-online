@@ -1089,8 +1089,9 @@ body {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 1.42857143;
-  color: #ebebeb;
-  background-color: #2b3e50;
+  color: #5c1201;
+  /*background-color: #4E5E6D;*/
+  background-color:rgb(134, 139, 165)
 }
 input,
 button,
@@ -1101,12 +1102,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #df691a;
+  color: #B14439;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #df691a;
+  color: #5c1201;
   text-decoration: underline;
 }
 a:focus {
@@ -4499,7 +4500,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #4e5d6c;
+  background-color: #DEDEDE;
   border-color: transparent;
 }
 .navbar-default .navbar-brand {
@@ -4514,12 +4515,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   color: #ebebeb;
 }
 .navbar-default .navbar-nav > li > a {
-  color: #ebebeb;
+  color: #5c1201;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
   color: #ebebeb;
-  background-color: #485563;
+  background-color: rgb(134, 139, 165);
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
@@ -4966,7 +4967,7 @@ a.badge:focus {
   padding-bottom: 30px;
   margin-bottom: 30px;
   color: inherit;
-  background-color: #4e5d6c;
+  background-color: #DEDEDE;
 }
 .jumbotron h1,
 .jumbotron .h1 {
