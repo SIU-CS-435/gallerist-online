@@ -52,8 +52,8 @@ namespace TeamJAMiN.Models.ComponentViewModels
             {
                 result.Add(new PlayerGalleryViewModel(game, color));
             }
-            TopGalleryModels = result.C;
-            result = new List<PlayerGalleryViewModel>();
+            TopGalleryModels = result;
+            result.Clear();
             foreach (PlayerColor color in BottomGalleryOrder)
             {
                 result.Add(new PlayerGalleryViewModel(game, color));
