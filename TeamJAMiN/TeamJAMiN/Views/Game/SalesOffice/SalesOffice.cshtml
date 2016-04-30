@@ -29,28 +29,27 @@
         </div>
     </div>
     <div class="col-xs-10">
-            @foreach (DraftContractViewModel contractModel in Model.DraftContractModels)
-            {
-                <div class="col-xs-3 no-padding">
-                    @if (Model.IsActivePlayer && Model.DraftIsValidActionState)
+        @foreach (DraftContractViewModel contractModel in Model.DraftContractModels)
+        {
+            <div class="col-xs-3 no-padding">
+                @if (Model.IsActivePlayer && Model.DraftIsValidActionState)
+                {
+                    using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Game.Id, gameAction = contractModel.State, actionLocation = contractModel.Location }, FormMethod.Post, new { role = "form" }))
                     {
-                        using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Game.Id, gameAction = contractModel.State, actionLocation = contractModel.Location }, FormMethod.Post, new { role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <div class="contract-card tile">
-                                <input type="submit" class="action-button" value="" />
-                                @Html.Partial("~/Views/Game/SalesOffice/Contract.cshtml", contractModel)
-                            </div>
-                        }
-                    }
-                    else
-                    {
+                        @Html.AntiForgeryToken()
                         <div class="contract-card tile">
+                            <input type="submit" class="action-button" value="" />
                             @Html.Partial("~/Views/Game/SalesOffice/Contract.cshtml", contractModel)
                         </div>
                     }
-                </div>
-            }
+                }
+                else
+                {
+                    <div class="contract-card tile">
+                        @Html.Partial("~/Views/Game/SalesOffice/Contract.cshtml", contractModel)
+                    </div>
+                }
+            </div>
         }
     </div>
 </div>
