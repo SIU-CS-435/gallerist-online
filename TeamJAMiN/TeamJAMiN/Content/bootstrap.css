@@ -1091,7 +1091,7 @@ body {
   line-height: 1.42857143;
   color: #5c1201;
   /*background-color: #4E5E6D;*/
-  background-color:rgb(134, 139, 165)
+  background-color: #eae7c8;
 }
 input,
 button,
@@ -1102,12 +1102,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #B14439;
+  color: #e63f7d;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #5c1201;
+  color: #c01957;
   text-decoration: underline;
 }
 a:focus {
@@ -3123,7 +3123,7 @@ fieldset[disabled] .btn-default.focus {
 }
 .btn-primary {
   color: #ffffff;
-  background-color: #df691a;
+  background-color: #e63f7d;
   border-color: transparent;
 }
 .btn-primary:focus,
@@ -3134,7 +3134,7 @@ fieldset[disabled] .btn-default.focus {
 }
 .btn-primary:hover {
   color: #ffffff;
-  background-color: #b15315;
+  background-color: #c01957;
   border-color: rgba(0, 0, 0, 0);
 }
 .btn-primary:active,
@@ -4493,14 +4493,13 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
   .navbar-right {
     float: right !important;
-    margin-right: -15px;
   }
   .navbar-right ~ .navbar-right {
     margin-right: 0;
   }
 }
 .navbar-default {
-  background-color: #DEDEDE;
+  background-color: white;
   border-color: transparent;
 }
 .navbar-default .navbar-brand {
@@ -4967,7 +4966,7 @@ a.badge:focus {
   padding-bottom: 30px;
   margin-bottom: 30px;
   color: inherit;
-  background-color: #DEDEDE;
+  background-color: white;
 }
 .jumbotron h1,
 .jumbotron .h1 {
