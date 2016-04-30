@@ -84,7 +84,7 @@ namespace TeamJAMiN.Models.ComponentViewModels
         private List<PlayerColor> TopGalleryOrder = new List<PlayerColor> { PlayerColor.yellow, PlayerColor.purple };
         public List<PlayerGalleryViewModel> TopGalleryModels { get; private set; }
 
-        private List<PlayerColor> BottomGalleryOrder = new List<PlayerColor> { PlayerColor.yellow, PlayerColor.purple };
+        private List<PlayerColor> BottomGalleryOrder = new List<PlayerColor> { PlayerColor.blue, PlayerColor.orange };
         public List<PlayerGalleryViewModel> BottomGalleryModels { get; private set; }
 
         public List<int> PlazaVisitorCounts { get; private set; }
