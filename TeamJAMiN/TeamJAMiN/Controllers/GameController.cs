@@ -34,8 +34,9 @@ namespace TeamJAMiN.Controllers
                 {
                     var allGames = galleristContext.Games.Where(m => !m.IsCompleted && !m.IsDeleted).OrderByDescending(m => m.CreatedTime);
                     var myGames = allGames.Where(m => m.Players.Any(n => n.UserId == userId));
+                    var availableGames = allGames.Where(m => !m.Players.Any(p => p.UserId == userId) && m.Players.Count < m.MaxNumberOfPlayers && !m.IsStarted);
 
-                    var allGamesList = allGames.Select(m => new GameDto
+                    var availableGamesList = allGames.Select(m => new GameDto
                     {
                         Id = m.Id,
                         Url = "/Game/Play/" + m.Id,
@@ -46,7 +47,6 @@ namespace TeamJAMiN.Controllers
                         MaxTurnLength = m.TurnLength,
                         MaxTurnLengthString = m.TurnLength.ToString(),
                         PlayersString = m.Players.Count + " of " + m.MaxNumberOfPlayers,
-                        isJoinable = !m.Players.Any(p => p.UserId == userId) && m.Players.Count < m.MaxNumberOfPlayers && !m.IsStarted,
                         CreatedTime = m.CreatedTime
                     }).ToList();
 
@@ -66,7 +66,7 @@ namespace TeamJAMiN.Controllers
                         CreatedTime = m.CreatedTime
                     }).ToList();
 
-                    ViewBag.allGames = allGamesList;
+                    ViewBag.availableGames = availableGamesList;
                     ViewBag.myGames = myGamesList;
                     return View();
                 }
