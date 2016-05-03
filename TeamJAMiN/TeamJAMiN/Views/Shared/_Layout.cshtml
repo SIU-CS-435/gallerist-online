@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using TeamJAMiN.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -27,7 +28,7 @@
                         <li>@Html.ActionLink("Create Game", "Create", "Game")</li>
                     }
                 </ul>
-                @Html.Partial("_LoginPartial")
+                @Html.Partial("_LoginPartial", new LoginViewModel())
             </div>
         </div>
     </div>
