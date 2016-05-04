@@ -57,7 +57,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
 
         public bool IsValidTransition(GameAction action)
         {
-            if (Game.CurrentTurn.PendingActions.Any(a => a.State == action.State))
+            if (Game.CurrentTurn.GetNextActions().Any(a => a.State == action.State))
             {
                 return IsValidGameState(action);
             }
@@ -66,7 +66,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
 
         public bool IsValidTransition(GameActionState state)
         {
-            if (Game.CurrentTurn.PendingActions.Any(a => a.State == state))
+            if (Game.CurrentTurn.GetNextActions().Any(a => a.State == state))
             {
                 var action = new GameAction { State = state };
                 return IsValidGameState(action);
