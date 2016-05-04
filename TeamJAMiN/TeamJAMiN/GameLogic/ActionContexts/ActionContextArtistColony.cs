@@ -6,7 +6,7 @@ using TeamJAMiN.GalleristComponentEntities;
 
 namespace TeamJAMiN.Controllers.GameLogicHelpers
 {
-    public class ArtistColonyContext : ActionContext
+    public class ArtistColonyContext : ActionContext, IMoneyTransactionContext
     {
         public ArtistColonyContext(Game game)
             : base(game, new Dictionary<GameActionState, Type> {
@@ -17,6 +17,22 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
                 { GameActionState.Pass, typeof(Pass) }
             })
         { }
+
+        public int GetCost()
+        {
+            if (_state is IMoneyTransactionState)
+            {
+                var transaction = (IMoneyTransactionState)_state;
+                return transaction.GetCost(this);
+            }
+            else
+                return -1;
+        }
+
+        public bool IsMoneyTransaction()
+        {
+            return _state is IMoneyTransactionState;
+        }
     }
 
     public class ArtistColony : LocationAction
@@ -29,12 +45,22 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         }
     }
 
-    public class ArtBuy : ActionState
+    public class ArtBuy : ActionState, IMoneyTransactionState
     {
         public ArtBuy()
         {
             Name = GameActionState.ArtBuy;
             TransitionTo = new HashSet<GameActionState> {  GameActionState.Pass };
+        }
+
+        public int GetCost(ActionContext context)
+        {
+            var artist = context.Game.GetArtistByLocationString(context.Action.Location);
+            if(context.Game.CurrentPlayer.Commission == artist)
+            {
+                return artist.InitialFame;
+            }
+            return artist.Fame;
         }
 
         public override void DoAction<ArtistColonyContext>(ArtistColonyContext context)
@@ -49,10 +75,9 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             {
                 artist.AvailableArt -= 1;
             }
-            //todo check if player has commission for artist
-            //todo check if price is less because of comission
+            var cost = GetCost(context);
             //todo let player pay with influence
-            context.Game.CurrentPlayer.Money -= artist.Fame;
+            context.Game.CurrentPlayer.Money -= cost;
             artist.Fame += art.Fame;
             artist.Fame += context.Game.CurrentPlayer.GetGalleryVisitorCountByType(VisitorTicketType.collector);
             //todo let player increase fame using influence

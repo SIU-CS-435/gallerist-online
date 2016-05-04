@@ -8,7 +8,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
 {
     public class ActionContext
     {
-        ActionState _state;
+        protected ActionState _state;
         public Dictionary<GameActionState, Type> NameToState;
         public Game Game { get; set; }
         public GameAction Action { get; set; }
