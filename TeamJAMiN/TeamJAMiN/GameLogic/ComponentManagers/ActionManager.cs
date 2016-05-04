@@ -6,8 +6,13 @@ using TeamJAMiN.GalleristComponentEntities;
 
 namespace TeamJAMiN.Controllers.GameLogicHelpers
 {
+    public enum PendingPosition
+        {
+            first,last
+        }
     public static class ActionManager
     {
+        
         public static GameAction GetTicketAction(VisitorTicketType type)
         {
             GameAction action = new GameAction();

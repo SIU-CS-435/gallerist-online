@@ -20,30 +20,56 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
 
         public static void AddPendingAction(this GameTurn turn, GameAction action)
         {
+            turn.AddPendingAction(action, PendingPosition.first);
+        }
+
+        public static void AddPendingAction(this GameTurn turn, GameAction action, PendingPosition position)
+        {
             var temp = turn.PendingActions;
+            AddPendingPositionHelper(turn, temp, action, position);
             temp.Add(action);
             turn.PendingActions = temp;
         }
-        public static void AddPendingActions(this GameTurn turn, List<GameActionState> actions, GameActionPriority priority, bool isExecutable)
+
+        public static void AddPendingActions(this GameTurn turn, List<GameActionState> actions, GameActionStatus status, bool isExecutable)
+        {
+            turn.AddPendingActions(actions, null, status, PendingPosition.first, isExecutable);
+        }
+
+        public static void AddPendingActions(this GameTurn turn, List<GameActionState> actions, GameActionStatus status, PendingPosition position, bool isExecutable)
+        {
+            turn.AddPendingActions(actions, null, status, position, isExecutable);
+        }
+
+        public static void AddPendingActions(this GameTurn turn, List<GameActionState> actions, GameAction parent, GameActionStatus status, PendingPosition position, bool isExecutable)
         {
             var temp = turn.PendingActions;
-            foreach ( GameActionState state in actions)
+            foreach (GameActionState state in actions)
             {
-                var action = new GameAction { State = state, Priority = priority, IsExecutable = isExecutable };
+                var action = new GameAction { State = state, Status = status, IsExecutable = isExecutable, Parent = parent };
+                AddPendingPositionHelper(turn, temp, action, position);
                 temp.Add(action);
             }
             turn.PendingActions = temp;
         }
 
-        public static void AddPendingActions(this GameTurn turn, List<GameActionState> actions, GameAction parent, GameActionPriority priority, bool isExecutable)
+        private static void AddPendingPositionHelper(GameTurn turn, List<GameAction> pendingList, GameAction newAction, PendingPosition position)
         {
-            var temp = turn.PendingActions;
-            foreach (GameActionState state in actions)
+            if (position == PendingPosition.first)
             {
-                var action = new GameAction { State = state, Parent = parent, Priority = priority, IsExecutable = isExecutable };
-                temp.Add(action);
+                newAction.Order = turn.CurrentActionOrderNumber + 1;
+                foreach (GameAction oldAction in pendingList)
+                {
+                    oldAction.Order += 1;
+                }
             }
-            turn.PendingActions = temp;
+            else
+            {
+                if (turn.PendingActions.Count > 0)
+                    newAction.Order = turn.PendingActions.Select(a => a.Order).OrderByDescending(o => o).FirstOrDefault();
+                else
+                    newAction.Order = turn.CurrentActionOrderNumber + 1;
+            }
         }
 
         public static void RemovePendingAction(this GameTurn turn, GameAction action)
@@ -70,9 +96,9 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             var action = temp.FirstOrDefault(a => a.State == state);
             if (action != null)
             {
-                if (action.Priority == GameActionPriority.OptionalExclusive)
+                if (action.Status == GameActionStatus.OptionalExclusive)
                 {
-                    temp.RemoveAll(a => a.Priority == GameActionPriority.OptionalExclusive && a.Parent.State == action.Parent.State);
+                    temp.RemoveAll(a => a.Status == GameActionStatus.OptionalExclusive && a.Order == action.Order);
                 }
                 else
                 {
@@ -87,9 +113,9 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             var temp = turn.PendingActions;
             if (action != null)
             {
-                if (action.Priority == GameActionPriority.OptionalExclusive)
+                if (action.Status == GameActionStatus.OptionalExclusive)
                 {
-                    temp.RemoveAll(a => a.Priority == GameActionPriority.OptionalExclusive && a.Parent == action.Parent);
+                    temp.RemoveAll(a => a.Status == GameActionStatus.OptionalExclusive && a.Order == action.Order);
                 }
                 else
                 {
@@ -99,11 +125,23 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             turn.PendingActions = temp;
         }
 
+        public static List<GameAction> GetNextActions(this GameTurn turn)
+        {
+            if (turn.PendingActions.Count > 0)
+            {
+                var orderedActions = turn.PendingActions.OrderBy(a => a.Order);
+                int next = orderedActions.First().Order;
+                return orderedActions.Where(a => a.Order == next).ToList();
+            }
+            return null;
+        }
+
         public static void AddCompletedAction(this GameTurn turn, GameAction action)
         {
             if(action.IsComplete == false)
             {
                 action.IsComplete = true;
+                action.Order = turn.CompletedActions.Count;
                 var temp = turn.CompletedActions;
                 temp.Add(action);
                 turn.CompletedActions = temp;
@@ -112,7 +150,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
 
         public static void SetupFirstTurn(this Game newGame)
         {
-            var firstTurn = new GameTurn { TurnNumber = 0, Type = GameTurnType.Setup, CurrentAction = new GameAction { State = GameActionState.GameStart } };
+            var firstTurn = new GameTurn { TurnNumber = 0, Type = GameTurnType.Setup, CurrentAction = new GameAction { State = GameActionState.GameStart, Order = 0 } };
             newGame.Turns.Add(firstTurn);
             var next = new GameAction { State = GameActionState.Pass };
             (new ActionContextInvoker(newGame)).DoActionSingle(next);

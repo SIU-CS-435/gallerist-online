@@ -64,11 +64,11 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         {
             if(TransitionTo.Count <= 1 )
             {
-                context.Game.CurrentTurn.AddPendingActions(TransitionTo.ToList(), GameActionPriority.Optional, false);
+                context.Game.CurrentTurn.AddPendingActions(TransitionTo.ToList(), GameActionStatus.Optional, false);
             }
             else
             {
-                context.Game.CurrentTurn.AddPendingActions(TransitionTo.ToList(), context.Action, GameActionPriority.OptionalExclusive, false);
+                context.Game.CurrentTurn.AddPendingActions(TransitionTo.ToList(), context.Action, GameActionStatus.OptionalExclusive, false);
             }
         }
         public virtual bool IsValidGameState(ActionContext context)
