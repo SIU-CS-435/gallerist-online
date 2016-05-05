@@ -7,9 +7,9 @@ using TeamJAMiN.GalleristComponentEntities;
 namespace TeamJAMiN.Controllers.GameLogicHelpers
 {
     public enum PendingPosition
-        {
-            first,last
-        }
+    {
+        first,last
+    }
     public static class ActionManager
     {
         

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using TeamJAMiN.GalleristComponentEntities;
+using TeamJAMiN.GameLogic.ComponentManagers;
 
 namespace TeamJAMiN.Controllers.GameLogicHelpers
 {
@@ -164,7 +165,9 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             context.Game.CurrentPlayer.Commission = artist;
             artist.AvailableArt -= 1;
             //todo give player artist bonus
-            var bonusState = ArtManager.BonusTypeToState[artist.DiscoverBonus];
+            var bonusState = BonusManager.BonusTypeToState[artist.DiscoverBonus];
+            var isExecutable = BonusManager.BonusStateIsExecutable[bonusState];
+            context.Game.CurrentTurn.AddPendingAction(new GameAction { State = bonusState, Parent = context.Action, IsExecutable = isExecutable });
             //todo replace below with a pass button or something.
             context.Game.CurrentTurn.AddCompletedAction(context.Action);
             AddPassAction(context);
