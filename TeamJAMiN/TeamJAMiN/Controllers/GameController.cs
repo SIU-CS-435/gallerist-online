@@ -274,7 +274,7 @@ namespace TeamJAMiN.Controllers
                 }
 
                 var playerLeaving = game.Players.First(m => m.UserName == User.Identity.Name);
-                game.Players.Remove(playerLeaving);
+                galleristContext.Players.Remove(playerLeaving);
                 galleristContext.SaveChanges();
 
                 PushHelper singleton = PushHelper.GetPushEngine();
