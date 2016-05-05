@@ -608,6 +608,7 @@
     <Content Include="Views\Manage\ManageProfile.cshtml" />
     <Content Include="Views\Game\InternationalMarket\AuctionLocation.cshtml" />
     <Content Include="Views\Game\PlayerBoard\ReputationTileLocation.cshtml" />
+    <Content Include="Views\Account\RegistrationForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
