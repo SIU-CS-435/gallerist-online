@@ -1138,6 +1138,7 @@ td{
 
 .control-label{
     font-size: 18px;
+    font-weight: normal;
 }
 
 .status-label{
@@ -1149,4 +1150,9 @@ td{
      background-color: #4e5d6c;
      text-decoration: underline;
      cursor: pointer;
+}
+
+.border-brown{
+    border-width: 1px;
+    border-color: #5c1201;
 }
