@@ -1,9 +1,27 @@
 ﻿
-/* Removes Gutter Padding From Rows*/
-/*Used in the influence track*/
+/* NavBar */
+.navbar-form .form-control {
+    max-width: 150px;
+    height: 25px;
+    margin: 6px 0;
+}
+
+.navbar-form .control-label {
+    padding: 8px 15px;
+    font-size: 16px;
+    font-weight: normal;
+}
+.navbar-form .btn {
+    height: 25px;
+    padding: 0 10px;
+    font-size: 14px;
+}
+
 .clickable {
     cursor: pointer;
 }
+
+/* Removes Gutter Padding From Rows */
 .row.no-gutter {
     margin-left: 0;
     margin-right: 0;
@@ -14,6 +32,7 @@
     padding-right: 0;
     padding-left: 0;
 }
+/************************************/
 
 .row.no-margin {
     margin-left: 0;
@@ -54,7 +73,8 @@
 .influence-star-icon, .reputation-tile-none, .influence-icon, .gallery-visitor, #international-market-reputation-action,
 #international-market-auction-action, #sales-office-contract-action, #sales-office-sell-action, #artist-colony-buy-action,
 #media-center-promote-action, #artist-colony-discover-action, #media-center-hire-action, .draw-contract-icon, .player-art-money,
-.player-art-type, .player-art-exhibit, .player-assistant-icon, .player-assistant-cost, .player-reputation-icon {
+.player-art-type, .player-art-exhibit, .player-assistant-icon, .player-assistant-cost, .player-reputation-icon, .influence-marker-yellow,
+ .influence-marker-blue, .influence-marker-orange, .influence-marker-purple {
     background-size:contain;
     background-repeat:no-repeat;
     background-position:50%;
@@ -1017,6 +1037,33 @@
     background-image:url(Icons/Influence.svg);
     background-size: 60%;
     background-position-y:25%;
+}
+.player-influence-markers {
+    list-style:none;
+    padding: 5px;
+    margin: 0;
+    position: absolute;
+    top: 5px;
+    z-index: 1;
+}
+.influence-marker {
+    height: 20px;
+    width: 20px;
+}
+.influence-marker:not(:first-child) {
+    margin-top: -10px;
+}
+.influence-marker-yellow {
+    background-image: url(Icons/InfluenceMarkerYellow.svg);
+}
+.influence-marker-blue {
+    background-image: url(Icons/InfluenceMarkerBlue.svg);
+}
+.influence-marker-orange {
+    background-image: url(Icons/InfluenceMarkerOrange.svg);
+} 
+.influence-marker-purple {
+    background-image: url(Icons/InfluenceMarkerPurple.svg);
 }
 
 /*Default Stuff*/

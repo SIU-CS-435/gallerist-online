@@ -383,6 +383,7 @@
     <Compile Include="Models\ComponentViewModels\ArtViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\AuctionLocationViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\DraftContractViewModel.cs" />
+    <Compile Include="Models\ComponentViewModels\InfluenceTrackViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\InternationalMarketViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\PlayerArtViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\PlayerBoardViewModel.cs" />
@@ -449,6 +450,10 @@
     <Content Include="Content\Icons\Influence.svg" />
     <Content Include="Content\Icons\InfluenceFive.svg" />
     <Content Include="Content\Icons\InfluenceFour.svg" />
+    <Content Include="Content\Icons\InfluenceMarkerBlue.svg" />
+    <Content Include="Content\Icons\InfluenceMarkerOrange.svg" />
+    <Content Include="Content\Icons\InfluenceMarkerPurple.svg" />
+    <Content Include="Content\Icons\InfluenceMarkerYellow.svg" />
     <Content Include="Content\Icons\InfluenceOne.svg" />
     <Content Include="Content\Icons\InfluenceThree.svg" />
     <Content Include="Content\Icons\InfluenceTwo.svg" />
@@ -604,6 +609,7 @@
     <Content Include="Views\Manage\ManageProfile.cshtml" />
     <Content Include="Views\Game\InternationalMarket\AuctionLocation.cshtml" />
     <Content Include="Views\Game\PlayerBoard\ReputationTileLocation.cshtml" />
+    <Content Include="Views\Account\RegistrationForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
