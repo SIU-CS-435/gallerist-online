@@ -23,17 +23,10 @@ $('[title!=""]').qtip({
 });
 
 //this is a generic tooltip I am setting up that can be used for displaying help info on game board
-$('.board-information-section').qtip({
+$('.action-button').qtip({
     content:{
-        text: function (event, api) {
-            //we will ideally want to change how we pull the text and title but this is just a demo of how we can
-            //pull from data attribute of hover'd item
-            return $(this).attr('data-text');
-        },
-        title: function (event, api) {
-            //pull from title of hover'd item (this is the default behavior)
-            return $(this).attr('title');
-        }
+        text:'When it is your turn, choose a board location to move to by clicking this area.',
+        title: 'Move Player',
     },
     position: {
         my: 'center left',
