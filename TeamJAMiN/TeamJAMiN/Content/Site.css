@@ -1164,3 +1164,8 @@ td{
     background-color: #e63f7d;
     color: white;
 }
+
+.qtip-content bold {
+    font-weight:bolder;
+    color: #e63f7d;
+}
