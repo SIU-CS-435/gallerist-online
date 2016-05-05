@@ -1140,7 +1140,15 @@ td{
     font-size: 18px;
 }
 
+.default-text-color{
+    color: #5c1021;
+}
+
 .status-label{
     font-size: 15px;
 }
 
+.qtip-bootstrap .qtip-titlebar{
+    background-color: #e63f7d;
+    color: white;
+}
