@@ -1141,6 +1141,10 @@ td{
     font-weight: normal;
 }
 
+.default-text-color{
+    color: #5c1021;
+}
+
 .status-label{
     font-size: 15px;
 }
@@ -1155,4 +1159,8 @@ td{
 .border-brown{
     border-width: 1px;
     border-color: #5c1201;
+}
+.qtip-bootstrap .qtip-titlebar{
+    background-color: #e63f7d;
+    color: white;
 }

@@ -10,7 +10,7 @@
                 using (Html.BeginForm("TakeGameAction", "Game", new { id = Model.Game.Id, gameAction = Model.DrawState }, FormMethod.Post, new { role = "form" }))
                 {
                     @Html.AntiForgeryToken()
-                    <div class="contract-card tile contract-draw-deck">
+                    <div class="contract-card tile contract-draw-deck help-tooltip" data-title="@Model.TooltipTitle" data-text="@Model.TooltipText">
                         <input type="submit" class="action-button" value="" />
                         <div class="contract-draw-title contract-draw-deck-section">Draw</div>
                         <div class="draw-contract-icon contract-draw-deck-section"></div>
@@ -20,7 +20,7 @@
             }
             else
             {
-                <div class="contract-card tile contract-draw-deck">
+                <div class="contract-card tile contract-draw-deck help-tooltip" data-title="@Model.TooltipTitle" data-text="@Model.TooltipText">
                     <div class="contract-draw-title contract-draw-deck-section">Draw</div>
                     <div class="draw-contract-icon contract-draw-deck-section"></div>
                     <div class="contract-draw-count contract-draw-deck-section">x @Model.DrawCount</div>
