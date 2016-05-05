@@ -1136,8 +1136,9 @@ td{
     margin-top: 10px;
 }
 
-.col-md-2.control-label{
+.control-label{
     font-size: 18px;
+    font-weight: normal;
 }
 
 .default-text-color{
@@ -1148,6 +1149,17 @@ td{
     font-size: 15px;
 }
 
+.gamelist-namelink{
+     border: none;
+     background-color: #4e5d6c;
+     text-decoration: underline;
+     cursor: pointer;
+}
+
+.border-brown{
+    border-width: 1px;
+    border-color: #5c1201;
+}
 .qtip-bootstrap .qtip-titlebar{
     background-color: #e63f7d;
     color: white;
