@@ -14,7 +14,9 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             {
                 { GameActionState.ChooseLocation, typeof(ChooseLocation) },
                 { GameActionState.Pass, typeof(Pass) },
-                { GameActionState.GameStart, typeof(GameStart) }
+                { GameActionState.GameStart, typeof(GameStart) },
+                { GameActionState.UseInfluenceAsMoney, typeof(UseInfluenceAsMoney) },
+                { GameActionState.UseInfluenceAsFame, typeof(UseInfluenceAsFame) }
             })
         { }
 
@@ -84,12 +86,14 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
     public interface IMoneyTransactionState
     {
         int GetCost(ActionContext context);
+        void CleanUp(ActionContext context);
     }
 
     public interface IMoneyTransactionContext
     {
         int GetCost();
         bool IsMoneyTransaction();
+        void CleanUp();
     }
 
     public class UseInfluenceAsMoney : ActionState
@@ -103,6 +107,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             context.Game.CurrentPlayer.UseInfluenceAsMoney(influenceAsMoney);
             cost -= influenceAsMoney;
             context.Game.CurrentPlayer.Money -= cost;
+            parentContext.CleanUp();
         }
 
         public override bool IsValidGameState(ActionContext context)

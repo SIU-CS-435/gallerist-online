@@ -25,6 +25,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
 
         public static void AddPendingAction(this GameTurn turn, GameAction action, PendingPosition position)
         {
+            action.Turn = turn;
             var temp = turn.PendingActions;
             AddPendingPositionHelper(turn, temp, action, position);
             temp.Add(action);
@@ -46,7 +47,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             var temp = turn.PendingActions;
             foreach (GameActionState state in actions)
             {
-                var action = new GameAction { State = state, Status = status, IsExecutable = isExecutable, Parent = parent };
+                var action = new GameAction { State = state, Status = status, IsExecutable = isExecutable, Parent = parent, Turn = turn };
                 AddPendingPositionHelper(turn, temp, action, position);
                 temp.Add(action);
             }

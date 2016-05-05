@@ -25,7 +25,9 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             { GameActionState.ContractToPlayerBoard, typeof(SalesOfficeContext) },
             { GameActionState.ChooseLocation, typeof(SetupContext) },
             { GameActionState.GameStart, typeof(SetupContext) },
-            { GameActionState.Pass, typeof(SetupContext) }
+            { GameActionState.Pass, typeof(SetupContext) },
+            { GameActionState.UseInfluenceAsFame, typeof(SetupContext) },
+            { GameActionState.UseInfluenceAsMoney, typeof(SetupContext) }
         };
 
         public static ActionContext GetContext(GameActionState state, Game game)

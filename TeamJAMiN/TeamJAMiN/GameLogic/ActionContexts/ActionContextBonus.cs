@@ -26,6 +26,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
                 { GameActionState.ChooseVisitorFromPlazaVipInvestor, typeof(ChooseVisitorFromPlazaVipInvestor) },
                 { GameActionState.ChooseVisitorFromBag, typeof(ChooseVisitorFromBag) },
                 { GameActionState.ChooseArtistFame, typeof(ChooseArtistFame) },
+                { GameActionState.GetFame, typeof(GetFame) }
             })
         { }
     }
@@ -143,6 +144,22 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             var player = context.Game.CurrentPlayer;
             var influence = player.GetGalleryVisitorCountByType(VisitorTicketType.vip) + player.GetGalleryVisitorCountByType(VisitorTicketType.collector);
             player.Influence += influence;
+        }
+    }
+
+    public class GetFame : BonusAction
+    {
+        public GetFame()
+        {
+            Name = GameActionState.GetFame;
+            TransitionTo = new HashSet<GameActionState> { };
+        }
+        public override void DoAction<ArtistColonyContext>(ArtistColonyContext context)
+        {
+            var player = context.Game.CurrentPlayer;
+            var fame = player.GetGalleryVisitorCountByType(VisitorTicketType.collector);
+            var artist = context.Game.GetArtistByLocationString(context.Action.Parent.Location);
+            artist.Fame += fame;
         }
     }
     public class ChooseContract : BonusAction

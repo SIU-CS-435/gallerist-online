@@ -33,6 +33,15 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
         {
             return _state is IMoneyTransactionState;
         }
+
+        public void CleanUp()
+        {
+            if(_state is IMoneyTransactionState)
+            {
+                var transaction = (IMoneyTransactionState)_state;
+                transaction.CleanUp(this);
+            }
+        }
     }
 
     public class ArtistColony : LocationAction
@@ -62,10 +71,17 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             }
             return artist.Fame;
         }
-
+        
+        public void CleanUp(ActionContext context)
+        {
+            var artist = context.Game.GetArtistByLocationString(context.Action.Location);
+            if (context.Game.CurrentPlayer.Commission == artist)
+                context.Game.CurrentPlayer.Commission = null;
+        }
         public override void DoAction<ArtistColonyContext>(ArtistColonyContext context)
         {
             var game = context.Game;
+            var turn = game.CurrentTurn;
             var artist = context.Game.GetArtistByLocationString(context.Action.Location);
             var type = artist.ArtType;
             var art = context.Game.GetArtFromStack(type);
@@ -75,22 +91,33 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             {
                 artist.AvailableArt -= 1;
             }
-            var cost = GetCost(context);
             //todo let player pay with influence
-            context.Game.CurrentPlayer.Money -= cost;
+            turn.AddPendingAction(new GameAction { State = GameActionState.UseInfluenceAsMoney, Parent = context.Action, IsExecutable = false });
             artist.Fame += art.Fame;
             artist.Fame += context.Game.CurrentPlayer.GetGalleryVisitorCountByType(VisitorTicketType.collector);
             //todo let player increase fame using influence
+            turn.AddPendingAction(new GameAction { State = GameActionState.UseInfluenceAsFame, Parent = context.Action, IsExecutable = false });
             context.Game.CurrentPlayer.Art.Add(art);
             //todo give player tickets
+            var ticketStates = art.GetArtTicketActionStates();
+            foreach( GameActionState ticketState in ticketStates)
+            {
+                bool isExecutable;
+                if (ticketState == GameActionState.GetTicketVip || ticketState == GameActionState.GetTicketCollector || ticketState == GameActionState.GetTicketInvestor)
+                {
+                    isExecutable = true;
+                }
+                else
+                    isExecutable = false;
+                turn.AddPendingAction(new GameAction { State = ticketState, Parent = context.Action, IsExecutable = isExecutable });
+            }
             //todo remove comission if applicable
             //todo see if player should gain reputation tile
             context.Game.SetupNextArt(type);
             //todo replace below with a pass button or something.
             context.Game.CurrentTurn.AddCompletedAction(context.Action);
-            context.DoAction(GameActionState.Pass);
+            AddPassAction(context);
         }
-        //todo add action location parameter in case this is called for an action other than the current action.
         //check if artist is a celebrity
         //todo check if player has room to exhibit art
         public override bool IsValidGameState(ActionContext context)
@@ -105,6 +132,10 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
                 return false;
             }
             if(artist.AvailableArt == 0)
+            {
+                return false;
+            }
+            if (context.Game.CurrentPlayer.Art.Where(a => a.IsSold == false).Count() > 3)
             {
                 return false;
             }
@@ -133,9 +164,10 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             context.Game.CurrentPlayer.Commission = artist;
             artist.AvailableArt -= 1;
             //todo give player artist bonus
+            var bonusState = ArtManager.BonusTypeToState[artist.DiscoverBonus];
             //todo replace below with a pass button or something.
             context.Game.CurrentTurn.AddCompletedAction(context.Action);
-            context.DoAction(GameActionState.Pass);
+            AddPassAction(context);
         }
         public override bool IsValidGameState(ActionContext context)
         {

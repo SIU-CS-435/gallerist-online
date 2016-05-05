@@ -8,6 +8,14 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
 {
     public static class ArtManager
     {
+        public static Dictionary<BonusType, GameActionState> BonusTypeToState = new Dictionary<BonusType, GameActionState>
+        {
+            { BonusType.assistant, GameActionState.GetAssistant },
+            { BonusType.twoTickets, GameActionState.ChooseTicketAnyTwo },
+            { BonusType.money, GameActionState.GetMoney },
+            { BonusType.influence, GameActionState.GetInfluence },
+            { BonusType.fame, GameActionState.GetFame }
+        }
         public static int[] StarToMoney = new int[] { 0, 5, 8, 11, 14, 17, 20 };
         public static void SetupNextArt(this Game game, ArtType type)
         {
@@ -71,6 +79,17 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
                 }
             }
             return StarToMoney[starLevel];
+        }
+
+        public static List<GameActionState> GetArtTicketActionStates(this GameArt art)
+        {
+            var result = new List<GameActionState>();
+            result.Add(TicketManager.GetStateByTicketList(art.FirstTicket.ToList()));
+            if(art.SecondTicket != null)
+            {
+                result.Add(TicketManager.GetStateByTicketList(art.SecondTicket.ToList()));
+            }
+            return result;
         }
     }
 }

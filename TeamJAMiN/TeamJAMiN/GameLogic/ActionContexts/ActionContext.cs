@@ -53,6 +53,7 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             State = action.State;
             _state.DoAction(this);
         }
+
     }
 
     public abstract class ActionState
@@ -68,12 +69,18 @@ namespace TeamJAMiN.Controllers.GameLogicHelpers
             }
             else
             {
-                context.Game.CurrentTurn.AddPendingActions(TransitionTo.ToList(), context.Action, GameActionStatus.OptionalExclusive, false);
+                context.Game.CurrentTurn.AddPendingActions(TransitionTo.ToList(), context.Action, GameActionStatus.OptionalExclusive, PendingPosition.first, false);
             }
         }
         public virtual bool IsValidGameState(ActionContext context)
         {
             return true;
         }
+
+        public void AddPassAction(ActionContext context)
+        {
+            context.Game.CurrentTurn.AddPendingAction(new GameAction { Parent = context.Action, State = GameActionState.Pass, IsExecutable = true }, PendingPosition.last);
+        }
+
     }
 }
