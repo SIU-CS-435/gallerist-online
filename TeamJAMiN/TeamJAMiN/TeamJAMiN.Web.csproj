@@ -383,6 +383,7 @@
     <Compile Include="Models\ComponentViewModels\ArtistViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\ArtViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\AuctionLocationViewModel.cs" />
+    <Compile Include="Models\ComponentViewModels\ChooseTicketViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\DraftContractViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\InternationalMarketViewModel.cs" />
     <Compile Include="Models\ComponentViewModels\PlayerArtViewModel.cs" />
@@ -604,6 +605,7 @@
     <Content Include="Views\Manage\ManageProfile.cshtml" />
     <Content Include="Views\Game\InternationalMarket\AuctionLocation.cshtml" />
     <Content Include="Views\Game\PlayerBoard\ReputationTileLocation.cshtml" />
+    <Content Include="Views\Game\ChooseTicketForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

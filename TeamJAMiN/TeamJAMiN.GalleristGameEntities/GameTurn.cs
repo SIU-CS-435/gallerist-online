@@ -99,7 +99,7 @@ namespace TeamJAMiN.GalleristComponentEntities
                     else
                     {
                         _completedActions = JsonConvert.DeserializeObject<List<GameAction>>(CompletedActionData);
-                        foreach (GameAction action in _pendingActions)
+                        foreach (GameAction action in _completedActions)
                         {
                             action.Turn = this;
                             if (action.ParentId != null)

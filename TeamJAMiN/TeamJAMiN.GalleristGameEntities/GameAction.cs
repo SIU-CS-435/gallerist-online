@@ -17,7 +17,8 @@ namespace TeamJAMiN.GalleristComponentEntities
             set
             {
                 _parent = value;
-                ParentId = value.Order;
+                if(value != null)
+                    ParentId = value.Order;
             }
         }
 
@@ -34,7 +35,8 @@ namespace TeamJAMiN.GalleristComponentEntities
             set
             {
                 _turn = value;
-                TurnId = value.Id;
+                if (value != null)
+                    TurnId = value.Id;
             }
         }
 
