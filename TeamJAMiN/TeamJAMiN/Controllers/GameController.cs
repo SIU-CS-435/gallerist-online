@@ -179,6 +179,10 @@ namespace TeamJAMiN.Controllers
                             UserId = identityContext.Users.First(m => m.UserName == User.Identity.Name).Id,
                             UserName = User.Identity.Name
                         });
+
+                        PushHelper singleton = PushHelper.GetPushEngine();
+                        singleton.RefreshGameList(gameResponse.Game.Players.Where(m => m.UserName != User.Identity.Name).Select(p => p.UserName).ToList());
+
                         ViewBag.userName = User.Identity.Name;
                         galleristContext.SaveChanges();
                         return Redirect("/Game/List");
